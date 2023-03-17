@@ -10,11 +10,11 @@ Com o plano de estudos formado, o estudante poderá acessar as aulas recomendada
 aba “Comentários” que cada uma terá. Sua mensagem poderá ser respondida e curtida por outros usuários
 
 Alunos:
-  Andrei Quaresma Pinto
-  Thiago Chan Ortega
-  Maria Eduarda Vitali
-  Arthur Afonso Jung
+  Andrei Quaresma Pinto,
+  Thiago Chan Ortega,
+  Maria Eduarda Vitali,
+  Arthur Afonso Jung,
 
 Orientadores:
-  Daniel Di Dominico
+  Daniel Di Dominico,
   Marcela Turim
