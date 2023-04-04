@@ -28,7 +28,7 @@ class ModuleController extends Controller
 
         $this->moduleDao->insert($module);
 
-        $this->loadView("create_module.php", []);
+        $this->loadView("module/create_module.php", []);
     }
 }
 

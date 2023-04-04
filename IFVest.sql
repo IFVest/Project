@@ -1,375 +1,250 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1deb5ubuntu1
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Tempo de geração: 27/03/2023 às 09:59
--- Versão do servidor: 8.0.32-0ubuntu0.22.04.2
--- Versão do PHP: 8.1.2-1ubuntu2.11
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Banco de dados: `IFVest`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Alternative`
---
-
-CREATE TABLE `Alternative` (
-  `idAlternative` int NOT NULL,
-  `Question_idQuestion` int NOT NULL,
-  `text` varchar(200) NOT NULL,
-  `isCorrect` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Comment`
---
-
-CREATE TABLE `Comment` (
-  `idComent` int NOT NULL,
-  `Lession_idLession` int NOT NULL,
-  `User_idUser` int NOT NULL,
-  `text` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `CorrectByModule`
---
-
-CREATE TABLE `CorrectByModule` (
-  `idCorrectByModule` int NOT NULL,
-  `Exam_idExam` int NOT NULL,
-  `totalQuestions` int NOT NULL,
-  `correctQuestions` int NOT NULL,
-  `isProblem` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Exam`
---
-
-CREATE TABLE `Exam` (
-  `idExam` int NOT NULL,
-  `ExamReport_idExamReport` int NOT NULL,
-  `User_idUser` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `ExamReport`
---
-
-CREATE TABLE `ExamReport` (
-  `idExamReport` int NOT NULL,
-  `StudyPlan_idStudyPlan` int NOT NULL,
-  `totalCorrects` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Lession`
---
-
-CREATE TABLE `Lession` (
-  `idLession` int NOT NULL,
-  `Module_idModule` int NOT NULL,
-  `StudyWeek_idStudyWeek` int NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `description` varchar(300) NOT NULL,
-  `URL` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Module`
---
-
-CREATE TABLE `module` (
-  `idModule` int NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `description` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Module_has_StudyPlan`
---
-
-CREATE TABLE `Module_has_StudyPlan` (
-  `Module_idModule` int NOT NULL,
-  `StudyPlan_idStudyPlan` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Question`
---
-
-CREATE TABLE `Question` (
-  `idQuestion` int NOT NULL,
-  `Module_idModule` int NOT NULL,
-  `text` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `Question_has_Exam`
---
-
-CREATE TABLE `Question_has_Exam` (
-  `Question_idQuestion` int NOT NULL,
-  `Exam_idExam` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `StudyCronogram`
---
-
-CREATE TABLE `StudyCronogram` (
-  `idStudyCronogram` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `StudyPlan`
---
-
-CREATE TABLE `StudyPlan` (
-  `idStudyPlan` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `StudyWeek`
---
-
-CREATE TABLE `StudyWeek` (
-  `idStudyWeek` int NOT NULL,
-  `StudyCronogram_idStudyCronogram` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `User`
---
-
-CREATE TABLE `User` (
-  `idUser` int NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `completeName` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8;
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices de tabela `Alternative`
---
-ALTER TABLE `Alternative`
-  ADD PRIMARY KEY (`idAlternative`),
-  ADD KEY `fk_Alternative_Question1_idx` (`Question_idQuestion`);
-
---
--- Índices de tabela `Coment`
---
-ALTER TABLE `Coment`
-  ADD PRIMARY KEY (`idComent`,`User_idUser`),
-  ADD KEY `fk_Coment_Lession1_idx` (`Lession_idLession`),
-  ADD KEY `fk_Coment_User1_idx` (`User_idUser`);
-
---
--- Índices de tabela `CorrectByModule`
---
-ALTER TABLE `CorrectByModule`
-  ADD PRIMARY KEY (`idCorrectByModule`),
-  ADD KEY `fk_CorrectByModule_Exam1_idx` (`Exam_idExam`);
-
---
--- Índices de tabela `Exam`
---
-ALTER TABLE `Exam`
-  ADD PRIMARY KEY (`idExam`),
-  ADD KEY `fk_Exam_ExamReport1_idx` (`ExamReport_idExamReport`),
-  ADD KEY `fk_Exam_User1_idx` (`User_idUser`);
-
---
--- Índices de tabela `ExamReport`
---
-ALTER TABLE `ExamReport`
-  ADD PRIMARY KEY (`idExamReport`),
-  ADD KEY `fk_ExamReport_StudyPlan1_idx` (`StudyPlan_idStudyPlan`);
-
---
--- Índices de tabela `Lession`
---
-ALTER TABLE `Lession`
-  ADD PRIMARY KEY (`idLession`),
-  ADD KEY `fk_Lession_Module_idx` (`Module_idModule`),
-  ADD KEY `fk_Lession_StudyWeek1_idx` (`StudyWeek_idStudyWeek`);
-
---
--- Índices de tabela `Module`
---
-ALTER TABLE `Module`
-  ADD PRIMARY KEY (`idModule`),
-  ADD KEY `fk_Module_CorrectByModule1_idx` (`CorrectByModule_idCorrectByModule`);
-
---
--- Índices de tabela `Module_has_StudyPlan`
---
-ALTER TABLE `Module_has_StudyPlan`
-  ADD PRIMARY KEY (`Module_idModule`,`StudyPlan_idStudyPlan`),
-  ADD KEY `fk_Module_has_StudyPlan_StudyPlan1_idx` (`StudyPlan_idStudyPlan`),
-  ADD KEY `fk_Module_has_StudyPlan_Module1_idx` (`Module_idModule`);
-
---
--- Índices de tabela `Question`
---
-ALTER TABLE `Question`
-  ADD PRIMARY KEY (`idQuestion`),
-  ADD KEY `fk_Question_Module1_idx` (`Module_idModule`);
-
---
--- Índices de tabela `Question_has_Exam`
---
-ALTER TABLE `Question_has_Exam`
-  ADD PRIMARY KEY (`Question_idQuestion`,`Exam_idExam`),
-  ADD KEY `fk_Question_has_Exam_Exam1_idx` (`Exam_idExam`),
-  ADD KEY `fk_Question_has_Exam_Question1_idx` (`Question_idQuestion`);
-
---
--- Índices de tabela `StudyCronogram`
---
-ALTER TABLE `StudyCronogram`
-  ADD PRIMARY KEY (`idStudyCronogram`);
-
---
--- Índices de tabela `StudyPlan`
---
-ALTER TABLE `StudyPlan`
-  ADD PRIMARY KEY (`idStudyPlan`);
-
---
--- Índices de tabela `StudyWeek`
---
-ALTER TABLE `StudyWeek`
-  ADD PRIMARY KEY (`idStudyWeek`),
-  ADD KEY `fk_StudyWeek_StudyCronogram1_idx` (`StudyCronogram_idStudyCronogram`);
-
---
--- Índices de tabela `User`
---
-ALTER TABLE `User`
-  ADD PRIMARY KEY (`idUser`);
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `Alternative`
---
-ALTER TABLE `Alternative`
-  ADD CONSTRAINT `fk_Alternative_Question1` FOREIGN KEY (`Question_idQuestion`) REFERENCES `Question` (`idQuestion`);
-
---
--- Restrições para tabelas `Coment`
---
-ALTER TABLE `Coment`
-  ADD CONSTRAINT `fk_Coment_Lession1` FOREIGN KEY (`Lession_idLession`) REFERENCES `Lession` (`idLession`),
-  ADD CONSTRAINT `fk_Coment_User1` FOREIGN KEY (`User_idUser`) REFERENCES `User` (`idUser`);
-
---
--- Restrições para tabelas `CorrectByModule`
---
-ALTER TABLE `CorrectByModule`
-  ADD CONSTRAINT `fk_CorrectByModule_Exam1` FOREIGN KEY (`Exam_idExam`) REFERENCES `Exam` (`idExam`);
-
---
--- Restrições para tabelas `Exam`
---
-ALTER TABLE `Exam`
-  ADD CONSTRAINT `fk_Exam_ExamReport1` FOREIGN KEY (`ExamReport_idExamReport`) REFERENCES `ExamReport` (`idExamReport`),
-  ADD CONSTRAINT `fk_Exam_User1` FOREIGN KEY (`User_idUser`) REFERENCES `User` (`idUser`);
-
---
--- Restrições para tabelas `ExamReport`
---
-ALTER TABLE `ExamReport`
-  ADD CONSTRAINT `fk_ExamReport_StudyPlan1` FOREIGN KEY (`StudyPlan_idStudyPlan`) REFERENCES `StudyPlan` (`idStudyPlan`);
-
---
--- Restrições para tabelas `Lession`
---
-ALTER TABLE `Lession`
-  ADD CONSTRAINT `fk_Lession_Module` FOREIGN KEY (`Module_idModule`) REFERENCES `Module` (`idModule`),
-  ADD CONSTRAINT `fk_Lession_StudyWeek1` FOREIGN KEY (`StudyWeek_idStudyWeek`) REFERENCES `StudyWeek` (`idStudyWeek`);
-
---
--- Restrições para tabelas `Module`
---
-ALTER TABLE `Module`
-  ADD CONSTRAINT `fk_Module_CorrectByModule1` FOREIGN KEY (`CorrectByModule_idCorrectByModule`) REFERENCES `CorrectByModule` (`idCorrectByModule`);
-
---
--- Restrições para tabelas `Module_has_StudyPlan`
---
-ALTER TABLE `Module_has_StudyPlan`
-  ADD CONSTRAINT `fk_Module_has_StudyPlan_Module1` FOREIGN KEY (`Module_idModule`) REFERENCES `Module` (`idModule`),
-  ADD CONSTRAINT `fk_Module_has_StudyPlan_StudyPlan1` FOREIGN KEY (`StudyPlan_idStudyPlan`) REFERENCES `StudyPlan` (`idStudyPlan`);
-
---
--- Restrições para tabelas `Question`
---
-ALTER TABLE `Question`
-  ADD CONSTRAINT `fk_Question_Module1` FOREIGN KEY (`Module_idModule`) REFERENCES `Module` (`idModule`);
-
---
--- Restrições para tabelas `Question_has_Exam`
---
-ALTER TABLE `Question_has_Exam`
-  ADD CONSTRAINT `fk_Question_has_Exam_Exam1` FOREIGN KEY (`Exam_idExam`) REFERENCES `Exam` (`idExam`),
-  ADD CONSTRAINT `fk_Question_has_Exam_Question1` FOREIGN KEY (`Question_idQuestion`) REFERENCES `Question` (`idQuestion`);
-
---
--- Restrições para tabelas `StudyWeek`
---
-ALTER TABLE `StudyWeek`
-  ADD CONSTRAINT `fk_StudyWeek_StudyCronogram1` FOREIGN KEY (`StudyCronogram_idStudyCronogram`) REFERENCES `StudyCronogram` (`idStudyCronogram`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- MySQL Script generated by MySQL Workbench
+-- seg 03 abr 2023 21:09:06
+-- Model: New Model    Version: 1.0
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Table `Module`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Module` (
+  `idModule` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(45) NOT NULL,
+  `subject` ENUM('Matemática', 'Português', 'Redação', 'Geografia', 'História', 'Ciências') NOT NULL,
+  PRIMARY KEY (`idModule`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `Question`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Question` (
+  `idQuestion` INT NOT NULL AUTO_INCREMENT,
+  `text` VARCHAR(500) NOT NULL,
+  `Module_idModule` INT NOT NULL,
+  PRIMARY KEY (`idQuestion`),
+  INDEX `fk_Question_Module1_idx` (`Module_idModule` ASC) VISIBLE,
+  CONSTRAINT `fk_Question_Module1`
+    FOREIGN KEY (`Module_idModule`)
+    REFERENCES `Module` (`idModule`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `Alternative`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Alternative` (
+  `idAlternative` INT NOT NULL AUTO_INCREMENT,
+  `text` VARCHAR(200) NOT NULL,
+  `isCorrect` TINYINT NOT NULL,
+  `Question_idQuestion` INT NOT NULL,
+  PRIMARY KEY (`idAlternative`),
+  INDEX `fk_Alternative_Question1_idx` (`Question_idQuestion` ASC) VISIBLE,
+  CONSTRAINT `fk_Alternative_Question1`
+    FOREIGN KEY (`Question_idQuestion`)
+    REFERENCES `Question` (`idQuestion`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `StudyWeek`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `StudyWeek` (
+  `idStudyWeek` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idStudyWeek`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `Lession`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Lession` (
+  `idLession` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(300) NOT NULL,
+  `VideoURL` VARCHAR(200) NOT NULL,
+  `Module_idModule` INT NOT NULL,
+  `StudyWeek_idStudyWeek` INT NOT NULL,
+  PRIMARY KEY (`idLession`),
+  INDEX `fk_Lession_Module_idx` (`Module_idModule` ASC) VISIBLE,
+  INDEX `fk_Lession_StudyWeek1_idx` (`StudyWeek_idStudyWeek` ASC) VISIBLE,
+  CONSTRAINT `fk_Lession_Module`
+    FOREIGN KEY (`Module_idModule`)
+    REFERENCES `Module` (`idModule`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Lession_StudyWeek1`
+    FOREIGN KEY (`StudyWeek_idStudyWeek`)
+    REFERENCES `StudyWeek` (`idStudyWeek`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `User`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `User` (
+  `idUser` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `completeName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idUser`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `Comment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Comment` (
+  `idComent` INT NOT NULL AUTO_INCREMENT,
+  `text` VARCHAR(200) NOT NULL,
+  `Lession_idLession` INT NOT NULL,
+  `User_idUser` INT NOT NULL,
+  PRIMARY KEY (`idComent`),
+  INDEX `fk_Coment_Lession1_idx` (`Lession_idLession` ASC) VISIBLE,
+  INDEX `fk_Coment_User1_idx` (`User_idUser` ASC) VISIBLE,
+  CONSTRAINT `fk_Coment_Lession1`
+    FOREIGN KEY (`Lession_idLession`)
+    REFERENCES `Lession` (`idLession`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Coment_User1`
+    FOREIGN KEY (`User_idUser`)
+    REFERENCES `User` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `Exam`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Exam` (
+  `idExam` INT NOT NULL AUTO_INCREMENT,
+  `User_idUser` INT NOT NULL,
+  PRIMARY KEY (`idExam`),
+  INDEX `fk_Exam_User1_idx` (`User_idUser` ASC) VISIBLE,
+  CONSTRAINT `fk_Exam_User1`
+    FOREIGN KEY (`User_idUser`)
+    REFERENCES `User` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `QuestionByModule`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `QuestionByModule` (
+  `idQuestionByModule` INT NOT NULL AUTO_INCREMENT,
+  `totalQuestions` INT NOT NULL,
+  `correctQuestions` INT NOT NULL,
+  `isProblem` TINYINT NOT NULL,
+  `Exam_idExam` INT NOT NULL,
+  PRIMARY KEY (`idQuestionByModule`),
+  INDEX `fk_CorrectByModule_Exam1_idx` (`Exam_idExam` ASC) VISIBLE,
+  CONSTRAINT `fk_CorrectByModule_Exam1`
+    FOREIGN KEY (`Exam_idExam`)
+    REFERENCES `Exam` (`idExam`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `StudyPlan`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `StudyPlan` (
+  `idStudyPlan` INT NOT NULL AUTO_INCREMENT,
+  `Exam_idExam` INT NOT NULL,
+  `User_idUser` INT NOT NULL,
+  PRIMARY KEY (`idStudyPlan`),
+  INDEX `fk_StudyPlan_Exam1_idx` (`Exam_idExam` ASC) VISIBLE,
+  INDEX `fk_StudyPlan_User1_idx` (`User_idUser` ASC) VISIBLE,
+  CONSTRAINT `fk_StudyPlan_Exam1`
+    FOREIGN KEY (`Exam_idExam`)
+    REFERENCES `Exam` (`idExam`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_StudyPlan_User1`
+    FOREIGN KEY (`User_idUser`)
+    REFERENCES `User` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `StudyPlan_has_Module`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `StudyPlan_has_Module` (
+  `StudyPlan_idStudyPlan` INT NOT NULL,
+  `Module_idModule` INT NOT NULL,
+  PRIMARY KEY (`StudyPlan_idStudyPlan`, `Module_idModule`),
+  INDEX `fk_StudyPlan_has_Module_Module1_idx` (`Module_idModule` ASC) VISIBLE,
+  INDEX `fk_StudyPlan_has_Module_StudyPlan1_idx` (`StudyPlan_idStudyPlan` ASC) VISIBLE,
+  CONSTRAINT `fk_StudyPlan_has_Module_StudyPlan1`
+    FOREIGN KEY (`StudyPlan_idStudyPlan`)
+    REFERENCES `StudyPlan` (`idStudyPlan`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_StudyPlan_has_Module_Module1`
+    FOREIGN KEY (`Module_idModule`)
+    REFERENCES `Module` (`idModule`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+-- -----------------------------------------------------
+-- Table `QuestionByModule_has_Question`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `QuestionByModule_has_Question` (
+  `QuestionByModule_idQuestionByModule` INT NOT NULL,
+  `Question_idQuestion` INT NOT NULL,
+  `UserRightAnswer` TINYINT NULL,
+  `chosenAnswer` INT NULL,
+  PRIMARY KEY (`QuestionByModule_idQuestionByModule`, `Question_idQuestion`),
+  INDEX `fk_QuestionByModule_has_Question_Question1_idx` (`Question_idQuestion` ASC) VISIBLE,
+  INDEX `fk_QuestionByModule_has_Question_QuestionByModule1_idx` (`QuestionByModule_idQuestionByModule` ASC) VISIBLE,
+  CONSTRAINT `fk_QuestionByModule_has_Question_QuestionByModule1`
+    FOREIGN KEY (`QuestionByModule_idQuestionByModule`)
+    REFERENCES `QuestionByModule` (`idQuestionByModule`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_QuestionByModule_has_Question_Question1`
+    FOREIGN KEY (`Question_idQuestion`)
+    REFERENCES `Question` (`idQuestion`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

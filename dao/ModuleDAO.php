@@ -9,11 +9,12 @@ class ModuleDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO module (name, description) VALUES (:name,:desc)";
+        $sql = "INSERT INTO Module (name, description, subject) VALUES (:name,:desc,:sub)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('name', $module->getName());
         $stm->bindValue('desc', $module->getDescription());
+        $stm->bindValue('sub', $module->getSubject());
 
         $stm->execute();
     }
