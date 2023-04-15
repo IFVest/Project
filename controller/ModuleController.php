@@ -15,20 +15,76 @@ class ModuleController extends Controller
         $this->handleAction();
     }
 
+    private function findById()
+    {
+        if (isset($_GET['id']))
+        {
+            $id = $_GET['id'];
+            return $this->moduleDao->findById($id);
+        }
+    }
+
+    public function list()
+    {
+        return $this->moduleDao->list();
+    }
+
     protected function save()
     {
-        $module_name = $_POST['module_name'];
-        $module_desc = $_POST['module_desc'];
-        $module_subject = $_POST['module_subject'];
+        $dados["id"] = isset($_POST['module_id']) ? $_POST['module_id'] : NULL;
+        $module_name = isset($_POST['module_name']) ? $_POST['module_name'] : NULL;
+        $module_desc = isset($_POST['module_desc']) ? $_POST['module_desc'] : NULL;
+        $module_subject = isset($_POST['module_subject']) ? $_POST['module_subject'] : NULL;
 
         $module = new Module();
+        $module->setId($dados['module_id']);
         $module->setName($module_name);
         $module->setDescription($module_desc);
         $module->setSubject($module_subject);
 
-        $this->moduleDao->insert($module);
+        if ($dados["id"] == NULL)
+        {
+            $this->moduleDao->insert($module);
+        }
+        else
+        {
+            $this->moduleDao->update($module);
+        }
+        
+        $this->loadView("module/create_module.php", $dados);
+    }
 
-        $this->loadView("module/create_module.php", []);
+    protected function edit()
+    {
+        $module = $this->findById();
+
+        if($module)
+        {
+            $dados["id"] = $module->getId();
+            $dados["module"] = $module;
+            echo "<script>console.log('" . $dados["module"]->getName() .  "')</script>"; 
+
+            $this->loadView("module/create_module.php", $dados);
+        }
+        else
+        {
+            $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
+        }
+    }
+
+    protected function delete()
+    {
+        $module = $this->findById();
+
+        if($module)
+        {
+            $this->moduleDao->delete($module);
+            $this->loadView("module/list_modules.php", []);
+        }
+        else
+        {
+            $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
+        }
     }
 }
 

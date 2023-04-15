@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/../../util/config.php");
+require_once(__DIR__ . "/../../model/ModuleSubject.php");
 ?>
 
 
@@ -14,22 +15,25 @@ require_once(__DIR__ . "/../../util/config.php");
 </head>
 
 <body>
-    <h1>Criar módulo</h1>
+    <h1> <?php if ($dados['id'] == 0) echo "Inserir";
+            else echo "Alterar"; ?> módulo</h1>
 
     <form method="POST" action="<?= BASE_URL ?>/controller/ModuleController.php?action=save">
-        Nome:<input type="text" name="module_name">
+        Nome:<input type="text" name="module_name" value="<?php echo ($dados["module"] ? $dados["module"]->getName() : '');?>">
         <br>
-        Descricao: <input type="text" name="module_desc">
+        Descricao: <input type="text" name="module_desc" value="<?php echo ($dados["module"] ? $dados["module"]->getDescription() : ''); ?>">
         <br>
         <select name="module_subject">
-            <option></option>
-            <option value="1">Matemática</option>
-            <option value="2">Português</option>
-            <option value="3">Redação</option>
-            <option value="4">Geografia</option>
-            <option value="5">História</option>
-            <option value="6">Ciências</option>
+            <?php $i = 1; foreach($modSubject->subjects as $subject):?>
+                <option value="<?php echo $i;?>" 
+                <?php echo ($dados["module"] && $subject == $dados["module"]->getSubject() ? "selected" : '');?>>
+                    <?php echo $subject;?>
+                </option>
+                <?php $i++;?>
+            <?php endforeach;?>
         </select>
+
+        <input type="hidden" name="module_id" value="<?php echo $dados['id']; ?>">
 
         <button type="submit">Gravar</button>
     </form>
