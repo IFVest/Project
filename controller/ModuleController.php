@@ -37,7 +37,7 @@ class ModuleController extends Controller
         $module_subject = isset($_POST['module_subject']) ? $_POST['module_subject'] : NULL;
 
         $module = new Module();
-        $module->setId($dados['module_id']);
+        $module->setId($dados['id']);
         $module->setName($module_name);
         $module->setDescription($module_desc);
         $module->setSubject($module_subject);
@@ -62,8 +62,6 @@ class ModuleController extends Controller
         {
             $dados["id"] = $module->getId();
             $dados["module"] = $module;
-            echo "<script>console.log('" . $dados["module"]->getName() .  "')</script>"; 
-
             $this->loadView("module/create_module.php", $dados);
         }
         else

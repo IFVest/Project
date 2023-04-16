@@ -1,10 +1,10 @@
 <?php
 enum Subjects{
-    case CIENCIAS;
-    case PORTUGUES;
-    case GEOGRAFIA;
-    case HISTORIA;
-    case MATEMATICA;
-    case REDACAO;
+    case Matemática;
+    case Português;
+    case Redação;
+    case Geografia;
+    case História;
+    case Ciências;
 }
 ?>

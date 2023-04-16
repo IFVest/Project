@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . "/../../util/config.php");
-require_once(__DIR__ . "/../../model/ModuleSubject.php");
+require_once(__DIR__ . "/../../model/Subjects.php");
+
 ?>
 
 
@@ -24,10 +25,10 @@ require_once(__DIR__ . "/../../model/ModuleSubject.php");
         Descricao: <input type="text" name="module_desc" value="<?php echo ($dados["module"] ? $dados["module"]->getDescription() : ''); ?>">
         <br>
         <select name="module_subject">
-            <?php $i = 1; foreach($modSubject->subjects as $subject):?>
+            <?php $i = 1; foreach(Subjects::cases() as $subject):?>
                 <option value="<?php echo $i;?>" 
-                <?php echo ($dados["module"] && $subject == $dados["module"]->getSubject() ? "selected" : '');?>>
-                    <?php echo $subject;?>
+                <?php echo ($dados["module"] && $subject->name == $dados["module"]->getSubject() ? "selected" : '');?>>
+                    <?php echo $subject->name;?>
                 </option>
                 <?php $i++;?>
             <?php endforeach;?>

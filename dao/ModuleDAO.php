@@ -71,10 +71,10 @@ class ModuleDAO{
         $sql = "UPDATE Module SET name = :name, description = :desc, subject = :sub WHERE id = :id";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue('name', $module->getName());
-        $stm->bindValue('desc', $module->getDescription());
-        $stm->bindValue('sub', $module->getSubject());
-        $stm->bindValue('id', $module->getId());
+        $stm->bindValue("name", $module->getName());
+        $stm->bindValue("desc", $module->getDescription());
+        $stm->bindValue("sub", $module->getSubject());
+        $stm->bindValue("id", $module->getId());
         $stm->execute();
     }
 
