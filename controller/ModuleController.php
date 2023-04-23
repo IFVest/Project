@@ -84,6 +84,11 @@ class ModuleController extends Controller
             $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
         }
     }
+
+    public function findByModuleId($moduleId)
+    {
+        return $this->moduleDao->findById($moduleId);
+    }
 }
 
 $mod = new ModuleController();

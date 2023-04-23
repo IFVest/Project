@@ -2,7 +2,6 @@
 class Lesson{
     private $id;
     private $title;
-    private $description;
     private $url;
     private $module;
     private $user;
@@ -43,23 +42,6 @@ class Lesson{
         return $this;
     }
 
-    /**
-     * Get the value of description
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set the value of description
-     */
-    public function setDescription($description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 
     /**
      * Get the value of url
