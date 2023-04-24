@@ -51,7 +51,7 @@ class ModuleController extends Controller
             $this->moduleDao->update($module);
         }
         
-        $this->loadView("module/create_module.php", $dados);
+        $this->loadView("module/list_modules.php", []);
     }
 
     protected function edit()
