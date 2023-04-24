@@ -1,9 +1,9 @@
 <?php
-class Lesson{
+class Lesson
+{
     private $id;
     private $title;
-    private $description;
-    private $videoUrl;
+    private $url;
     private $module;
     private $studyWeek;
 
@@ -43,41 +43,6 @@ class Lesson{
         return $this;
     }
 
-    /**
-     * Get the value of description
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set the value of description
-     */
-    public function setDescription($description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of videoUrl
-     */
-    public function getVideoUrl()
-    {
-        return $this->videoUrl;
-    }
-
-    /**
-     * Set the value of videoUrl
-     */
-    public function setVideoUrl($videoUrl): self
-    {
-        $this->videoUrl = $videoUrl;
-
-        return $this;
-    }
 
     /**
      * Get the value of module
@@ -111,6 +76,24 @@ class Lesson{
     public function setStudyWeek($studyWeek): self
     {
         $this->studyWeek = $studyWeek;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of url
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set the value of url
+     */
+    public function setUrl($url): self
+    {
+        $this->url = $url;
 
         return $this;
     }

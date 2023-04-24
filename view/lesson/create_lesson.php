@@ -1,5 +1,6 @@
 <?php
     require_once(__DIR__ . "/../../controller/ModuleController.php");
+    require_once(__DIR__ . "/../../util/config.php");
 ?>
 
 <!DOCTYPE html>
@@ -11,21 +12,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Criar aula</h1>
+    <h1> <?php if ($dados["id"] == 0) echo "Criar"; else echo "Alterar";?> aula </h1>
 
-    <form method="POST" action="<?php BASE_URL ?>/controller/LessonController.php?action=save">
-        Titulo:<input type="text" name="lesson_title">
+    <form method="POST" action="<?= BASE_URL ?>/controller/LessonController.php?action=save">
+        Titulo:<input type="text" name="lesson_title" value="<?php echo ($dados["lesson"]) ? $dados["lesson"]->getTitle() : '' ?>">
         <br>
-        Descrição:<input type="text" name="lesson_desc">
-        <br>
-        Url:<input type="text" name="lesson_url">
+        Url:<input type="text" name="lesson_url" value="<?php echo ($dados["lesson"]) ? $dados["lesson"]->getUrl() : '';?>">
         <br>
         Módulo: <select name="lesson_module">
-            <?php foreach($mod->list() as $module): ?>
-                <option value="<?php echo $module->getId()?>">
+            <?php foreach($mod->list() as $module):?>
+                <option value="<?php echo $module->getId(); ?>" <?php echo ($dados["lesson"] && $dados["lesson"]->getModule() == $module->getId() ? "selected" : ''); ?>>
                     <?php echo $module->getName(); ?>
                 </option>
-            <?php endforeach;?>
+            <?php endforeach; ?>
         </select>
 
         <input type="text" hidden name="lesson_user">

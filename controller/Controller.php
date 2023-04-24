@@ -21,12 +21,12 @@ class Controller
         if ($methodName && method_exists($this, $methodName))
             $this->$methodName();
 
-        elseif (method_exists($this, $methodNoAction))
-            $this->$methodNoAction();
+        // elseif (method_exists($this, $methodNoAction))
+        //     $this->$methodNoAction();
 
-        else {
-            throw new BadFunctionCallException("Ação não implementada");
-        }
+        // else {
+        //     throw new BadFunctionCallException("Ação não implementada");
+        // }
     }
 
     protected function loadView(string $path, array $dados, string $msgErro = "", string $msgSucesso = "")

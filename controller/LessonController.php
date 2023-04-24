@@ -1,8 +1,8 @@
 <?php
 
 require_once(__DIR__ . "/../model/Lesson.php");
-require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/LessonDAO.php");
+require_once(__DIR__ . "/Controller.php");
 
 class LessonController extends Controller{
 
@@ -14,25 +14,88 @@ class LessonController extends Controller{
         $this->handleAction();
     }
 
-    public function save()
+    private function findById()
     {
+        if (isset($_GET["id"]))
+        {
+            $lessonId = $_GET["id"];
+            $lesson = $this->lessonDao->findById($lessonId);
+            return $lesson;
+        }
+    }
+
+    protected function save()
+    {
+
         $dados["id"] = isset($_POST["lesson_id"]) ? $_POST["lesson_id"] : NULL;
         $lesson_title = isset($_POST["lesson_title"]) ? $_POST["lesson_title"] : NULL;
-        $lesson_desc = isset($_POST["lesson_desc"]) ? $_POST["lesson_desc"] : NULL;
         $lesson_url = isset($_POST["lesson_url"]) ? $_POST["lesson_url"] : NULL;
         $moduleId = isset($_POST["lesson_module"]) ? $_POST["lesson_module"] : NULL;
 
+        
         $lesson = new Lesson();
+        $lesson->setId($dados["id"]);
         $lesson->setTitle($lesson_title);
-        $lesson->setDescription($lesson_desc);
         $lesson->setUrl($lesson_url);
+        $lesson->setModule($moduleId);
 
+         
         if ($dados["id"] == NULL)
         {
-            //$this->lessonDao->insert();
+            echo "<script>console.log('".$lesson->getId()."')</script>";
+            echo "<script>console.log('" . $lesson->getTitle() . "')</script>";
+            echo "<script>console.log('" . $lesson->getUrl() . "')</script>";       
+            $this->lessonDao->insert($lesson);
+            echo "<script>console.log('".$lesson->getId()."')</script>";
+            echo "<script>console.log('" . $lesson->getTitle() . "')</script>";
+            echo "<script>console.log('" . $lesson->getUrl() . "')</script>";       
+        }
+        else
+        {
+            $this->lessonDao->update($lesson);
         }
 
-        $this->loadView("lesson/create_lesson.php", []);
+        $this->loadView("lesson/list_lessons.php", []);
+    }
+
+    public function list()
+    {
+        return $this->lessonDao->list();
+    }
+
+    protected function edit()
+    {
+        $lesson = $this->findById();
+
+        if ($lesson)
+        {
+            $dados["id"] = $lesson->getId();
+            $dados["lesson"] = $lesson;
+
+            $this->loadView("lesson/create_lesson.php", $dados);
+        }
+        else
+        {
+            echo "Aula não encontrada";
+        }
+    }
+
+    protected function delete()
+    {
+        $lesson = $this->findById();
+
+        if ($lesson)
+        {
+            $this->lessonDao->delete($lesson);
+
+            $this->loadView("lesson/list_lessons.php", []);
+        }
+        else
+        {
+            echo "Aula não encontrada";
+        }
     }
 }
+
+$les = new LessonController();
 ?>
