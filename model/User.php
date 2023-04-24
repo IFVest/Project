@@ -1,35 +1,88 @@
 <?php
 class User
 {
-    private $login;
-    private $pass;
-    private $fullName;
+    private $id;
+    private $email;
+    private $password;
+    private $completeName;
     private $function;
-    private $examReports;
+
 
     /**
-     * Get the value of examReports
-     */ 
-    public function getExamReports()
+     * Get the value of id
+     */
+    public function getId()
     {
-        return $this->examReports;
+        return $this->id;
     }
 
     /**
-     * Set the value of examReports
-     *
-     * @return  self
-     */ 
-    public function setExamReports($examReports)
+     * Set the value of id
+     */
+    public function setId($id): self
     {
-        $this->examReports = $examReports;
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of email
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     */
+    public function setEmail($email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     */
+    public function setPassword($password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of completeName
+     */
+    public function getCompleteName()
+    {
+        return $this->completeName;
+    }
+
+    /**
+     * Set the value of completeName
+     */
+    public function setCompleteName($completeName): self
+    {
+        $this->completeName = $completeName;
 
         return $this;
     }
 
     /**
      * Get the value of function
-     */ 
+     */
     public function getFunction()
     {
         return $this->function;
@@ -37,72 +90,10 @@ class User
 
     /**
      * Set the value of function
-     *
-     * @return  self
-     */ 
-    public function setFunction($function)
+     */
+    public function setFunction($function): self
     {
         $this->function = $function;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of fullName
-     */ 
-    public function getFullName()
-    {
-        return $this->fullName;
-    }
-
-    /**
-     * Set the value of fullName
-     *
-     * @return  self
-     */ 
-    public function setFullName($fullName)
-    {
-        $this->fullName = $fullName;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of pass
-     */ 
-    public function getPass()
-    {
-        return $this->pass;
-    }
-
-    /**
-     * Set the value of pass
-     *
-     * @return  self
-     */ 
-    public function setPass($pass)
-    {
-        $this->pass = $pass;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of login
-     */ 
-    public function getLogin()
-    {
-        return $this->login;
-    }
-
-    /**
-     * Set the value of login
-     *
-     * @return  self
-     */ 
-    public function setLogin($login)
-    {
-        $this->login = $login;
 
         return $this;
     }

@@ -1,10 +1,10 @@
 <?php
 
-class Alternative{
+class Comment{
     private $id;
     private $text;
-    private $isCorrect;
-    private $question;
+    private $lesson;
+    private $user;
 
     /**
      * Get the value of id
@@ -43,37 +43,37 @@ class Alternative{
     }
 
     /**
-     * Get the value of isCorrect
+     * Get the value of lesson
      */
-    public function getIsCorrect()
+    public function getLesson()
     {
-        return $this->isCorrect;
+        return $this->lesson;
     }
 
     /**
-     * Set the value of isCorrect
+     * Set the value of lesson
      */
-    public function setIsCorrect($isCorrect): self
+    public function setLesson($lesson): self
     {
-        $this->isCorrect = $isCorrect;
+        $this->lesson = $lesson;
 
         return $this;
     }
 
     /**
-     * Get the value of question
+     * Get the value of user
      */
-    public function getQuestion()
+    public function getUser()
     {
-        return $this->question;
+        return $this->user;
     }
 
     /**
-     * Set the value of question
+     * Set the value of user
      */
-    public function setQuestion($question): self
+    public function setUser($user): self
     {
-        $this->question = $question;
+        $this->user = $user;
 
         return $this;
     }

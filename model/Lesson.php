@@ -3,9 +3,9 @@ class Lesson{
     private $id;
     private $title;
     private $description;
-    private $url;
+    private $videoUrl;
     private $module;
-    private $user;
+    private $studyWeek;
 
     /**
      * Get the value of id
@@ -62,19 +62,19 @@ class Lesson{
     }
 
     /**
-     * Get the value of url
+     * Get the value of videoUrl
      */
-    public function getUrl()
+    public function getVideoUrl()
     {
-        return $this->url;
+        return $this->videoUrl;
     }
 
     /**
-     * Set the value of url
+     * Set the value of videoUrl
      */
-    public function setUrl($url): self
+    public function setVideoUrl($videoUrl): self
     {
-        $this->url = $url;
+        $this->videoUrl = $videoUrl;
 
         return $this;
     }
@@ -98,19 +98,19 @@ class Lesson{
     }
 
     /**
-     * Get the value of user
+     * Get the value of studyWeek
      */
-    public function getUser()
+    public function getStudyWeek()
     {
-        return $this->user;
+        return $this->studyWeek;
     }
 
     /**
-     * Set the value of user
+     * Set the value of studyWeek
      */
-    public function setUser($user): self
+    public function setStudyWeek($studyWeek): self
     {
-        $this->user = $user;
+        $this->studyWeek = $studyWeek;
 
         return $this;
     }
