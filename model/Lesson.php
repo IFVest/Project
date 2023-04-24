@@ -1,10 +1,11 @@
 <?php
-class Lesson{
+class Lesson
+{
     private $id;
     private $title;
     private $url;
     private $module;
-    private $user;
+    private $studyWeek;
 
     /**
      * Get the value of id
@@ -44,24 +45,6 @@ class Lesson{
 
 
     /**
-     * Get the value of url
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Set the value of url
-     */
-    public function setUrl($url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
      * Get the value of module
      */
     public function getModule()
@@ -80,19 +63,37 @@ class Lesson{
     }
 
     /**
-     * Get the value of user
+     * Get the value of studyWeek
      */
-    public function getUser()
+    public function getStudyWeek()
     {
-        return $this->user;
+        return $this->studyWeek;
     }
 
     /**
-     * Set the value of user
+     * Set the value of studyWeek
      */
-    public function setUser($user): self
+    public function setStudyWeek($studyWeek): self
     {
-        $this->user = $user;
+        $this->studyWeek = $studyWeek;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of url
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set the value of url
+     */
+    public function setUrl($url): self
+    {
+        $this->url = $url;
 
         return $this;
     }

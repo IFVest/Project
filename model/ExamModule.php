@@ -1,10 +1,11 @@
 <?php
-class CorrectByModule{
+class ExamModule{
     private $id;
     private $totalQuestions;
     private $correctQuestions;
     private $isProblem;
     private $exam;
+    private $module;
 
     /**
      * Get the value of id
@@ -92,6 +93,24 @@ class CorrectByModule{
     public function setExam($exam): self
     {
         $this->exam = $exam;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of module
+     */
+    public function getModule()
+    {
+        return $this->module;
+    }
+
+    /**
+     * Set the value of module
+     */
+    public function setModule($module): self
+    {
+        $this->module = $module;
 
         return $this;
     }

@@ -32,19 +32,23 @@ class LessonController extends Controller{
         $lesson_url = isset($_POST["lesson_url"]) ? $_POST["lesson_url"] : NULL;
         $moduleId = isset($_POST["lesson_module"]) ? $_POST["lesson_module"] : NULL;
 
+        
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);
         $lesson->setTitle($lesson_title);
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
 
-        // echo "<script>console.log('".$lesson->getId()."')</script>";
-        // echo "<script>console.log('" . $lesson->getTitle() . "')</script>";
-        // echo "<script>console.log('" . $lesson->getUrl() . "')</script>";
-        
+         
         if ($dados["id"] == NULL)
         {
+            echo "<script>console.log('".$lesson->getId()."')</script>";
+            echo "<script>console.log('" . $lesson->getTitle() . "')</script>";
+            echo "<script>console.log('" . $lesson->getUrl() . "')</script>";       
             $this->lessonDao->insert($lesson);
+            echo "<script>console.log('".$lesson->getId()."')</script>";
+            echo "<script>console.log('" . $lesson->getTitle() . "')</script>";
+            echo "<script>console.log('" . $lesson->getUrl() . "')</script>";       
         }
         else
         {

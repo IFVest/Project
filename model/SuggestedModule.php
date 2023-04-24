@@ -1,8 +1,27 @@
 <?php
 
-class Module{
+class SuggestedModule{
+    private $id;
     private $studyPlan;
     private $module;
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get the value of studyPlan
