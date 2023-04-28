@@ -87,6 +87,18 @@ class ModuleDAO{
         $stm = $conn->prepare($sql);
         $stm->execute([$module->getId()]);
     }
+
+    public function findBySubject($subject) {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM Module WHERE subject = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$subject]);
+        $result = $stm->fetchAll();
+
+        return $this->mapModules($result);
+    }
 }
 
 ?>

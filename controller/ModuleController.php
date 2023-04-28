@@ -26,7 +26,10 @@ class ModuleController extends Controller
 
     public function list()
     {
-        return $this->moduleDao->list();
+        $dados["lista"] = $this->moduleDao->list();
+
+        $this->loadView("module/list_modules.php", $dados);
+
     }
 
     protected function save()
@@ -51,7 +54,9 @@ class ModuleController extends Controller
             $this->moduleDao->update($module);
         }
         
-        $this->loadView("module/list_modules.php", []);
+        $this->list();
+        exit();
+        //$this->loadView("module/list_modules.php", []);
     }
 
     protected function edit()
@@ -88,6 +93,12 @@ class ModuleController extends Controller
     public function findByModuleId($moduleId)
     {
         return $this->moduleDao->findById($moduleId);
+    }
+
+    public function findBySubject() {
+
+        $module_subject = $_GET['subject'];
+        $modules = $this->moduleDao->findBySubject($module_subject);
     }
 }
 

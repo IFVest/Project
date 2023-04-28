@@ -30,14 +30,28 @@
 </body>
 
 <script>
-    let subjectRadio = document.querySelector('.subject')
+    
+    let subjectRadio = document.querySelectorAll('.subject')
+    
+    subjectRadio.forEach(subject => 
+        subject.addEventListener('click', filterBySubject)
+    )
     let divModules = document.querySelector('.modules')
-    subjectRadio.addEventListener('change', filterBySubject)
 
     function filterBySubject(event){
+        let subject
+        subjectRadio.forEach(subject => 
+            subject.checked ? subject = subject.value : ''
+        )
+
         let xml = new XMLHttpRequest()
-        xml.open()
-        let modules = []
+        xml.open("GET", "../../controller/ModuleController.php?action=findBySubject&subject=${subject}", true)
+        xml.onload = function() {
+            if (xml.status >= 200 && xml.status < 400) {
+                console.log(this.responseText)
+            }
+        }
+        xml.send()
     }
 
 

@@ -1,10 +1,3 @@
-<?php
-
-require_once(__DIR__ . "/../../controller/ModuleController.php");
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +19,7 @@ require_once(__DIR__ . "/../../controller/ModuleController.php");
         </thead>
         <tbody>
             <?php
-            $modules = $mod->list();
+            $modules = $dados['lista'];
             foreach ($modules as $module) :
             ?>
                 <tr>
@@ -34,10 +27,10 @@ require_once(__DIR__ . "/../../controller/ModuleController.php");
                     <td style="border: 1px solid black"><?php echo $module->getDescription(); ?></td>
                     <td style="border: 1px solid black"><?php echo $module->getSubject(); ?></td>
                     <td style="border: 1px solid black">
-                        <a href="../../controller/ModuleController.php?action=edit&id=<?php echo $module->getId(); ?>">Alterar</a>
+                        <a href="ModuleController.php?action=edit&id=<?php echo $module->getId(); ?>">Alterar</a>
                     </td>
                     <td style="border: 1px solid black">
-                        <a href="../../controller/ModuleController.php?action=delete&id=<?php echo $module->getId(); ?>">Deletar</a>
+                        <a href="ModuleController.php?action=delete&id=<?php echo $module->getId(); ?>">Deletar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
