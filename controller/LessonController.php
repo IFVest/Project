@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/../model/Lesson.php");
 require_once(__DIR__ . "/../dao/LessonDAO.php");
+require_once(__DIR__ . "/ModuleController.php");
 require_once(__DIR__ . "/Controller.php");
 
 class LessonController extends Controller{
@@ -41,26 +42,21 @@ class LessonController extends Controller{
 
          
         if ($dados["id"] == NULL)
-        {
-            echo "<script>console.log('".$lesson->getId()."')</script>";
-            echo "<script>console.log('" . $lesson->getTitle() . "')</script>";
-            echo "<script>console.log('" . $lesson->getUrl() . "')</script>";       
-            $this->lessonDao->insert($lesson);
-            echo "<script>console.log('".$lesson->getId()."')</script>";
-            echo "<script>console.log('" . $lesson->getTitle() . "')</script>";
-            echo "<script>console.log('" . $lesson->getUrl() . "')</script>";       
+        {      
+            $this->lessonDao->insert($lesson);       
         }
         else
         {
             $this->lessonDao->update($lesson);
         }
 
-        $this->loadView("lesson/list_lessons.php", []);
+        $this->list();
     }
 
     public function list()
     {
-        return $this->lessonDao->list();
+        $dados["lista"] = $this->lessonDao->list();
+        $this->loadView("lesson/list_lessons.php", $dados);
     }
 
     protected function edit()
@@ -76,7 +72,7 @@ class LessonController extends Controller{
         }
         else
         {
-            echo "Aula não encontrada";
+            $this->list();
         }
     }
 
@@ -87,14 +83,23 @@ class LessonController extends Controller{
         if ($lesson)
         {
             $this->lessonDao->delete($lesson);
-
-            $this->loadView("lesson/list_lessons.php", []);
         }
-        else
-        {
-            echo "Aula não encontrada";
-        }
+        
+        $this->list();
     }
+
+    public function findModuleById($id)
+    {
+        echo "<script>console.log('teste')</script>";
+        $mod = new ModuleController();
+        return $mod->findByModuleId($id);        
+    }
+
+    public function test()
+    {
+        return 'test';
+    }
+
 }
 
 $les = new LessonController();

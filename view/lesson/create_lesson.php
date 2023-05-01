@@ -20,7 +20,7 @@
         Url:<input type="text" name="lesson_url" value="<?php echo ($dados["lesson"]) ? $dados["lesson"]->getUrl() : '';?>">
         <br>
         Módulo: <select name="lesson_module">
-            <?php foreach($mod->list() as $module):?>
+            <?php foreach($mod->getAll() as $module):?>
                 <option value="<?php echo $module->getId(); ?>" <?php echo ($dados["lesson"] && $dados["lesson"]->getModule() == $module->getId() ? "selected" : ''); ?>>
                     <?php echo $module->getName(); ?>
                 </option>

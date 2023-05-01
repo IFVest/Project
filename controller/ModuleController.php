@@ -55,8 +55,6 @@ class ModuleController extends Controller
         }
         
         $this->list();
-        exit();
-        //$this->loadView("module/list_modules.php", []);
     }
 
     protected function edit()
@@ -71,7 +69,7 @@ class ModuleController extends Controller
         }
         else
         {
-            $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
+            $this->list();
         }
     }
 
@@ -82,12 +80,9 @@ class ModuleController extends Controller
         if($module)
         {
             $this->moduleDao->delete($module);
-            $this->loadView("module/list_modules.php", []);
         }
-        else
-        {
-            $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
-        }
+
+        $this->list();
     }
 
     public function findByModuleId($moduleId)
@@ -99,6 +94,16 @@ class ModuleController extends Controller
 
         $module_subject = $_GET['subject'];
         $modules = $this->moduleDao->findBySubject($module_subject);
+    }
+
+    public function getAll()
+    {
+        return $this->moduleDao->list();
+    }
+
+    public function test()
+    {
+        echo 'test';
     }
 }
 
