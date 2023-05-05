@@ -1,6 +1,6 @@
 <?php
-    require_once(__DIR__ . "/../../controller/ModuleController.php");
     require_once(__DIR__ . "/../../util/config.php");
+    require_once(__DIR__ . "/../../model/Subjects.php");
 ?>
 
 <!DOCTYPE html>
@@ -19,13 +19,13 @@
         <br>
         Url:<input type="text" name="lesson_url" value="<?php echo ($dados["lesson"]) ? $dados["lesson"]->getUrl() : '';?>">
         <br>
-        Módulo: <select name="lesson_module">
-            <?php foreach($mod->getAll() as $module):?>
-                <option value="<?php echo $module->getId(); ?>" <?php echo ($dados["lesson"] && $dados["lesson"]->getModule() == $module->getId() ? "selected" : ''); ?>>
-                    <?php echo $module->getName(); ?>
-                </option>
-            <?php endforeach; ?>
+        Matéria: <select name="lesson_subject">
+            <?php foreach(Subjects::cases() as $subject):?>
+                <option class="subject" value="<?php echo $subject->name; ?>"><?php echo $subject->name?></option>
+            <?php endforeach;?>
         </select>
+        <br>
+        Módulo:
 
         <input type="text" hidden name="lesson_user">
         <input type="text" hidden name="lesson_id" value="<?php echo $dados["id"];?>">
@@ -33,5 +33,34 @@
         <button type="submit">Gravar</button>
     </form>
     
+
 </body>
+
+<script>
+    var subjects = document.querySelectorAll(".subject")
+
+    subjects.forEach(subject => 
+        subject.addEventListener("click", filterBySubject)
+    )
+
+    function filterBySubject(event) {
+        var selectedSubject
+
+        subjects.forEach(subject =>
+            subject.selected ? selectedSubject = subject.value : ''
+        )
+
+        var xhttp = new XMLHttpRequest()
+        xhttp.open("GET", "LessonController.php?action=getAllModules", true)
+        xhttp.onload = function() {
+            if (xhttp.status >= 200 && xhttp.status < 400) {
+                var modules = JSON.parse(this.responseText)
+                console.log(modules)
+            }
+        }
+        xhttp.send()
+    }
+</script>
+
 </html>
+

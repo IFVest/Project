@@ -48,6 +48,7 @@
         xml.open("GET", "../../controller/ModuleController.php?action=findBySubject&subject=${subject}", true)
         xml.onload = function() {
             if (xml.status >= 200 && xml.status < 400) {
+                var modules = this.responseText
                 console.log(this.responseText)
             }
         }

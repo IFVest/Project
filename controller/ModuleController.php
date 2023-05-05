@@ -32,6 +32,11 @@ class ModuleController extends Controller
 
     }
 
+    protected function create()
+    {
+        $this->loadView("module/create_module.php", []);
+    }
+
     protected function save()
     {
         $dados["id"] = isset($_POST['module_id']) ? $_POST['module_id'] : NULL;
@@ -94,11 +99,6 @@ class ModuleController extends Controller
 
         $module_subject = $_GET['subject'];
         $modules = $this->moduleDao->findBySubject($module_subject);
-    }
-
-    public function getAll()
-    {
-        return $this->moduleDao->list();
     }
 
     public function test()

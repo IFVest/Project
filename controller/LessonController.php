@@ -2,16 +2,18 @@
 
 require_once(__DIR__ . "/../model/Lesson.php");
 require_once(__DIR__ . "/../dao/LessonDAO.php");
-require_once(__DIR__ . "/ModuleController.php");
+require_once(__DIR__ . "/../dao/ModuleDAO.php");
 require_once(__DIR__ . "/Controller.php");
 
 class LessonController extends Controller{
 
     private LessonDAO $lessonDao;
+    private ModuleDAO $moduleDao;
 
     public function __construct()
     {
         $this->lessonDao = new LessonDAO();
+        $this->moduleDao = new ModuleDAO();
         $this->handleAction();
     }
 
@@ -23,6 +25,11 @@ class LessonController extends Controller{
             $lesson = $this->lessonDao->findById($lessonId);
             return $lesson;
         }
+    }
+
+    protected function create()
+    {
+        $this->loadView("lesson/create_lesson.php", []);
     }
 
     protected function save()
@@ -88,16 +95,16 @@ class LessonController extends Controller{
         $this->list();
     }
 
-    public function findModuleById($id)
+    public function getAllModules()
     {
-        echo "<script>console.log('teste')</script>";
-        $mod = new ModuleController();
-        return $mod->findByModuleId($id);        
+        $modules = $this->moduleDao->list();
+        $modulesJSON = json_encode($modules[0]);
+        echo $modulesJSON;
     }
 
     public function test()
     {
-        return 'test';
+        echo 'test';
     }
 
 }
