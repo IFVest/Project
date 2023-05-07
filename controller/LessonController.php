@@ -95,10 +95,11 @@ class LessonController extends Controller{
         $this->list();
     }
 
-    public function getAllModules()
+    public function findModulesBySubject()
     {
-        $modules = $this->moduleDao->list();
-        $modulesJSON = json_encode($modules[0]);
+        $subject = $_GET["subject"];
+        $modules = $this->moduleDao->findBySubject($subject);
+        $modulesJSON = json_encode($modules);
         echo $modulesJSON;
     }
 
