@@ -51,7 +51,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
     )
 
     function filterBySubject(event) {
-        var modules
+        // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria
         subjects.forEach(subject =>
             subject.selected ? selectedSubject = subject.value : ''
         )
@@ -60,19 +60,25 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         xhttp.onload = function() {
             if (xhttp.status >= 200 && xhttp.status < 400) {
                 modules = JSON.parse(this.responseText)
-                console.log(modules)
+                // Com os módulos, chama o método setModules para colocá-los em outro select
+                setModules(modules)
             }
         }
         xhttp.send()
 
-        setModules(modules)
     }
 
     function setModules(subjectModules) {
+        modulesDiv.innerHTML = ''
         var select = document.createElement("select")
+        select.setAttribute("name", "lesson_module")
 
-        for(subject in subjectModules) {
+        for (i = 0; i < subjectModules.length; i++) {
             var option = document.createElement("option")
+            option.setAttribute("value", subjectModules[i].id)
+            option.innerHTML = subjectModules[i].name
+
+            select.appendChild(option)
         }
 
         modulesDiv.appendChild(select)

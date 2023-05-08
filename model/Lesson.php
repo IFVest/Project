@@ -5,6 +5,7 @@ class Lesson
     private $title;
     private $url;
     private $module;
+    private $moduleName;
     private $studyWeek;
 
     /**
@@ -94,6 +95,24 @@ class Lesson
     public function setUrl($url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of moduleName
+     */
+    public function getModuleName()
+    {
+        return $this->moduleName;
+    }
+
+    /**
+     * Set the value of moduleName
+     */
+    public function setModuleName($moduleName): self
+    {
+        $this->moduleName = $moduleName;
 
         return $this;
     }

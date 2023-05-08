@@ -14,6 +14,11 @@ class WeekController extends Controller
         $this->handleAction();
     }
 
+    protected function create()
+    {
+        $this->loadView("week/create_week.php", []);
+    }
+
     protected function save()
     {
         

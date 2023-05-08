@@ -16,13 +16,13 @@
     <form method="POST" action="">
         Título: <input type="text" name="week_marker">
         <button type="submit">Gravar</button>
-
-        Matéria: <br>
-        <?php foreach(Subjects::cases() as $subject):?>
-            <input type="radio" name="subject" class="subject" value="<?php echo $subject->name;?>">
-            <?php echo $subject->name; ?>
-        <?php endforeach;?>
-
+        <br>
+        Matéria: 
+        <select name="subjects">
+            <?php foreach(Subjects::cases() as $subject):?>
+                <option class="subject" value="<?php echo $subject->name; ?>"><?php echo $subject->name ?></option>
+            <?php endforeach;?>
+        </select>
         <div class="modules">
 
         </div>

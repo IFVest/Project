@@ -46,7 +46,6 @@ class LessonController extends Controller{
         $lesson->setTitle($lesson_title);
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
-
          
         if ($dados["id"] == NULL)
         {      
@@ -63,6 +62,14 @@ class LessonController extends Controller{
     public function list()
     {
         $dados["lista"] = $this->lessonDao->list();
+        $i = 0;
+        foreach($dados["lista"] as $lesson):
+            $lessonModule = $this->findModuleById($lesson->getModule());
+            $moduleName = $lessonModule->getName();
+            $dados["lista"][$i]->setModuleName($moduleName);
+            $i++;
+        endforeach;
+
         $this->loadView("lesson/list_lessons.php", $dados);
     }
 
@@ -103,9 +110,14 @@ class LessonController extends Controller{
         echo $modulesJSON;
     }
 
+    public function findModuleById($id) 
+    {
+        return $this->moduleDao->findById($id);
+    }
+
     public function test()
     {
-        echo 'test';
+        return 'test';
     }
 
 }

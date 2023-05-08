@@ -10,7 +10,6 @@
 
 <body>
     <h1>Listar Aulas</h1>
-
     <table>
         <th style="border: 1px solid black">Titulo</th>
         <th style="border: 1px solid black">Url</th>
@@ -24,7 +23,7 @@
             <tr>
                 <td style="border: 1px solid black"><?php echo $lesson->getTitle(); ?></td>
                 <td style="border: 1px solid black"><?php echo $lesson->getUrl(); ?></td>
-                <td style="border: 1px solid black"><?php echo $les->findModuleById(5);?></td>
+                <td style="border: 1px solid black"><?php echo $lesson->getModuleName();?></td>
                 <td style="border: 1px solid black">
                     <a href="LessonController.php?action=edit&id=<?php echo $lesson->getId(); ?>">Alterar</a>
                 </td>
