@@ -38,8 +38,10 @@ class LessonController extends Controller{
         $dados["id"] = isset($_POST["lesson_id"]) ? $_POST["lesson_id"] : NULL;
         $lesson_title = isset($_POST["lesson_title"]) ? $_POST["lesson_title"] : NULL;
         $lesson_url = isset($_POST["lesson_url"]) ? $_POST["lesson_url"] : NULL;
-        $moduleId = isset($_POST["lesson_module"]) ? $_POST["lesson_module"] : NULL;
+        $moduleId = isset($_POST["lesson_modules"]) ? $_POST["lesson_modules"] : NULL;
 
+        echo "<script>console.log('".$moduleId."')</script>";
+        echo "<script>console.log('".$lesson_title."')</script>";
         
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);

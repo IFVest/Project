@@ -27,7 +27,7 @@ function filterBySubject(event) {
 function setModules(subjectModules) {
   modulesDiv.innerHTML = "";
   var select = document.createElement("select");
-  select.setAttribute("class", "lesson_modules");
+  select.setAttribute("name", "lesson_modules");
 
   for (i = 0; i < subjectModules.length; i++) {
     var option = document.createElement("option");

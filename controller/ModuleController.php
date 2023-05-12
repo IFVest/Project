@@ -3,15 +3,18 @@
 require_once(__DIR__ . "/../dao/ModuleDAO.php");
 require_once(__DIR__ . "/../model/Module.php");
 require_once(__DIR__ . "/Controller.php");
+require_once(__DIR__ . "/../service/ModuleService.php");
 
 class ModuleController extends Controller
 {
 
     private ModuleDAO $moduleDao;
+    private ModuleService $moduleService;
 
     public function __construct()
     {
         $this->moduleDao = new ModuleDAO();
+        $this->moduleService = new ModuleService();
         $this->handleAction();
     }
 
@@ -24,11 +27,11 @@ class ModuleController extends Controller
         }
     }
 
-    public function list()
+    public function list($errorMsgs = "")
     {
         $dados["lista"] = $this->moduleDao->list();
 
-        $this->loadView("module/list_modules.php", $dados);
+        $this->loadView("module/list_modules.php", $dados, $errorMsgs);
 
     }
 
@@ -49,17 +52,32 @@ class ModuleController extends Controller
         $module->setName($module_name);
         $module->setDescription($module_desc);
         $module->setSubject($module_subject);
+        
+        $errors = $this->moduleService->validarDados($module);
 
-        if ($dados["id"] == NULL)
-        {
-            $this->moduleDao->insert($module);
-        }
-        else
-        {
-            $this->moduleDao->update($module);
+        if (empty($errors)) {
+            try{
+
+                if ($dados["id"] == NULL)
+                {
+                    $this->moduleDao->insert($module);
+                }
+                else
+                {
+                    $this->moduleDao->update($module);
+                }
+                
+                $this->list();
+
+            } catch (PDOException $e) {
+                $errors = "Erro ao salvar o módulo no banco de dados";
+            }
+            
         }
         
-        $this->list();
+        $dados["module"] = $module;
+        $errorMsgs = implode("<br>", $errors);
+        $this->list($errorMsgs);
     }
 
     protected function edit()
