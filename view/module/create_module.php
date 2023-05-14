@@ -16,7 +16,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 </head>
 
 <body>
-    <h1> <?php if ($dados['id'] == 0) echo "Inserir";
+    <h1> <?php if ($dados['id'] == NULL) echo "Inserir";
             else echo "Alterar"; ?> módulo</h1>
 
     <form method="POST" action="<?= BASE_URL ?>/controller/ModuleController.php?action=save">
@@ -39,7 +39,9 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <button type="submit">Gravar</button>
     </form>
 
-
+    <div class="col-6">
+        <?php require_once(__DIR__ . "/../include/msg.php");?>
+    </div>
 </body>
 
 </html>

@@ -15,6 +15,7 @@ class ModuleController extends Controller
     {
         $this->moduleDao = new ModuleDAO();
         $this->moduleService = new ModuleService();
+        $this->setActionDefault("list");
         $this->handleAction();
     }
 
@@ -27,17 +28,17 @@ class ModuleController extends Controller
         }
     }
 
-    public function list($errorMsgs = "")
+    public function list()
     {
         $dados["lista"] = $this->moduleDao->list();
 
-        $this->loadView("module/list_modules.php", $dados, $errorMsgs);
+        $this->loadView("module/list_modules.php", $dados);
 
     }
 
-    protected function create()
+    protected function create($dados = [], $errorMsgs = "")
     {
-        $this->loadView("module/create_module.php", []);
+        $this->loadView("module/create_module.php", $dados, $errorMsgs);
     }
 
     protected function save()
@@ -68,6 +69,7 @@ class ModuleController extends Controller
                 }
                 
                 $this->list();
+                exit;
 
             } catch (PDOException $e) {
                 $errors = "Erro ao salvar o módulo no banco de dados";
@@ -77,7 +79,7 @@ class ModuleController extends Controller
         
         $dados["module"] = $module;
         $errorMsgs = implode("<br>", $errors);
-        $this->list($errorMsgs);
+        $this->create($dados, $errorMsgs);
     }
 
     protected function edit()

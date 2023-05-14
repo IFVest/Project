@@ -4,6 +4,7 @@ require_once(__DIR__ . "/../util/config.php");
 
 class Controller
 {
+    private String $actionDefault = "";
 
     protected function handleAction()
     {
@@ -18,18 +19,27 @@ class Controller
     {
         $methodNoAction = "noAction";
 
-        if ($methodName && method_exists($this, $methodName))
+        //Se o médoto extiver em branco, chama o $actionDefault (caso exista)
+        if ( (!$methodName) || empty(trim($methodName)) && method_exists($this, $methodName)) {
+            $method = $this->actionDefault;
+            $this->$method();
+        
+        //Verifica se o método da action recebido por parâmetro existe na classe
+        //Se sim, chama-o
+        } else if ($methodName && method_exists($this, $methodName)){
             $this->$methodName();
 
-        elseif (method_exists($this, $methodNoAction))
-            $this->$methodNoAction();
+            //Código para esconder os parâmetros da URL, inclusive o action
+            $url_parts = parse_url($_SERVER['REQUEST_URI']); //Divide a URL em 'path' e 'query'
+            echo "<script>window.history.replaceState({}, '', '{$url_parts['path']}');</script>";
+        }
 
         else {
             throw new BadFunctionCallException("Ação não implementada");
         }
     }
 
-    protected function loadView(string $path, array $dados, string $msgErro = "", string $msgSucesso = "")
+    protected function loadView(string $path, array $dados, string $errorMsgs = "", string $msgSucesso = "")
     {
         $caminho = __DIR__ . "/../view/" . $path;
         if (file_exists($caminho)) {
@@ -44,5 +54,11 @@ class Controller
     {
         echo "Ação não encontrada no controller.<br>";
         echo "Verifique com o administrador do sistema.";
+    }
+
+    public function setActionDefault($actionDefault) {
+        $this->actionDefault = $actionDefault;
+
+        return $this;
     }
 }
