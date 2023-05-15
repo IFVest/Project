@@ -2,6 +2,7 @@
 class Exam{
     private $id;
     private $user;
+    private $examModules;
 
     /**
      * Get the value of id
