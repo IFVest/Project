@@ -53,7 +53,7 @@ class ModuleController extends Controller
         $module->setName($module_name);
         $module->setDescription($module_desc);
         $module->setSubject($module_subject);
-        
+
         $errors = $this->moduleService->validarDados($module);
 
         if (empty($errors)) {
@@ -112,7 +112,7 @@ class ModuleController extends Controller
 
     public function findByModuleId($moduleId)
     {
-        return $this->moduleDao->findById($moduleId);
+        $this->moduleDao->findById($moduleId);
     }
 
     public function findBySubject() {

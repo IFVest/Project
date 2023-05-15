@@ -30,8 +30,8 @@ class Controller
             $this->$methodName();
 
             //Código para esconder os parâmetros da URL, inclusive o action
-            $url_parts = parse_url($_SERVER['REQUEST_URI']); //Divide a URL em 'path' e 'query'
-            echo "<script>window.history.replaceState({}, '', '{$url_parts['path']}');</script>";
+            // $url_parts = parse_url($_SERVER['REQUEST_URI']); //Divide a URL em 'path' e 'query'
+            // echo "<script>window.history.replaceState({}, '', '{$url_parts['path']}');</script>";
         }
 
         else {

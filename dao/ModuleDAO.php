@@ -34,7 +34,14 @@ class ModuleDAO{
 
         $modules = $this->mapModules($result);
 
-        return $modules[0];
+        if (count($modules) == 1) {
+            return $modules[0];
+        }
+        else {
+            return null;
+        }
+
+        die();
     }
 
     public function list()
