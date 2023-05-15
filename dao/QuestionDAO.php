@@ -1,26 +1,30 @@
 <?php
 
 require_once(__DIR__ . "/../model/Question.php");
+require_once(__DIR__ . "/../dao/AlternativeDAO.php");
+require_once(__DIR__ . "/../service/AlternativeService.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 
 class QuestionDAO{
     
     private AlternativeService $alternativeService;
+    private AlternativeDAO $alternativeDao;
 
     function __construct(){
         $this->alternativeService = new AlternativeService();
+        $this->alternativeDao = new AlternativeDAO();
     }
 
     private function mapQuestions($sql){
         $questions = array();
 
         foreach($sql as $quest){
-            $question = new Module();
+            $question = new Question();
             $question->setId($quest['id']);
             $question->setText($quest['text']);
-            $question->setmodule($quest['module']);
+            $question->setmodule($quest['idModule']);
 
-            $alternatives = $alternativeService->getByQuestion($quest->getId());
+            $alternatives = $this->alternativeDao->findByQuestion($question);
             $question->setAlternatives($alternatives);
 
             array_push($questions, $question);
@@ -56,29 +60,32 @@ class QuestionDAO{
     public function insert(Question $question, Array $alternatives){
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Question (text, module) VALUES (:text,:module)";
+        $sql = "INSERT INTO Question (text, idModule) VALUES (:text,:module)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('text', $question->getText());
-        $stm->bindValue('module', $question->getModule());
+        $stm->bindValue('module', $question->getModule()->getId());
 
         $stm->execute();
+        //Pegando o último ID inserido, no caso a questão no situação. 
 
-        $this->alternativeService->insertArray($alternatives, $question); 
+        $question->setId($conn->lastInsertId());
+        $this->alternativeService->insertArray($alternatives); 
     }
 
     public function update(Question $question, Array $alternatives){
         $conn = Connection::getConn();
 
-        $sql = "UPDATE Question SET text = :text, module = :module, subject = :sub WHERE id = :id";
+        $sql = "UPDATE Question SET text = :text, idModule = :module WHERE id = :id";
 
         $stm = $conn->prepare($sql);
+
         $stm->bindValue('text', $question->getText());
-        $stm->bindValue('module', $question->getModule());
-        $stm->bindValue('id', $module->getId());
+        $stm->bindValue('module', $question->getModule()->getId());
+        $stm->bindValue('id', $question->getId());
         $stm->execute();
 
-        $this->alternativeService->updateArray($alternatives, $question->getId());
+        $this->alternativeService->updateArray($alternatives, $question);
     }
 
     public function delete(Question $question){
@@ -86,7 +93,7 @@ class QuestionDAO{
         $sql = "DELETE FROM Question WHERE id = ?";
         $stm = $conn->prepare($sql);
 
-        $this->alternativeService->deleteByQuestion($question->getId());
+        $this->alternativeDao->deleteByQuestion($question);
 
         $stm->execute([$question->getId()]);
     }

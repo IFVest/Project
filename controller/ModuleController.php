@@ -42,16 +42,18 @@ class ModuleController extends Controller
         $module->setDescription($module_desc);
         $module->setSubject($module_subject);
 
-        if ($dados["id"] == NULL)
-        {
+        if ($dados["id"] == NULL){
             $this->moduleDao->insert($module);
         }
-        else
-        {
+        else{
             $this->moduleDao->update($module);
         }
         
         $this->loadView("module/list_modules.php", []);
+    }
+
+    protected function create(){
+        $this->loadView("module/create_module.php", []);
     }
 
     protected function edit()

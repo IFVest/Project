@@ -1,7 +1,5 @@
 <?php
     require_once(__DIR__ . "/../../util/config.php");
-    require_once(__DIR__ . "/../../controller/QuestionController.php");
-    require_once(__DIR__ . "/../../controller/ModuleController.php");
 ?> 
 
 
@@ -19,14 +17,12 @@
     <h1> <?php if ($dados['id'] == 0) echo "Inserir";
             else echo "Alterar"; ?> questão</h1>
 
-    <form method="POST" action="<?= BASE_URL ?>//controller/QuestionController.php?action=save">
+    <form method="POST" action="<?= BASE_URL ?>/controller/QuestionController.php?action=save">
         <select name="question_module" required>
             <?php
-            $moduleController = new ModuleController();
-            $modules = $moduleController->list();
-            foreach($modules as $module):?>
+            foreach($dados['modules'] as $module):?>
                 <option value="<?php echo $module->getId()?>" 
-                <?php echo ($dados["question"] && $module == $dados["module"]->getModule() ? "selected" : '');?>>
+                <?php echo ($dados["question"] && $module == $dados["question"]->getModule() ? "selected" : '');?>>
                     <?php echo $module->getName();?>
                 </option>
             <?php endforeach;?>
@@ -40,8 +36,12 @@
         <!-- Create alternatives while create the question -->
         <?php for($i = 1; $i<=5; $i++){
             echo '<label for="alternative'.$i.'">Alternativa'.$i.' </label>';
-            echo '<input type="text" name="alternative'.$i.'" value="'.($dados[`alternative$i`] ? $dados["alternative$i"]->getText() : '').'" required >';
-            echo '<input type="radio" name="correctAlternative" value='.$i.'>';
+            echo '<input type="text" name="alternative'.$i.'" value="'.
+                (isset($dados['question']) && $dados['question']->getAlternatives() ? $dados['question']->getAlternatives()[$i-1]->getText() : '')
+            .'" required >';
+            echo '<input type="radio" name="correctAlternative" value='.$i.' '.
+                (isset($dados['question']) && $dados['question']->getAlternatives()[$i-1]->getIsCorrect() ? 'checked' : '')
+            .'>';
             echo '<br>';
             } 
         ?>  

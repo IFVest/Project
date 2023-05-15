@@ -10,35 +10,19 @@ class AlternativeService{
         $this->alternativeDAO = new AlternativeDAO();
     }
 
-    function insertArray(Array $alternatives, Question $question){
+    function insertArray(Array $alternatives){
         foreach($alternatives as $alt):
-            $alternative = new Alternative();
-            $alternative->setText($alt['text']);
-            $alternative->setIsCorrect($alt['isCorrect']);
-            $alternative->setQuestion($question);
-
-            $alternativeDAO->insert($alternative);
+            $this->alternativeDAO->insert($alt);
         endforeach;
     } 
 
-    function updateArray(Array $alternatives, int $idQuestion){
-        $alternativesByQuestion = $this->getByQuestion($idQuestion);
+    function updateArray(Array $alternatives, Question $question){
+        $alternativesByQuestion = $this->alternativeDAO->findByQuestion($question);
         for($i = 0; $i<=4; $i++){
-            $alternativesByQuestion[$i]->setText($alternatives[$i]['text']);
-            $alternativesByQuestion[$i]->setIsCorrect($alternatives[$i]['isCorrect']);
+            $alternativesByQuestion[$i]->setText($alternatives[$i]->getText());
+            $alternativesByQuestion[$i]->setIsCorrect($alternatives[$i]->getIsCorrect());
 
-            $alternativeDAO->update($alternativesByQuestion[$i]);
+            $this->alternativeDAO->update($alternativesByQuestion[$i]);
         }
-    }
-
-    function getByQuestion(int $id){
-        return $alternativeDAO->getByQuestion($id);
-    }
-
-    function deleteByQuestion(int $id){
-        $alternatives = $this->getByQuestion($id);
-        foreach($alternatives as $alternative):
-            $alternativeDAO->delete($alternative->getId());
-        endforeach;
     }
 } 

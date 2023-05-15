@@ -1,6 +1,7 @@
 <?php
-
-require_once(__DIR__ . "/../util/config.php");
+    ini_set('display_errors', 1);
+    error_reporting(E_ERROR);
+    require_once(__DIR__ . "/../util/config.php");
 
 class Controller
 {
@@ -17,13 +18,11 @@ class Controller
     protected function callAction($methodName)
     {
         $methodNoAction = "noAction";
-
-        if ($methodName && method_exists($this, $methodName))
+        if ($methodName && method_exists($this, $methodName)){
             $this->$methodName();
-
-        elseif (method_exists($this, $methodNoAction))
+        }else if (method_exists($this, $methodNoAction)){
             $this->$methodNoAction();
-
+        }
         else {
             throw new BadFunctionCallException("Ação não implementada");
         }

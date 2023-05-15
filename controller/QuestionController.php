@@ -1,24 +1,22 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ERROR);
+require_once(__DIR__ . '/../util/config.php');
 require_once(__DIR__ . "/../dao/QuestionDAO.php");
 require_once(__DIR__ . "/../model/Question.php");
-require_once(__DIR__ . "/../service/AlternativeService.php");
+require_once(__DIR__ . "/../model/Alternative.php");
+require_once(__DIR__ . "/../dao/AlternativeDAO.php");
 require_once(__DIR__ . "/Controller.php");
-require_once(__DIR__ . "/ModuleController.php");
-
+require_once(__DIR__ . "/../dao/ModuleDAO.php");
 
 class QuestionController extends Controller{
 
     private QuestionDAO $questionDao;
-    private Question $question;
-    private ModuleController $moduleController;
-    private AlternativeService $alternativeService;
+    private ModuleDAO $moduleDao;
+    private AlternativeDAO $alternativeDao;
 
-    public function __construct(){
+    function __construct(){
         $this->questionDao = new QuestionDAO();
-        $this->question = new Question();
-        $this->moduleController = new ModuleController();
+        $this->moduleDao = new ModuleDAO();
+        $this->alternativeDao = new AlternativeDao();
         $this->handleAction();
     }
 
@@ -30,7 +28,13 @@ class QuestionController extends Controller{
     }
 
     public function list(){
-        return $this->questionDao->list();
+        $dados['lista'] = $this->questionDao->list();
+        $this->loadView("question/list_questions.php", $dados);
+    }
+
+    public function create(){
+        $dados['modules'] = $this->moduleDao->list();
+        $this->loadView("question/create_question.php", $dados);
     }
 
     protected function save(){
@@ -40,24 +44,24 @@ class QuestionController extends Controller{
         $question_module = isset($_POST['question_module']) ? $_POST['question_module'] : NULL;
 
         // Adicionando no objeto questão
-        $this->question->setId($dados['id']);
-        $this->question->setText($module_text);
+        $question = new Question();
+        $question->setId($dados['id']);
+        $question->setText($question_text);
 
         // Pegando o modulo do banco
-        $question_module = $this->moduleController->findById($question_module);
-        $this->question->setModule($question_module);
+        $question_module = $this->moduleDao->findById($question_module);
+        $question->setModule($question_module);
 
         // Colocando as alternativas da questão em um array para enviar para a controller da alternativa
         $alternatives = [];
         for($i = 1; $i<=5; $i++){
-            $text = isset($_POST['alternative{$i}']) ? $_POST['alternative{$i}'] : NULL;
-            $isCorrect = false;
-            if(isset($_POST['correctAlternative']) && $_POST['correctAlternative'] == $i){
-                $isCorrect = true;
-            }
-            $alternative['text'] = $text;
-            $alternative['isCorrect'] = $isCorrect;
+            $text = isset($_POST['alternative'.$i]) ? $_POST['alternative'.$i] : NULL;
+            $isCorrect = (isset($_POST['correctAlternative']) && $_POST['correctAlternative'] == $i)? _TRUE_ : _FALSE_;
 
+            $alternative = new Alternative();
+            $alternative->setText($text);
+            $alternative->setIsCorrect($isCorrect);
+            $alternative->setQuestion($question);
             array_push($alternatives, $alternative);
         }
 
@@ -68,7 +72,7 @@ class QuestionController extends Controller{
             $this->questionDao->update($question, $alternatives);
         }
 
-        $this->loadView("question/create_question.php", $dados);
+        $this->list();
     }
 
     // Cria o objeto para ser enviado à tela de editar, para que estejam obtidos os dados
@@ -78,12 +82,7 @@ class QuestionController extends Controller{
         if($question){
             $dados["id"] = $question->getId();
             $dados["question"] = $question;
-
-            $alternatives = $this->alternativeService->getByQuestion($question);
-            for($i = 0; $i<=4; $i++){
-                $dados["alterative"+($i++)] = $alternatives[$i];
-            }
-            
+            $dados['modules'] = $this->moduleDao->list();
             $this->loadView("question/create_question.php", $dados);
         }else{
             $this->loadView("question/list_question.php", [], "Questão não encontrada");
@@ -95,9 +94,11 @@ class QuestionController extends Controller{
 
         if($question){
             $this->questionDao->delete($question);
-            $this->loadView("question/list_question.php", []);
+            $this->list();
         }else{
-            $this->loadView("question/list_question.php", [], "Questão não encontrada");
+            $this->list();
         }
     }
 }
+
+$questionController = new QuestionController();
