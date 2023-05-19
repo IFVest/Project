@@ -34,6 +34,6 @@ require_once(__DIR__ . "/../../model/Subjects.php");
     </form>
 </body>
 
-<script src="<?= BASE_URL ?>/js/filterByModule.js"></script>
+<script src="<?= BASE_URL ?>/js/filterByModule.js" type="module"></script>
 
 </html>

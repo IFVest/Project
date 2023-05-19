@@ -4,16 +4,20 @@ require_once(__DIR__ . "/../model/Lesson.php");
 require_once(__DIR__ . "/../dao/LessonDAO.php");
 require_once(__DIR__ . "/../dao/ModuleDAO.php");
 require_once(__DIR__ . "/Controller.php");
+require_once(__DIR__ . "/../service/LessonService.php");
+
 
 class LessonController extends Controller{
 
     private LessonDAO $lessonDao;
     private ModuleDAO $moduleDao;
+    private LessonService $lessonService;
 
     public function __construct()
     {
         $this->lessonDao = new LessonDAO();
         $this->moduleDao = new ModuleDAO();
+        $this->lessonService = new LessonService();
         $this->handleAction();
     }
 
@@ -27,9 +31,9 @@ class LessonController extends Controller{
         }
     }
 
-    protected function create()
+    protected function create($dados = [], $errorMsgs = "")
     {
-        $this->loadView("lesson/create_lesson.php", []);
+        $this->loadView("lesson/create_lesson.php", $dados, $errorMsgs);
     }
 
     protected function save()
@@ -39,9 +43,6 @@ class LessonController extends Controller{
         $lesson_title = isset($_POST["lesson_title"]) ? $_POST["lesson_title"] : NULL;
         $lesson_url = isset($_POST["lesson_url"]) ? $_POST["lesson_url"] : NULL;
         $moduleId = isset($_POST["lesson_modules"]) ? $_POST["lesson_modules"] : NULL;
-
-        echo "<script>console.log('".$moduleId."')</script>";
-        echo "<script>console.log('".$lesson_title."')</script>";
         
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);
@@ -49,16 +50,32 @@ class LessonController extends Controller{
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
          
-        if ($dados["id"] == NULL)
-        {      
-            $this->lessonDao->insert($lesson);       
-        }
-        else
-        {
-            $this->lessonDao->update($lesson);
+        $errors = $this->lessonService->validarDados($lesson);
+        // $lesson_module = $this->findModuleById($moduleId);
+        // if ($lesson_module == "Invalid module") {
+        //     array_push($errors, $lesson_module);
+        // }
+
+        if (empty($errors)) {
+            try{
+                if ($dados["id"] == NULL) {
+                    $this->lessonDao->insert($lesson);
+                } else {
+                    $this->lessonDao->update($lesson);
+                }
+
+                $this->list();
+                exit;
+            }
+            catch (PDOException $e) {
+                $errors = "Erro ao salvar aula no banco de dados";
+            }
         }
 
-        $this->list();
+
+        $dados["lesson"] = $lesson;
+        $errorMsgs = implode("<br>", $errors);
+        $this->create($dados, $errorMsgs);
     }
 
     public function list()

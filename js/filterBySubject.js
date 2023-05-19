@@ -4,8 +4,9 @@ var modulesDiv = document.querySelector(".modules");
 subjects.forEach((subject) =>
   subject.addEventListener("click", filterBySubject)
 );
-
-function filterBySubject(event) {
+export function test(test){ console.log(test)}
+export function filterBySubject(name) {
+  console.log(name)
   // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria
   subjects.forEach((subject) =>
     subject.selected ? (selectedSubject = subject.value) : ""
@@ -24,7 +25,7 @@ function filterBySubject(event) {
   xhttp.send();
 }
 
-function setModules(subjectModules) {
+export function setModules(subjectModules) {
   modulesDiv.innerHTML = "";
   var select = document.createElement("select");
   select.setAttribute("name", "lesson_modules");

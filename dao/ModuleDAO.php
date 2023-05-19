@@ -38,7 +38,7 @@ class ModuleDAO{
             return $modules[0];
         }
         else {
-            return null;
+            return "Invalid module";
         }
 
         die();

@@ -14,7 +14,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 </head>
 
 <body>
-    <h1> <?php if ($dados["id"] == 0) echo "Criar";
+    <h1> <?php if ($dados["id"] == NULL) echo "Criar";
             else echo "Alterar"; ?> aula </h1>
     <form method="POST" action="<?= BASE_URL ?>/controller/LessonController.php?action=save">
         Titulo:<input type="text" name="lesson_title" value="<?php echo ($dados["lesson"]) ? $dados["lesson"]->getTitle() : '' ?>">
@@ -37,7 +37,9 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <button type="submit">Gravar</button>
     </form>
 
-
+    <div class="col-6">
+        <?php require_once(__DIR__ . "/../include/msg.php"); ?>
+    </div>
 </body>
 <script src="<?= BASE_URL ?>/js/filterBySubject.js"></script>
 

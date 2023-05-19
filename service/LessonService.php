@@ -14,6 +14,7 @@ class LessonService {
             array_push($errors, "O campo URL é obrigatório");
         }
 
-        
+        return $errors;
     }
 }
+?>
