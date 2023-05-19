@@ -84,5 +84,18 @@ class LessonDAO{
         $stm = $conn->prepare($sql);
         $stm->execute([$lesson->getId()]);
     }
+
+    public function findByModuleId($moduleId)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT FROM Lesson WHERE idModule = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$moduleId]);
+        $result = $stm->fetchAll();
+
+        return $this->mapLessons($result);
+    }
 }
 ?>

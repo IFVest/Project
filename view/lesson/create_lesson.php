@@ -41,6 +41,6 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <?php require_once(__DIR__ . "/../include/msg.php"); ?>
     </div>
 </body>
-<script src="<?= BASE_URL ?>/js/filterBySubject.js"></script>
+<script src="<?= BASE_URL ?>/js/filtering.js" type="module"></script>
 
 </html>
