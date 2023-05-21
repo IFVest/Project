@@ -49,12 +49,13 @@ class LessonController extends Controller{
         $lesson->setTitle($lesson_title);
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
-         
+        
         $errors = $this->lessonService->validarDados($lesson);
-        // $lesson_module = $this->findModuleById($moduleId);
-        // if ($lesson_module == "Invalid module") {
-        //     array_push($errors, $lesson_module);
-        // }
+        
+        $lesson_module = $this->findModuleById($moduleId);
+        if ($lesson_module == "Invalid module") {
+            array_push($errors, "Módulo inválido");
+        }
 
         if (empty($errors)) {
             try{
@@ -133,13 +134,19 @@ class LessonController extends Controller{
     {
         $moduleId = $_GET["moduleId"];
         $lessons = $this->lessonDao->findByModuleId($moduleId);
+        print_r($lessons);
         $lessonsJSON = json_encode($lessons);
         echo $lessonsJSON;
     }
 
     public function findModuleById($id) 
     {
-        return $this->moduleDao->findById($id);
+        try {
+            $module = $this->moduleDao->findById($id);
+            return $module;
+        } catch (PDOException $e) {
+            echo $e;
+        }
     }
 
     public function test()

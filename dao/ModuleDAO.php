@@ -37,11 +37,11 @@ class ModuleDAO{
         if (count($modules) == 1) {
             return $modules[0];
         }
-        else {
-            return "Invalid module";
+        else if(count($modules) > 1) {
+            return "More than 1 module found";
         }
 
-        die();
+        die("Invalid module");
     }
 
     public function list()

@@ -13,7 +13,7 @@ class LessonService {
         if (! $lesson->getUrl()) {
             array_push($errors, "O campo URL é obrigatório");
         }
-
+        
         return $errors;
     }
 }

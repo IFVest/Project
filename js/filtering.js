@@ -1,11 +1,15 @@
 var subjects = document.querySelectorAll(".subject");
 var modulesDiv = document.querySelector(".modules");
 
+export var moduleFiltering = function() {
+  filterBySubject(false);
+}
+
 subjects.forEach((subject) =>
-  subject.addEventListener("click", filterBySubject)
+  subject.addEventListener("click", moduleFiltering)
 );
 
-export function filterBySubject(filterModule = false) {
+export function filterBySubject(filterModule) {
   // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria
   let selectedSubject = "";
   subjects.forEach((subject) =>
@@ -35,9 +39,9 @@ export function filterBySubject(filterModule = false) {
 export function createSelect(object, filterModule) {
   var selectAttribute = "";
   var optionAttribute = "";
-  if (filterModule == false) {
+  modulesDiv.innerHTML = "";
 
-    modulesDiv.innerHTML = "";
+  if (filterModule == false) {
     selectAttribute = "lesson_modules";
     optionAttribute = "lesson_module";
   } else if (filterModule == true) {
@@ -67,17 +71,18 @@ export function createSelect(object, filterModule) {
 }
 
 function filterByModule(){
-  var lesson_moduleId = document.querySelector(".lesson_modules").value;
+  var week_moduleId = document.querySelector(".week_modules").value;
+  console.log(week_moduleId)
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "LessonController.php?action=findLessonsByModuleId&moduleId=" + lesson_moduleId, true);
+  xhttp.open("GET", "LessonController.php?action=findLessonsByModuleId&moduleId=" + week_moduleId, true);
   xhttp.onload = function () {
 
     if (xhttp.status >= 200 && xhttp.status < 400) {
-      console.log('parq')
-      // let modules = JSON.parse(this.responseText);
-      // // Com os módulos, chama o método setModules para colocá-los em outro select
+      // let lessons = JSON.parse(this.responseText);
+      // Cria um select com as aulas encontradas de opção
       
-      // setModules(modules, test);
+      // CRIAR FUNÇÃO DE SERIALIZAÇÃO NA LESSON
+      console.log(this.responseText)
     }
   };
   xhttp.send();

@@ -89,7 +89,7 @@ class LessonDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT FROM Lesson WHERE idModule = ?";
+        $sql = "SELECT * FROM Lesson WHERE idModule = ?";
 
         $stm = $conn->prepare($sql);
         $stm->execute([$moduleId]);
