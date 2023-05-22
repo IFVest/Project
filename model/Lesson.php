@@ -1,5 +1,5 @@
 <?php
-class Lesson
+class Lesson implements JsonSerializable
 {
     private $id;
     private $title;
@@ -7,6 +7,17 @@ class Lesson
     private $module;
     private $moduleName;
     private $studyWeek;
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'url' => $this->url,
+            'moduleId' => $this->module,
+            'moduleName' => $this->moduleName
+        ];
+    }
 
     /**
      * Get the value of id

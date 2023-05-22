@@ -11,6 +11,8 @@ require_once(__DIR__ . "/../../model/Subjects.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="<?= BASE_URL ?>/js/filtering.js" type="module"></script>
+
 </head>
 
 <body>
@@ -41,6 +43,5 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <?php require_once(__DIR__ . "/../include/msg.php"); ?>
     </div>
 </body>
-<script src="<?= BASE_URL ?>/js/filtering.js" type="module"></script>
 
 </html>

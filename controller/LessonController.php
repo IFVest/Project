@@ -134,7 +134,6 @@ class LessonController extends Controller{
     {
         $moduleId = $_GET["moduleId"];
         $lessons = $this->lessonDao->findByModuleId($moduleId);
-        print_r($lessons);
         $lessonsJSON = json_encode($lessons);
         echo $lessonsJSON;
     }
