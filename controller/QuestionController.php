@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../util/config.php');
 require_once(__DIR__ . "/../dao/QuestionDAO.php");
+require_once(__DIR__ . "/../service/QuestionService.php");
 require_once(__DIR__ . "/../model/Question.php");
 require_once(__DIR__ . "/../model/Alternative.php");
 require_once(__DIR__ . "/../dao/AlternativeDAO.php");
@@ -12,11 +13,13 @@ class QuestionController extends Controller{
     private QuestionDAO $questionDao;
     private ModuleDAO $moduleDao;
     private AlternativeDAO $alternativeDao;
+    private QuestionService $questionService;
 
     function __construct(){
         $this->questionDao = new QuestionDAO();
         $this->moduleDao = new ModuleDAO();
         $this->alternativeDao = new AlternativeDao();
+        $this->questionService = new QuestionService();
         $this->handleAction();
     }
 
@@ -32,17 +35,18 @@ class QuestionController extends Controller{
         $this->loadView("question/list_questions.php", $dados);
     }
 
-    public function create(){
+    public function create($dados = [], $errorMsgs = ""){
+        $dados['id'] = NULL;
         $dados['modules'] = $this->moduleDao->list();
-        $this->loadView("question/create_question.php", $dados);
+        $this->loadView("question/create_question.php", $dados, $errorMsgs);
     }
 
     protected function save(){
+
         // Pegando valores do formulário
         $dados["id"] = isset($_POST['question_id']) ? $_POST['question_id'] : NULL;
         $question_text = isset($_POST['question_text']) ? $_POST['question_text'] : NULL;
         $question_module = isset($_POST['question_module']) ? $_POST['question_module'] : NULL;
-
         // Adicionando no objeto questão
         $question = new Question();
         $question->setId($dados['id']);
@@ -64,15 +68,28 @@ class QuestionController extends Controller{
             $alternative->setQuestion($question);
             array_push($alternatives, $alternative);
         }
-
-        // Inteação com a DAO
-        if($dados['id'] == NULL){
-            $this->questionDao->insert($question, $alternatives);
-        }else{
-            $this->questionDao->update($question, $alternatives);
+        $question->setAlternatives($alternatives);
+        $errors = $this->questionService->validateData($question);
+        if (empty($errors)) {
+            // Inteação com a DAO
+            try{
+                if($dados['id'] == NULL){
+                    $this->questionDao->insert($question);
+                }else{
+                    echo 'alo';
+                    $this->questionDao->update($question);
+                }
+                $this->list();
+                exit;
+            } catch (PDOException $e) {
+                $errors = "Erro ao salvar a questão no banco de dados";
+            }
+            
         }
-
-        $this->list();
+        
+        $dados["question"] = $question;
+        $errorMsgs = implode("<br>", $errors);
+        $this->create($dados, $errorMsgs);
     }
 
     // Cria o objeto para ser enviado à tela de editar, para que estejam obtidos os dados

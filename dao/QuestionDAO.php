@@ -57,7 +57,7 @@ class QuestionDAO{
         return $this->mapQuestions($result);
     }
 
-    public function insert(Question $question, Array $alternatives){
+    public function insert(Question $question){
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO Question (text, idModule) VALUES (:text,:module)";
@@ -67,13 +67,13 @@ class QuestionDAO{
         $stm->bindValue('module', $question->getModule()->getId());
 
         $stm->execute();
-        //Pegando o último ID inserido, no caso a questão no situação. 
 
+        //Pegando o último ID inserido, no caso a questão no situação. 
         $question->setId($conn->lastInsertId());
-        $this->alternativeService->insertArray($alternatives); 
+        $this->alternativeService->insertArray($question->getAlternatives()); 
     }
 
-    public function update(Question $question, Array $alternatives){
+    public function update(Question $question){
         $conn = Connection::getConn();
 
         $sql = "UPDATE Question SET text = :text, idModule = :module WHERE id = :id";
@@ -85,7 +85,7 @@ class QuestionDAO{
         $stm->bindValue('id', $question->getId());
         $stm->execute();
 
-        $this->alternativeService->updateArray($alternatives, $question);
+        $this->alternativeService->updateAlternativesQuestion($question);
     }
 
     public function delete(Question $question){

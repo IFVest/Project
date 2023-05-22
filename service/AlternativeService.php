@@ -16,11 +16,12 @@ class AlternativeService{
         endforeach;
     } 
 
-    function updateArray(Array $alternatives, Question $question){
+    function updateAlternativesQuestion(Question $question){
         $alternativesByQuestion = $this->alternativeDAO->findByQuestion($question);
+        $newAlternatives = $question->getAlternatives();
         for($i = 0; $i<=4; $i++){
-            $alternativesByQuestion[$i]->setText($alternatives[$i]->getText());
-            $alternativesByQuestion[$i]->setIsCorrect($alternatives[$i]->getIsCorrect());
+            $alternativesByQuestion[$i]->setText($newAlternatives[$i]->getText());
+            $alternativesByQuestion[$i]->setIsCorrect($newAlternatives[$i]->getIsCorrect());
 
             $this->alternativeDAO->update($alternativesByQuestion[$i]);
         }
