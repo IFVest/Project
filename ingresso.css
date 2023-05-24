@@ -1,0 +1,26 @@
+body {
+    background-color: #e5e5e5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: justify;
+    
+}
+
+p{
+    margin:auto;
+    width:1024px;
+    padding:10px;
+    /* background-color:#ebebeb; */
+    font-size:16px;
+    font-family:Verdana;
+}
+
+h1, h2{
+    margin:auto;
+    width:1024px;
+    padding:10px;
+    /* background-color:#ebebeb; */
+    /* font-size:14px; */
+    font-family:Verdana;
+}

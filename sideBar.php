@@ -17,13 +17,19 @@
         </a>
         <ul class="navbar-nav d-flex flex-column mt-5 w-100">
             <li class="nav-item w-100">
-                <a href="#" class="nav-link text-light pl-4">Home</a>
+                <a href="./ingresso.php" class="nav-link text-light pl-4">Ingresso</a>
             </li>
             <li class="nav-item w-100">
-                <a href="#" class="nav-link text-light pl-4">About</a>
+                <a href="./pages/cronograma.php" class="nav-link text-light pl-4">Cronograma</a>
             </li>
             <li class="nav-item w-100">
-                <a href="#" class="nav-link text-light pl-4">Blog</a>
+                <a href="./pages/simulados.php" class="nav-link text-light pl-4">Simulados</a>
+            </li>
+            <li class="nav-item w-100">
+                <a href="./pages/materias.php" class="nav-link text-light pl-4">Matérias</a>
+            </li>
+            <li class="nav-item w-100">
+                <a href="./pages/historico.php" class="nav-link text-light pl-4">Histórico</a>
             </li>
         </ul>
     </nav>
@@ -32,10 +38,15 @@
         <button class="btn my-4" id="menu-btn">
             <i class="bi bi-chevron-compact-right"></i>
         </button>
+
     </section>
+
+
 
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/cjs/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
     <script>
         var menu_btn = document.querySelector("#menu-btn")
         var sidebar = document.querySelector("#sidebar")
@@ -45,5 +56,7 @@
             container.classList.toggle("active-cont")
         })
     </script>
+
+
 </body>
 </html>
