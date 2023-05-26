@@ -1,5 +1,5 @@
 <?php
-include("./sideBar.php");
+include(__DIR__ . "/componentes/sideBar.php");
 ?>
 
 <!doctype html>

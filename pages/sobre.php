@@ -1,5 +1,5 @@
 <?php
-include("./sideBar.php");
+include(__DIR__ . "/componentes/sideBar.php");
 ?>
 
 <!doctype html>
@@ -7,7 +7,7 @@ include("./sideBar.php");
 
 <head>
     <title>Sobre o IF</title>
-    <link rel="stylesheet" href="./ingresso.css">
+    <link rel="stylesheet" href="./css/ingresso.css">
 </head>
 
 <body>
