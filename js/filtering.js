@@ -93,8 +93,6 @@ function showLessons(lessons) {
 
   for(let i = 0; i < lessons.length; i++) {
     var card = document.createElement("div");
-    card.innerHTML = lessons[i].title;
-    lessonsDiv.appendChild(card);
     card.setAttribute("class", "lesson-card");
     card.setAttribute("style", "width: 18rem");
     
@@ -109,11 +107,17 @@ function showLessons(lessons) {
     // Corpo 
     var cardBody = document.createElement("div")
     cardBody.setAttribute("class", "card-body");
-    var lessonTitle = document.createElement("h5")
-    var title = document.createTextNode(lessons[i].title);
-    lessonTitle.appendChild(title);
+    var checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("name", "week_lessons[]");
+    checkbox.setAttribute("value", lessons[i].id);
+    checkbox.setAttribute("id", lessons[i].title);
+    var label = document.createElement("label");
+    label.setAttribute("for", lessons[i].title);
+    label.innerHTML = lessons[i].title;
     
-    cardBody.appendChild(lessonTitle);
+    cardBody.appendChild(label);
+    cardBody.appendChild(checkbox);
     card.appendChild(cardBody);
     lessonsDiv.append(card);
   }

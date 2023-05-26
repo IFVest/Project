@@ -21,7 +21,22 @@ class WeekController extends Controller
 
     protected function save()
     {
+        $dados["id"] = isset($_POST["week_id"]) ? $_POST["week_id"] : NULL;
+        $marker = isset($_POST["week_marker"]) ? $_POST["week_marker"] : NULL;
+        $lessons = isset($_POST["week_lessons"]) ? $_POST["week_lessons"] : NULL;
         
+        $week = new StudyWeek();
+        $week->setMarker($marker);
+
+        if ($dados["id"] == NULL) {
+            echo "<script>console.log('" . $week->getMarker() . "')</script>"; 
+            $this->weekDao->insert($week);
+        }
+        else {
+            echo "<script>console.log('altera')</script>";
+
+        }
+
     }
 }
 

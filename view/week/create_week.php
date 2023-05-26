@@ -15,7 +15,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 <body>
     <h1>Criar semana</h1>
 
-    <form method="POST" action="">
+    <form method="POST" action="<?= BASE_URL ?>/controller/WeekController.php?action=save">
         Título: <input type="text" name="week_marker">
         <button type="submit">Gravar</button>
         <br>
@@ -31,6 +31,10 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <br>
         Aulas:
         <div class="lessons"></div>
+
+        <button type="submit">Gravar</button>
+
+        <input type="hidden" name="week_id" value="<?php echo $dados["id"]?>">
     </form>
 </body>
 
