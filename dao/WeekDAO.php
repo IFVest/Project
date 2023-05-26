@@ -8,10 +8,9 @@ class WeekDAO
     public function insert(StudyWeek $week) {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO StudyWeek (marker) VALUES (:m)";
-
+        $sql = "INSERT INTO StudyWeek (marker) VALUES (?)";
+        
         $stm = $conn->prepare($sql);
-        $stm->bindValue("m", $week->getMarker());
-        $stm->execute();
+        $stm->execute([$week->getMarker()]);
     }
 }

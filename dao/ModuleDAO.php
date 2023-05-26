@@ -37,11 +37,11 @@ class ModuleDAO{
         if (count($modules) == 1) {
             return $modules[0];
         }
-        else if(count($modules) > 1) {
-            return "More than 1 module found";
+        else if(count($modules) == 0) {
+            return null;
         }
 
-        die("Invalid module");
+        die("ModuleDAO.findById() - ERRO: Mais de um módulo encontrado");
     }
 
     public function list()

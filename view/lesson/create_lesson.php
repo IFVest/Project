@@ -16,10 +16,10 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 </head>
 
 <body>
-    <h1> <?php if ($dados["id"] == NULL) echo "Criar";
+    <h1> <?php if (isset($dados["id"]) && $dados["id"] == NULL) echo "Criar";
             else echo "Alterar"; ?> aula </h1>
     <form method="POST" action="<?= BASE_URL ?>/controller/LessonController.php?action=save">
-        Titulo:<input type="text" name="lesson_title" value="<?php echo ($dados["lesson"]) ? $dados["lesson"]->getTitle() : '' ?>">
+        Titulo:<input type="text" name="lesson_title" value="<?php echo (isset($dados["lesson"])) ? $dados["lesson"]->getTitle() : '' ?>">
         <br>
         Url:<input type="text" name="lesson_url" value="<?php echo ($dados["lesson"]) ? $dados["lesson"]->getUrl() : ''; ?>">
         <br>

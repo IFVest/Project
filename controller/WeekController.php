@@ -10,13 +10,13 @@ class WeekController extends Controller
 
     public function __construct()
     {
-        $weekDao = new WeekDAO();
+        $this->weekDao = new WeekDAO();
         $this->handleAction();
     }
 
-    protected function create()
+    protected function create($dados = [], $errorMsgs = "")
     {
-        $this->loadView("week/create_week.php", []);
+        $this->loadView("week/create_week.php", $dados, $errorMsgs);
     }
 
     protected function save()
@@ -29,7 +29,6 @@ class WeekController extends Controller
         $week->setMarker($marker);
 
         if ($dados["id"] == NULL) {
-            echo "<script>console.log('" . $week->getMarker() . "')</script>"; 
             $this->weekDao->insert($week);
         }
         else {

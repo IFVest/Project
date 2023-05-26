@@ -52,8 +52,10 @@ class LessonController extends Controller{
         
         $errors = $this->lessonService->validarDados($lesson);
         
-        $lesson_module = $this->findModuleById($moduleId);
-        if ($lesson_module == "Invalid module") {
+        $lesson_module = $this->moduleDao->findById($moduleId);
+        echo "<script>console.log('aasdasdad')</script>";
+
+        if ($lesson_module == null) {
             array_push($errors, "Módulo inválido");
         }
 
@@ -136,16 +138,6 @@ class LessonController extends Controller{
         $lessons = $this->lessonDao->findByModuleId($moduleId);
         $lessonsJSON = json_encode($lessons);
         echo $lessonsJSON;
-    }
-
-    public function findModuleById($id) 
-    {
-        try {
-            $module = $this->moduleDao->findById($id);
-            return $module;
-        } catch (PDOException $e) {
-            echo $e;
-        }
     }
 
     public function test()
