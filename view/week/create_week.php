@@ -34,7 +34,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
         <button type="submit">Gravar</button>
 
-        <input type="hidden" name="week_id" value="<?php echo $dados["id"]?>">
+        <input type="hidden" name="week_id" value="<?php echo isset($dados["id"]) ? $dados["id"] : NULL ?>">
     </form>
 </body>
 

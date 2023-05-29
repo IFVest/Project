@@ -18,6 +18,7 @@ class LessonController extends Controller{
         $this->lessonDao = new LessonDAO();
         $this->moduleDao = new ModuleDAO();
         $this->lessonService = new LessonService();
+        $this->setActionDefault("list");
         $this->handleAction();
     }
 
@@ -51,13 +52,6 @@ class LessonController extends Controller{
         $lesson->setModule($moduleId);
         
         $errors = $this->lessonService->validarDados($lesson);
-        
-        $lesson_module = $this->moduleDao->findById($moduleId);
-        echo "<script>console.log('aasdasdad')</script>";
-
-        if ($lesson_module == null) {
-            array_push($errors, "Módulo inválido");
-        }
 
         if (empty($errors)) {
             try{
@@ -86,7 +80,7 @@ class LessonController extends Controller{
         $dados["lista"] = $this->lessonDao->list();
         $i = 0;
         foreach($dados["lista"] as $lesson):
-            $lessonModule = $this->findModuleById($lesson->getModule());
+            $lessonModule = $this->moduleDao->findById($lesson->getModule());
             $moduleName = $lessonModule->getName();
             $dados["lista"][$i]->setModuleName($moduleName);
             $i++;
