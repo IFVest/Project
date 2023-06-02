@@ -97,5 +97,14 @@ class LessonDAO{
 
         return $this->mapLessons($result);
     }
+
+    public function updateLessonStudyWeek(Lesson $lesson) {
+        $conn = Connection::getConn();
+
+        $sql = "UPDATE Lesson SET idStudyWeek = ? WHERE id = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$lesson->getStudyWeek(), $lesson->getId()]);
+    }
 }
 ?>

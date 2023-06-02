@@ -36,8 +36,26 @@ class LessonService {
         return $errors;
     }
 
-    public function findById($id) {
+    public function findByLessonId($id) {
         return $this->lessonDao->findById($id);
+    }
+
+    public function findModulesBySubject($subject)
+    {
+        $modules = $this->moduleDao->findBySubject($subject);
+        $modulesJSON = json_encode($modules);
+        return $modulesJSON;
+    }
+
+    public function findLessonsByModuleId($moduleId) 
+    {
+        $lessons = $this->lessonDao->findByModuleId($moduleId);
+        $lessonsJSON = json_encode($lessons);
+        return $lessonsJSON;
+    }
+
+    public function updateLessonStudyWeek($lesson) {
+        $this->lessonDao->updateLessonStudyWeek($lesson);
     }
 }
 ?>

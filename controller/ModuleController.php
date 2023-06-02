@@ -109,22 +109,6 @@ class ModuleController extends Controller
 
         $this->list();
     }
-
-    public function findByModuleId($moduleId)
-    {
-        $this->moduleDao->findById($moduleId);
-    }
-
-    public function findBySubject() {
-
-        $module_subject = $_GET['subject'];
-        $modules = $this->moduleDao->findBySubject($module_subject);
-    }
-
-    public function test()
-    {
-        echo 'test';
-    }
 }
 
 $mod = new ModuleController();

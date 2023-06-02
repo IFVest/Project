@@ -118,27 +118,19 @@ class LessonController extends Controller{
         $this->list();
     }
 
-    public function findModulesBySubject()
-    {
+    protected function findByLessonId($id) {
+        return $this->lessonService->findByLessonId($id);
+    }
+
+    protected function findModulesBySubject() {
         $subject = $_GET["subject"];
-        $modules = $this->moduleDao->findBySubject($subject);
-        $modulesJSON = json_encode($modules);
-        echo $modulesJSON;
+        echo $this->lessonService->findModulesBySubject($subject);
     }
 
-    public function findLessonsByModuleId() 
-    {
+    protected function findLessonsByModuleId() {
         $moduleId = $_GET["moduleId"];
-        $lessons = $this->lessonDao->findByModuleId($moduleId);
-        $lessonsJSON = json_encode($lessons);
-        echo $lessonsJSON;
+        echo $this->lessonService->findLessonsByModuleId($moduleId);
     }
-
-    public function test()
-    {
-        return 'test';
-    }
-
 }
 
 $les = new LessonController();
