@@ -10,10 +10,13 @@
     <h1>hahahah</h1>
     <table>
         <thead>
-            
+            <th style="border: 1px solid black">Nome</th>
+            <th style="border: 1px solid black">Aula</th>
+            <th style="border: 1px solid black">Alterar</th>
+            <th style="border: 1px solid black">Deletar</th>
         </thead>
         <tbody>
-
+            
         </tbody>
     </table>
 </body>

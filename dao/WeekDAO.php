@@ -11,6 +11,16 @@ class WeekDAO
         $this->lessonService = new LessonService();
     }
 
+    public function mapWeeks($result) {
+        $weeks = [];
+        foreach($result as $req):
+            $week = new StudyWeek();
+            $week->setMarker($req["marker"]);
+        endforeach;
+
+        return $weeks;
+    }
+
     public function insert(StudyWeek $week) {
         $conn = Connection::getConn();
 
