@@ -25,7 +25,7 @@ export function filterBySubject(filterModule) {
   );
 
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "LessonController.php?action=findModulesBySubject&subject=" + selectedSubject, true
+  xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true
   );
   xhttp.onload = function () {
 

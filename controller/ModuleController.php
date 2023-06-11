@@ -109,6 +109,12 @@ class ModuleController extends Controller
 
         $this->list();
     }
+
+    protected function findModulesBySubject()
+    {
+        $subject = $_GET["subject"];
+        echo $this->moduleService->findModulesBySubject($subject);
+    }
 }
 
 $mod = new ModuleController();

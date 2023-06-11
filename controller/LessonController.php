@@ -122,11 +122,6 @@ class LessonController extends Controller{
         return $this->lessonService->findByLessonId($id);
     }
 
-    protected function findModulesBySubject() {
-        $subject = $_GET["subject"];
-        echo $this->lessonService->findModulesBySubject($subject);
-    }
-
     protected function findLessonsByModuleId() {
         $moduleId = $_GET["moduleId"];
         echo $this->lessonService->findLessonsByModuleId($moduleId);

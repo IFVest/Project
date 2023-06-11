@@ -40,13 +40,6 @@ class LessonService {
         return $this->lessonDao->findById($id);
     }
 
-    public function findModulesBySubject($subject)
-    {
-        $modules = $this->moduleDao->findBySubject($subject);
-        $modulesJSON = json_encode($modules);
-        return $modulesJSON;
-    }
-
     public function findLessonsByModuleId($moduleId) 
     {
         $lessons = $this->lessonDao->findByModuleId($moduleId);
