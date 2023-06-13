@@ -1,11 +1,23 @@
 <?php
-class Lesson{
+class Lesson implements JsonSerializable
+{
     private $id;
     private $title;
-    private $description;
-    private $videoUrl;
+    private $url;
     private $module;
+    private $moduleName;
     private $studyWeek;
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'url' => $this->url,
+            'moduleId' => $this->module,
+            'moduleName' => $this->moduleName
+        ];
+    }
 
     /**
      * Get the value of id
@@ -43,41 +55,6 @@ class Lesson{
         return $this;
     }
 
-    /**
-     * Get the value of description
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set the value of description
-     */
-    public function setDescription($description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of videoUrl
-     */
-    public function getVideoUrl()
-    {
-        return $this->videoUrl;
-    }
-
-    /**
-     * Set the value of videoUrl
-     */
-    public function setVideoUrl($videoUrl): self
-    {
-        $this->videoUrl = $videoUrl;
-
-        return $this;
-    }
 
     /**
      * Get the value of module
@@ -111,6 +88,42 @@ class Lesson{
     public function setStudyWeek($studyWeek): self
     {
         $this->studyWeek = $studyWeek;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of url
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set the value of url
+     */
+    public function setUrl($url): self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of moduleName
+     */
+    public function getModuleName()
+    {
+        return $this->moduleName;
+    }
+
+    /**
+     * Set the value of moduleName
+     */
+    public function setModuleName($moduleName): self
+    {
+        $this->moduleName = $moduleName;
 
         return $this;
     }

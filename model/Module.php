@@ -1,13 +1,21 @@
 <?php
 
-class Module{
+class Module implements JsonSerializable{
     private $id;
     private $name;
     private $description;
     private $subject;
     private $lessons;
     
-
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'subject' => $this->subject
+        ];
+    }
 
     /**
      * Get the value of id

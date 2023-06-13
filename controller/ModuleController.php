@@ -3,15 +3,19 @@
 require_once(__DIR__ . "/../dao/ModuleDAO.php");
 require_once(__DIR__ . "/../model/Module.php");
 require_once(__DIR__ . "/Controller.php");
+require_once(__DIR__ . "/../service/ModuleService.php");
 
 class ModuleController extends Controller
 {
 
     private ModuleDAO $moduleDao;
+    private ModuleService $moduleService;
 
     public function __construct()
     {
         $this->moduleDao = new ModuleDAO();
+        $this->moduleService = new ModuleService();
+        $this->setActionDefault("list");
         $this->handleAction();
     }
 
@@ -26,12 +30,20 @@ class ModuleController extends Controller
 
     public function list()
     {
-        return $this->moduleDao->list();
+        $dados["lista"] = $this->moduleDao->list();
+
+        $this->loadView("module/list_modules.php", $dados);
+
+    }
+
+    protected function create($dados = [], $errorMsgs = "")
+    {
+        $this->loadView("module/create_module.php", $dados, $errorMsgs);
     }
 
     protected function save()
     {
-        $dados["id"] = isset($_POST['module_id']) ? $_POST['module_id'] : NULL;
+        $dados["id"] = isset($_POST['module_id']) ? $_POST["module_id"] : NULL;
         $module_name = isset($_POST['module_name']) ? $_POST['module_name'] : NULL;
         $module_desc = isset($_POST['module_desc']) ? $_POST['module_desc'] : NULL;
         $module_subject = isset($_POST['module_subject']) ? $_POST['module_subject'] : NULL;
@@ -42,18 +54,32 @@ class ModuleController extends Controller
         $module->setDescription($module_desc);
         $module->setSubject($module_subject);
 
-        if ($dados["id"] == NULL){
-            $this->moduleDao->insert($module);
-        }
-        else{
-            $this->moduleDao->update($module);
+        $errors = $this->moduleService->validarDados($module);
+
+        if (empty($errors)) {
+            try{
+
+                if ($dados["id"] == NULL)
+                {
+                    $this->moduleDao->insert($module);
+                }
+                else
+                {
+                    $this->moduleDao->update($module);
+                }
+                
+                $this->list();
+                exit;
+
+            } catch (PDOException $e) {
+                $errors = "Erro ao salvar o módulo no banco de dados";
+            }
+            
         }
         
-        $this->loadView("module/list_modules.php", []);
-    }
-
-    protected function create(){
-        $this->loadView("module/create_module.php", []);
+        $dados["module"] = $module;
+        $errorMsgs = implode("<br>", $errors);
+        $this->create($dados, $errorMsgs);
     }
 
     protected function edit()
@@ -68,7 +94,7 @@ class ModuleController extends Controller
         }
         else
         {
-            $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
+            $this->list();
         }
     }
 
@@ -79,12 +105,9 @@ class ModuleController extends Controller
         if($module)
         {
             $this->moduleDao->delete($module);
-            $this->loadView("module/list_modules.php", []);
         }
-        else
-        {
-            $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
-        }
+
+        $this->list();
     }
 }
 

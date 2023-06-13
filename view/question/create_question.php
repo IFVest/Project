@@ -22,14 +22,14 @@
             <?php
             foreach($dados['modules'] as $module):?>
                 <option value="<?php echo $module->getId()?>" 
-                <?php echo ($dados["question"] && $module == $dados["question"]->getModule() ? "selected" : '');?>>
+                <?php echo (isset($dados["question"]) && $module->getId() == $dados["question"]->getModule() ? "selected" : '');?>>
                     <?php echo $module->getName();?>
                 </option>
             <?php endforeach;?>
         </select><br>
 
         <label for="question_text">Enunciado: </label>
-        <input type="text" name="question_text" value="<?php echo ($dados["question"] ? $dados["question"]->getText() : '');?>"required>
+        <input type="text" name="question_text" value="<?php echo (isset($dados["question"]) ? $dados["question"]->getText() : '');?>"required>
         <br>
         
         

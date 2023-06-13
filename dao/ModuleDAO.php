@@ -30,7 +30,14 @@ class ModuleDAO{
 
         $modules = $this->mapModules($result);
 
-        return $modules[0];
+        if (count($modules) == 1) {
+            return $modules[0];
+        }
+        else if(count($modules) == 0) {
+            return null;
+        }
+
+        die("ModuleDAO.findById() - ERRO: Mais de um módulo encontrado");
     }
 
     public function list(){
@@ -80,5 +87,17 @@ class ModuleDAO{
 
         $stm = $conn->prepare($sql);
         $stm->execute([$module->getId()]);
+    }
+
+    public function findBySubject($subject) {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM Module WHERE subject = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$subject]);
+        $result = $stm->fetchAll();
+
+        return $this->mapModules($result);
     }
 }

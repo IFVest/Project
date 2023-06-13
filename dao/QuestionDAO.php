@@ -22,7 +22,7 @@ class QuestionDAO{
             $question = new Question();
             $question->setId($quest['id']);
             $question->setText($quest['text']);
-            $question->setmodule($quest['idModule']);
+            $question->setModule($quest['idModule']);
 
             $alternatives = $this->alternativeDao->findByQuestion($question);
             $question->setAlternatives($alternatives);
