@@ -23,7 +23,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
     <a href="ModuleController.php?action=create">
         <button>Criar módulo</button>
     </a>
-    <script src="<?= BASE_URL ?>/js/listingFiltering.js"></script>
+    <script src="<?= BASE_URL ?>/js/listFiltering.js" type="module"></script>
 
 </body>
 

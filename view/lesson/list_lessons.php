@@ -1,3 +1,7 @@
+<?php
+require_once(__DIR__ . "/../../model/Subjects.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,29 +14,13 @@
 
 <body>
     <h1>Listar Aulas</h1>
-    <table>
-        <th style="border: 1px solid black">Titulo</th>
-        <th style="border: 1px solid black">Url</th>
-        <th style="border: 1px solid black">Módulo</th>
-        <th style="border: 1px solid black">Alterar</th>
-        <th style="border: 1px solid black">Deletar</th>
-        <?php
-        $lessons = $dados["lista"];
-        foreach ($lessons as $lesson) :
-        ?>
-            <tr>
-                <td style="border: 1px solid black"><?php echo $lesson->getTitle(); ?></td>
-                <td style="border: 1px solid black"><?php echo $lesson->getUrl(); ?></td>
-                <td style="border: 1px solid black"><?php echo $lesson->getModuleName();?></td>
-                <td style="border: 1px solid black">
-                    <a href="LessonController.php?action=edit&id=<?php echo $lesson->getId(); ?>">Alterar</a>
-                </td>
-                <td style="border: 1px solid black">
-                    <a href="LessonController.php?action=delete&id=<?php echo $lesson->getId(); ?>">Deletar</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <?php foreach (Subjects::cases() as $subject) : ?>
+        <button class="subject" style="width: 64em; height: 4em"> <?php echo $subject->name; ?> </button>
+        <div class="modules" id="<?php echo $subject->name; ?>"></div>
+        <br>
+    <?php endforeach; ?>
+
+    <script src="<?= BASE_URL ?>/js/lessonListFiltering.js" type="module"></script>
 </body>
 
 </html>

@@ -1,25 +1,47 @@
 var subjects = document.querySelectorAll(".subject");
 var modulesDiv = document.querySelectorAll(".modules");
 
+export var subjectFiltering = function(subjectButton) {
+    filterBySubject(subjectButton.currentTarget, false);
+};
+
 subjects.forEach(subject => {
-    subject.addEventListener("click", filterBySubject);
+    subject.addEventListener("click", subjectFiltering);
 });
 
-function filterBySubject(subjectButton) {
-    var selectedSubject = subjectButton.currentTarget.innerHTML.trim()
+export function filterBySubject(subjectButton, filterLesson) {
+    var selectedSubject = subjectButton.innerHTML.trim()
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true);
     xhttp.onload = function () {
         if (xhttp.status >= 200 && xhttp.status < 400) {
             var modules = JSON.parse(this.responseText);
-
-            createModuleTable(modules, selectedSubject);
+            
+            if (filterLesson) {
+                createModulesButtons(modules, selectedSubject);
+            }
+            else {
+                createModuleTable(modules, selectedSubject);
+            }
         }
     };
     xhttp.send();
 }
 
-function createModuleTable(modules, subject){
+function createModulesButtons(modules, subject) {
+    modulesDiv.forEach(module => {
+        module.innerHTML = "";
+    });
+
+    var subjectModulesDiv = document.querySelector("#" + subject);
+    
+    // modules.forEach(module => {
+    //     let moduleButton = document.createElement("button");
+    //     let module
+    // })
+}
+
+export function createModuleTable(modules, subject){
     modulesDiv.forEach(module => {
         module.innerHTML = "";
     });
