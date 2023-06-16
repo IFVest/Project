@@ -1,5 +1,5 @@
-var modulesDiv = document.querySelector(".modules");
 var subjects = document.querySelectorAll(".subject");
+var modulesDiv = document.querySelectorAll(".modules");
 
 subjects.forEach(subject => {
     subject.addEventListener("click", filterBySubject);
@@ -13,13 +13,18 @@ function filterBySubject(subjectButton) {
         if (xhttp.status >= 200 && xhttp.status < 400) {
             var modules = JSON.parse(this.responseText);
 
-            createModuleTable(modules);
+            createModuleTable(modules, selectedSubject);
         }
     };
     xhttp.send();
 }
 
-function createModuleTable(modules){
+function createModuleTable(modules, subject){
+    modulesDiv.forEach(module => {
+        module.innerHTML = "";
+    });
+
+    var subjectModulesDiv = document.querySelector("#" + subject);
     var table = document.createElement("table");
     table.setAttribute("name", "modulesTable");
     var thead = document.createElement("thead");
@@ -47,11 +52,17 @@ function createModuleTable(modules){
         let tdDescription = document.createElement("td");
         let tdAlter = document.createElement("td");
         let tdDelete = document.createElement("td");
+        var linkAlter = document.createElement("a");
+        var linkDelete = document.createElement("a");
         tdName.innerHTML = modules[i].name;
-        tdDescription.innerHTML = modules[i].description
-        tdAlter.innerHTML = "Alterar";
-        tdDelete.innerHTML = "Deletar";
-
+        tdDescription.innerHTML = modules[i].description;
+        linkAlter.setAttribute("href", "ModuleController.php?action=edit&id=" + modules[i].id);
+        linkAlter.innerHTML = "Alterar";
+        linkDelete.setAttribute("href", "ModuleController.php?action=delete&id=" + modules[i].id);
+        linkDelete.innerHTML = "Deletar";
+        
+        tdAlter.appendChild(linkAlter);
+        tdDelete.appendChild(linkDelete);
         tr.appendChild(tdName);
         tr.appendChild(tdDescription);
         tr.appendChild(tdAlter);
@@ -59,6 +70,6 @@ function createModuleTable(modules){
         thead.appendChild(tr);
     }
     table.appendChild(thead);
-    modulesDiv.appendChild(table);
+    subjectModulesDiv.appendChild(table);
 
 }

@@ -37,6 +37,10 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
         <button type="submit">Gravar</button>
     </form>
+    <br>
+    <a href="ModuleController.php">
+        <button>Ver módulos</button>
+    </a>
 
     <div class="col-6">
         <?php require_once(__DIR__ . "/../include/msg.php");?>

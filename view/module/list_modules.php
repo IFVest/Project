@@ -17,9 +17,12 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
     <?php foreach (Subjects::cases() as $subject) : ?>
         <button class="subject" style="width: 64em; height: 4em"> <?php echo $subject->name; ?> </button>
-        <div class="modules"></div>
+        <div class="modules" id="<?php echo $subject->name; ?>"></div>
         <br>
     <?php endforeach; ?>
+    <a href="ModuleController.php?action=create">
+        <button>Criar módulo</button>
+    </a>
     <script src="<?= BASE_URL ?>/js/listingFiltering.js"></script>
 
 </body>
