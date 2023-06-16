@@ -13,7 +13,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 </head>
 
 <body>
-    <h1>heheh</h1>
+    <h1>Listar Módulos</h1>
 
     <?php foreach (Subjects::cases() as $subject) : ?>
         <button class="subject" style="width: 64em; height: 4em"> <?php echo $subject->name; ?> </button>
