@@ -35,10 +35,23 @@ function createModulesButtons(modules, subject) {
 
     var subjectModulesDiv = document.querySelector("#" + subject);
     
-    // modules.forEach(module => {
-    //     let moduleButton = document.createElement("button");
-    //     let module
-    // })
+    modules.forEach(module => {
+        let moduleButton = document.createElement("button");
+        moduleButton.setAttribute("value", module.id);
+        moduleButton.setAttribute("class", "module");
+        moduleButton.style.width = "60em";
+        moduleButton.style.height = "3em";
+        moduleButton.innerHTML = module.name;
+        subjectModulesDiv.appendChild(moduleButton);
+    })
+}
+
+function filterByModule(idModule) {
+    
+}
+
+function createLessonTable(lessons) {
+
 }
 
 export function createModuleTable(modules, subject){
