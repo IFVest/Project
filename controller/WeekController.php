@@ -24,7 +24,8 @@ class WeekController extends Controller
 
     protected function list()
     {
-        $this->loadView("week/list_weeks.php", []);
+        $dados["lista"] = $this->weekDao->list();
+        $this->loadView("week/list_weeks.php", $dados);
     }
 
     protected function save()

@@ -16,7 +16,7 @@
             <th style="border: 1px solid black">Deletar</th>
         </thead>
         <tbody>
-            
+            <?php print_r($dados["lista"]);?>
         </tbody>
     </table>
 </body>

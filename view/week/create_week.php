@@ -35,6 +35,8 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <button type="submit">Gravar</button>
 
         <input type="hidden" name="week_id" value="<?php echo isset($dados["id"]) ? $dados["id"] : NULL ?>">
+
+        <!-- DIV COM AS AULAS SELECIONADAS-->
     </form>
 </body>
 

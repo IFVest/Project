@@ -21,6 +21,18 @@ class WeekDAO
         return $weeks;
     }
 
+    public function list(){
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM StudyWeek";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapWeeks($result);
+    }
+
     public function insert(StudyWeek $week) {
         $conn = Connection::getConn();
 
