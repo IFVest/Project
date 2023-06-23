@@ -93,7 +93,7 @@ function createLessonTable(lessons, moduleName) {
     var thAlter = document.createElement("th");
     var thDelete = document.createElement("th");
     thTitle.innerHTML = "Título";
-    thVisualize.innerHTML = "Visualizar";
+    thVisualize.innerHTML = "Video";
     thAlter.innerHTML = "Alterar";
     thDelete.innerHTML = "Deletar";
     thead.appendChild(thTitle);
@@ -111,12 +111,14 @@ function createLessonTable(lessons, moduleName) {
         let tdDelete = document.createElement("td");
         let linkAlter = document.createElement("a");
         let linkDelete = document.createElement("a");
-        tdTitle.innerHTML = lessons[i].title;
-        tdVisualize.innerHTML = "Visualizar";
+        let visualizeButton = document.createElement("button");
+        visualizeButton.innerHTML = "Visualizar";        
         linkAlter.setAttribute("href", "LessonController.php?action=edit&id=" + lessons[i].id);
         linkDelete.setAttribute("href", "LessonController.php?action=delete&id=" + lessons[i].id);
         linkAlter.innerHTML = "Alterar";
         linkDelete.innerHTML = "Deletar";
+        tdTitle.innerHTML = lessons[i].title;
+        tdVisualize.appendChild(visualizeButton);
         tdAlter.appendChild(linkAlter);
         tdDelete.appendChild(linkDelete);
         tr.appendChild(tdTitle);
@@ -124,10 +126,23 @@ function createLessonTable(lessons, moduleName) {
         tr.appendChild(tdAlter);
         tr.appendChild(tdDelete);
         tbody.appendChild(tr);
+
+        visualizeButton.addEventListener("click", () => {
+            showVideo(lessons[i].url)
+        });
     }
     table.appendChild(tbody);
     moduleLessonsDiv.appendChild(table);
 
+}
+
+function showVideo(videoUrl) {
+    var lessonVideoDiv = document.querySelector(".video");
+    var video = document.createElement("iframe");
+    video.setAttribute("src", videoUrl);
+    video.setAttribute("width", "1280px");
+    video.setAttribute("height", "720px");
+    lessonVideoDiv.appendChild(video);
 }
 
 export function createModuleTable(modules, subject){

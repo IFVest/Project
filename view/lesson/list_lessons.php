@@ -14,11 +14,17 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
 <body>
     <h1>Listar Aulas</h1>
-    <?php foreach (Subjects::cases() as $subject) : ?>
-        <button class="subject" style="width: 64em; height: 4em"> <?php echo $subject->name; ?> </button>
-        <div class="modules" id="<?php echo $subject->name; ?>"></div>
-        <br>
-    <?php endforeach; ?>
+    <div class="lessonListing">
+        <div class="video" style="display:inline-block"></div>  
+        <div class="list" style="display:inline-block">
+        <?php foreach (Subjects::cases() as $subject) : ?>
+            <button class="subject" style="width: 64em; height: 4em"> <?php echo $subject->name; ?> </button>
+            <div class="modules" id="<?php echo $subject->name; ?>"></div>
+            <br>
+        <?php endforeach; ?>
+        </div>
+    </div>
+    
 
     <script src="<?= BASE_URL ?>/js/lessonListFiltering.js" type="module"></script>
 </body>
