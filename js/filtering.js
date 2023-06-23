@@ -31,7 +31,9 @@ export function filterBySubject(filterModule) {
 
     if (xhttp.status >= 200 && xhttp.status < 400) {
       let modules = JSON.parse(this.responseText);
-      // Com os módulos, chama o método setModules para colocá-los em outro select
+      // Com os módulos, coloca-os em um select.
+      // filterModule serve para saber se ao selecionar módulo no select aparecerá 
+      // as aulas referente a ele. (utilizada pela classe de semana de estudos)
       
       createSelect(modules, filterModule);
     }
@@ -59,6 +61,7 @@ export function createSelect(object, filterModule) {
   for (let i = 0; i < object.length; i++) {
     var option = document.createElement("option");
 
+    // Adicionar função de listar aulas
     if (filterModule) {
       option.addEventListener("click", filterByModule);
     }
