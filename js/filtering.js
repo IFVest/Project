@@ -1,6 +1,7 @@
 var subjects = document.querySelectorAll(".subject");
 var modulesDiv = document.querySelector(".modules");
 var lessonsDiv = document.querySelector(".lessons");
+var selectedLessonsDiv = document.querySelector(".selected-lessons");
 
 export var moduleFiltering = function() {
   filterBySubject(false);
@@ -118,11 +119,19 @@ function showLessons(lessons) {
     var label = document.createElement("label");
     label.setAttribute("for", lessons[i].title);
     label.innerHTML = lessons[i].title;
-    
     cardBody.appendChild(label);
     cardBody.appendChild(checkbox);
     card.appendChild(cardBody);
     lessonsDiv.append(card);
+
+    checkbox.addEventListener("change", function() {
+      if (this.checked) {
+        showSelectedLesson(lessons[i]);
+      }
+    });
   }
 }
 
+function showSelectedLesson(lesson) {
+  selectedLessonsDiv.innerHTML += lesson.title;
+}

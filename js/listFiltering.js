@@ -138,6 +138,7 @@ function createLessonTable(lessons, moduleName) {
 
 function showVideo(videoUrl) {
     var lessonVideoDiv = document.querySelector(".video");
+    lessonVideoDiv.innerHTML = "";
     var video = document.createElement("iframe");
     video.setAttribute("src", videoUrl);
     video.setAttribute("width", "1280px");

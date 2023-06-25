@@ -31,7 +31,9 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <br>
         Aulas:
         <div class="lessons"></div>
-
+        <br>
+        Aulas selecionadas:
+        <div class="selected-lessons"></div>
         <button type="submit">Gravar</button>
 
         <input type="hidden" name="week_id" value="<?php echo isset($dados["id"]) ? $dados["id"] : NULL ?>">
