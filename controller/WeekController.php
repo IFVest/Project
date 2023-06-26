@@ -14,6 +14,7 @@ class WeekController extends Controller
     {
         $this->weekDao = new WeekDAO();
         $this->lessonService = new LessonService();
+        $this->setActionDefault("list");
         $this->handleAction();
     }
 

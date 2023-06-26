@@ -98,6 +98,18 @@ class LessonDAO{
         return $this->mapLessons($result);
     }
 
+    public function findByWeekId($weekId) {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM Lesson WHERE idStudyWeek = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$weekId]);
+        $result = $stm->fetchAll();
+
+        return $this->mapLessons($result);
+    }
+
     public function updateLessonStudyWeek(Lesson $lesson) {
         $conn = Connection::getConn();
 

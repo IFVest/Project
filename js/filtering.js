@@ -133,5 +133,31 @@ function showLessons(lessons) {
 }
 
 function showSelectedLesson(lesson) {
-  selectedLessonsDiv.innerHTML += lesson.title;
+  var selectedLessonCard = document.createElement("div");
+  selectedLessonCard.setAttribute("class", "lesson-card");
+
+  // Card video
+  var selectedLessonVideo = document.createElement("iframe");
+  selectedLessonVideo.setAttribute("src", lesson.url);
+  selectedLessonVideo.setAttribute("width", "250");
+  selectedLessonVideo.setAttribute("height", "200");
+
+  // Card body
+  var selectedLessonBody = document.createElement("div");
+  var removeButton = document.createElement("button");
+  var inputId = document.createElement("input");
+  inputId.setAttribute("type", "hidden");
+  inputId.setAttribute("name", "week_lessons[]");
+  inputId.setAttribute("value", lesson.id);
+  removeButton.innerHTML = "Remover";
+  selectedLessonBody.appendChild(removeButton);
+  selectedLessonBody.setAttribute("class", "card-body");
+  removeButton.addEventListener("click", function() {
+    selectedLessonCard.remove()
+  });
+  selectedLessonBody.appendChild(inputId);
+  selectedLessonCard.appendChild(selectedLessonVideo);
+  selectedLessonCard.appendChild(selectedLessonBody);
+  
+  selectedLessonsDiv.appendChild(selectedLessonCard);
 }

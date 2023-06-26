@@ -8,16 +8,17 @@
 </head>
 <body>
     <h1>hahahah</h1>
-    <table>
-        <thead>
-            <th style="border: 1px solid black">Nome</th>
-            <th style="border: 1px solid black">Aula</th>
-            <th style="border: 1px solid black">Alterar</th>
-            <th style="border: 1px solid black">Deletar</th>
-        </thead>
-        <tbody>
-            <?php print_r($dados["lista"]);?>
-        </tbody>
-    </table>
+    <?php foreach($dados["lista"] as $week):?>
+        <div class="week">
+            <?php echo $week->getMarker();?>
+            <button>Alterar</button>
+            <button>Deletar</button>
+        </div>
+        <div class="week-lessons">
+            <?php foreach($week->getLessons() as $lesson): ?>
+                <div class="lesson"></div>
+            <?php endforeach;?>
+        </div>
+    <?php endforeach;?>
 </body>
 </html>

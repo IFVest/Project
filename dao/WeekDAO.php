@@ -3,19 +3,30 @@
 require_once(__DIR__ . "/../model/StudyWeek.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 require_once(__DIR__ . "/../service/LessonService.php");
+require_once(__DIR__ . "/LessonDAO.php");
 
 class WeekDAO
 {
     private LessonService $lessonService;
+    private LessonDAO $lessonDao;
+
     public function __construct(){
         $this->lessonService = new LessonService();
+        $this->lessonDao = new LessonDAO();
     }
 
     public function mapWeeks($result) {
-        $weeks = [];
+        $weeks = array();
         foreach($result as $req):
             $week = new StudyWeek();
+            $week->setId($req["id"]);
             $week->setMarker($req["marker"]);
+
+            // Procurar aulas
+            $lessons = $this->lessonDao->findByWeekId($week->getId());
+            $week->setLessons($lessons);
+
+            array_push($weeks, $week);
         endforeach;
 
         return $weeks;
