@@ -59,4 +59,26 @@ class WeekDAO
             $this->lessonService->updateLessonStudyWeek($lesson);
         endforeach;
     }
+
+    public function delete(StudyWeek $week) {
+        $conn = Connection::getConn();
+
+        $sql = "DELETE FROM StudyWeek WHERE id = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$week->getId()]);
+    }
+
+    public function findById($weekId) {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM StudyWeek WHERE id = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$weekId]);
+        $result = $stm->fetchAll();
+
+        $weeks = $this->mapWeeks($result);
+        return $weeks[0];
+    }
 }

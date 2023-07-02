@@ -56,6 +56,28 @@ class WeekController extends Controller
         }
 
     }
+
+    protected function findById(){
+        if (isset($_GET["id"])){
+            $weekId = $_GET["id"];
+            $week = $this->weekDao->findById($weekId);
+            return $week;
+        }
+    }
+
+    protected function edit(){
+        $week = $this->findById();
+    }
+
+    protected function delete() {
+        $week = $this->findById();
+
+        if ($week) {
+            $this->weekDao->delete($week);
+        }
+
+        $this->list();
+    }
 }
 
 $wk = new WeekController();
