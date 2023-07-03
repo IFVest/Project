@@ -13,7 +13,7 @@
     <?php foreach ($dados["lista"] as $week) : ?>
         <div class="week">
             <?php echo $week->getMarker(); ?>
-            <a>
+            <a href="WeekController.php?action=edit&id=<?php echo $week->getId();?>">
                 <button>Alterar</button>
             </a>
             <a href="WeekController.php?action=delete&id=<?php echo $week->getId();?>">

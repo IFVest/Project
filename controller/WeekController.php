@@ -67,6 +67,17 @@ class WeekController extends Controller
 
     protected function edit(){
         $week = $this->findById();
+
+        if ($week) {
+            $dados["id"] = $week->getId();
+            $dados["week"] = $week;
+
+            $this->loadView("week/create_week.php", $dados);
+        } 
+        else {
+            $this->list();
+        }
+
     }
 
     protected function delete() {

@@ -161,3 +161,5 @@ function showSelectedLesson(lesson) {
   
   selectedLessonsDiv.appendChild(selectedLessonCard);
 }
+
+
