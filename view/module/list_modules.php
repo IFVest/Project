@@ -1,3 +1,7 @@
+<?php
+require_once(__DIR__ . "/../../model/Subjects.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,33 +13,17 @@
 </head>
 
 <body>
-    <table>
-        <thead>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Matéria</th>
-            <th>Alterar</th>
-            <th>Deletar</th>
-        </thead>
-        <tbody>
-            <?php
-            $modules = $dados['lista'];
-            foreach ($modules as $module) :
-            ?>
-                <tr>
-                    <td style="border: 1px solid black"><?php echo $module->getName(); ?></td>
-                    <td style="border: 1px solid black"><?php echo $module->getDescription(); ?></td>
-                    <td style="border: 1px solid black"><?php echo $module->getSubject(); ?></td>
-                    <td style="border: 1px solid black">
-                        <a href="ModuleController.php?action=edit&id=<?php echo $module->getId(); ?>">Alterar</a>
-                    </td>
-                    <td style="border: 1px solid black">
-                        <a href="ModuleController.php?action=delete&id=<?php echo $module->getId(); ?>">Deletar</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <h1>Listar Módulos</h1>
+
+    <?php foreach (Subjects::cases() as $subject) : ?>
+        <button class="subject" style="width: 64em; height: 4em"> <?php echo $subject->name; ?> </button>
+        <div class="modules" id="<?php echo $subject->name; ?>"></div>
+        <br>
+    <?php endforeach; ?>
+    <a href="ModuleController.php?action=create">
+        <button>Criar módulo</button>
+    </a>
+    <script src="<?= BASE_URL ?>/js/listFiltering.js" type="module"></script>
 
 </body>
 

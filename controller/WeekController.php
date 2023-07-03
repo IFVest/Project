@@ -14,6 +14,7 @@ class WeekController extends Controller
     {
         $this->weekDao = new WeekDAO();
         $this->lessonService = new LessonService();
+        $this->setActionDefault("list");
         $this->handleAction();
     }
 
@@ -24,7 +25,8 @@ class WeekController extends Controller
 
     protected function list()
     {
-        $this->loadView("week/list_weeks.php", []);
+        $dados["lista"] = $this->weekDao->list();
+        $this->loadView("week/list_weeks.php", $dados);
     }
 
     protected function save()
@@ -53,6 +55,39 @@ class WeekController extends Controller
 
         }
 
+    }
+
+    protected function findById(){
+        if (isset($_GET["id"])){
+            $weekId = $_GET["id"];
+            $week = $this->weekDao->findById($weekId);
+            return $week;
+        }
+    }
+
+    protected function edit(){
+        $week = $this->findById();
+
+        if ($week) {
+            $dados["id"] = $week->getId();
+            $dados["week"] = $week;
+
+            $this->loadView("week/create_week.php", $dados);
+        } 
+        else {
+            $this->list();
+        }
+
+    }
+
+    protected function delete() {
+        $week = $this->findById();
+
+        if ($week) {
+            $this->weekDao->delete($week);
+        }
+
+        $this->list();
     }
 }
 

@@ -1,9 +1,17 @@
 <?php
 
 require_once(__DIR__ . "/../model/Module.php");
+require_once(__DIR__ . "/../dao/ModuleDAO.php");
 require_once(__DIR__ . "/../model/Subjects.php");
 
 class ModuleService {
+
+    private $moduleDao;
+
+    public function __construct()
+    {
+        $this->moduleDao = new ModuleDAO;
+    }
 
     public function validarDados(Module $module) {
         $errors = array();
@@ -26,6 +34,13 @@ class ModuleService {
         }
 
         return $errors;
+    }
+
+    public function findModulesBySubject($subject)
+    {
+        $modules = $this->moduleDao->findBySubject($subject);
+        $modulesJSON = json_encode($modules);
+        return $modulesJSON;
     }
 }
 ?>

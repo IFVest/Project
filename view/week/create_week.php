@@ -13,10 +13,10 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 </head>
 
 <body>
-    <h1>Criar semana</h1>
+    <h1><?php if (! isset($dados["id"]) || $dados["id"] == NULL) echo "Criar"; else echo "Alterar";?> semana</h1>
 
     <form method="POST" action="<?= BASE_URL ?>/controller/WeekController.php?action=save">
-        Título: <input type="text" name="week_marker">
+        Título: <input type="text" name="week_marker" value="<?php echo isset($dados["week"]) ? $dados["week"]->getMarker() : ''; ?>">
         <button type="submit">Gravar</button>
         <br>
         Matéria:
@@ -31,11 +31,17 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <br>
         Aulas:
         <div class="lessons"></div>
+        <br>
+        Aulas selecionadas:
+        <div class="selected-lessons">
 
+        </div>
         <button type="submit">Gravar</button>
 
         <input type="hidden" name="week_id" value="<?php echo isset($dados["id"]) ? $dados["id"] : NULL ?>">
     </form>
+    
+    <!-- Mostrar aulas da semana selecionada quando for alterar -->
 </body>
 
 <script src="<?= BASE_URL ?>/js/filterByModule.js" type="module"></script>
