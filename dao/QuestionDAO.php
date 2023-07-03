@@ -22,7 +22,7 @@ class QuestionDAO{
             $question = new Question();
             $question->setId($quest['id']);
             $question->setText($quest['text']);
-            $question->setmodule($quest['idModule']);
+            $question->setModule($quest['idModule']);
 
             $alternatives = $this->alternativeDao->findByQuestion($question);
             $question->setAlternatives($alternatives);
@@ -96,6 +96,18 @@ class QuestionDAO{
         $this->alternativeDao->deleteByQuestion($question);
 
         $stm->execute([$question->getId()]);
+    }
+
+    public function findByModule(Module $module){
+        $conn = Connection::getConn();
+        $sql = "SELECT * FROM Question q WHERE q.idModule = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$module->getId()]);
+        $result = $stm->fetchAll();
+
+        $questions = $this->mapQuestions($result);
+
+        return $questions;
     }
 }
 

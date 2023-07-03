@@ -39,5 +39,23 @@ class Exam{
 
         return $this;
     }
+
+    /**
+     * Get the value of examModules
+     */
+    public function getExamModules()
+    {
+        return $this->examModules;
+    }
+
+    /**
+     * Set the value of examModules
+     */
+    public function setExamModules($examModules): self
+    {
+        $this->examModules = $examModules;
+
+        return $this;
+    }
 }
 ?>

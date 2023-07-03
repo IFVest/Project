@@ -56,8 +56,7 @@ class ModuleController extends Controller
         $this->loadView("module/create_module.php", []);
     }
 
-    protected function edit()
-    {
+    protected function edit(){
         $module = $this->findById();
 
         if($module)
@@ -72,19 +71,23 @@ class ModuleController extends Controller
         }
     }
 
-    protected function delete()
-    {
+    protected function delete(){
         $module = $this->findById();
 
-        if($module)
-        {
+        if($module){
             $this->moduleDao->delete($module);
             $this->loadView("module/list_modules.php", []);
         }
-        else
-        {
+        else{
             $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
         }
+    }
+
+    public function findModulesBySubject(){
+        $subject = $_GET["subject"];
+        $modules = $this->moduleDao->findBySubject($subject);
+        $modulesJSON = json_encode($modules);
+        echo $modulesJSON;
     }
 }
 

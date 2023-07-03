@@ -1,10 +1,9 @@
 <?php
-enum Subjects{
-    case Matemática;
-    case Português;
-    case Redação;
-    case Geografia;
-    case História;
-    case Ciências;
+enum Subjects: int{
+    case Matemática = 1;
+    case Português = 2;
+    case Redação = 3;
+    case Geografia = 4;
+    case História = 5;
+    case Ciências = 6;
 }
-?>

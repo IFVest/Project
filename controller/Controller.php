@@ -1,5 +1,6 @@
 <?php
 
+error_reporting(E_ERROR);
 require_once(__DIR__ . "/../util/config.php");
 
 class Controller

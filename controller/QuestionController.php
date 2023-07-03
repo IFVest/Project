@@ -76,7 +76,6 @@ class QuestionController extends Controller{
                 if($dados['id'] == NULL){
                     $this->questionDao->insert($question);
                 }else{
-                    echo 'alo';
                     $this->questionDao->update($question);
                 }
                 $this->list();

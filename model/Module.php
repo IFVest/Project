@@ -1,13 +1,13 @@
 <?php
 
-class Module{
+class Module implements JsonSerializable{
     private $id;
     private $name;
     private $description;
     private $subject;
     private $lessons;
+    private $questions;
     
-
 
     /**
      * Get the value of id
@@ -101,10 +101,38 @@ class Module{
      * Set the value of lessons
      *
      * @return  self
-     */ 
+     */  
     public function setLessons($lessons)
     {
         $this->lessons = $lessons;
+
+        return $this;
+    }
+
+    public function jsonSerialize(): mixed {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'subject' => $this->subject
+        ];
+    }
+
+
+    /**
+     * Get the value of questions
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Set the value of questions
+     */
+    public function setQuestions($questions): self
+    {
+        $this->questions = $questions;
 
         return $this;
     }
