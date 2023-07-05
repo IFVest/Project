@@ -36,6 +36,7 @@ class WeekController extends Controller
         $week_lessons = isset($_POST["week_lessons"]) ? $_POST["week_lessons"] : NULL;
 
         $week = new StudyWeek();
+        $week->setId($dados["id"]);
         $week->setMarker($marker);
         
         # Pegando as aulas escolhidas pelo seu id
@@ -51,10 +52,10 @@ class WeekController extends Controller
             $this->weekDao->insert($week);
         }
         else {
-            echo "<script>console.log('altera')</script>";
-
+            $this->weekDao->alter($week);
         }
 
+        $this->list();
     }
 
     protected function findById(){

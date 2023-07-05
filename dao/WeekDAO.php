@@ -60,6 +60,23 @@ class WeekDAO
         endforeach;
     }
 
+    public function alter(StudyWeek $week) {
+        $conn = Connection::getConn();
+
+        $sql = "UPDATE StudyWeek SET marker = ? WHERE id = ?";
+        
+        $weekId = $week->getId();
+        $stm = $conn->prepare($sql);
+        $stm->execute([$week->getMarker(), $weekId]);
+
+        // Alterando o id da semana nas aulas
+        foreach ($week->getLessons() as $lesson) :
+            $lesson->setStudyWeek($weekId);
+            $this->lessonService->updateLessonStudyWeek($lesson);
+        endforeach;
+
+    }
+
     public function delete(StudyWeek $week) {
         $conn = Connection::getConn();
 
