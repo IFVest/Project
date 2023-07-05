@@ -1,6 +1,6 @@
 <?php
 
-class Module{
+class Question{
     private $id;
     private $text;
     private $module;

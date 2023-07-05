@@ -60,7 +60,7 @@ class WeekDAO
         endforeach;
     }
 
-    public function alter(StudyWeek $week) {
+    public function update(StudyWeek $week) {
         $conn = Connection::getConn();
 
         $sql = "UPDATE StudyWeek SET marker = ? WHERE id = ?";

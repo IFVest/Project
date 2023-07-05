@@ -52,7 +52,7 @@ class WeekController extends Controller
             $this->weekDao->insert($week);
         }
         else {
-            $this->weekDao->alter($week);
+            $this->weekDao->update($week);
         }
 
         $this->list();

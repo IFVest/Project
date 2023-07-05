@@ -10,15 +10,15 @@ class ModuleDAO{
         $questions = array();
 
         foreach($sql as $quest){
-            $question = new Module();
+            $question = new Question();
             $question->setId($quest['id']);
-            $question->setName($quest['text']);
-            $question->setDescription($quest['module']);
+            $question->setText($quest['text']);
+            $question->setModule($quest['module']);
 
             array_push($questions, $question);
         }
 
-        return $modules;
+        return $questions;
     }
 
     public function findById(int $id)
@@ -71,7 +71,7 @@ class ModuleDAO{
         $stm = $conn->prepare($sql);
         $stm->bindValue('text', $question->getText());
         $stm->bindValue('module', $question->getModule());
-        $stm->bindValue("id", $module->getId());
+        $stm->bindValue("id", $question->getId());
         $stm->execute();
     }
 
