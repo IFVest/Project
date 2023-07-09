@@ -51,7 +51,7 @@ class LessonController extends Controller{
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
         
-        $errors = $this->lessonService->validarDados($lesson);
+        $errors = $this->lessonService->validateData($lesson);
 
         if (empty($errors)) {
             try{

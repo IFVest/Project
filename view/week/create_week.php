@@ -37,7 +37,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <br>
         Aulas selecionadas:
         <div class="selected-lessons">
-            <?php if (isset($dados["week"])) {
+            <?php if (isset($dados["week"]) && !empty($dados["week"]->getLessons())) {
                 foreach ($dados["week"]->getLessons() as $lesson) : ?>
                     <div class="lesson-card">
                         <iframe src="<?php echo $lesson->getUrl(); ?>" width="250" height="200"></iframe>
@@ -53,6 +53,10 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
         <input type="hidden" name="week_id" value="<?php echo isset($dados["id"]) ? $dados["id"] : NULL ?>">
     </form>
+    <br>
+    <div class="col-6">
+        <?php require_once(__DIR__ . "/../include/msg.php"); ?>
+    </div>
 
 </body>
 

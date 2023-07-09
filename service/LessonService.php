@@ -14,7 +14,7 @@ class LessonService {
         $this->lessonDao = new LessonDAO();
     }
 
-    public function validarDados(Lesson $lesson) {
+    public function validateData(Lesson $lesson) {
         $errors = array();
         
         if (! $lesson->getTitle()) {

@@ -13,7 +13,7 @@ class ModuleService {
         $this->moduleDao = new ModuleDAO;
     }
 
-    public function validarDados(Module $module) {
+    public function validateData(Module $module) {
         $errors = array();
         $moduleSubject = $module->getSubject();
 

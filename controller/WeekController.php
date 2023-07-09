@@ -4,16 +4,19 @@ require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../model/StudyWeek.php");
 require_once(__DIR__ . "/../dao/WeekDAO.php");
 require_once(__DIR__ . "/../service/LessonService.php");
+require_once(__DIR__ . "/../service/WeekService.php");
 
 class WeekController extends Controller
 {
     private WeekDAO $weekDao;
     private LessonService $lessonService;
+    private WeekService $weekService;
 
     public function __construct()
     {
         $this->weekDao = new WeekDAO();
         $this->lessonService = new LessonService();
+        $this->weekService = new WeekService();
         $this->setActionDefault("list");
         $this->handleAction();
     }
@@ -40,22 +43,35 @@ class WeekController extends Controller
         $week->setMarker($marker);
         
         # Pegando as aulas escolhidas pelo seu id
-        $lessons = [];
-        foreach ($week_lessons as $lessonId):
-            $lesson = $this->lessonService->findByLessonId($lessonId);
-            array_push($lessons, $lesson);
-        endforeach;
+        if (!empty($week_lessons)) {
+            $lessons = [];
+            foreach ($week_lessons as $lessonId) :
+                $lesson = $this->lessonService->findByLessonId($lessonId);
+                array_push($lessons, $lesson);
+            endforeach;
+
+            $week->setLessons($lessons);
+        }
         
-        $week->setLessons($lessons);
+        $errors = $this->weekService->validateData($week);
+        if (empty($errors)) {
+            try {
+                if ($dados["id"] == NULL) {
+                    $this->weekDao->insert($week);
+                } else {
+                    $this->weekDao->update($week);
+                }
 
-        if ($dados["id"] == NULL) {
-            $this->weekDao->insert($week);
+                $this->list();
+                exit;
+            } catch (PDOException $e) {
+                $errors = "Erro ao salvar semana no banco de dados";
+            }
         }
-        else {
-            $this->weekDao->update($week);
-        }
-
-        $this->list();
+        
+        $dados["week"] = $week;
+        $errorMsgs = implode("<br>", $errors);
+        $this->create($dados, $errorMsgs);
     }
 
     protected function findById(){

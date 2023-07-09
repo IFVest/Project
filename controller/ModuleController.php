@@ -54,7 +54,7 @@ class ModuleController extends Controller
         $module->setDescription($module_desc);
         $module->setSubject($module_subject);
 
-        $errors = $this->moduleService->validarDados($module);
+        $errors = $this->moduleService->validateData($module);
 
         if (empty($errors)) {
             try{
