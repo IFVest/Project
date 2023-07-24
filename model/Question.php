@@ -4,6 +4,7 @@ class Question{
     private $id;
     private $text;
     private $module;
+    private $alternatives;
 
     /**
      * Get the value of id
@@ -55,6 +56,24 @@ class Question{
     public function setModule($module): self
     {
         $this->module = $module;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of alternatives
+     */
+    public function getAlternatives()
+    {
+        return $this->alternatives;
+    }
+
+    /**
+     * Set the value of alternatives
+     */
+    public function setAlternatives($alternatives): self
+    {
+        $this->alternatives = $alternatives;
 
         return $this;
     }

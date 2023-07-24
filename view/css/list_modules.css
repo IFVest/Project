@@ -1,0 +1,8 @@
+.subjects-header {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.create-module {
+    margin-right: auto;
+}

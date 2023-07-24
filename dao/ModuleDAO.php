@@ -2,11 +2,8 @@
 
 require_once(__DIR__ . "/../model/Module.php");
 require_once(__DIR__ . "/../connection/Connection.php");
-
 class ModuleDAO{
-
-    private function mapModules($sql)
-    {
+    private function mapModules($sql){
         $modules = array();
 
         foreach($sql as $mod){
@@ -22,8 +19,7 @@ class ModuleDAO{
         return $modules;
     }
 
-    public function findById(int $id)
-    {
+    public function findById(int $id){
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM Module m WHERE m.id = ?";
@@ -44,8 +40,7 @@ class ModuleDAO{
         die("ModuleDAO.findById() - ERRO: Mais de um módulo encontrado");
     }
 
-    public function list()
-    {
+    public function list(){
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM Module";
@@ -57,8 +52,7 @@ class ModuleDAO{
         return $this->mapModules($result);
     }
 
-    public function insert(Module $module)
-    {
+    public function insert(Module $module){
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO Module (name, description, subject) VALUES (:name,:desc,:sub)";
@@ -107,5 +101,3 @@ class ModuleDAO{
         return $this->mapModules($result);
     }
 }
-
-?>
