@@ -6,6 +6,7 @@ class ExamModule{
     private $isProblem;
     private $exam;
     private $module;
+    private $userAnswers;
 
     /**
      * Get the value of id
@@ -111,6 +112,24 @@ class ExamModule{
     public function setModule($module): self
     {
         $this->module = $module;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of userAnswers
+     */
+    public function getUserAnswers()
+    {
+        return $this->userAnswers;
+    }
+
+    /**
+     * Set the value of userAnswers
+     */
+    public function setUserAnswers($userAnswers): self
+    {
+        $this->userAnswers = $userAnswers;
 
         return $this;
     }

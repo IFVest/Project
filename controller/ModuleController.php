@@ -82,8 +82,7 @@ class ModuleController extends Controller
         $this->create($dados, $errorMsgs);
     }
 
-    protected function edit()
-    {
+    protected function edit(){
         $module = $this->findById();
 
         if($module)
@@ -98,13 +97,15 @@ class ModuleController extends Controller
         }
     }
 
-    protected function delete()
-    {
+    protected function delete(){
         $module = $this->findById();
 
-        if($module)
-        {
+        if($module){
             $this->moduleDao->delete($module);
+            $this->loadView("module/list_modules.php", []);
+        }
+        else{
+            $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
         }
 
         $this->list();

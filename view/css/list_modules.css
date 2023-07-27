@@ -1,8 +1,5 @@
 .subjects-header {
     display: flex;
-    box-sizing: border-box;
+    justify-content:space-between;
 }
 
-.create-module {
-    margin-right: auto;
-}

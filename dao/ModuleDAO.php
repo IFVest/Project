@@ -2,8 +2,12 @@
 
 require_once(__DIR__ . "/../model/Module.php");
 require_once(__DIR__ . "/../connection/Connection.php");
+require_once(__DIR__ . "/../dao/QuestionDAO.php");
+
 class ModuleDAO{
-    private function mapModules($sql){
+
+    private function mapModules($sql)
+    {
         $modules = array();
 
         foreach($sql as $mod){
@@ -13,13 +17,18 @@ class ModuleDAO{
             $module->setDescription($mod['description']);
             $module->setSubject($mod['subject']);
 
+            $questDao = new QuestionDAO();
+            $questions = $questDao->findByModule($module);
+            $module->setQuestions($questions);
+
             array_push($modules, $module);
         }
 
         return $modules;
     }
 
-    public function findById(int $id){
+    public function findById(int $id)
+    {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM Module m WHERE m.id = ?";
@@ -33,14 +42,15 @@ class ModuleDAO{
         if (count($modules) == 1) {
             return $modules[0];
         }
-        else if(count($modules) == 0) {
-            return null;
+        else if(count($modules) > 1) {
+            return "More than 1 module found";
         }
 
-        die("ModuleDAO.findById() - ERRO: Mais de um módulo encontrado");
+        die("Invalid module");
     }
 
-    public function list(){
+    public function list()
+    {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM Module";
@@ -52,7 +62,8 @@ class ModuleDAO{
         return $this->mapModules($result);
     }
 
-    public function insert(Module $module){
+    public function insert(Module $module)
+    {
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO Module (name, description, subject) VALUES (:name,:desc,:sub)";
@@ -97,7 +108,8 @@ class ModuleDAO{
         $stm = $conn->prepare($sql);
         $stm->execute([$subject]);
         $result = $stm->fetchAll();
-
         return $this->mapModules($result);
     }
 }
+
+?>
