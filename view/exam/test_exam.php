@@ -12,21 +12,27 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
 </head>
 <body>
     <h1>Simulado</h1>
+    <form method="POST" action="<?= BASE_URL ?>/controller/ModuleController.php?action=save"></form>
     <?php 
     $examModules = $dados['prova']->getExamModules();
-
+    $questionCount = 1;
     foreach($examModules as $exMod):
-        foreach($exMod->getUserAnswers() as $userAnswer):
-            echo $userAnswer->getQuestion()->getText();
-            echo "<br>";
-            foreach($userAnswer->getQuestion()->getAlternatives() as $alt){
-                echo '<input type="radio" name="'.$userAnswer->getQuestion()->getId().'" value="'.$alt->getId().'">';
-                echo $alt->getText();
-                echo '<br>';
-            }
-            echo '<br><br>';
+        foreach($exMod->getUserAnswers() as $userAnswer):?>
+            <div class="<?= $exMod->getId(); ?>">
+                <span><?= $questionCount.') '.$userAnswer->getQuestion()->getText(); ?></span>
+                <br>
+                <?php foreach($userAnswer->getQuestion()->getAlternatives() as $alt): ?>
+                    <input type="radio" name="<?= $userAnswer->getId();?>" value="<?= $alt->getId();?>">
+                    <span> <?= $alt->getText();?></span>
+                    <br>
+                <?php endforeach; ?>
+                <br><br>
+                <?php $questionCount += 1; ?>
+            </div>
+        <?php 
         endforeach;
     endforeach;
     ?>
+    
 </body>
 </html>
