@@ -78,6 +78,7 @@ class UserAnswerDAO{
         $stm->bindValue('userRightAnswer', $userAnwer->getUserRightAnswer());
 
         $stm->execute();
+        $userAnwer->setId($conn->lastInsertId());
     }
 
     public function update(UserAnswer $userAnwer){

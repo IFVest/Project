@@ -45,7 +45,6 @@ class UserAnswerService {
     }
 
     function insertArray(Array $userAnswers, ExamModule $examModule){
-        echo ' '.count($userAnswers);
         foreach($userAnswers as $userAnswer):
             $userAnswer->setExamModule($examModule);
             $this->userAnswerDao->insert($userAnswer);

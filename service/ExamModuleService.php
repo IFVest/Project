@@ -67,7 +67,6 @@ class ExamModuleService{
 
     function insertArray(Array $examModules, Exam $exam){
         foreach($examModules as $examModule):
-            echo $examModule->getModule()->getName();
             $examModule->setExam($exam);
             $this->examModuleDao->insert($examModule);
         endforeach;
