@@ -61,7 +61,7 @@ class ExamDAO{
     public function insert(Exam $exam){
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Exam (user) VALUES (:user)";
+        $sql = "INSERT INTO Exam (idUser) VALUES (:user)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('user', $exam->getUser()->getId());
@@ -71,7 +71,7 @@ class ExamDAO{
         //Pegando o último ID inserido, no caso a questão no situação. 
         $examModuleService = new ExamModuleService();
         $exam->setId($conn->lastInsertId());
-        $examModuleService->insertArray($exam->getExamModules()); 
+        $examModuleService->insertArray($exam->getExamModules(), $exam); 
     }
 
     public function delete(Question $question){

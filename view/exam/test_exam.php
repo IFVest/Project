@@ -20,7 +20,7 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
             echo $userAnswer->getQuestion()->getText();
             echo "<br>";
             foreach($userAnswer->getQuestion()->getAlternatives() as $alt){
-                echo '<input type="radio" name="'.$userAnswer->getId().'">';
+                echo '<input type="radio" name="'.$userAnswer->getQuestion()->getId().'" value="'.$alt->getId().'">';
                 echo $alt->getText();
                 echo '<br>';
             }

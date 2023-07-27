@@ -44,7 +44,6 @@ class ExamController extends Controller{
         $exam_subjects_module_num = [];
         if($exam_type == 'default'){
             // Se for Default, colocar as 7 matérias - ALL
-            //TODO muito lento (??)
             foreach(Subjects::cases() as $subject):
                 $exam_subjects_module_num[$subject->name] = [
                     'Module' => 'ALL',
@@ -65,7 +64,7 @@ class ExamController extends Controller{
         }
         // Pega as questões, separadas por matérias -> ExamModule
         $exam_modules = $this->examModuleService->handleRandomExamModules($exam_subjects_module_num);
-        
+
         // Find User
         $user = $this->userDao->findById($user_id);
 

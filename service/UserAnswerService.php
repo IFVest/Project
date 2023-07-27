@@ -23,7 +23,7 @@ class UserAnswerService {
             if($this->notRepeat($userAnswers, $question)){
                 $userAnswer = new UserAnswer();
                 $userAnswer->setChosenAnswer(null);
-                $userAnswer->setUserRightAnswer(false);
+                $userAnswer->setUserRightAnswer(False);
                 $userAnswer->setQuestion($question);
                 array_push($userAnswers, $userAnswer);
             }else{
@@ -38,14 +38,16 @@ class UserAnswerService {
         $result = true;
         foreach($userAnswers as $userAnswer){
             if($userAnswer->getQuestion() == $newQuestion){
-                $result = false;
+                $result = False;
             }
         }
         return $result;
     }
 
-    function insertArray(Array $userAnswers){
+    function insertArray(Array $userAnswers, ExamModule $examModule){
+        echo ' '.count($userAnswers);
         foreach($userAnswers as $userAnswer):
+            $userAnswer->setExamModule($examModule);
             $this->userAnswerDao->insert($userAnswer);
         endforeach;
     }

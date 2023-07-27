@@ -17,7 +17,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE TABLE IF NOT EXISTS `Module` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(1000) NOT NULL,
   `subject` ENUM('Matemática', 'Português', 'Redação', 'Geografia', 'História', 'Ciências') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -29,7 +29,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Question` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(500) NOT NULL,
+  `text` VARCHAR(1000) NOT NULL,
   `idModule` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Question_Module1_idx` (`idModule` ASC) ,
@@ -47,7 +47,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Alternative` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(200) NOT NULL,
+  `text` VARCHAR(500) NOT NULL,
   `isCorrect` TINYINT NOT NULL,
   `idQuestion` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -78,8 +78,8 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `Lesson` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(300) NOT NULL,
-  `videoURL` VARCHAR(200) NOT NULL,
+  `description` VARCHAR(1000) NOT NULL,
+  `videoURL` VARCHAR(1000) NOT NULL,
   `idModule` INT NOT NULL,
   `idStudyWeek` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
-  `completeName` VARCHAR(45) NOT NULL,
+  `completeName` VARCHAR(100) NOT NULL,
   `function` ENUM('Professor', 'Administrador', 'Aluno') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -118,7 +118,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(200) NOT NULL,
+  `text` VARCHAR(500) NOT NULL,
   `idLession` INT NOT NULL,
   `idUser` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -210,7 +210,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `SuggestedModule`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SuggestedModule` (
-  `id` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idStudyPlan` INT NOT NULL,
   `idModule` INT NOT NULL,
   INDEX `fk_StudyPlan_has_Module_Module1_idx` (`idModule` ASC) ,
@@ -234,16 +234,16 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `UserAnswer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `UserAnswer` (
-  `id` VARCHAR(45) NOT NULL,
-  `idExamModules` INT NOT NULL,
+  `id` INt NOT NULL AUTO_INCREMENT,
+  `idExamModule` INT NOT NULL,
   `idQuestion` INT NOT NULL,
   `UserRightAnswer` TINYINT NULL,
   `chosenAnswer` INT NULL,
   INDEX `fk_QuestionByModule_has_Question_Question1_idx` (`idQuestion` ASC) ,
-  INDEX `fk_QuestionByModule_has_Question_QuestionByModule1_idx` (`idExamModules` ASC) ,
+  INDEX `fk_QuestionByModule_has_Question_QuestionByModule1_idx` (`idExamModule` ASC) ,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_QuestionByModule_has_Question_QuestionByModule1`
-    FOREIGN KEY (`idExamModules`)
+    FOREIGN KEY (`idExamModule`)
     REFERENCES `ExamModule` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -260,7 +260,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `Material`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Material` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `path` VARCHAR(300) NOT NULL,
   `idLession` INT NOT NULL,
   PRIMARY KEY (`id`),

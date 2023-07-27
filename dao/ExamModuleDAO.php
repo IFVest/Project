@@ -87,7 +87,7 @@ class ExamModuleDAO{
 
         //Pegando o último ID inserido, no caso a questão no situação. 
         $examModule->setId($conn->lastInsertId());
-        $this->userAnswerService->insertArray($examModule->getUserAnswers()); 
+        $this->userAnswerService->insertArray($examModule->getUserAnswers(), $examModule); 
     }
 
     public function update(ExamModule $examModule){
