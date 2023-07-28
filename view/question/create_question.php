@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <h1> <?php if ($dados['id'] == NULL) echo "Inserir";
+    <h1> <?php if (! isset($dados['id']) || $dados['id'] == NULL) echo "Inserir";
             else echo "Alterar"; ?> questão</h1>
 
     <form method="POST" action="<?= BASE_URL ?>/controller/QuestionController.php?action=save">

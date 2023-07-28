@@ -54,11 +54,7 @@ class ModuleController extends Controller
         $module->setDescription($module_desc);
         $module->setSubject($module_subject);
 
-<<<<<<< HEAD
-        $errors = $this->moduleService->validarDados($module);
-=======
         $errors = $this->moduleService->validateData($module);
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
 
         if (empty($errors)) {
             try{
@@ -86,12 +82,8 @@ class ModuleController extends Controller
         $this->create($dados, $errorMsgs);
     }
 
-<<<<<<< HEAD
     protected function edit()
     {
-=======
-    protected function edit(){
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
         $module = $this->findById();
 
         if($module)
@@ -106,15 +98,6 @@ class ModuleController extends Controller
         }
     }
 
-<<<<<<< HEAD
-    protected function delete()
-    {
-        $module = $this->findById();
-
-        if($module)
-        {
-            $this->moduleDao->delete($module);
-=======
     protected function delete(){
         $module = $this->findById();
 
@@ -124,7 +107,6 @@ class ModuleController extends Controller
         }
         else{
             $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
         }
 
         $this->list();

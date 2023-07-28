@@ -20,10 +20,7 @@ class QuestionController extends Controller{
         $this->moduleDao = new ModuleDAO();
         $this->alternativeDao = new AlternativeDao();
         $this->questionService = new QuestionService();
-<<<<<<< HEAD
-=======
         $this->setActionDefault("list");
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
         $this->handleAction();
     }
 
@@ -80,10 +77,6 @@ class QuestionController extends Controller{
                 if($dados['id'] == NULL){
                     $this->questionDao->insert($question);
                 }else{
-<<<<<<< HEAD
-                    echo 'alo';
-=======
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
                     $this->questionDao->update($question);
                 }
                 $this->list();

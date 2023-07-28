@@ -16,7 +16,7 @@ include_once(__DIR__ . "/../../util/config.php");
     <title>home</title>
 </head>
 
-<body class="darken-bg">
+<body>
     <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
         <a href="<?=BASE_URL?>/view/sobre.php" class="navbar-brand text-light mt-5">
             <div class="display-5 font-weight-bold">IFVest</div>

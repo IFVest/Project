@@ -51,11 +51,7 @@ class LessonController extends Controller{
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
         
-<<<<<<< HEAD
-        $errors = $this->lessonService->validarDados($lesson);
-=======
         $errors = $this->lessonService->validateData($lesson);
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
 
         if (empty($errors)) {
             try{
