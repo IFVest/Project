@@ -53,12 +53,5 @@ body {
 }
 
 .darken-bg {
-  position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Define a cor de escurecimento desejada */
-    /* z-index: 1; */
-    pointer-events: none; /* Para evitar que o clique atinja o escurecimento */
+  background:rgb(96, 96, 96)
 }

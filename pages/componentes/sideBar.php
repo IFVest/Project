@@ -1,7 +1,3 @@
-<?php
-include_once(__DIR__ . "/../../util/config.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,31 +8,31 @@ include_once(__DIR__ . "/../../util/config.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?=BASE_URL?>/view/componentes/sideBar.css">
+    <link rel="stylesheet" href="componentes/sideBar.css">
     <title>home</title>
 </head>
 
 <body class="darken-bg">
     <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
-        <a href="<?=BASE_URL?>/view/sobre.php" class="navbar-brand text-light mt-5">
+        <a href="./sobre.php" class="navbar-brand text-light mt-5">
             <div class="display-5 font-weight-bold">IFVest</div>
         </a>
         <ul class="navbar-nav d-flex flex-column mt-5 w-100">
 
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/ingresso.php" class="nav-link text-light pl-4">Ingresso</a>
+                <a href="./ingresso.php" class="nav-link text-light pl-4">Ingresso</a>
             </li>
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/cronograma.php" class="nav-link text-light pl-4">Cronograma</a>
+                <a href="cronograma.php" class="nav-link text-light pl-4">Cronograma</a>
             </li>
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/simulados.php" class="nav-link text-light pl-4">Simulados</a>
+                <a href="simulados.php" class="nav-link text-light pl-4">Simulados</a>
             </li>
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/materias.php" class="nav-link text-light pl-4">Matérias</a>
+                <a href="materias.php" class="nav-link text-light pl-4">Matérias</a>
             </li>
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/historico.php" class="nav-link text-light pl-4">Histórico</a>
+                <a href="historico.php" class="nav-link text-light pl-4">Histórico</a>
             </li>
         </ul>
     </nav>
@@ -58,14 +54,14 @@ include_once(__DIR__ . "/../../util/config.php");
         var menu_btn = document.querySelector("#menu-btn");
         var sidebar = document.querySelector("#sidebar");
         var container = document.querySelector(".my-container");
-        var background = document.querySelector('.darken-bg');
+        var background = document.querySelector('body');
         var isDarkened = false;
 
         menu_btn.addEventListener("click", () => {
             sidebar.classList.toggle("active-nav");
             container.classList.toggle("active-cont");
-
-            if (container.classList.contains("active-nav")) {
+            
+            if (sidebar.classList.contains("active-nav")) {
                 background.classList.add('darken-bg');
                 isDarkened = true;
             } else {
@@ -75,11 +71,16 @@ include_once(__DIR__ . "/../../util/config.php");
         });
 
         sidebar.addEventListener("click", () => {
-            if (event.target === sidebar && isDarkened) {
-                background.classList.remove('darken-bg');
-                isDarkened = false;
-            }
-        });
+                    if (isDarkened) {
+                        background.classList.remove('darken-bg');
+                        isDarkened = false;
+                    } else {
+                        background.classList.add('darken-bg');
+                        isDarkened = true;
+                    }
+                });
+
+
     </script>
 
 

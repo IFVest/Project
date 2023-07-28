@@ -97,6 +97,21 @@ class QuestionDAO{
 
         $stm->execute([$question->getId()]);
     }
+<<<<<<< HEAD
+=======
+
+    public function findByModule(Module $module){
+        $conn = Connection::getConn();
+        $sql = "SELECT * FROM Question q WHERE q.idModule = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$module->getId()]);
+        $result = $stm->fetchAll();
+
+        $questions = $this->mapQuestions($result);
+
+        return $questions;
+    }
+>>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
 }
 
 ?>

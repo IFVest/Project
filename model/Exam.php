@@ -27,7 +27,7 @@ class Exam{
      */
     public function getUser()
     {
-        return $this->idUser;
+        return $this->user;
     }
 
     /**
@@ -35,7 +35,25 @@ class Exam{
      */
     public function setUser($idUser): self
     {
-        $this->idUser = $idUser;
+        $this->user = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of examModules
+     */
+    public function getExamModules()
+    {
+        return $this->examModules;
+    }
+
+    /**
+     * Set the value of examModules
+     */
+    public function setExamModules($examModules): self
+    {
+        $this->examModules = $examModules;
 
         return $this;
     }

@@ -10,25 +10,49 @@ subjects.forEach(subject => {
 });
 
 export function filterBySubject(subjectButton, filterLesson) {
-    var selectedSubject = subjectButton.innerHTML.trim()
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true);
-    xhttp.onload = function () {
-        if (xhttp.status >= 200 && xhttp.status < 400) {
-            var modules = JSON.parse(this.responseText);
-            
-            // filterLesson serve para, ao invés de mostrar uma tabela contendo todos
-            // os módulos, mostra-os em botões que ao serem clicados mostram uma tabela
-            // de aulas referentes a ele
-            if (filterLesson) {
-                createModulesButtons(modules, selectedSubject);
+    var isExpanded = subjectButton.getAttribute("aria-expanded");
+    if (isExpanded === "true") {
+        isExpanded = true;
+    }
+    else if (isExpanded === "false") {
+        isExpanded = false;
+    }
+
+    var selectedSubject = subjectButton.innerHTML.trim();
+
+    // precisa converter string para boolean
+    if (!isExpanded) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true);
+        xhttp.onload = function () {
+            if (xhttp.status >= 200 && xhttp.status < 400) {
+                var modules = JSON.parse(this.responseText);
+
+                if (modules.length != 0){
+                    // filterLesson serve para, ao invés de mostrar uma tabela contendo todos
+                    // os módulos, mostra-os em botões que ao serem clicados mostram uma tabela
+                    // de aulas referentes a ele
+                    if (filterLesson) {
+                        createModulesButtons(modules, selectedSubject);
+                    }
+                    else {
+                        createModuleTable(modules, selectedSubject);
+                    }
+
+                    subjectButton.setAttribute("aria-expanded", true);
+                } else {
+                    alert("Matéria não possui módulos.");
+                }
+                
             }
-            else {
-                createModuleTable(modules, selectedSubject);
-            }
-        }
-    };
-    xhttp.send();
+        };
+        xhttp.send();
+    }
+    else {
+        var subjectModulesDiv = document.querySelector("#" + selectedSubject);
+        subjectModulesDiv.innerHTML = '';
+        subjectButton.setAttribute("aria-expanded", false);
+    }
 }
 
 function createModulesButtons(modules, subject) {
@@ -46,6 +70,7 @@ function createModulesButtons(modules, subject) {
         moduleButton.setAttribute("value", module.id);
         moduleButton.setAttribute("id", module.name);
         moduleButton.setAttribute("class", "module");
+        moduleButton.setAttribute("aria-expanded", false);
         moduleButton.style.width = "60em";
         moduleButton.style.height = "3em";
         moduleButton.innerHTML = module.name;
@@ -60,19 +85,41 @@ function createModulesButtons(modules, subject) {
 }
 
 function filterByModule(moduleClick) {
-    var moduleId = moduleClick.currentTarget.value;
-    var moduleName = moduleClick.currentTarget.id;
+    var moduleButton = moduleClick.currentTarget;
+    var moduleId = moduleButton.value;
+    var moduleName = moduleButton.id;
+    var isExpanded = moduleButton.getAttribute("aria-expanded");
+
+    if (isExpanded === "true") {
+        isExpanded = true;
+    }
+    else if (isExpanded === "false") {
+        isExpanded = false;
+    }
     
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "LessonController.php?action=findLessonsByModuleId&moduleId=" + moduleId, true);
-    xhttp.onload = function () {
-        if (xhttp.status >= 200 && xhttp.status < 400) {
-            var lessons = JSON.parse(this.responseText);
-            
-            createLessonTable(lessons, moduleName);
-        }
-    };
-    xhttp.send();
+    if (!isExpanded) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "LessonController.php?action=findLessonsByModuleId&moduleId=" + moduleId, true);
+        xhttp.onload = function () {
+            if (xhttp.status >= 200 && xhttp.status < 400) {
+                var lessons = JSON.parse(this.responseText);
+                
+                if (lessons.length != 0) {
+                    createLessonTable(lessons, moduleName);
+                    moduleButton.setAttribute("aria-expanded", true);
+                } else {
+                    alert("Módulo não possui aulas.");
+                }
+            }
+        };
+        xhttp.send();
+    }
+    else {
+        var moduleLessonsDiv = document.querySelector("#" + moduleName.replace(/\s/g, '_') + "-lessons");
+        moduleLessonsDiv.innerHTML = '';
+        moduleButton.setAttribute("aria-expanded", false);
+    }
+    
 }
 
 function createLessonTable(lessons, moduleName) {

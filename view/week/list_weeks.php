@@ -21,12 +21,13 @@
             </a>
         </div>
         <div class="week-lessons">
-            <?php foreach ($week->getLessons() as $lesson) : ?>
-                <div class="lesson">
-                    <label for="lesson-<?php echo $lesson->getId(); ?>"><?php echo $lesson->getTitle(); ?></label>
-                    <iframe id="<?php echo $lesson->getId(); ?>" src="<?php echo $lesson->getUrl(); ?>"></iframe>
-                </div>
-            <?php endforeach; ?>
+            <?php if (!empty($week->getLessons())) {
+                foreach ($week->getLessons() as $lesson) : ?>
+                    <div class="lesson">
+                        <label for="lesson-<?php echo $lesson->getId(); ?>"><?php echo $lesson->getTitle(); ?></label>
+                        <iframe id="<?php echo $lesson->getId(); ?>" src="<?php echo $lesson->getUrl(); ?>"></iframe>
+                    </div>
+            <?php endforeach; }?>
         </div>
     <?php endforeach; ?>
 </body>

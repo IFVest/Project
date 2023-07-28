@@ -2,8 +2,17 @@
 
 require_once(__DIR__ . "/../model/Module.php");
 require_once(__DIR__ . "/../connection/Connection.php");
+<<<<<<< HEAD
 class ModuleDAO{
     private function mapModules($sql){
+=======
+require_once(__DIR__ . "/../dao/QuestionDAO.php");
+
+class ModuleDAO{
+
+    private function mapModules($sql)
+    {
+>>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
         $modules = array();
 
         foreach($sql as $mod){
@@ -13,13 +22,25 @@ class ModuleDAO{
             $module->setDescription($mod['description']);
             $module->setSubject($mod['subject']);
 
+<<<<<<< HEAD
+=======
+            $questDao = new QuestionDAO();
+            $questions = $questDao->findByModule($module);
+            $module->setQuestions($questions);
+
+>>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
             array_push($modules, $module);
         }
 
         return $modules;
     }
 
+<<<<<<< HEAD
     public function findById(int $id){
+=======
+    public function findById(int $id)
+    {
+>>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM Module m WHERE m.id = ?";
@@ -33,6 +54,7 @@ class ModuleDAO{
         if (count($modules) == 1) {
             return $modules[0];
         }
+<<<<<<< HEAD
         else if(count($modules) == 0) {
             return null;
         }
@@ -41,6 +63,17 @@ class ModuleDAO{
     }
 
     public function list(){
+=======
+        else if(count($modules) > 1) {
+            return "More than 1 module found";
+        }
+
+        die("Invalid module");
+    }
+
+    public function list()
+    {
+>>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM Module";
@@ -52,7 +85,12 @@ class ModuleDAO{
         return $this->mapModules($result);
     }
 
+<<<<<<< HEAD
     public function insert(Module $module){
+=======
+    public function insert(Module $module)
+    {
+>>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO Module (name, description, subject) VALUES (:name,:desc,:sub)";
@@ -97,7 +135,15 @@ class ModuleDAO{
         $stm = $conn->prepare($sql);
         $stm->execute([$subject]);
         $result = $stm->fetchAll();
+<<<<<<< HEAD
 
         return $this->mapModules($result);
     }
 }
+=======
+        return $this->mapModules($result);
+    }
+}
+
+?>
+>>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76

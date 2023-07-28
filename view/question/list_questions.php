@@ -1,8 +1,10 @@
 <?php
 
-
 require_once(__DIR__ . "/../../controller/QuestionController.php");
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +17,7 @@ require_once(__DIR__ . "/../../controller/QuestionController.php");
 
     <?php
     //require_once(__DIR__ . "/../../util/config.php"); 
-    include_once(BASE_PATH . '/view/include/bootstrap_header.php');
+    include_once(BASE_URL . '/view/include/bootstrap_header.php');
     ?>
 </head>
 

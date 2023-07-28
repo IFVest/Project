@@ -6,6 +6,7 @@ class Module implements JsonSerializable{
     private $description;
     private $subject;
     private $lessons;
+    private $questions;
     
     public function jsonSerialize(): mixed
     {
@@ -109,10 +110,28 @@ class Module implements JsonSerializable{
      * Set the value of lessons
      *
      * @return  self
-     */ 
+     */  
     public function setLessons($lessons)
     {
         $this->lessons = $lessons;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of questions
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
+     * Set the value of questions
+     */
+    public function setQuestions($questions): self
+    {
+        $this->questions = $questions;
 
         return $this;
     }
