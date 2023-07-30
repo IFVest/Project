@@ -7,31 +7,28 @@ require_once(__DIR__ . "/../service/ExamModuleService.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 
 class ExamDAO{
-    private ExamModuleDAO $examModuleDao;
-    private UserDAO $userDAO;
-
     function __construct(){
-        $this->examModuleDao = new ExamModuleDAO();
-        $this->userDAO = new UserDAO();
     }
 
     private function mapExams($sql){
+        $examModuleDao = new ExamModuleDAO();
+        $userDAO = new UserDAO();
         $exams = array();
 
         foreach($sql as $exam_sql){
             $exam = new Exam();
             $exam->setId($exam_sql['id']);
 
-            $user = $this->userDao->findById($exam_sql['idUser']);
+            $user = $userDao->findById($exam_sql['idUser']);
             $exam->setUser($user);
 
-            $examModules = $this->examModuleDao->findByExam($exam);
-            $question->setExamModules($examModules);
+            $examModules = $examModuleDao->findByExam($exam);
+            $exam->setExamModules($examModules);
 
             array_push($exams, $exam);
         }
 
-        return $questions;
+        return $exams;
     }
 
     public function findById(int $id){

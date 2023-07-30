@@ -20,9 +20,8 @@ class UserAnswerDAO{
             $userAnwer->setChosenAnswer($usaw['chosenAnswer']);
             $userAnwer->setUserRightAnswer($usaw['userRightAnswer']);
 
-            // $examModule = $this->examModuleDao->findById($usaw['idExamModule']);
-            // $userAnwer->setExamModule($examModule);
             $userAnwer->setExamModule($usaw['idExamModule']);
+            
             $question = $this->questionDAO->findById($usaw['idQuestion']);
             $userAnwer->setQuestion($question);
 
@@ -89,7 +88,10 @@ class UserAnswerDAO{
 
         $stm = $conn->prepare($sql);
 
-        $stm->bindValue('idExamModule', $userAnwer->getExamModule()->getId());
+        $idExamModule = (gettype($userAnwer->getExamModule())!='int')? $userAnwer->getExamModule()->getId() : $userAnwer->getExamModule();
+        echo $idExamModule;
+
+        $stm->bindValue('idExamModule', $idExamModule);
         $stm->bindValue('idQuestion', $userAnwer->getQuestion()->getId());
         $stm->bindValue('chosenAnswer', $userAnwer->getChosenAnswer());
         $stm->bindValue('userRightAnswer', $userAnwer->getUserRightAnswer());

@@ -22,7 +22,7 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
                 <span><?= $questionCount.') '.$userAnswer->getQuestion()->getText(); ?></span>
                 <br>
                 <?php foreach($userAnswer->getQuestion()->getAlternatives() as $alt): ?>
-                    <input type="radio" name="<?= $userAnswer->getId();?>" value="<?= $alt->getId();?>">
+                    <input type="radio" name="<?= $userAnswer->getId();?>" value="<?= $alt->getId();?>" >
                     <span> <?= $alt->getText();?></span>
                     <br>
                 <?php endforeach; ?>
@@ -33,6 +33,7 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
         endforeach;
     endforeach;
     ?>
-    
+    <button class="finish-btn">Finalizar</button>
+    <script src="<?= BASE_URL ?>../view/exam/answerExamScript.js"></script>
 </body>
 </html>

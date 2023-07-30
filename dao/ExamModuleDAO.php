@@ -1,16 +1,22 @@
 <?php
 error_reporting(1);
 require_once(__DIR__ . "/../model/ExamModule.php");
+require_once(__DIR__ . "/../dao/ExamDAO.php");
+require_once(__DIR__ . "/../dao/ModuleDAO.php");
+require_once(__DIR__ . "/../dao/UserAnswerDAO.php");
 require_once(__DIR__ . "/../service/UserAnswerService.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 
 class ExamModuleDAO{
 
     function __construct(){
-        $this->userAnswerService = new UserAnswerService();
+
     }
 
     private function mapExamModules($sql){
+        $examDao = new ExamDAO();
+        $moduleDao = new ModuleDAO();
+        $userAnswerDao = new UserAnswerDAO();
         $examModules = array();
 
         foreach($sql as $exMod){
@@ -20,13 +26,13 @@ class ExamModuleDAO{
             $examModule->setCorrectQuestions($exMod['correctQuestions']);
             $examModule->setIsProblem($exMod['isProblem']);
 
-            $exam = $this->examDao->findById($exMod['idExam']);
+            $exam = $examDao->findById($exMod['idExam']);
             $examModule->setExam($exam);
 
-            $module = $this->moduleDao->findById($exMod['idModule']);
+            $module = $moduleDao->findById($exMod['idModule']);
             $exam->setmodule($module);
 
-            $userAnswers = $this->userAnswerDAO->findByExamModule($examModule);
+            $userAnswers = $userAnswerDAO->findByExamModule($examModule);
             $examModule->setUserAnswer($userAnswers);
 
             array_push($examModules, $examModue);
@@ -87,7 +93,8 @@ class ExamModuleDAO{
 
         //Pegando o último ID inserido, no caso a questão no situação. 
         $examModule->setId($conn->lastInsertId());
-        $this->userAnswerService->insertArray($examModule->getUserAnswers(), $examModule); 
+        $userAnswerService = new UserAnswerService();
+        $userAnswerService->insertArray($examModule->getUserAnswers(), $examModule); 
     }
 
     public function update(ExamModule $examModule){
