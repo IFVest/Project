@@ -1,6 +1,7 @@
 <?php
 error_reporting(1);
 require_once(__DIR__ . "/../model/ExamModule.php");
+require_once(__DIR__ . "/../util/config.php");
 require_once(__DIR__ . "/../service/ModuleService.php");
 require_once(__DIR__ . "/../service/UserAnswerService.php");
 require_once(__DIR__ . "/../dao/ExamModuleDAO.php");
@@ -43,10 +44,11 @@ class ExamModuleService{
                 $exam_module = new ExamModule();
                 $exam_module->setTotalQuestions(count($userAnswers));
                 $exam_module->setCorrectQuestions(0);
-                $exam_module->setIsProblem(true);
+                $exam_module->setIsProblem(_TRUE_);
                 $exam_module->setModule($modules[$i]);
                 $exam_module->setUserAnswers($userAnswers);
-                array_push($exam_modules, $exam_module);
+                
+                count($userAnswers)? array_push($exam_modules, $exam_module) : '';
             }
         endforeach;
 

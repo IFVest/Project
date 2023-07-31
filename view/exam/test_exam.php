@@ -34,6 +34,6 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
     endforeach;
     ?>
     <button class="finish-btn">Finalizar</button>
-    <script src="<?= BASE_URL ?>../view/exam/answerExamScript.js"></script>
+    <script src="<?= BASE_URL ?>/view/exam/answerExamScript.js"></script>
 </body>
 </html>

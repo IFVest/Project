@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `UserAnswer` (
   `id` INt NOT NULL AUTO_INCREMENT,
   `idExamModule` INT NOT NULL,
   `idQuestion` INT NOT NULL,
-  `UserRightAnswer` TINYINT NULL,
+  `userRightAnswer` TINYINT NULL,
   `chosenAnswer` INT NULL,
   INDEX `fk_QuestionByModule_has_Question_Question1_idx` (`idQuestion` ASC) ,
   INDEX `fk_QuestionByModule_has_Question_QuestionByModule1_idx` (`idExamModule` ASC) ,
