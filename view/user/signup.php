@@ -16,7 +16,7 @@
     <title>Signup</title>
   </head>
   <body>
-    <form method="POST" action="<?php BASE_URL ?>/controller/UserController.php?action=save">
+    <form method="POST" action="<?= BASE_URL ?>/controller/UserController.php?action=save">
       <div class="container">
         <div class="card">
           <h1>Cadastrar</h1>
@@ -26,23 +26,23 @@
           <div id="msgSuccess"></div>
 
           <div class="label-float">
-            <input type="text" id="nome" placeholder=" " required />
+            <input type="text" id="nome" name="name" placeholder=" " required />
             <label id="labelNome" for="nome">Nome</label>
           </div>
 
           <div class="label-float">
-            <input type="email" id="email" placeholder=" " required />
+            <input type="email" id="email" name="email" placeholder=" " required />
             <label id="labelEmail" for="usuario">E-mail</label>
           </div>
 
           <div class="label-float">
-            <input type="password" id="senha" placeholder=" " required />
+            <input type="password" id="senha" name="pass" placeholder=" " required />
             <label id="labelSenha" for="senha">Senha</label>
             <i id="verSenha" class="fa fa-eye" aria-hidden="true"></i>
           </div>
 
           <div class="label-float">
-            <input type="password" id="confirmSenha" placeholder=" " required />
+            <input type="password" id="confirmSenha" name="passConfirm" placeholder=" " required />
             <label id="labelConfirmSenha" for="confirmSenha"
               >Confirmar Senha</label
             >

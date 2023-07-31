@@ -1,3 +1,7 @@
+<?php
+  require_once(__DIR__ . "/../../util/config.php");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -8,11 +12,11 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="./singin.css" />
+    <link rel="stylesheet" href="<?=BASE_URL?>/view/user/signin.css" />
     <title>Singin</title>
   </head>
   <body>
-    <form>
+    <form method="POST" action="<?= BASE_URL ?>/controller/UserController.php?action=login">
     <div class="main-login">
 
       <div class="left-card">
@@ -25,25 +29,27 @@
 
 
         <div class="label-float">
-          <input type="email" id="email" onchange="onChangeEmail()" />
+          <input type="email" id="email" name="email" onchange="onChangeEmail()" />
           <label id="userEmail" for="email">E-mail</label>
           <div class="error" id="email-required-error">E-mail é obrigatório</div>
           <div class="error" id="email-invalid-error">E-mail inválido</div>
         </div>
 
         <div class="label-float">
-          <input type="password" id="senha" onchange="onChangeSenha()"/>
+          <input type="password" id="senha" name="pass" onchange="onChangeSenha()"/>
           <label id="senhaLabel" for="senha">Senha</label>
           <i class="fa fa-eye" aria-hidden="true"></i>
           <div class="error" id="senha-required-error">Senha é obrigatória</div>
         </div>
 
         <div class="justify-center">
-          <button type="button" id="login-button" disabled="true" onclick="login()">Entrar</button>
+          <button type="button" id="login-button" disabled="true">Entrar</button>
         </div>
 
         <div class="justify-center">
-          <button type="button" id="cadastro" onclick="register()">Cadastre-se</button>
+          <a href="<?= BASE_URL ?>/view/user/signup.php">
+            <button type="button" id="cadastro">Cadastre-se</button>
+          </a>
         </div>
 
         </form>

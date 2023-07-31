@@ -5,7 +5,7 @@ class User
     private $email;
     private $password;
     private $completeName;
-    private $function;
+    private $roles;
 
 
     /**
@@ -81,19 +81,21 @@ class User
     }
 
     /**
-     * Get the value of function
-     */
-    public function getFunction()
+     * Get the value of roles
+     */ 
+    public function getRoles()
     {
-        return $this->function;
+        return $this->roles;
     }
 
     /**
-     * Set the value of function
-     */
-    public function setFunction($function): self
+     * Set the value of roles
+     *
+     * @return  self
+     */ 
+    public function setRoles($roles)
     {
-        $this->function = $function;
+        $this->roles = $roles;
 
         return $this;
     }

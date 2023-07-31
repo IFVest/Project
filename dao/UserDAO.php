@@ -13,7 +13,7 @@ class UserDAO{
             $user->setEmail($us['email']);
             $user->setPassword($us['password']);
             $user->setCompleteName($us['completeName']);
-            $user->setFunction($us['function']);
+            $user->setRoles($us['roles']);
 
             array_push($users, $user);
         }
@@ -48,27 +48,27 @@ class UserDAO{
     public function insert(User $user){
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO User (email, password, completeName, function) VALUES (:email, :password, :compelteName, :function)";
+        $sql = "INSERT INTO User (email, password, completeName, roles) VALUES (:email, :password, :completeName, :roles)";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue('email', $question->getEmail());
-        $stm->bindValue('password', $question->getPassword());
-        $stm->bindValue('completeName', $question->getCompleteName());
-        $stm->bindValue('function', $question->getFunction());
+        $stm->bindValue('email', $user->getEmail());
+        $stm->bindValue('password', $user->getPassword());
+        $stm->bindValue('completeName', $user->getCompleteName());
+        $stm->bindValue('roles', $user->getRoles());
         $stm->execute();
     }
 
     public function update(User $user){
         $conn = Connection::getConn();
 
-        $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, function=:function WHERE id = :id";
+        $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, roles=:roles WHERE id = :id";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue('email', $question->getEmail());
-        $stm->bindValue('password', $question->getPassword());
-        $stm->bindValue('completeName', $question->getCompleteName());
-        $stm->bindValue('function', $question->getFunction());
-        $stm->bindValue('id', $question->getId());
+        $stm->bindValue('email', $user->getEmail());
+        $stm->bindValue('password', $user->getPassword());
+        $stm->bindValue('completeName', $user->getCompleteName());
+        $stm->bindValue('roles', $user->getRoles());
+        $stm->bindValue('id', $user->getId());
         $stm->execute();
     }
 
@@ -77,6 +77,12 @@ class UserDAO{
         $sql = "DELETE FROM User WHERE id = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$user->getId()]);
+    }
+
+    public function findByEmail($email) {
+        $conn = Connection::getConn();
+        
+        $sql = "SELECT * FROM User WHERE email = ?";
     }
 }
 

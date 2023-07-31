@@ -8,14 +8,6 @@ function onChangeEmail() {
      toggleSenhaErrors();
    }
    
-   function login() {
-     window.location.href = "../html/home.html";
-   }
-   
-   function register() {
-     window.location.href = "../html/signup.html";
-   }
-   
    function isEmailValid() {
      const email = document.getElementById("email").value;
      if (!email) {
