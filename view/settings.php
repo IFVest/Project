@@ -29,7 +29,7 @@ include(__DIR__ . "/componentes/sideBar.php");
             <div class="col-2 mb-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                    <a href="./lesson/list_lessons.php">Listar aula</a>
+                    <a href="../controller/LessonController.php">Listar aula</a>
                     </div>
                 </div>
             </div>

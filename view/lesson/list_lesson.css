@@ -1,0 +1,29 @@
+body{
+    /* align-items: center; */
+/*     
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;  */
+    background-color: #e5e5e5;
+}
+ 
+.title{
+    text-align: center;
+}
+
+.lessonListing{
+    text-align: right;
+    margin-right: 12px; */
+ }
+
+
+.subject{
+    border: none;
+    /* border-radius: 10px; */
+    /* background-color: #cdd2c1; */
+/* } */
+
+/* button{
+    border: solid 1px;
+    border-radius: 10px;
+}  */

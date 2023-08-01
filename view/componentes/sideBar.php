@@ -38,10 +38,13 @@ include_once(__DIR__ . "/../../util/config.php");
             <li class="nav-item w-100">
                 <a href="<?= BASE_URL ?>/view/historico.php" class="nav-link text-light pl-4">Histórico</a>
             </li>
+            <li class="nav-item w-100">
+                <a href="<?= BASE_URL ?>/view/settings.php" class="nav-link text-light pl-4">Configurações</a>
+            </li>
         </ul>
     </nav>
 
-    <section class="p-4 my-container">
+    <section class="p-4 my-container" style="position: absolute; z-index: 1;">
         <button class="btn my-4" id="menu-btn">
             <i class="bi bi-chevron-compact-right"></i>
         </button>

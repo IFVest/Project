@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/../../util/config.php");
+include(__DIR__ . "/../componentes/sideBar.php");
 require_once(__DIR__ . "/../../model/Subjects.php");
 
 ?>
