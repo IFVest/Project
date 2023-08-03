@@ -25,8 +25,14 @@ class ExamController extends Controller{
     }
     
     public function list($exam){
+        $this->loadView("/../controller/ExamController.php?action=view?id=".$exam->getId(), []);
+    }
+
+    protected function view(){
+        $exam_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        $exam = $this->examDao->findById($exam_id);
         $dados['prova'] = $exam;
-        $this->loadView("exam/test_exam.php", $dados);
+        $this->loadView('exam/test_exam.php', $dados);
     }
         
     

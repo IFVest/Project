@@ -12,7 +12,7 @@ class ExamDAO{
 
     private function mapExams($sql){
         $examModuleDao = new ExamModuleDAO();
-        $userDAO = new UserDAO();
+        $userDao = new UserDAO();
         $exams = array();
 
         foreach($sql as $exam_sql){
@@ -71,14 +71,12 @@ class ExamDAO{
         $examModuleService->insertArray($exam->getExamModules(), $exam); 
     }
 
-    public function delete(Question $question){
+    public function delete(Exam $exam){
         $conn = Connection::getConn();
-        $sql = "DELETE FROM Question WHERE id = ?";
+        $sql = "DELETE FROM Exam WHERE id = ?";
         $stm = $conn->prepare($sql);
 
-        $this->alternativeDao->deleteByQuestion($question);
-
-        $stm->execute([$question->getId()]);
+        $stm->execute([$exam->getId()]);
     }
 }
 

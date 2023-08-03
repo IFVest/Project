@@ -51,10 +51,10 @@ class UserDAO{
         $sql = "INSERT INTO User (email, password, completeName, function) VALUES (:email, :password, :compelteName, :function)";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue('email', $question->getEmail());
-        $stm->bindValue('password', $question->getPassword());
-        $stm->bindValue('completeName', $question->getCompleteName());
-        $stm->bindValue('function', $question->getFunction());
+        $stm->bindValue('email', $user->getEmail());
+        $stm->bindValue('password', $user->getPassword());
+        $stm->bindValue('completeName', $user->getCompleteName());
+        $stm->bindValue('function', $user->getFunction());
         $stm->execute();
     }
 
@@ -64,11 +64,11 @@ class UserDAO{
         $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, function=:function WHERE id = :id";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue('email', $question->getEmail());
-        $stm->bindValue('password', $question->getPassword());
-        $stm->bindValue('completeName', $question->getCompleteName());
-        $stm->bindValue('function', $question->getFunction());
-        $stm->bindValue('id', $question->getId());
+        $stm->bindValue('email', $user->getEmail());
+        $stm->bindValue('password', $user->getPassword());
+        $stm->bindValue('completeName', $user->getCompleteName());
+        $stm->bindValue('function', $user->getFunction());
+        $stm->bindValue('id', $user->getId());
         $stm->execute();
     }
 

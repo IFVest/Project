@@ -20,9 +20,9 @@ class ExamModuleDAO{
         $examModules = array();
 
         foreach($sql as $exMod){
-            $examModule = new Question();
+            $examModule = new ExamModule();
             $examModule->setId($exMod['id']);
-            $examModule->setText($exMod['totalQuestions']);
+            $examModule->setTotalQuestions($exMod['totalQuestions']);
             $examModule->setCorrectQuestions($exMod['correctQuestions']);
             $examModule->setIsProblem($exMod['isProblem']);
 
@@ -32,10 +32,10 @@ class ExamModuleDAO{
             $module = $moduleDao->findById($exMod['idModule']);
             $exam->setmodule($module);
 
-            $userAnswers = $userAnswerDAO->findByExamModule($examModule);
-            $examModule->setUserAnswer($userAnswers);
+            $userAnswers = $userAnswerDao->findByExamModule($examModule);
+            $examModule->setUserAnswers($userAnswers);
 
-            array_push($examModules, $examModue);
+            array_push($examModules, $examModule);
         }
 
         return $examModules;

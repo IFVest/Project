@@ -15,7 +15,7 @@ class UserAnswerController extends Controller{
     private function findById(){
         if (isset($_GET['id'])){
             $id = $_GET['id'];
-            return $this->moduleDao->findById($id);
+            return $this->userAnswerDao->findById($id);
         }
     }
 
