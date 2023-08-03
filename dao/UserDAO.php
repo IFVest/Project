@@ -83,6 +83,12 @@ class UserDAO{
         $conn = Connection::getConn();
         
         $sql = "SELECT * FROM User WHERE email = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$email]);
+        $result = $stm->fetchAll();
+
+        return $this->mapUsers($result);
     }
 }
 

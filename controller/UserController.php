@@ -4,19 +4,26 @@ require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../model/User.php");
 require_once(__DIR__ . "/../model/UserRoles.php");
 require_once(__DIR__ . "/../dao/UserDAO.php");
+require_once(__DIR__ . "/../service/UserService.php");
 
 class UserController extends Controller{
 
     private UserDAO $userDao;
+    private UserService $userService;
 
     public function __construct() {
         $this->userDao = new UserDAO();
-        $this->setActionDefault("create");
+        $this->userService = new UserService();
+        $this->setActionDefault("signup");
         $this->handleAction();
     }
 
-    protected function create($dados = [], $errorMsgs = "") {
+    protected function signup($dados = [], $errorMsgs = "") {
         $this->loadView("user/signup.php", $dados, $errorMsgs);
+    }
+
+    protected function signin($dados = [], $errorMsgs = "") {
+        $this->loadView("user/signin.php", $dados, $errorMsgs);
     }
 
     protected function save() {
@@ -44,9 +51,23 @@ class UserController extends Controller{
     protected function login() {
         $userEmail = isset($_POST["email"]) ? $_POST["email"] : null;
         $userPass = isset($_POST["pass"]) ? $_POST["pass"] : null;
-        
-        // Comparar senha que foi digitada com a senha hasheada do usuário
-        $hashedPass = password_hash($userPass, PASSWORD_DEFAULT);
+
+        $userToLogin = new User();
+        $userToLogin->setEmail($userEmail);
+        $userToLogin->setPassword($userPass);
+
+
+
+        $errors = $this->userService->validateData($userToLogin);
+
+        if (empty($errors)) {
+            $this->loadView("/ingresso.php", [], "");
+        }
+        else {
+            $dados["user"] = $userToLogin;
+            $errorMsgs = implode("<br>", $errors);
+            $this->signin($dados, $errorMsgs);
+        }
     }
 }
 

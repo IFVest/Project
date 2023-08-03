@@ -3,76 +3,76 @@ function onChangeEmail() {
     toggleEmailErrors();
    }
    
-   function onChangeSenha(){
-     toggleButtonsDisabled();
-     toggleSenhaErrors();
-   }
-   
-   function isEmailValid() {
-     const email = document.getElementById("email").value;
-     if (!email) {
-         return false;
-     } 
-     return validateEmail(email);
-      
-   }
-   
-   function toggleEmailErrors() {
-     const email = document.getElementById('email').value;
-     if(!email){
-       document.getElementById('email-required-error').style.display = "block";
-     } else {
-       document.getElementById('email-required-error').style.display = "none";
-     }
-   
-     if (validateEmail(email)){
-       document.getElementById('email-invalid-error').style.display = "none";
-     } else {
-       document.getElementById('email-invalid-error').style.display = "block";
-     }
-   }
-   
-   function toggleSenhaErrors() {
-     const senha = document.getElementById("senha").value;
-     if (!senha) {
-        document.getElementById("senha-required-error").style.display = "block";
-     } else {
-        document.getElementById("senha-required-error").style.display = "none";
-     }
-   }
-   
-   function toggleButtonsDisabled(){
-     const emailValid = isEmailValid();
-     document.getElementById("cadastro").disabled = !emailValid;
-   
-     const passwordValid = isPasswordValid();
-     document.getElementById("login-button").disabled = !emailValid || !passwordValid;
-   
-   }
-   
-   function isPasswordValid() {
-     const senha = document.getElementById("senha").value;
-     if (!senha) {
-         return false;
-     }
-     return true;
-   }
-   
-   function validateEmail(email) {
-     return /\S+@\S+\.\S+/.test(email);
-   }
-   
-   // Habilita ver a senha
-   let btn = document.querySelector('.fa-eye')
-   btn.addEventListener('click', ()=>{
-      let inputSenha = document.querySelector('#senha')
-     
-     if(inputSenha.getAttribute('type') == 'password'){
-       inputSenha.setAttribute('type', 'text')
-     } else {
-       inputSenha.setAttribute('type', 'password')
-     }
-   })
+function onChangeSenha(){
+  toggleButtonsDisabled();
+  toggleSenhaErrors();
+}
+
+function isEmailValid() {
+  const email = document.getElementById("email").value;
+  if (!email) {
+      return false;
+  } 
+  return validateEmail(email);
+  
+}
+
+function toggleEmailErrors() {
+  const email = document.getElementById('email').value;
+  if(!email){
+    document.getElementById('email-required-error').style.display = "block";
+  } else {
+    document.getElementById('email-required-error').style.display = "none";
+  }
+
+  if (validateEmail(email)){
+    document.getElementById('email-invalid-error').style.display = "none";
+  } else {
+    document.getElementById('email-invalid-error').style.display = "block";
+  }
+}
+
+function toggleSenhaErrors() {
+  const senha = document.getElementById("senha").value;
+  if (!senha) {
+    document.getElementById("senha-required-error").style.display = "block";
+  } else {
+    document.getElementById("senha-required-error").style.display = "none";
+  }
+}
+
+function toggleButtonsDisabled(){
+  const emailValid = isEmailValid();
+  document.getElementById("cadastro").disabled = !emailValid;
+
+  const passwordValid = isPasswordValid();
+  document.getElementById("login-button").disabled = !emailValid || !passwordValid;
+
+}
+
+function isPasswordValid() {
+  const senha = document.getElementById("senha").value;
+  if (!senha) {
+      return false;
+  }
+  return true;
+}
+
+function validateEmail(email) {
+  return /\S+@\S+\.\S+/.test(email);
+}
+
+// Habilita ver a senha
+let btn = document.querySelector('.fa-eye')
+btn.addEventListener('click', ()=>{
+  let inputSenha = document.querySelector('#senha')
+  
+  if(inputSenha.getAttribute('type') == 'password'){
+    inputSenha.setAttribute('type', 'text')
+  } else {
+    inputSenha.setAttribute('type', 'password')
+  }
+})
    
    // function entrar(){
    //   let email = document.querySelector('#email')

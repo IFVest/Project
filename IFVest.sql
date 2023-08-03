@@ -104,7 +104,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `User` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(60) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `completeName` VARCHAR(45) NOT NULL,
   `roles` ENUM('Professor', 'Administrador', 'Aluno') NOT NULL,
   PRIMARY KEY (`id`))
