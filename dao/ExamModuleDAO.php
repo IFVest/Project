@@ -26,11 +26,10 @@ class ExamModuleDAO{
             $examModule->setCorrectQuestions($exMod['correctQuestions']);
             $examModule->setIsProblem($exMod['isProblem']);
 
-            $exam = $examDao->findById($exMod['idExam']);
-            $examModule->setExam($exam);
+            $examModule->setExam($exMod['idExam']);
 
             $module = $moduleDao->findById($exMod['idModule']);
-            $exam->setmodule($module);
+            $examModule->setModule($module);
 
             $userAnswers = $userAnswerDao->findByExamModule($examModule);
             $examModule->setUserAnswers($userAnswers);
@@ -62,7 +61,7 @@ class ExamModuleDAO{
 
         $examModules = $this->mapExamModules($result);
 
-        return $examModules[0];
+        return $examModules;
     }
 
     public function list(){

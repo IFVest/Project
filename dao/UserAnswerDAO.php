@@ -83,7 +83,7 @@ class UserAnswerDAO{
     public function update(UserAnswer $userAnswer){
         $conn = Connection::getConn();
 
-        $sql = "UPDATE UserAnswer SET idExamModule = :idExamModule, idQuestion = :idQuestion, chosenAnswer=:chosenAnswer
+        $sql = "UPDATE UserAnswer SET idExamModule = :idExamModule, idQuestion = :idQuestion, chosenAnswer=:chosenAnswer,
             userRightAnswer = :userRightAnswer WHERE id = :id";
 
         $stm = $conn->prepare($sql);
@@ -98,8 +98,8 @@ class UserAnswerDAO{
         $stm->bindValue('idExamModule', $idExamModule) ;
         $stm->bindValue('idQuestion', $userAnswer->getQuestion()->getId());
         $stm->bindValue('chosenAnswer', $userAnswer->getChosenAnswer());
-        $stm->bindValue('userRightAnswer', $userAnswer->getUserRightAnswer());
-        $stm->bindValue('id', $userAnswer->getId());
+        $stm->bindValue('userRightAnswer', intval($userAnswer->getUserRightAnswer()));
+        $stm->bindValue('id', intval($userAnswer->getId()));
         $stm->execute();
     }
 

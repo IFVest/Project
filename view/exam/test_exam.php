@@ -13,8 +13,10 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
 <body>
     <h1>Simulado</h1>
     <form method="POST" action="<?= BASE_URL ?>/controller/ModuleController.php?action=save"></form>
-    <?php 
-    $examModules = $dados['prova']->getExamModules();
+    <?php
+
+    $exam = $dados['prova'];
+    $examModules = $exam->getExamModules();
     $questionCount = 1;
     foreach($examModules as $exMod):
         foreach($exMod->getUserAnswers() as $userAnswer):?>
@@ -22,7 +24,7 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
                 <span><?= $questionCount.') '.$userAnswer->getQuestion()->getText(); ?></span>
                 <br>
                 <?php foreach($userAnswer->getQuestion()->getAlternatives() as $alt): ?>
-                    <input type="radio" name="<?= $userAnswer->getId();?>" value="<?= $alt->getId();?>" >
+                    <input type="radio" name="<?= $userAnswer->getId();?>" value="<?= $alt->getId();?>" <?= ($userAnswer->getChosenAnswer() == $alt->getId())? 'checked' : '' ?>>
                     <span> <?= $alt->getText();?></span>
                     <br>
                 <?php endforeach; ?>
