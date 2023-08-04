@@ -19,12 +19,6 @@ class UserService {
         if (! $user->getPassword()) {
             array_push($errors, "O campo SENHA é obrigatório");
         }
-        
-        // Verificar se senhas batem
-        $foundUser = $this->findUserByEmail($user->getEmail())[0];
-        if (! password_verify($user->getPassword(), $foundUser->getPassword())) {
-            array_push($errors, "Senha errada");
-        }
 
         return $errors;
     }

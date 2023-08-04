@@ -6,3 +6,4 @@ define('DB_PASSWORD', 'bancodedados');
 define('BASE_URL', '/Project');
 define('_TRUE_', 1);
 define('_FALSE_', 0);
+define('SIGNIN_PAGE', '/Project/view/user/signin.php');

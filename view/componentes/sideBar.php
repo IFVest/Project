@@ -1,5 +1,14 @@
 <?php
 include_once(__DIR__ . "/../../util/config.php");
+
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
+    echo "<script>console.log('".$_SESSION["userId"]."')</script>";
+
+if (! isset($_SESSION["userId"])) {
+    header("location: ". SIGNIN_PAGE);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +46,9 @@ include_once(__DIR__ . "/../../util/config.php");
             </li>
             <li class="nav-item w-100">
                 <a href="<?= BASE_URL ?>/view/historico.php" class="nav-link text-light pl-4">Histórico</a>
+            </li>
+            <li class="nav-item w-100">
+                <a href="<?= BASE_URL ?>/view/settings.php" class="nav-link text-light pl-4">Configurações</a>
             </li>
             <li class="nav-item w-100">
                 <a href="<?= BASE_URL ?>/view/settings.php" class="nav-link text-light pl-4">Configurações</a>

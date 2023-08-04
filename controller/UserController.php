@@ -14,7 +14,7 @@ class UserController extends Controller{
     public function __construct() {
         $this->userDao = new UserDAO();
         $this->userService = new UserService();
-        $this->setActionDefault("signup");
+        $this->setActionDefault("signin");
         $this->handleAction();
     }
 
@@ -56,18 +56,37 @@ class UserController extends Controller{
         $userToLogin->setEmail($userEmail);
         $userToLogin->setPassword($userPass);
 
-
-
         $errors = $this->userService->validateData($userToLogin);
 
         if (empty($errors)) {
-            $this->loadView("/ingresso.php", [], "");
+            try {
+                // Verificar se senhas batem
+                $foundUser = $this->userService->findUserByEmail($userToLogin->getEmail())[0];
+
+                if (! password_verify($userToLogin->getPassword(), $foundUser->getPassword())) {
+                    array_push($errors, "Senha errada");
+                } else {
+                    $this->createUserSession($foundUser);
+                    $this->loadView("/ingresso.php", [], "");
+                    exit;
+                }
+            }
+            catch (PDOException $e) {
+                $errors = "Usuário não encontrado";
+            }
         }
-        else {
-            $dados["user"] = $userToLogin;
-            $errorMsgs = implode("<br>", $errors);
-            $this->signin($dados, $errorMsgs);
-        }
+        
+        $dados["user"] = $userToLogin;
+        $errorMsgs = implode("<br>", $errors);
+        $this->signin($dados, $errorMsgs);
+    }
+
+    private function createUserSession(User $user) {
+        session_start();
+
+        $_SESSION["userId"] = $user->getId();
+        $_SESSION["userName"] = $user->getCompleteName();
+        $_SESSION["userRole"] = $user->getRoles();
     }
 }
 
