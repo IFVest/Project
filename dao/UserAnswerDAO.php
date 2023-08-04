@@ -89,11 +89,6 @@ class UserAnswerDAO{
         $stm = $conn->prepare($sql);
 
         $idExamModule = (gettype($userAnswer->getExamModule())!='integer')? $userAnswer->getExamModule()->getId() : $userAnswer->getExamModule();
-        echo ' EM:'.$idExamModule;
-        echo ' QI:'.$userAnswer->getQuestion()->getId();
-        echo ' CA:'.$userAnswer->getChosenAnswer();
-        echo ' URA:'.$userAnswer->getUserRightAnswer();
-        echo ' ID:'.$userAnswer->getId();
 
         $stm->bindValue('idExamModule', $idExamModule) ;
         $stm->bindValue('idQuestion', $userAnswer->getQuestion()->getId());

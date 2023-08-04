@@ -20,17 +20,11 @@ class UserAnswerController extends Controller{
     }
 
     protected function changeChosenAnswer(){
-        $userAnswerId = isset($_POST['userAnswerId'])? $_POST['userAnswerId'] : 0;
-        $alternativeId = isset($_POST['alternativeId'])? $_POST['alternativeId'] : 0;
-        echo ' '.$userAnswerId;
-        echo ' '.$alternativeId;
+        $userAnswerId = $_POST['userAnswerId'] ?? 0;
+        $alternativeId = $_POST['alternativeId'] ?? 0;
         $userAnswer = $this->userAnswerDao->findById($userAnswerId);
-        echo ' '.$userAnswer->getQuestion()->getText();
         $userAnswer->setChosenAnswer($alternativeId);
-        echo ' '.$userAnswer->getChosenAnswer();
         $this->userAnswerDao->update($userAnswer);
-
-        echo 'salvado';
     }
 
 }

@@ -99,14 +99,14 @@ class ExamModuleDAO{
     public function update(ExamModule $examModule){
         $conn = Connection::getConn();
 
-        $sql = "UPDATE ExamModule SET totalQuestions = :totalQuestions, correctQuestions = :correctQuestions
-            isProblem= :isProblem, idExam = :exam idModule = :module WHERE id = :id";
+        $sql = "UPDATE ExamModule SET totalQuestions = :totalQuestions, correctQuestions = :correctQuestions,
+            isProblem= :isProblem, idExam = :exam, idModule = :module WHERE id = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('totalQuestions', $examModule->getTotalQuestions());
         $stm->bindValue('correctQuestions', $examModule->getCorrectQuestions());
         $stm->bindValue('isProblem', $examModule->getIsProblem());
-        $stm->bindValue('exam', $examModule->getExam()->getId());
+        $stm->bindValue('exam', $examModule->getExam());
         $stm->bindValue('module', $examModule->getModule()->getId());
         $stm->bindValue('id', $examModule->getId());
         $stm->execute();

@@ -12,30 +12,32 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
 </head>
 <body>
     <h1>Simulado</h1>
-    <form method="POST" action="<?= BASE_URL ?>/controller/ModuleController.php?action=save"></form>
-    <?php
+    <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=makeReport">
+        <?php
 
-    $exam = $dados['prova'];
-    $examModules = $exam->getExamModules();
-    $questionCount = 1;
-    foreach($examModules as $exMod):
-        foreach($exMod->getUserAnswers() as $userAnswer):?>
+        $exam = $dados['prova'];
+        $examModules = $exam->getExamModules();
+        $questionCount = 1;
+        foreach($examModules as $exMod):?>
             <div class="<?= $exMod->getId(); ?>">
-                <span><?= $questionCount.') '.$userAnswer->getQuestion()->getText(); ?></span>
-                <br>
-                <?php foreach($userAnswer->getQuestion()->getAlternatives() as $alt): ?>
-                    <input type="radio" name="<?= $userAnswer->getId();?>" value="<?= $alt->getId();?>" <?= ($userAnswer->getChosenAnswer() == $alt->getId())? 'checked' : '' ?>>
-                    <span> <?= $alt->getText();?></span>
-                    <br>
-                <?php endforeach; ?>
-                <br><br>
-                <?php $questionCount += 1; ?>
+                <?php foreach($exMod->getUserAnswers() as $userAnswer):?>
+                        <span><?= $questionCount.') '.$userAnswer->getQuestion()->getText(); ?></span>
+                        <br>
+                        <?php foreach($userAnswer->getQuestion()->getAlternatives() as $alt): ?>
+                            <input type="radio" name="<?= $userAnswer->getId();?>" value="<?= $alt->getId();?>" <?= ($userAnswer->getChosenAnswer() == $alt->getId())? 'checked' : '' ?>>
+                            <span> <?= $alt->getText();?></span>
+                            <br>
+                        <?php endforeach; ?>
+                        <br><br>
+                        <?php $questionCount += 1; ?>
+                <?php
+                endforeach;?>
             </div>
-        <?php 
-        endforeach;
-    endforeach;
-    ?>
-    <button class="finish-btn">Finalizar</button>
+        <?php endforeach; ?>
+        <input type="hidden" name="id" value="<?= $exam->getId()?>">
+
+        <button type="submit">FINALIZAR</button>
+    </form>
     <script src="<?= BASE_URL ?>/view/exam/answerExamScript.js"></script>
 </body>
 </html>

@@ -25,6 +25,8 @@ class ExamDAO{
             $examModules = $examModuleDao->findByExam($exam);
             $exam->setExamModules($examModules);
 
+            $exam->setFinished($exam_sql['finished']);
+
             array_push($exams, $exam);
         }
 
@@ -58,17 +60,27 @@ class ExamDAO{
     public function insert(Exam $exam){
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Exam (idUser) VALUES (:user)";
+        $sql = "INSERT INTO Exam (idUser, finished) VALUES (:user, :finished)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('user', $exam->getUser()->getId());
-
+        $stm->bindValue('finished', $exam->getFinished());
         $stm->execute();
 
         //Pegando o último ID inserido, no caso a questão no situação. 
         $examModuleService = new ExamModuleService();
         $exam->setId($conn->lastInsertId());
         $examModuleService->insertArray($exam->getExamModules(), $exam); 
+    }
+
+    public function update(Exam $exam){
+        $conn = Connection::getConn();
+        $sql = "UPDATE Exam set finished = :finished WHERE id = :id";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue('finished', $exam->getFinished());
+        $stm->bindValue('id', $exam->getId());
+        $stm->execute();
     }
 
     public function delete(Exam $exam){

@@ -144,6 +144,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `Exam` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,
+  `finished` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Exam_User1_idx` (`idUser` ASC) ,
   CONSTRAINT `fk_Exam_User1`

@@ -4,17 +4,20 @@ require_once(__DIR__ . '/../model/Subjects.php');
 require_once(__DIR__ . '/../dao/UserDAO.php');
 require_once(__DIR__ . '/../dao/ExamDAO.php');
 require_once(__DIR__ . '/../service/ExamModuleService.php');
+require_once(__DIR__ . '/../service/ExamService.php');
 require_once(__DIR__ . "/Controller.php");
 
 class ExamController extends Controller{
     private ExamModuleService $examModuleService;
     private ExamDAO $examDao;
     private UserDAO $userDao;
-    
+    private ExamService $examService;
+
     function __construct(){
         $this->examModuleService = new ExamModuleService();
         $this->examDao = new ExamDAO();
         $this->userDao = new UserDAO();
+        $this->examService = new ExamService();
         $this->handleAction();
     }
     
@@ -28,14 +31,21 @@ class ExamController extends Controller{
         $this->view($exam);
     }
 
+    private function report($exam){
+        $exam_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        $exam = ($exam != null)? $exam : $this->examDao->findById($exam_id);
+
+        $dados['prova'] = $exam;
+        $this->loadView('exam/report_exam.php', $dados);
+    }
+
     public function view($exam=null){
         $exam_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
         $exam = ($exam != null)? $exam : $this->examDao->findById($exam_id);
+
         $dados['prova'] = $exam;
         $this->loadView('exam/test_exam.php', $dados);
     }
-        
     
     public function create($dados = [], $errorMsgs = ""){
         $this->loadView("exam/create_exam.php", $dados, $errorMsgs);
@@ -79,6 +89,7 @@ class ExamController extends Controller{
         $exam = new Exam();
         $exam->setUser($user);
         $exam->setExamModules($exam_modules);
+        $exam->setFinished(_FALSE_);
 
         $errors = [];
         try{
@@ -91,6 +102,16 @@ class ExamController extends Controller{
         $errorMsgs = implode("<br>", $errors);
         $this->list($exam, $errorMsgs);
     }
+
+    protected function makeReport(){
+        $exam_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        $exam = $this->examDao->findById($exam_id);
+        $this->examService->makeReport($exam);
+        $exam->setFinished(_TRUE_);
+        $this->examDao->update($exam);
+        $this->report($exam);
+    }
+
 }
 
 $examController = new ExamController();
