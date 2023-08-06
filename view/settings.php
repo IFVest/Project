@@ -17,7 +17,7 @@ include(__DIR__ . "/componentes/sideBar.php");
             <div class="col-2 mb-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <a href="./lesson/create_lesson.php">Criar aula</a>
+                        <a href="../controller/LessonController.php?action=create">Criar aula</a>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@ include(__DIR__ . "/componentes/sideBar.php");
             <div class="col-2 mb-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                    <a href="./question/create_question.php">Criar Questão</a>
+                    <a href="../controller/QuestionController.php?action=create">Criar Questão</a>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@ include(__DIR__ . "/componentes/sideBar.php");
             <div class="col-2 mb-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                    <a href="./question/list_questions.php">Listar Questão</a>
+                    <a href="../controller/QuestionController.php">Listar Questão</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@ include(__DIR__ . "/componentes/sideBar.php");
             <div class="col-2 mb-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                    <a href="./module/create_module.php">Criar Modulo</a>
+                    <a href="../controller/ModuleController.php?action=create">Criar Modulo</a>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@ include(__DIR__ . "/componentes/sideBar.php");
             <div class="col-2 mb-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                    <a href="./module/list_modules.php">Listar Modulo</a>
+                    <a href="../controller/ModuleController.php">Listar Modulo</a>
                     </div>
                 </div>
             </div>

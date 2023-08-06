@@ -50,9 +50,6 @@ if (! isset($_SESSION["userId"])) {
             <li class="nav-item w-100">
                 <a href="<?= BASE_URL ?>/view/settings.php" class="nav-link text-light pl-4">Configurações</a>
             </li>
-            <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/settings.php" class="nav-link text-light pl-4">Configurações</a>
-            </li>
         </ul>
     </nav>
 

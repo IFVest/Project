@@ -60,8 +60,6 @@ class WeekDAO
         endforeach;
     }
 
-<<<<<<< HEAD
-=======
     public function update(StudyWeek $week) {
         $conn = Connection::getConn();
 
@@ -79,7 +77,6 @@ class WeekDAO
 
     }
 
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
     public function delete(StudyWeek $week) {
         $conn = Connection::getConn();
 

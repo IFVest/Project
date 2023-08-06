@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `completeName` VARCHAR(45) NOT NULL,
-  `roles` ENUM('Professor', 'Administrador', 'Aluno') NOT NULL,
+  `role` ENUM('Professor', 'Administrador', 'Aluno') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;

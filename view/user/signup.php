@@ -52,6 +52,8 @@
           <div class="justify-center">
             <button>Cadastrar</button>
           </div>
+
+          <input type="hidden">
         </div>
       </div>
     </form>

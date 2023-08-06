@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . "/../../model/Subjects.php");
+include(__DIR__ . "/../componentes/sideBar.php");
 ?>
 
 <!DOCTYPE html>

@@ -1,3 +1,7 @@
+<?php
+    include(__DIR__ . "/../componentes/sideBar.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -39,7 +39,7 @@ class UserController extends Controller{
         $userToSave->setCompleteName($userName);
         $userToSave->setEmail($userEmail);
         $userToSave->setPassword($hashedPass);
-        $userToSave->setRoles(UserRoles::Aluno->name);
+        $userToSave->setRole(UserRoles::Aluno->name);
 
         // TODO: Verificar se email já existe
 
@@ -86,7 +86,7 @@ class UserController extends Controller{
 
         $_SESSION["userId"] = $user->getId();
         $_SESSION["userName"] = $user->getCompleteName();
-        $_SESSION["userRole"] = $user->getRoles();
+        $_SESSION["userRole"] = $user->getRole();
     }
 }
 
