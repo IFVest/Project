@@ -8,6 +8,15 @@ class Module implements JsonSerializable{
     private $lessons;
     private $questions;
     
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'subject' => $this->subject
+        ];
+    }
 
     /**
      * Get the value of id
@@ -108,16 +117,6 @@ class Module implements JsonSerializable{
 
         return $this;
     }
-
-    public function jsonSerialize(): mixed {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'subject' => $this->subject
-        ];
-    }
-
 
     /**
      * Get the value of questions

@@ -1,4 +1,5 @@
 <?php
+    include(__DIR__ . "/../componentes/sideBar.php");
     require_once(__DIR__ . "/../../util/config.php");
 ?> 
 
@@ -10,11 +11,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/view/question/create_question.css">
     <title>Questão</title>
 </head>
 
 <body>
-    <h1> <?php if ($dados['id'] == NULL) echo "Inserir";
+    <h1> <?php if (! isset($dados['id']) || $dados['id'] == NULL) echo "Inserir";
             else echo "Alterar"; ?> questão</h1>
 
     <form method="POST" action="<?= BASE_URL ?>/controller/QuestionController.php?action=save">
@@ -22,14 +24,14 @@
             <?php
             foreach($dados['modules'] as $module):?>
                 <option value="<?php echo $module->getId()?>" 
-                <?php echo ($dados["question"] && $module == $dados["question"]->getModule() ? "selected" : '');?>>
+                <?php echo (isset($dados["question"]) && $module->getId() == $dados["question"]->getModule() ? "selected" : '');?>>
                     <?php echo $module->getName();?>
                 </option>
             <?php endforeach;?>
         </select><br>
 
         <label for="question_text">Enunciado: </label>
-        <input type="text" name="question_text" value="<?php echo ($dados["question"] ? $dados["question"]->getText() : '');?>"required>
+        <input type="text" name="question_text" value="<?php echo (isset($dados["question"]) ? $dados["question"]->getText() : '');?>"required>
         <br>
         
         

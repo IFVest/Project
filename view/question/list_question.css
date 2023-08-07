@@ -1,0 +1,27 @@
+*{
+    /* align-items: center;
+    text-align: center; */
+    padding: 15px;
+    text-decoration: none;
+}
+
+.container-fluid{
+    display: inline-block;
+}
+
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    background-color: #04AA6D;
+    color: white;
+    
+}
+

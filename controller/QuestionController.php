@@ -20,6 +20,7 @@ class QuestionController extends Controller{
         $this->moduleDao = new ModuleDAO();
         $this->alternativeDao = new AlternativeDao();
         $this->questionService = new QuestionService();
+        $this->setActionDefault("list");
         $this->handleAction();
     }
 
