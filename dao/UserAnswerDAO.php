@@ -1,8 +1,11 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 require_once(__DIR__ . "/../model/UserAnswer.php");
 require_once(__DIR__ . "/../dao/QuestionDAO.php");
 require_once(__DIR__ . "/../connection/Connection.php");
+error_reporting(1);
 
 class UserAnswerDAO{
     private QuestionDAO $questionDAO;
@@ -66,15 +69,20 @@ class UserAnswerDAO{
 
     public function insert(UserAnswer $userAnswer){
         $conn = Connection::getConn();
+        
+        echo $userAnswer->getExamModule()->getId().' ';
+        echo $userAnswer->getQuestion()->getId().' ';
+        echo 'ca: '. $userAnswer->getChosenAnswer().' ';
+        echo 'ra: '. $userAnswer->getUserRightAnswer().' ';
 
-        $sql = "INSERT INTO UserAnswer (idExamModule, idQuestion, chosenAnswer, userRightAnswer) VALUES 
-            (:idExamModule, :idQuestion, :chosenAnswer, :userRightAnswer)";
+        $sql = "INSERT INTO UserAnswer (idExamModule, idQuestion, userRightAnswer, chosenAnswer) VALUES 
+            (:idExamModule, :idQuestion, :userRightAnswer, :chosenAnswer)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('idExamModule', $userAnswer->getExamModule()->getId());
         $stm->bindValue('idQuestion', $userAnswer->getQuestion()->getId());
-        $stm->bindValue('chosenAnswer', $userAnswer->getChosenAnswer());
         $stm->bindValue('userRightAnswer', $userAnswer->getUserRightAnswer());
+        $stm->bindValue('chosenAnswer', $userAnswer->getChosenAnswer());
         
         $stm->execute();
         $userAnswer->setId($conn->lastInsertId());
@@ -93,8 +101,8 @@ class UserAnswerDAO{
         $stm->bindValue('idExamModule', $idExamModule) ;
         $stm->bindValue('idQuestion', $userAnswer->getQuestion()->getId());
         $stm->bindValue('chosenAnswer', $userAnswer->getChosenAnswer());
-        $stm->bindValue('userRightAnswer', intval($userAnswer->getUserRightAnswer()));
-        $stm->bindValue('id', intval($userAnswer->getId()));
+        $stm->bindValue('userRightAnswer', $userAnswer->getUserRightAnswer());
+        $stm->bindValue('id', $userAnswer->getId());
         $stm->execute();
     }
 

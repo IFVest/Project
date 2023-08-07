@@ -39,7 +39,7 @@ if (! isset($_SESSION["userId"])) {
                 <a href="<?= BASE_URL ?>/view/cronograma.php" class="nav-link text-light pl-4">Cronograma</a>
             </li>
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/simulados.php" class="nav-link text-light pl-4">Simulados</a>
+                <a href="<?= BASE_URL ?>/view/exam/create_exam.php" class="nav-link text-light pl-4">Simulados</a>
             </li>
             <li class="nav-item w-100">
                 <a href="<?= BASE_URL ?>/view/materias.php" class="nav-link text-light pl-4">Matérias</a>

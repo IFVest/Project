@@ -40,8 +40,8 @@ include(__DIR__ . "/../componentes/sideBar.php");
                                         ?>
                                     </p>
                                 <?php endforeach; ?>
-                                <a href="../controller/QuestionController.php?action=edit&id=">Alterar</a>
-                                <a href="../controller/QuestionController.php?action=delete&id=">Deletar</a>
+                                <a href="../controller/QuestionController.php?action=edit&id=<?= $question->getId(); ?>">Alterar</a>
+                                <a href="../controller/QuestionController.php?action=delete&id=<?= $question->getId(); ?>">Deletar</a>
                             </div>
                         </div>
                     </div>

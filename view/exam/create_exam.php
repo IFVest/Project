@@ -1,4 +1,5 @@
 <?php
+    include(__DIR__ . "/../componentes/sideBar.php");
     error_reporting(E_ERROR);
     require_once(__DIR__ . "/../../util/config.php");
     require_once(__DIR__ . "/../../model/Subjects.php");
