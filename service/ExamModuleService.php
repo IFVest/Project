@@ -55,6 +55,7 @@ class ExamModuleService{
         return $exam_modules;
     }
 
+    //todo lidar com poucas questões
     private function defineQuestionsNum($modulesNum, $questionsNum){
         $questionsNumAux = $questionsNum;
         $result = [];
