@@ -8,13 +8,15 @@ include(__DIR__ . "/componentes/sideBar.php");
 <head>
     <title>Sobre o IF</title>
     <link rel="stylesheet" href="./css/ingresso.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-</head>  
-                O IFPR se destaca por ser uma instituição pública de ensino que oferece 
-                formação gratuita aos estudantes. Além disso, também é conhecido por explorar o 
-                aprendizado prático com a vivência de experiências baseadas na realidade de 
-                atuação profissional das diferentes áreas.
-            </p>
+</head>
+<body>
+<div class="p-5">
+<p>
+    O IFPR se destaca por ser uma instituição pública de ensino que oferece
+    formação gratuita aos estudantes. Além disso, também é conhecido por explorar o
+    aprendizado prático com a vivência de experiências baseadas na realidade de
+    atuação profissional das diferentes áreas.
+</p>
             <p>Os Institutos Federais são instituições pluricurriculares e multicampi 
                 (reitoria, campus, campus avançado, polos de inovação e polos de educação a 
                 distância), especializados na oferta de educação profissional e tecnológica 
@@ -90,8 +92,7 @@ include(__DIR__ . "/componentes/sideBar.php");
   </ul>
 </div>
    </p></div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
+</div>
 </body>
 
 </html>
