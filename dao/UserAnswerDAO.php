@@ -69,12 +69,6 @@ class UserAnswerDAO{
 
     public function insert(UserAnswer $userAnswer){
         $conn = Connection::getConn();
-        
-        echo $userAnswer->getExamModule()->getId().' ';
-        echo $userAnswer->getQuestion()->getId().' ';
-        echo 'ca: '. $userAnswer->getChosenAnswer().' ';
-        echo 'ra: '. $userAnswer->getUserRightAnswer().' ';
-
         $sql = "INSERT INTO UserAnswer (idExamModule, idQuestion, userRightAnswer, chosenAnswer) VALUES 
             (:idExamModule, :idQuestion, :userRightAnswer, :chosenAnswer)";
 

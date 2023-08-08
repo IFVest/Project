@@ -16,6 +16,7 @@ body {
   margin-left: -300px;
   background-color: rgb(92, 206, 92);
   transition: 0.4s;
+  z-index: 999;
 }
 
 .nav-link{

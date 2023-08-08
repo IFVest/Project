@@ -1,6 +1,6 @@
 <?php
-    include(__DIR__ . "/../componentes/sideBar.php");
     error_reporting(E_ERROR);
+    include(__DIR__ . "/../componentes/sideBar.php");
     require_once(__DIR__ . "/../../util/config.php");
     require_once(__DIR__ . "/../../model/Subjects.php");
 ?> 
@@ -42,8 +42,7 @@
 
         <button type="submit">Gravar</button>
         <input type='hidden' value='0' name='filters_count'>
-        <!-- <input type='hidden' value='<?php $_SESSION['user_id'] ?>' name='filters_count'> -->
-        <input type='hidden' value='1' name='user_id'>
+        <input type='hidden' value='<?= $_SESSION['userId'];?>' name='user_id'>
     </form>
     <div class="error-div">
         <?php require_once(__DIR__ . "/../include/msg.php");?>

@@ -26,7 +26,7 @@ if (! isset($_SESSION["userId"])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
+    <nav class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar" style="position: absolute; z-index: 1;">
         <a href="<?=BASE_URL?>/view/sobre.php" class="navbar-brand text-light mt-5">
             <div class="display-5 font-weight-bold">IFVest</div>
         </a>
@@ -45,7 +45,7 @@ if (! isset($_SESSION["userId"])) {
                 <a href="<?= BASE_URL ?>/view/materias.php" class="nav-link text-light pl-4">Matérias</a>
             </li>
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/historico.php" class="nav-link text-light pl-4">Histórico</a>
+                <a href="<?= BASE_URL ?>/controller/ExamController.php?action=listAll" class="nav-link text-light pl-4">Histórico</a>
             </li>
             <li class="nav-item w-100">
                 <a href="<?= BASE_URL ?>/view/settings.php" class="nav-link text-light pl-4">Configurações</a>

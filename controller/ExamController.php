@@ -31,7 +31,7 @@ class ExamController extends Controller{
         $this->view($exam);
     }
 
-    private function report($exam){
+    protected function report($exam=null){
         $exam_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $exam = ($exam != null)? $exam : $this->examDao->findById($exam_id);
 
@@ -45,6 +45,13 @@ class ExamController extends Controller{
 
         $dados['prova'] = $exam;
         $this->loadView('exam/test_exam.php', $dados);
+    }
+
+    protected function listAll(){
+        session_start();
+        $exams = $this->examDao->findByUser($_SESSION['userId']);
+        $dados['provas'] = $exams;
+        $this->loadView('exam/historic.php', $dados);
     }
     
     public function create($dados = [], $errorMsgs = ""){

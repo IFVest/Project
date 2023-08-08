@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `Question` (
   `text` VARCHAR(999) NOT NULL,
   `idModule` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Question_Module1_idx` (`idModule` ASC) VISIBLE,
+  INDEX `fk_Question_Module1_idx` (`idModule` ASC),
   CONSTRAINT `fk_Question_Module1`
     FOREIGN KEY (`idModule`)
     REFERENCES `Module` (`id`)
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `Alternative` (
   `isCorrect` TINYINT NOT NULL,
   `idQuestion` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Alternative_Question1_idx` (`idQuestion` ASC) VISIBLE,
+  INDEX `fk_Alternative_Question1_idx` (`idQuestion` ASC),
   CONSTRAINT `fk_Alternative_Question1`
     FOREIGN KEY (`idQuestion`)
     REFERENCES `Question` (`id`)
@@ -93,8 +93,8 @@ CREATE TABLE IF NOT EXISTS `Lesson` (
   `idModule` INT NOT NULL,
   `idStudyWeek` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Lession_Module_idx` (`idModule` ASC) VISIBLE,
-  INDEX `fk_Lession_StudyWeek1_idx` (`idStudyWeek` ASC) VISIBLE,
+  INDEX `fk_Lession_Module_idx` (`idModule` ASC),
+  INDEX `fk_Lession_StudyWeek1_idx` (`idStudyWeek` ASC),
   CONSTRAINT `fk_Lession_Module`
     FOREIGN KEY (`idModule`)
     REFERENCES `Module` (`id`)
@@ -136,8 +136,8 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `idLession` INT NOT NULL,
   `idUser` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Coment_Lession1_idx` (`idLession` ASC) VISIBLE,
-  INDEX `fk_Coment_User1_idx` (`idUser` ASC) VISIBLE,
+  INDEX `fk_Coment_Lession1_idx` (`idLession` ASC),
+  INDEX `fk_Coment_User1_idx` (`idUser` ASC),
   CONSTRAINT `fk_Coment_Lession1`
     FOREIGN KEY (`idLession`)
     REFERENCES `Lesson` (`id`)
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `Exam` (
   `idUser` INT NOT NULL,
   `finished` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Exam_User1_idx` (`idUser` ASC) VISIBLE,
+  INDEX `fk_Exam_User1_idx` (`idUser` ASC),
   CONSTRAINT `fk_Exam_User1`
     FOREIGN KEY (`idUser`)
     REFERENCES `User` (`id`)
@@ -185,8 +185,8 @@ CREATE TABLE IF NOT EXISTS `ExamModule` (
   `totalQuestions` INT NOT NULL,
   `idModule` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_CorrectByModule_Exam1_idx` (`idExam` ASC) VISIBLE,
-  INDEX `fk_ExamModules_Module1_idx` (`idModule` ASC) VISIBLE,
+  INDEX `fk_CorrectByModule_Exam1_idx` (`idExam` ASC),
+  INDEX `fk_ExamModules_Module1_idx` (`idModule` ASC),
   CONSTRAINT `fk_CorrectByModule_Exam1`
     FOREIGN KEY (`idExam`)
     REFERENCES `Exam` (`id`)
@@ -211,8 +211,8 @@ CREATE TABLE IF NOT EXISTS `StudyPlan` (
   `idExam` INT NOT NULL,
   `idUser` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_StudyPlan_Exam1_idx` (`idExam` ASC) VISIBLE,
-  INDEX `fk_StudyPlan_User1_idx` (`idUser` ASC) VISIBLE,
+  INDEX `fk_StudyPlan_Exam1_idx` (`idExam` ASC),
+  INDEX `fk_StudyPlan_User1_idx` (`idUser` ASC),
   CONSTRAINT `fk_StudyPlan_Exam1`
     FOREIGN KEY (`idExam`)
     REFERENCES `Exam` (`id`)
@@ -236,8 +236,8 @@ CREATE TABLE IF NOT EXISTS `SuggestedModule` (
   `id` INT NOT NULL,
   `idStudyPlan` INT NOT NULL,
   `idModule` INT NOT NULL,
-  INDEX `fk_StudyPlan_has_Module_Module1_idx` (`idModule` ASC) VISIBLE,
-  INDEX `fk_StudyPlan_has_Module_StudyPlan1_idx` (`idStudyPlan` ASC) VISIBLE,
+  INDEX `fk_StudyPlan_has_Module_Module1_idx` (`idModule` ASC),
+  INDEX `fk_StudyPlan_has_Module_StudyPlan1_idx` (`idStudyPlan` ASC),
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_StudyPlan_has_Module_StudyPlan1`
     FOREIGN KEY (`idStudyPlan`)
@@ -259,15 +259,15 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `UserAnswer` ;
 
 CREATE TABLE IF NOT EXISTS `UserAnswer` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idExamModule` INT NOT NULL,
   `idQuestion` INT NOT NULL,
   `userRightAnswer` TINYINT NULL,
   `chosenAnswer` INT,
-  INDEX `fk_QuestionByModule_has_Question_Question1_idx` (`idQuestion` ASC) VISIBLE,
-  INDEX `fk_QuestionByModule_has_Question_QuestionByModule1_idx` (`idExamModule` ASC) VISIBLE,
+  INDEX `fk_QuestionByModule_has_Question_Question1_idx` (`idQuestion` ASC),
+  INDEX `fk_QuestionByModule_has_Question_QuestionByModule1_idx` (`idExamModule` ASC),
   PRIMARY KEY (`id`),
-  INDEX `fk_UserAnswer_Alternative1_idx` (`chosenAnswer` ASC) VISIBLE,
+  INDEX `fk_UserAnswer_Alternative1_idx` (`chosenAnswer` ASC),
   CONSTRAINT `fk_QuestionByModule_has_Question_QuestionByModule1`
     FOREIGN KEY (`idExamModule`)
     REFERENCES `ExamModule` (`id`)
@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `Material` (
   `Path` VARCHAR(300) NOT NULL,
   `idLession` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Material_Lesson1_idx` (`idLession` ASC) VISIBLE,
+  INDEX `fk_Material_Lesson1_idx` (`idLession` ASC),
   CONSTRAINT `fk_Material_Lesson1`
     FOREIGN KEY (`idLession`)
     REFERENCES `Lesson` (`id`)

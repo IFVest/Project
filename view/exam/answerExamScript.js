@@ -8,9 +8,7 @@ function changeUserAnswer(event){
     let alternativeId = event.target.value
     let userAnswerId = event.target.name
 
-    console.log(alternativeId)
-    console.log(userAnswerId)
-    let params = 'alternativeId='+ alternativeId + '&userAnswerId=' + userAnswerId
+    let params = 'alternativeId='+ alternativeId + '&userAnswerId=' + userAnswerId + '&examId='
     var xhttp = new XMLHttpRequest();
     
     xhttp.open("POST", `UserAnswerController.php?action=changeChosenAnswer`, true );
