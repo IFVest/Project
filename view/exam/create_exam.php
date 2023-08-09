@@ -19,7 +19,7 @@
 <body>
     <div class="component p-5 d-flex flex-column align-items-center justify-content-center">
         <h1 class='my-2'>Criar Simulado Personalizado</h1>
-        <div class="form card col-8 m-3">
+        <div class="form card col-8 m-3 p-3">
             <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=save" class='d-flex flex-column'>
                 <div class="type-exam d-flex justify-content-evenly">
                     <div class="personalized m-2">
@@ -33,14 +33,8 @@
                 </div>
                 
                 <div class="filters" style="display: none; border: 1px solid black;">
-                    <div class="container-personalized1" style="display: none; border: 1px solid black;">
-                        <select name="subjects1" class='subjects'>
-                            <?php foreach (Subjects::cases() as $subject) : ?>
-                                <option class="subject1" value="<?php echo $subject->name; ?>"><?php echo $subject->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div class="modules">
-                        </div>
+                    <div class="modules">
+                        
                     </div>
                     <button class='new-filter-button'>Adicionar componente</button>
                 </div>
