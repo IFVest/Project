@@ -18,5 +18,10 @@ h1, h2{
     width:1024px;
     padding:10px;
     /* font-size:14px; */
-    /* font-family:Verdana;
+    /* font-family:Verdana; */
 }
+
+.container-fluid {
+    background-color: #e5e5e5;
+}
+

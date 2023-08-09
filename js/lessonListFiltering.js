@@ -8,7 +8,3 @@ subjects.forEach(subject => {
         listFlt.filterBySubject(subject, true)
     });
 });
-
-function test(){
-    console.log('test');
-}

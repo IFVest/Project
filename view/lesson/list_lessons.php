@@ -1,45 +1,62 @@
 <?php
+ require( __DIR__. "/../componentes/header.php");
 require_once(__DIR__ . "/../../model/Subjects.php");
-include(__DIR__ . "/../componentes/sideBar.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+    <!-- MAIN CONTENT-->
+    <main class="main-content col-md-10 px-md-5">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            
+            <h1 class="content-title">Listar Aulas</h1>
+            
+            <!-- MENUZINHO DE OPÇÕES-->
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle d-flex align-items-center gap-1">
+                    <i class="bi bi-flower1"></i>
+                    opção dropdown
+                </button>
+            </div>
+        </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/view/lesson/list_lesson.css">
-</head>
+        <h5 class="content-subtitle">subtítulo</h5>
+        <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
-<body>
-    <h1 class="title">Listar Aulas</h1>
-
-    <div class="teste" style="position: relative; float:left;">
-        <?php foreach (Subjects::cases() as $subject) : ?>
-                    <div class="modules" id="<?php echo $subject->name; ?>"></div>
-                    <br>
-            <?php endforeach; ?>
-    </div>
+        <div class="row">
+            <div class="col-md-9">
 
 
-    <div class="lessonListing" >
-        <div class="video" style="display:inline-block"></div>
-        <div class="list" style="display:inline-block">
+                <!-- SERAO LISTADOS AS AULAS DE CADA MODULO -->
+                <?php foreach (Subjects::cases() as $subject) : ?>
+                    
+                        <div class="modules row" id="<?php echo $subject->name; ?>"></div>
+                        
+                <?php endforeach; ?>
+
+            </div>
+
+            <div class="col-md-3">
             <?php foreach (Subjects::cases() as $subject) : ?>
+
+                
+
+
                 <div style="background-color: #cdd2c1; "> 
-                    <button class="subject" style="width: 220px; height: 80px"> <?php echo $subject->name; ?> </button>
+                    <button class="subject"> <?php echo $subject->name; ?> </button>
                     <!-- <div class="modules" id="<?php echo $subject->name; ?>"></div> -->
                     <br>
                 </div>
             <?php endforeach; ?>
+            </div>
         </div>
-    </div>
 
+      
+    </main>
 
     <script src="<?= BASE_URL ?>/js/lessonListFiltering.js" type="module"></script>
-</body>
 
-</html>
+
+    <?php require __DIR__. "/../componentes/footer.php"?>       

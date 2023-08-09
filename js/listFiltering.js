@@ -65,22 +65,29 @@ function createModulesButtons(modules, subject) {
     // Criar módulos em botões com uma div referente às suas aulas logo abaixo do botão
     modules.forEach(module => {
         let moduleDiv = document.createElement("div");
-        let moduleButton = document.createElement("button");
+        let moduloCard = document.createElement("div");
         let moduleLessonsDiv = document.createElement("div");
-        moduleButton.setAttribute("value", module.id);
-        moduleButton.setAttribute("id", module.name);
-        moduleButton.setAttribute("class", "module");
-        moduleButton.setAttribute("aria-expanded", false);
-        moduleButton.style.width = "60em";
-        moduleButton.style.height = "3em";
-        moduleButton.innerHTML = module.name;
+
+        moduloCard.setAttribute("value", module.id);
+        moduloCard.setAttribute("id", module.name);
+
+        moduloCard.classList.add("card");
+        moduloCard.classList.add("col-md-3");
+        moduloCard.classList.add("px-5");
+        moduloCard.classList.add("mb-4");
+        moduloCard.classList.add("me-4");
+
+        moduloCard.setAttribute("aria-expanded", false);
+        moduloCard.innerHTML = module.name;
+
+
         moduleLessonsDiv.setAttribute("class", "lessons");
         let moduleLessonsId = module.name + "-lessons";
         moduleLessonsDiv.setAttribute("id", moduleLessonsId.replace(/\s/g, '_'));
-        moduleDiv.appendChild(moduleButton);
+        moduleDiv.appendChild(moduloCard);
         moduleDiv.appendChild(moduleLessonsDiv);
         subjectModulesDiv.appendChild(moduleDiv);
-        moduleButton.addEventListener("click", filterByModule);
+        moduloCard.addEventListener("click", filterByModule);
     })
 }
 
