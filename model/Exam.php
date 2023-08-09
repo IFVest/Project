@@ -3,6 +3,23 @@ class Exam{
     private $id;
     private $user;
     private $examModules;
+    private $finished;
+
+    /**
+     * @return mixed
+     */
+    public function getFinished()
+    {
+        return $this->finished;
+    }
+
+    /**
+     * @param mixed $finished
+     */
+    public function setFinished($finished): void
+    {
+        $this->finished = $finished;
+    }
 
     /**
      * Get the value of id
@@ -33,9 +50,9 @@ class Exam{
     /**
      * Set the value of idUser
      */
-    public function setUser($idUser): self
+    public function setUser($user): self
     {
-        $this->user = $idUser;
+        $this->user = $user;
 
         return $this;
     }

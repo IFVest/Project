@@ -1,5 +1,14 @@
 <?php
 include_once(__DIR__ . "/../../util/config.php");
+
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
+    echo "<script>console.log('".$_SESSION["userId"]."')</script>";
+
+if (! isset($_SESSION["userId"])) {
+    header("location: ". SIGNIN_PAGE);
+}
+
 ?>
 
 <!DOCTYPE html>

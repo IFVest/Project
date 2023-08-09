@@ -4,28 +4,19 @@ require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../model/StudyWeek.php");
 require_once(__DIR__ . "/../dao/WeekDAO.php");
 require_once(__DIR__ . "/../service/LessonService.php");
-<<<<<<< HEAD
-=======
 require_once(__DIR__ . "/../service/WeekService.php");
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
 
 class WeekController extends Controller
 {
     private WeekDAO $weekDao;
     private LessonService $lessonService;
-<<<<<<< HEAD
-=======
     private WeekService $weekService;
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
 
     public function __construct()
     {
         $this->weekDao = new WeekDAO();
         $this->lessonService = new LessonService();
-<<<<<<< HEAD
-=======
         $this->weekService = new WeekService();
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
         $this->setActionDefault("list");
         $this->handleAction();
     }
@@ -48,27 +39,6 @@ class WeekController extends Controller
         $week_lessons = isset($_POST["week_lessons"]) ? $_POST["week_lessons"] : NULL;
 
         $week = new StudyWeek();
-<<<<<<< HEAD
-        $week->setMarker($marker);
-        
-        # Pegando as aulas escolhidas pelo seu id
-        $lessons = [];
-        foreach ($week_lessons as $lessonId):
-            $lesson = $this->lessonService->findByLessonId($lessonId);
-            array_push($lessons, $lesson);
-        endforeach;
-        
-        $week->setLessons($lessons);
-
-        if ($dados["id"] == NULL) {
-            $this->weekDao->insert($week);
-        }
-        else {
-            echo "<script>console.log('altera')</script>";
-
-        }
-
-=======
         $week->setId($dados["id"]);
         $week->setMarker($marker);
         
@@ -102,7 +72,6 @@ class WeekController extends Controller
         $dados["week"] = $week;
         $errorMsgs = implode("<br>", $errors);
         $this->create($dados, $errorMsgs);
->>>>>>> 8456543e7376c94c24e1e6bc88c40e1047742b76
     }
 
     protected function findById(){

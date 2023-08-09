@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/../model/UserAnswer.php");
 require_once(__DIR__ . "/../dao/UserAnswerDAO.php");
+require_once(__DIR__ . '/../util/config.php');
 
 class UserAnswerService {
     private UserAnswerDAO $userAnswerDao; 
@@ -23,7 +24,7 @@ class UserAnswerService {
             if($this->notRepeat($userAnswers, $question)){
                 $userAnswer = new UserAnswer();
                 $userAnswer->setChosenAnswer(null);
-                $userAnswer->setUserRightAnswer(false);
+                $userAnswer->setUserRightAnswer(_FALSE_);
                 $userAnswer->setQuestion($question);
                 array_push($userAnswers, $userAnswer);
             }else{
@@ -38,14 +39,15 @@ class UserAnswerService {
         $result = true;
         foreach($userAnswers as $userAnswer){
             if($userAnswer->getQuestion() == $newQuestion){
-                $result = false;
+                $result = False;
             }
         }
         return $result;
     }
 
-    function insertArray(Array $userAnswers){
+    function insertArray(Array $userAnswers, ExamModule $examModule){
         foreach($userAnswers as $userAnswer):
+            $userAnswer->setExamModule($examModule);
             $this->userAnswerDao->insert($userAnswer);
         endforeach;
     }

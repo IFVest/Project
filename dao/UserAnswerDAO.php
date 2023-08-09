@@ -15,14 +15,13 @@ class UserAnswerDAO{
         $userAnwers = array();
 
         foreach($sql as $usaw){
-            $userAnwer = new UserAnwer();
+            $userAnwer = new UserAnswer();
             $userAnwer->setId($usaw['id']);
             $userAnwer->setChosenAnswer($usaw['chosenAnswer']);
             $userAnwer->setUserRightAnswer($usaw['userRightAnswer']);
 
-            // $examModule = $this->examModuleDao->findById($usaw['idExamModule']);
-            // $userAnwer->setExamModule($examModule);
-            $userAnwer->setExamModule($usaw['idExamModule']);
+            $userAnwer->setExamModule(intval($usaw['idExamModule']));
+            
             $question = $this->questionDAO->findById($usaw['idQuestion']);
             $userAnwer->setQuestion($question);
 
@@ -65,34 +64,37 @@ class UserAnswerDAO{
         return $this->mapUserAnwers($result);
     }
 
-    public function insert(UserAnswer $userAnwer){
+    public function insert(UserAnswer $userAnswer){
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO UserAnswer (idExamModule, idQuestion, chosenAnswer, userRightAnswer) VALUES 
             (:idExamModule, :idQuestion, :chosenAnswer, :userRightAnswer)";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue('idExamModule', $userAnwer->getExamModule()->getId());
-        $stm->bindValue('idQuestion', $userAnwer->getQuestion()->getId());
-        $stm->bindValue('chosenAnswer', $userAnwer->getChosenAnswer());
-        $stm->bindValue('userRightAnswer', $userAnwer->getUserRightAnswer());
-
+        $stm->bindValue('idExamModule', $userAnswer->getExamModule()->getId());
+        $stm->bindValue('idQuestion', $userAnswer->getQuestion()->getId());
+        $stm->bindValue('chosenAnswer', $userAnswer->getChosenAnswer());
+        $stm->bindValue('userRightAnswer', $userAnswer->getUserRightAnswer());
+        
         $stm->execute();
+        $userAnswer->setId($conn->lastInsertId());
     }
 
-    public function update(UserAnswer $userAnwer){
+    public function update(UserAnswer $userAnswer){
         $conn = Connection::getConn();
 
-        $sql = "UPDATE UserAnswer SET idExamModule = :idExamModule, idQuestion = :idQuestion, chosenAnswer=:chosenAnswer
+        $sql = "UPDATE UserAnswer SET idExamModule = :idExamModule, idQuestion = :idQuestion, chosenAnswer=:chosenAnswer,
             userRightAnswer = :userRightAnswer WHERE id = :id";
 
         $stm = $conn->prepare($sql);
 
-        $stm->bindValue('idExamModule', $userAnwer->getExamModule()->getId());
-        $stm->bindValue('idQuestion', $userAnwer->getQuestion()->getId());
-        $stm->bindValue('chosenAnswer', $userAnwer->getChosenAnswer());
-        $stm->bindValue('userRightAnswer', $userAnwer->getUserRightAnswer());
-        $stm->bindValue('id', $userAnwer->getId());
+        $idExamModule = (gettype($userAnswer->getExamModule())!='integer')? $userAnswer->getExamModule()->getId() : $userAnswer->getExamModule();
+
+        $stm->bindValue('idExamModule', $idExamModule) ;
+        $stm->bindValue('idQuestion', $userAnswer->getQuestion()->getId());
+        $stm->bindValue('chosenAnswer', $userAnswer->getChosenAnswer());
+        $stm->bindValue('userRightAnswer', intval($userAnswer->getUserRightAnswer()));
+        $stm->bindValue('id', intval($userAnswer->getId()));
         $stm->execute();
     }
 

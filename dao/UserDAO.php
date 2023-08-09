@@ -13,7 +13,7 @@ class UserDAO{
             $user->setEmail($us['email']);
             $user->setPassword($us['password']);
             $user->setCompleteName($us['completeName']);
-            $user->setRoles($us['roles']);
+            $user->setRole($us['role']);
 
             array_push($users, $user);
         }
@@ -48,26 +48,26 @@ class UserDAO{
     public function insert(User $user){
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO User (email, password, completeName, roles) VALUES (:email, :password, :completeName, :roles)";
+        $sql = "INSERT INTO User (email, password, completeName, role) VALUES (:email, :password, :completeName, :role)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('email', $user->getEmail());
         $stm->bindValue('password', $user->getPassword());
         $stm->bindValue('completeName', $user->getCompleteName());
-        $stm->bindValue('roles', $user->getRoles());
+        $stm->bindValue('role', $user->getRole());
         $stm->execute();
     }
 
     public function update(User $user){
         $conn = Connection::getConn();
 
-        $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, roles=:roles WHERE id = :id";
+        $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, role=:role WHERE id = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('email', $user->getEmail());
         $stm->bindValue('password', $user->getPassword());
         $stm->bindValue('completeName', $user->getCompleteName());
-        $stm->bindValue('roles', $user->getRoles());
+        $stm->bindValue('role', $user->getRole());
         $stm->bindValue('id', $user->getId());
         $stm->execute();
     }

@@ -43,11 +43,11 @@ class QuestionController extends Controller{
     }
 
     protected function save(){
-
         // Pegando valores do formulário
         $dados["id"] = isset($_POST['question_id']) ? $_POST['question_id'] : NULL;
         $question_text = isset($_POST['question_text']) ? $_POST['question_text'] : NULL;
         $question_module = isset($_POST['question_module']) ? $_POST['question_module'] : NULL;
+        
         // Adicionando no objeto questão
         $question = new Question();
         $question->setId($dados['id']);

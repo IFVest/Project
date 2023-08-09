@@ -17,7 +17,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE TABLE IF NOT EXISTS `Module` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(45) NOT NULL,
+  `description` VARCHAR(1000) NOT NULL,
   `subject` ENUM('Matemática', 'Português', 'Redação', 'Geografia', 'História', 'Ciências') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -29,7 +29,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Question` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(500) NOT NULL,
+  `text` VARCHAR(1000) NOT NULL,
   `idModule` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Question_Module1_idx` (`idModule` ASC) ,
@@ -47,7 +47,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Alternative` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(200) NOT NULL,
+  `text` VARCHAR(500) NOT NULL,
   `isCorrect` TINYINT NOT NULL,
   `idQuestion` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -78,7 +78,8 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `Lesson` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
-  `videoURL` VARCHAR(300) NOT NULL,
+  `description` VARCHAR(1000) NOT NULL,
+  `videoURL` VARCHAR(1000) NOT NULL,
   `idModule` INT NOT NULL,
   `idStudyWeek` INT NULL,
   PRIMARY KEY (`id`),
@@ -103,10 +104,10 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `User` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `completeName` VARCHAR(45) NOT NULL,
-  `roles` ENUM('Professor', 'Administrador', 'Aluno') NOT NULL,
+  `completeName` VARCHAR(100) NOT NULL,
+  `role` ENUM('Professor', 'Administrador', 'Aluno') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -117,7 +118,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Comment` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(200) NOT NULL,
+  `text` VARCHAR(500) NOT NULL,
   `idLession` INT NOT NULL,
   `idUser` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -143,6 +144,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `Exam` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,
+  `finished` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Exam_User1_idx` (`idUser` ASC) ,
   CONSTRAINT `fk_Exam_User1`
@@ -209,7 +211,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `SuggestedModule`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SuggestedModule` (
-  `id` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idStudyPlan` INT NOT NULL,
   `idModule` INT NOT NULL,
   INDEX `fk_StudyPlan_has_Module_Module1_idx` (`idModule` ASC) ,
@@ -233,16 +235,16 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `UserAnswer`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `UserAnswer` (
-  `id` VARCHAR(45) NOT NULL,
-  `idExamModules` INT NOT NULL,
+  `id` INt NOT NULL AUTO_INCREMENT,
+  `idExamModule` INT NOT NULL,
   `idQuestion` INT NOT NULL,
-  `UserRightAnswer` TINYINT NULL,
+  `userRightAnswer` TINYINT NULL,
   `chosenAnswer` INT NULL,
   INDEX `fk_QuestionByModule_has_Question_Question1_idx` (`idQuestion` ASC) ,
-  INDEX `fk_QuestionByModule_has_Question_QuestionByModule1_idx` (`idExamModules` ASC) ,
+  INDEX `fk_QuestionByModule_has_Question_QuestionByModule1_idx` (`idExamModule` ASC) ,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_QuestionByModule_has_Question_QuestionByModule1`
-    FOREIGN KEY (`idExamModules`)
+    FOREIGN KEY (`idExamModule`)
     REFERENCES `ExamModule` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -259,7 +261,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `Material`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Material` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `path` VARCHAR(300) NOT NULL,
   `idLession` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -275,3 +277,375 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `function`) VALUES (NULL, 'andrei@gmail.com', '1234', 'Andrei Pinto', 'Administrador');
+
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Matemática Básica', 'Dando a base para o resto dos módulos', 'Matemática');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Logarítmo', 'Resolução de exponenciais', 'Matemática');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Funções', 'A arte de colocar um número em um scrpt e receber um gráfico', 'Matemática');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Ortografia', 'Para escrever melhor', 'Português');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Conectivos', 'Para escrever de forma clara e conectada', 'Português');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Concordância', 'Para que seu texto tenha sentido', 'Português');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Era Medieval', 'Os anos das trevas, sem economia ou Estado', 'História');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Idade Moderna', 'Formação dos Estados-Modernos e revoluções ideológicas', 'História');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Era Vargas', 'Anos de ditadura populista no Brasil', 'História');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Dinâmica', 'As Leis de Newton', 'Ciências');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Eletroquímica', 'Mudança de energia química para energia elétrica', 'Ciências');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Citologia', 'Estudando as células', 'Ciências');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Climas', 'Os Climas ao redor do mundo', 'Geografia');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Guerra Fria', 'Embate ideológico entre EUA e URSS', 'Geografia');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Globalização', 'Conectando o mundo moderno', 'Geografia');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Em um projeto para a construção de um cinema, os arquitetos estão avaliando a relação entre a quantidade de fileiras e a quantidade de cadeiras em cada fileira. O projeto inicial prevê uma sala para 304 pessoas. No caso de utilizarem 19 fileiras, o número de cadeiras por fileira será', '1');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '14', '0', '1');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '15', '0', '1');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '16', '1', '1');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '17', '0', '1');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '18', '0', '1');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Em uma gincana de férias, 75 crianças se inscreveram para participar das atividades de recreação. De modo a organizarem os jogos e atividades, eles verificaram a faixa etária dos inscritos e constataram que 2/5 das crianças têm mais de doze anos. Quantos participantes tem menos que 12 anos?', '1');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '40', '0', '2');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '32', '0', '2');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '40', '0', '2');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '45', '1', '2');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '60', '0', '2');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Em uma cidade são organizados a cada três anos os Jogos Universitários Gerais, um evento de competição esportiva que reúne os melhores nomes do esporte local. Em 2020 aconteceram os últimos jogos municipais, mesmo ano em que aconteceram os Jogos Olímpicos Internacionais, no Japão. Qual será o próximo ano em que os dois eventos irão acontecer simultaneamente?', '1');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '2018', '0', '3');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '2032', '1', '3');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '2040', '0', '3');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '2044', '0', '3');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '2052', '0', '3');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Se log3 x + log9 x = 1, então o valor de x é', '2');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '∛2', '0', '4');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '√2', '0', '4');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '∛3', '0', '4');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '√3', '0', '4');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '∛9', '1', '4');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Para realizar a viagem dos sonhos, uma pessoa precisava fazer um empréstimo no valor de R$ 5 000,00. Para pagar as prestações, dispõe de, no máximo, R$ 400,00 mensais. Para esse valor de empréstimo, o valor da prestação (P) é calculado em função do número de prestações (n) segundo a fórmula
+
+P igual a numerador 5000 espaço x espaço 1 vírgula 013 à potência de n espaço x espaço 0 vírgula 013 sobre denominador parêntese esquerdo 1 vírgula 013 à potência de n menos 1 parêntese direito fim da fração
+
+Se necessário, utilize 0,005 como aproximação para log 1,013; 2,602 como aproximação para log 400; 2,525 como aproximação para log 335.
+
+De acordo com a fórmula dada, o menor número de parcelas cujos valores não comprometem o limite definido pela pessoa é', '2');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '12', '0', '5');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '14', '0', '5');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '15', '0', '5');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '16', '1', '5');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '17', '0', '5');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Se log5 x = 2 e log10 y = 4, então log20 y/x é', '2');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '2', '1', '6');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '4', '0', '6');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '5', '0', '6');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '8', '0', '6');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '10', '0', '6');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Uma empresa de telefonia oferece dois tipos de planos:
+
+- Plano Plus: 3,5 GB de internet, mais ligações ilimitadas para telefones fixos e celulares.
+- Plano Econômico: 3,5 GB de internet, mais 50 min de ligações para telefones fixos e celulares.
+- O plano Plus custa por mês R$ 65,90, já o plano Econômico custa R$ 10,80, sendo que é cobrado R$ 1,90 por minuto quando o cliente exceder os 50 min incluídos no plano.
+
+Considerando esses dois planos, usando quantos minutos de ligações por mês, o plano Plus passa a ser mais econômico?', '3');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '30 min', '0', '7');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '50 min', '0', '7');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '60 min', '0', '7');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '70 min', '0', '7');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '80 min', '1', '7');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Um motorista de táxi cobra, para cada corrida, uma taxa fixa de R$ 5,00 e mais R$ 2,00 por quilômetro rodado. O valor total arrecadado (R) num dia é função da quantidade total (x) de quilômetros percorridos e calculado por meio da função R(x) = ax + b, em que a é o preço cobrado por quilômetro e b, a soma de todas as taxas fixas recebidas no dia. Se, em um dia, o taxista realizou 10 corridas e arrecadou R$ 410,00, então a média de quilômetros rodados por corrida, foi de', '3');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '14', '0', '8');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '16', '0', '8');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '18', '1', '8');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '20', '0', '8');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Nenhuma da anteriores', '0', '8');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'As curvas de oferta e de demanda de um produto representam, respectivamente, as quantidades que vendedores e consumidores estão dispostos a comercializar em função do preço do produto. Em alguns casos, essas curvas podem ser representadas por retas. Suponha que as quantidades de oferta e de demanda de um produto sejam, respectivamente, representadas pelas equações:
+QO = – 20 + 4P
+QD = 46 – 2P
+em que QO é quantidade de oferta, QD é a quantidade de demanda e P é o preço do produto.
+A partir dessas equações, de oferta e de demanda, os economistas encontram o preço de equilíbrio de mercado, ou seja, quando QO e QD se igualam.
+Para a situação descrita, qual o valor do preço de equilíbrio?', '3');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '5', '0', '9');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '11', '1', '9');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '13', '0', '9');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '23', '0', '9');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '33', '0', '9');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Complete a palavra: Pis_ina', '4');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'ss', '0', '10');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 's', '0', '10');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'c', '1', '10');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'x', '0', '10');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'ç', '0', '10');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Para ter uma letra bonita, você deve:', '4');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Escrever rápido e sem prestar atenção', '0', '11');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Escrever Calmo e e se esforçando para ser legível', '1', '11');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Obrigatoriamente tem que ser "letra de forma"', '0', '11');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Obrigatoriamente tem que ser "letra cursiva"', '0', '11');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Nenhuma das alternativas', '0', '11');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Complete a palavra em inglês: Suc_es_: ', '4');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Nada e s', '0', '12');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Nada nas duas', '0', '12');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'c e nada', '0', '12');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'c e s', '1', '12');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Nenhuma das Alternativas', '0', '12');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Em “Escreveu tanto que fez um calo no dedo”, o conectivo expressa o sentido de:', '5');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Comapração', '0', '13');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Consequência', '1', '13');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Explicação', '0', '13');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Causa', '0', '13');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Condição', '0', '13');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Em “Vamos esclarecer tudo assim que o professor chegar”, o conectivo expressa o sentido de:', '5');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Condição', '0', '14');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Comparação', '0', '14');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Finalidade', '0', '14');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Explicação', '0', '14');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Tempo', '1', '14');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Em “Estava mais atrasada do que o costume”, o conectivo expressa o sentido de:', '5');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Comparação', '1', '15');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Causa', '0', '15');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Conformidade', '0', '15');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Consequência', '0', '15');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Explicação', '0', '15');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Elas _____ providenciaram os atestados, que enviaram _____ às procurações, como instrumentos _____ para os fins colimados.', '6');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'mesmas, anexos, bastantes', '1', '16');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'mesmo, anexo, bastante', '0', '16');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'mesmas, anexo, bastante', '0', '16');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'mesmo, anexos, bastante', '0', '16');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'mesmas, anexos, bastante', '0', '16');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Marque a única frase onde a concordância nominal aparece de maneira inadequada', '6');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Obrigava sua corpulência a exercício e evolução forçada.', '0', '17');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Obrigava sua corpulência a exercício e evolução forçados.', '0', '17');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Obrigava sua corpulência a exercício e evolução forçadas', '1', '17');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Obrigava sua corpulência a forçado exercício e evolução', '0', '17');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Obrigava sua corpulência a forçada evolução e exercício.', '0', '17');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'A frase em que a concordância nominal está INCORRETA é:', '6');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'As ferramentas que julgo necessárias para você consertar o motor, ei-Ias nesta caixa; deixo anexa, para seu próprio controle, uma relação delas.', '0', '18');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'É realmente louvável os esforços que vocês empreenderam para nos ajudar, portanto, qualquer que sejam os resultados, agradecemos muito.', '1', '18');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Questões político-econômicas envolvem amplo debate, logo não considere inaceitáveis algumas indefinições referentes a esses pontos.', '0', '18');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Muitas pesquisas recentes tornaram superadas algumas afirmações sobre a língua e a literatura portuguesas.', '0', '18');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Passadas cerca de duas semanas, foram conhecidos os resultados do concurso que premiou o artista mais destacado do carnaval e de outras folias cariocas.', '0', '18');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Na Idade Média a sociedade era profundamente dominada pela religiosidade e misticismo, no imaginário comum interpretava-se o surgimento de doenças e epidemias como sendo resultados da ira divina, pelos pecados humanos. Entretanto registra-se neste período falta de higiene, de água tratada e de um sistema de esgoto, que provocou surtos de epidemias que mataram milhares de pessoas.
+
+Durante esse período ocorreu um dos maiores surtos epidêmicos, conhecido por:', '7');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Surto de Gripe H1N1.', '0', '19');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Peste Negra.', '1', '19');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Gripe Espanhola.', '0', '19');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Foco de Varíola.', '0', '19');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Peste de Atenas', '0', '19');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'O conflito travado por ingleses e franceses de 1337 a 1453 ficou conhecido como:', '7');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Cruzada Albigense.', '0', '20');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Guerra dos Trinta Anos.', '0', '20');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Guerra dos Camponeses.', '0', '20');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Guerra dos Cem Anos.', '1', '20');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Guerra Normanda.', '0', '20');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'O Feudalismo foi uma organização econômica, política, social e cultural baseada na posse da terra, que predominou na Europa Ocidental durante a Idade Média.
+
+A sociedade no feudalismo era chamada de sociedade estamental, porque era composta por', '7');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'camadas sociais estanques.', '0', '21');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'castas.', '0', '21');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'cidades-estado', '0', '21');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'tribos.', '0', '21');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'feudos.', '1', '21');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Qual documento escrito pelo monge Martinho Lutero é considerado o inaugurador da Reforma Protestante em 1517?', '8');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '95 considerações', '0', '22');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Teses sobre as indulgências da Igreja', '0', '22');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '95 teses', '1', '22');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Da inconveniência das indulgências', '0', '22');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Contestação aberta à Santa Sé', '0', '22');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Rei francês que é considerado o grande símbolo do absolutismo na Europa Ocidental:', '8');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Carlos Magno.', '0', '23');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Luís XIV.', '1', '23');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Luís XVI.', '0', '23');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Carlos V.', '0', '23');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Carlos X.', '0', '23');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'O primeiro acordo de divisão da América assinado entre Espanha e Portugal em 1494 ficou conhecido como:', '8');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Tratado de Tordesilhas.', '1', '24');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Tratado de Madrid.', '0', '24');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Tratado de Santo Ildefonso.', '0', '24');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Tratado de Badajoz.', '0', '24');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Tratado de El Pardo.', '0', '24');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'A depressão que afetou a economia mundial entre 1929 e 1934 se anunciou, ainda em 1928, por uma queda generalizada nos preços agrícolas internacionais. Mas o fator mais marcante foi a crise financeira detonada pela quebra da Bolsa de Nova Iorque.
+
+Disponível em: http://cpdoc.fgv.br. Acesso em: 20 abr. 2015 (adaptado).
+
+Perante o cenário econômico descrito, o Estado brasileiro assume, a partir de 1930, uma política de incentivo à:', '9');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'industrialização interna para substituir as importações.', '1', '25');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'nacionalização de empresas estrangeiras atingidas pela crise.', '0', '25');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'venda de terras a preços acessíveis para os pequenos produtores.', '0', '25');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'entrada de imigrantes para trabalhar nas indústrias de base recém-criadas.', '0', '25');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'abertura de linhas de financiamento especial para empresas do setor terciário.', '0', '25');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'O marco inicial das discussões parlamentares em torno do direito do voto feminino são os debates que antecederam a Constituição de 1824, que não trazia qualquer impedimento ao exercício dos direitos políticos por mulheres, mas, por outro lado, também não era explícita quanto à possibilidade desse exercício. Foi somente em 1932, dois anos antes de estabelecido o voto aos 18 anos, que as mulheres obtiveram o direito de votar, o que veio a concretizar-se no ano seguinte. Isso ocorreu a partir da aprovação do Código Eleitoral de 1932.
+
+Disponível em: http://tse.jusbrasil.com.br. Acesso em: 14 maio 2018.
+
+Um dos fatores que contribuíram para a efetivação da medida mencionada no texto foi a', '9');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'superação da cultura patriarcal.', '0', '26');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'influência de igrejas protestantes.', '0', '26');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'pressão do governo revolucionário.', '0', '26');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'fragilidade das oligarquias regionais.', '0', '26');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'campanha de extensão da cidadania.', '1', '26');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Durante o Estado Novo, os encarregados da propaganda procuraram aperfeiçoar-se na arte da empolgação e envolvimento das “multidões” através das mensagens políticas. Nesse tipo de discurso, o significado das palavras importa pouco, pois, como declarou Goebbels, “não falamos para dizer alguma coisa, mas para obter determinado efeito”.
+
+CAPELATO, M. H. Propaganda política e controle dos meios de comunicação. In: PANDOLFI, D. (Org.). Repensando o Estado Novo. Rio de Janeiro: FGV, 1999.
+
+O controle sobre os meios de comunicação foi uma marca do Estado Novo, sendo fundamental à propaganda política, na medida em que visava', '9');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'conquistar o apoio popular na legitimação do novo governo.', '1', '27');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'ampliar o envolvimento das multidões nas decisões políticas.', '0', '27');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'aumentar a oferta de informações públicas para a sociedade civil.', '0', '27');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'estender a participação democrática dos meios de comunicação no Brasil.', '0', '27');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'alargar o entendimento da população sobre as intenções do novo governo.', '0', '27');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Um corpo com massa de 5 kg é submetido a uma força de intensidade 25N. Qual é a aceleração que ele adquire, em m/s^2?', '10');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '1', '0', '28');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '2', '0', '28');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '3', '0', '28');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '4', '0', '28');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '5', '1', '28');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'A primeira Lei de Newton afirma que, se a soma de todas as forças atuando sobre o corpo for zero, o corpo …', '10');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'terá um movimento uniformemente variado', '1', '29');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'apresentará velocidade constante', '1', '29');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'apresentará velocidade constante em módulo, mas sua direção poderá ser alterada.', '0', '29');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'será desacelerado', '0', '29');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'apresentará um movimento circular uniforme.', '0', '29');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Na cela eletroquímica representada pela equação:
+
+Ni0 + 2Ag+ → Ni2+ + 2Ag0
+
+é correto afirmar que:', '11');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'os elétrons fluem, pelo circuito externo, da prata para o níquel.', '1', '30');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'o cátodo é o eletrodo de níquel.', '0', '30');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'o eletrodo de prata sofre desgaste.', '0', '30');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'a prata sofre redução.', '1', '30');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'a solução de níquel irá se diluir.', '0', '30');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Nas pilhas eletroquímicas obtém-se corrente elétrica devido à reação de oxidorredução.
+
+Podemos afirmar que:', '11');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'no cátodo, ocorre sempre a semirreação de oxidação.', '0', '31');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'no cátodo, ocorre sempre a semirreação de redução.', '1', '31');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'no ânodo, ocorre sempre a semirreação de redução.', '0', '31');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'no ânodo, ocorre sempre a oxidação e a redução simultaneamente', '0', '31');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'no cátodo, ocorre sempre a oxidação e a redução simultaneamente.', '0', '31');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Dados:
+
+Fe3+ (aq) +  e– → Fe2+ (aq)        E° = – 0,77 V
+
+Fe2+ (aq) + 2e– → Fe (s)      E° = – 0,44 V
+
+Cu2+(aq) + 2e– → Cu (s)        E° = + 0,34 V
+
+A formação da ferrugem é um processo natural e que ocasiona um grande prejuízo. Estima-se que cerca de 25% da produção anual de aço é utilizada para repor peças ou estruturas oxidadas. Um estudante resolveu testar métodos para evitar a corrosão em um tipo de prego. Ele utilizou três pregos de ferro, um em cada tubo de ensaio. No tubo I, ele deixou o prego envolto por uma atmosfera contendo somente gás nitrogênio e fechou o tubo. No tubo II, ele enrolou um fio de cobre sobre o prego, cobrindo metade de sua superfície. No tubo III, ele cobriu todo o prego com uma tinta aderente.
+
+Após um mês o estudante verificou formação de ferrugem', '11');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'em nenhum dos pregos.', '0', '32');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'apenas no prego I.', '0', '32');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'apenas no prego II.', '1', '32');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'apenas no prego III.', '0', '32');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'apenas nos pregos I e II.', '0', '32');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'A Biologia Celular, também chamada de Citologia, é o ramo da Biologia dedicado ao estudo das células e o desenvolvimento tecnológico na área da microscopia permitiu desvendar, em detalhes, as estruturas celulares.
+
+É correto afirmar que uma célula eucarionte é formada basicamente por', '12');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'parede celular, ribossomos e citoplasma.', '0', '33');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'citoplasma, material genético e parede celular.', '0', '33');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'membrana plasmática, citoplasma e núcleo definido.', '1', '33');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'cápsula, membrana plasmática e DNA.', '0', '33');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'nenhuma das anteriores', '0', '33');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Segundo a Teoria celular
+
+I. Todos os seres vivos são constituídos por células.
+II. As diferentes formas de vida apresentam a célula como unidade básica.
+III. O interior de uma célula abriga atividades essenciais aos seres vivos.
+IV. Uma célula é desenvolvida por uma célula preexistente.
+
+Estão corretas as afirmativas', '12');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'I e II', '1', '34');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'III e IV', '1', '34');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'I, II e III', '1', '34');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Todas as alternativas', '1', '34');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Nenhuma das alternativas', '1', '34');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'A organização celular de uma célula eucarionte é mais complexa que a estrutura de uma célula procarionte. Na verdade, acredita-se que a célula eucarionte surgiu a partir de uma célula primitiva, que seria a célula procariótica.
+
+Células eucariontes apresentam estruturas que atuam similares aos órgãos, realizando as atividades celulares essenciais para a célula. As mitocôndrias, por exemplo:', '12');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'são responsáveis pela síntese de proteínas na célula.', '1', '35');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'realizam a respiração celular, que produz a maior parte de energia necessária para as funções vitais.', '1', '35');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'digerem moléculas orgânicas, como carboidratos, lipídios e proteínas', '1', '35');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'atuam no armazenamento, modificação e liberação de substâncias.', '1', '35');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'juntam células que compõem um organimos pluricelular', '1', '35');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'São as condições atmosféricas de um determinado lugar durante um longo período de tempo. Para sua classificação, são necessárias as observações sobre o comportamento atmosférico durante, no mínimo, trinta anos.
+
+O enunciado acima faz referência:', '13');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'às temperaturas.', '0', '36');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'à pressão atmosférica.', '0', '36');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'ao tempo.', '0', '36');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'ao clima.', '1', '36');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'à umidade do ar.', '0', '36');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Os elementos do clima são as grandezas atmosféricas que, em conjunto, são responsáveis pela caracterização de um determinado tipo climático.
+
+Assinale a alternativa que NÃO indica um elemento do clima:', '13');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Temperatura.', '0', '37');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Pressão atmosférica.', '0', '37');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Umidade do ar.', '0', '37');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Relevo.', '1', '37');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Nenhuma das anteriores', '0', '37');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Existem diversos tipos de climas no planeta, e vários são os fatores que influenciam nessa diversidade. Marque a única alternativa que não indica corretamente um fator de influência nos climas mundiais.', '13');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Maritimidade.', '0', '38');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Continentalidade.', '0', '38');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Altitude.', '0', '38');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Latitude.', '0', '38');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Umidade do ar.', '1', '38');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Assinale a alternativa que NÃO se relaciona ao momento histórico denominado Guerra Fria.', '14');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'As bombas atômicas atiradas em Hiroshima e Nagasaki pelos norte-americanos também ajudaram a eclodir o conflito da Guerra Fria.', '0', '39');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'A chamada Doutrina Truman tinha como objetivo impedir a expansão do comunismo no que se considerava como países democráticos.', '0', '39');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Criou-se o Conselho de Assistência Mútua econômica (COMECON), com o objetivo de integrar as economias da URSS e dos países do Leste Europeu, criando um mercado comum.', '0', '39');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Os Estados Unidos criaram uma série de programas que foram implementados com o objetivo de recuperar e reformar a economia, além de auxiliar os prejudicados pela Grande Depressão.', '1', '39');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'A tensão diplomática entre Washington e Moscou por conta dos mísseis que estavam sendo instalados na ilha de Cuba.', '0', '39');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Qual dos acontecimentos seguintes não teve relação com a Guerra Fria:', '14');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Guerra Civil Espanhola', '1', '40');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Guerra da Coreia', '0', '40');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Revolução Cubana', '0', '40');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Ditaduras latino-americanas', '0', '40');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Guerra do Afeganistão', '0', '40');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'A Perestroika e a Glasnot foram propostas de reforma que levaram a União Soviética a sua dissolução. Quem foi o presidente responsável por essas reformas:', '14');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Boris Ieltsin', '0', '41');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Yuri Andropov', '0', '41');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Leonid Brejnev', '0', '41');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Nikita Kruschev', '0', '41');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Mikhail Gorbachev', '1', '41');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'A globalização é um processo contínuo de integração, em especial, econômica do globo. Para tal, torna-se necessário a disponibilidade de ferramentas que permitem a organização das redes e dos fluxos entre as diferentes regiões do mundo. Desse modo, pode-se apontar que a globalização está amparada n0', '15');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'protecionismo econômico praticado pelos países desenvolvidos.', '0', '42');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'desenvolvimento dos meios de transporte e de comunicação', '1', '42');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, ' emprego de técnicas tradicionais de produção, como o fordismo.', '0', '42');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'comprometimento com o desenvolvimento sustentável das nações.', '0', '42');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'processo industrial altamente concentrado nos países emergentes.', '0', '42');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'As atividades industriais da globalização estão extremamente internacionalizadas e são baseadas em ferramentas tecnológicas de produção e comercialização. Sendo assim, destacam-se, no processo de globalização, as empresas ligadas à', '15');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'produção de conhecimento, como as de informática.', '1', '43');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'exploração de bens primários, como as madeireiras.', '0', '43');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'atividade de produção artesanal, como as têxteis.', '0', '43');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'alta exploração dos trabalhadores, como as de base.', '0', '43');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'extração de minerais metálicos, como as mineradoras.', '0', '43');
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Com relação ao espaço mundial, o processo de globalização provoca uma homogeneização da produção e do consumo em nível global, porém esse processo não é uniforme em todo o planeta. Desse modo, pode-se afirmar que a globalização resultou na', '15');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'melhoria da qualidade de vida das populações periféricas', '0', '44');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'utilização de mão de obra com baixa qualificação profissional', '0', '44');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'acentuação da desigualdade social entre diferentes regiões.', '1', '44');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'diminuição dos impactos ambientais gerados no globo.', '0', '44');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'centralização econômica dos governos neoliberais.', '0', '44');
+
+INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, 'Dentro de um elevador, um objeto de peso 100 N está apoiado sobre uma superfície. O elevador está descendo e freando com aceleração vertical e para cima de 0,1 m/s2. Considere a aceleração da gravidade como 10 m/s2.
+
+Durante o tempo de frenagem, a força que sustenta o objeto vale, em newtons,', '10');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '101', '1', '45');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '99', '0', '45');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '110', '0', '45');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '90', '0', '45');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, '100', '0', '45');
+

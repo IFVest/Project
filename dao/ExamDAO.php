@@ -7,31 +7,30 @@ require_once(__DIR__ . "/../service/ExamModuleService.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 
 class ExamDAO{
-    private ExamModuleDAO $examModuleDao;
-    private UserDAO $userDAO;
-
     function __construct(){
-        $this->examModuleDao = new ExamModuleDAO();
-        $this->userDAO = new UserDAO();
     }
 
     private function mapExams($sql){
+        $examModuleDao = new ExamModuleDAO();
+        $userDao = new UserDAO();
         $exams = array();
 
         foreach($sql as $exam_sql){
             $exam = new Exam();
             $exam->setId($exam_sql['id']);
 
-            $user = $this->userDao->findById($exam_sql['idUser']);
+            $user = $userDao->findById($exam_sql['idUser']);
             $exam->setUser($user);
 
-            $examModules = $this->examModuleDao->findByExam($exam);
-            $question->setExamModules($examModules);
+            $examModules = $examModuleDao->findByExam($exam);
+            $exam->setExamModules($examModules);
+
+            $exam->setFinished($exam_sql['finished']);
 
             array_push($exams, $exam);
         }
 
-        return $questions;
+        return $exams;
     }
 
     public function findById(int $id){
@@ -61,27 +60,35 @@ class ExamDAO{
     public function insert(Exam $exam){
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Exam (user) VALUES (:user)";
+        $sql = "INSERT INTO Exam (idUser, finished) VALUES (:user, :finished)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('user', $exam->getUser()->getId());
-
+        $stm->bindValue('finished', $exam->getFinished());
         $stm->execute();
 
         //Pegando o último ID inserido, no caso a questão no situação. 
         $examModuleService = new ExamModuleService();
         $exam->setId($conn->lastInsertId());
-        $examModuleService->insertArray($exam->getExamModules()); 
+        $examModuleService->insertArray($exam->getExamModules(), $exam); 
     }
 
-    public function delete(Question $question){
+    public function update(Exam $exam){
         $conn = Connection::getConn();
-        $sql = "DELETE FROM Question WHERE id = ?";
+        $sql = "UPDATE Exam set finished = :finished WHERE id = :id";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue('finished', $exam->getFinished());
+        $stm->bindValue('id', $exam->getId());
+        $stm->execute();
+    }
+
+    public function delete(Exam $exam){
+        $conn = Connection::getConn();
+        $sql = "DELETE FROM Exam WHERE id = ?";
         $stm = $conn->prepare($sql);
 
-        $this->alternativeDao->deleteByQuestion($question);
-
-        $stm->execute([$question->getId()]);
+        $stm->execute([$exam->getId()]);
     }
 }
 

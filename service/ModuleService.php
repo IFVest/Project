@@ -51,11 +51,11 @@ class ModuleService {
         if(count($allModules) != 0){
             $modulesNumber = ($maxModulesNum < count($allModules))? rand(1, $maxModulesNum) : count($allModules);
             for($i = 0; $i<$modulesNumber; $i++){
-                $modulePosition = rand(1, count($allModules)) - 1;
+                $modulePosition = rand(0, count($allModules)-1);
                 if(!in_array($allModules[$modulePosition], $modules)){
                     array_push($modules, $allModules[$modulePosition]);
                 }else{
-                    $i--;
+                    $i -= 1;
                 }
             }
         } 

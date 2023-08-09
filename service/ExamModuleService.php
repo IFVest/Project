@@ -1,6 +1,7 @@
 <?php
 error_reporting(1);
 require_once(__DIR__ . "/../model/ExamModule.php");
+require_once(__DIR__ . "/../util/config.php");
 require_once(__DIR__ . "/../service/ModuleService.php");
 require_once(__DIR__ . "/../service/UserAnswerService.php");
 require_once(__DIR__ . "/../dao/ExamModuleDAO.php");
@@ -23,36 +24,38 @@ class ExamModuleService{
 
         foreach(Subjects::cases() as $subject):
             $subjectName = $subject->name;
-            if(isset($exam_subjects_module_num[$subjectName])){
-                $module = $exam_subjects_module_num[$subjectName]['Module'];
-                $questions_num = $exam_subjects_module_num[$subjectName]['NumberQuestions'];
+            if(!isset($exam_subjects_module_num[$subjectName])){
+               break; 
+            }
+            $module = $exam_subjects_module_num[$subjectName]['Module'];
+            $questions_num = $exam_subjects_module_num[$subjectName]['NumberQuestions'];
+            
+            $modules = [];
+            if($module == 'ALL'){
+                $modules = $this->moduleService->findRandomlyBySubject($subjectName, $questions_num);
+            }else{
+                $module = $this->moduleService->findById($module);
+                $modules = [$module];
+            }
+
+            $num_questions_by_module = $this->defineQuestionsNum(count($modules), $questions_num);
+            for($i = 0; $i<count($modules); $i++){
+                $userAnswers = $this->userAnswerService->handleRandomQuestions($modules[$i], $num_questions_by_module[$i]);
+                $exam_module = new ExamModule();
+                $exam_module->setTotalQuestions(count($userAnswers));
+                $exam_module->setCorrectQuestions(0);
+                $exam_module->setIsProblem(_TRUE_);
+                $exam_module->setModule($modules[$i]);
+                $exam_module->setUserAnswers($userAnswers);
                 
-                $modules = [];
-                if($module == 'ALL'){
-                    $modules = $this->moduleService->findRandomlyBySubject($subjectName, $questions_num);
-                }else{
-                    $module = $this->moduleService->findById($module);
-                    $modules = [$module];
-                }
-
-                $num_questions_by_module = $this->defineQuestionsNum(count($modules), $questions_num);
-                for($i = 0; $i<count($modules); $i++){
-                    $userAnswers = $this->userAnswerService->handleRandomQuestions($modules[$i], $num_questions_by_module[$i]);
-                    $exam_module = new ExamModule();
-                    $exam_module->setTotalQuestions(count($userAnswers));
-                    $exam_module->setCorrectQuestions(0);
-                    $exam_module->setIsProblem(true);
-                    $exam_module->setModule($modules[$i]);
-                    $exam_module->setUserAnswers($userAnswers);
-                    array_push($exam_modules, $exam_module);
-                }
-
+                count($userAnswers)? array_push($exam_modules, $exam_module) : '';
             }
         endforeach;
 
         return $exam_modules;
     }
 
+    //todo lidar com poucas questões
     private function defineQuestionsNum($modulesNum, $questionsNum){
         $questionsNumAux = $questionsNum;
         $result = [];
@@ -65,8 +68,9 @@ class ExamModuleService{
         return $result;
     }
 
-    function insertArray(Array $examModules){
+    function insertArray(Array $examModules, Exam $exam){
         foreach($examModules as $examModule):
+            $examModule->setExam($exam);
             $this->examModuleDao->insert($examModule);
         endforeach;
     } 

@@ -11,7 +11,7 @@
             <div class="col-md-12 col-lg-2  mb-4 ">
                 <div class="card">
                     <div class="card-body">
-                        <a href="./lesson/create_lesson.php">Criar aula</a>
+                        <a href="../controller/LessonController.php?action=create">Criar aula</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="col-md-12 col-lg-2  mb-4">
             <div class="card">
                     <div class="card-body">
-                    <a href="./question/create_question.php">Criar Questão</a>
+                    <a href="../controller/QuestionController.php?action=create">Criar Questão</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
             <div class="col-md-12 col-lg-2  mb-4">
             <div class="card">
                     <div class="card-body">
-                    <a href="./question/list_questions.php">Listar Questão</a>
+                    <a href="../controller/QuestionController.php">Listar Questão</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
             <div class="col-md-12 col-lg-2  mb-4">
             <div class="card">
                     <div class="card-body">
-                    <a href="./module/create_module.php">Criar Modulo</a>
+                    <a href="../controller/ModuleController.php?action=create">Criar Modulo</a>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="col-md-12 col-lg-2  mb-4">
             <div class="card">
                     <div class="card-body">
-                    <a href="./module/list_modules.php">Listar Modulo</a>
+                    <a href="../controller/ModuleController.php">Listar Modulo</a>
                     </div>
                 </div>
             </div>
