@@ -36,13 +36,13 @@ if (! isset($_SESSION["userId"])) {
                 <a href="<?= BASE_URL ?>/view/ingresso.php" class="nav-link text-light pl-4">Ingresso</a>
             </li>
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/cronograma.php" class="nav-link text-light pl-4">Cronograma</a>
+                <a href="<?= BASE_URL ?>/controller/WeekController.php" class="nav-link text-light pl-4">Cronograma</a>
             </li>
             <li class="nav-item w-100">
                 <a href="<?= BASE_URL ?>/view/exam/create_exam.php" class="nav-link text-light pl-4">Simulados</a>
             </li>
             <li class="nav-item w-100">
-                <a href="<?= BASE_URL ?>/view/materias.php" class="nav-link text-light pl-4">Matérias</a>
+                <a href="<?= BASE_URL ?>/controller/LessonController.php" class="nav-link text-light pl-4">Matérias</a>
             </li>
             <li class="nav-item w-100">
                 <a href="<?= BASE_URL ?>/controller/ExamController.php?action=listAll" class="nav-link text-light pl-4">Histórico</a>

@@ -48,6 +48,7 @@ class LessonController extends Controller{
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);
         $lesson->setTitle($lesson_title);
+        $lesson->setDescription("");
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
         
