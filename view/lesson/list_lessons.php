@@ -22,8 +22,6 @@ require_once(__DIR__ . "/../../model/Subjects.php");
             </div>
         </div>
 
-        <h5 class="content-subtitle">subtítulo</h5>
-        <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
         <div class="row">
             <div class="col-md-9">

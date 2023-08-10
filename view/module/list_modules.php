@@ -1,27 +1,38 @@
-<?php
+
+<?php 
+require (__DIR__. "/../componentes/header.php");
 require_once(__DIR__ . "/../../model/Subjects.php");
-include(__DIR__ . "/../componentes/sideBar.php");
 require_once(__DIR__ . "/../../util/config.php");
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+    <!-- MAIN CONTENT-->
+    <main class="main-content col-md-10 px-md-5">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            
+            <h1 class="content-title">Listagem de modulos</h1>
+            
+            <!-- MENUZINHO DE OPÇÕES-->
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle d-flex align-items-center gap-1">
+                    <i class="bi bi-flower1"></i>
+                    opção dropdown
+                </button>
+            </div>
+        </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>/view/css/list_modules.css">
-    <title>Document</title>
-</head>
+        <h5 class="content-subtitle"></h5>
 
-<body>
-    <div class="subjects">
+
+        <div class="subjects">
         <div class="subjects-header">
-            <h1>Listar Módulos</h1>
-            <a class="create-module" href="ModuleController.php?action=create">
+            <!-- <a class="create-module" href="/controller/ModuleController.php?action=create">
                 <button>Criar módulo</button>
-            </a>
+            </a> -->
         </div>
         <div class="subjects-body">
         <?php foreach (Subjects::cases() as $subject) : ?>
@@ -35,6 +46,6 @@ require_once(__DIR__ . "/../../util/config.php");
 
     <script src="<?= BASE_URL ?>/js/listFiltering.js" type="module"></script>
 
-</body>
+    </main>
 
-</html>
+    <?php require __DIR__. "/../componentes/footer.php"?>       

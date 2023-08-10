@@ -1,32 +1,25 @@
-<?php 
-require (__DIR__. "/../componentes/header.php");
-require_once(__DIR__ . "/../../util/config.php");
-?>
+<?php
+    include(__DIR__ . "/../componentes/sideBar.php");
+    require_once(__DIR__ . "/../../util/config.php");
+?> 
 
-    <!-- MAIN CONTENT-->
-    <main class="main-content col-md-10 px-md-5">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            
-        <h1> <?php if (! isset($dados['id']) || $dados['id'] == NULL) echo "Inserir";
+
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/view/question/create_question.css">
+    <title>Questão</title>
+</head>
+
+<body>
+    <h1> <?php if (! isset($dados['id']) || $dados['id'] == NULL) echo "Inserir";
             else echo "Alterar"; ?> questão</h1>
-            
-            <!-- MENUZINHO DE OPÇÕES-->
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
-                </div>
-                <button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle d-flex align-items-center gap-1">
-                    <i class="bi bi-flower1"></i>
-                    opção dropdown
-                </button>
-            </div>
-        </div>
 
-        <h5 class="content-subtitle">Espaço para a criação de questões!</h5>
-        
-       
-        <form method="POST" action="<?= BASE_URL ?>/controller/QuestionController.php?action=save">
+    <form method="POST" action="<?= BASE_URL ?>/controller/QuestionController.php?action=save">
         <select name="question_module" required>
             <?php
             foreach($dados['modules'] as $module):?>
@@ -59,11 +52,9 @@ require_once(__DIR__ . "/../../util/config.php");
         
         <button type="submit">Gravar</button>
     </form>
-
     <div class="error-div">
         <?php require_once(__DIR__ . "/../include/msg.php");?>
     </div>
+</body>
 
-    </main>
-
-    <?php require __DIR__. "/../componentes/footer.php"?>       
+</html>

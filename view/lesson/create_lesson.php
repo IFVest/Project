@@ -1,33 +1,40 @@
 <?php
-include(__DIR__ . "/../componentes/sideBar.php");
+require(__DIR__ . "/../componentes/header.php");
 require_once(__DIR__ . "/../../util/config.php");
 require_once(__DIR__ . "/../../model/Subjects.php");
 ?>
+<script src="<?= BASE_URL ?>/js/filtering.js" type="module"></script>
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- MAIN CONTENT-->
+<main class="main-content col-md-10 px-md-5">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="<?= BASE_URL ?>/js/filtering.js" type="module"></script>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/view/lesson/create_lesson.css">
+        <h1 class="content-title"> <?php if (!isset($dados["id"]) || $dados["id"] == NULL) echo "Criar";
+                                    else echo "Alterar"; ?> aula </h1>
 
-</head>
+        <!-- MENUZINHO DE OPÇÕES-->
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary btn-rounded dropdown-toggle d-flex align-items-center gap-1">
+                <i class="bi bi-flower1"></i>
+                opção dropdown
+            </button>
+        </div>
+    </div>
 
-<body>
-    <h1 class="title"> <?php if (! isset($dados["id"]) || $dados["id"] == NULL) echo "Criar";
-            else echo "Alterar"; ?> aula </h1>
+    <h5 class="content-subtitle">Espaço para criação de novas aulas!</h5>
+
     <form method="POST" action="<?= BASE_URL ?>/controller/LessonController.php?action=save">
         <label>Titulo:</label>
-        <input type="text"  class="lesson_title" name="lesson_title" value="<?php echo isset($dados["lesson"]) ? $dados["lesson"]->getTitle() : '' ?>">
+        <input type="text" class="lesson_title" name="lesson_title" value="<?php echo isset($dados["lesson"]) ? $dados["lesson"]->getTitle() : '' ?>">
         <br>
         <label>Url:</label>
         <input type="text" class="lesson_url" name="lesson_url" value="<?php echo isset($dados["lesson"]) ? $dados["lesson"]->getUrl() : ''; ?>">
         <br>
-        <label>Matéria:</label> 
+        <label>Matéria:</label>
         <select name="subjects">
             <?php foreach (Subjects::cases() as $subject) : ?>
                 <option class="subject" value="<?php echo $subject->name; ?>"><?php echo $subject->name ?></option>
@@ -37,16 +44,17 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <label>Módulos:</label>
         <div class="modules" class="modules">
         </div>
-        
+
         <input type="text" hidden name="lesson_user">
         <input type="text" hidden name="lesson_id" value="<?php echo isset($dados["id"]) ? $dados["id"] : NULL; ?>">
         <br>
-        <button type="submit" class="buttonSave" >Gravar</button>
+        <button type="submit" class="buttonSave">Gravar</button>
     </form>
 
     <div class="col-6">
         <?php require_once(__DIR__ . "/../include/msg.php"); ?>
     </div>
-</body>
 
-</html>
+</main>
+
+<?php require __DIR__ . "/../componentes/footer.php" ?>
