@@ -66,7 +66,7 @@ class LessonController extends Controller{
                 exit;
             }
             catch (PDOException $e) {
-                $errors = "Erro ao salvar aula no banco de dados";
+                array_push($errors, "Erro ao salvar aula no banco de dados");
             }
         }
 
