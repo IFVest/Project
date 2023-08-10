@@ -1,5 +1,5 @@
 :root {
-    --cor-primaria: #76ba99; /* var(--cor-primaria);  */
+    --cor-primaria: #98CE00; /* var(--cor-primaria);  */
     --cor-secundaria: #adcf9f;
 }
 
@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5 {
     font-size: 28px;
     font-family: "Poppins", sans-serif;
 
-    color: #5b47fb;
+    color: var(--cor-primaria);
     letter-spacing: -1px;
     display: flex;
     align-items: center;
@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .navbar-brand {
-    color: #2470dc;
+    color: var(--cor-primaria);
 }
 
 .responsive-button {
@@ -119,7 +119,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .sidebar .nav-link.active {
-    color: #2470dc;
+    color: var(--cor-primaria);
 }
 
 .sidebar-heading {
