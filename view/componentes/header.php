@@ -10,7 +10,7 @@ include_once(__DIR__ . "/../../util/config.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Maria Eduarda">
-    <title>Template baseado em Bootstrap</title>
+    <title></title>
 
     <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
