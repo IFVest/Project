@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "/../../model/Subjects.php");
-include(__DIR__ . "/../componentes/sideBar.php");
+include(__DIR__ . "/../componentes/header.php");
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ include(__DIR__ . "/../componentes/sideBar.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="<?= BASE_URL ?>/js/filterByModule.js" type="module"></script>
+    <script src="<?= BASE_URL ?>/js/weekFilterByModule.js" type="module"></script>
     <script src="<?= BASE_URL ?>/js/weekLessons.js"></script>
     <title>Document</title>
 </head>
@@ -21,7 +21,6 @@ include(__DIR__ . "/../componentes/sideBar.php");
 
     <form method="POST" action="<?= BASE_URL ?>/controller/WeekController.php?action=save">
         Título: <input type="text" name="week_marker" value="<?php echo isset($dados["week"]) ? $dados["week"]->getMarker() : ''; ?>">
-        <button type="submit">Gravar</button>
         <br>
         Matéria:
         <select name="subjects">

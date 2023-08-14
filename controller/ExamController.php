@@ -31,7 +31,7 @@ class ExamController extends Controller{
         $this->view($exam);
     }
 
-    private function report($exam){
+    protected function report($exam=null){
         $exam_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
         $exam = ($exam != null)? $exam : $this->examDao->findById($exam_id);
 
@@ -46,6 +46,13 @@ class ExamController extends Controller{
         $dados['prova'] = $exam;
         $this->loadView('exam/test_exam.php', $dados);
     }
+
+    protected function listAll(){
+        session_start();
+        $exams = $this->examDao->findByUser($_SESSION['userId']);
+        $dados['provas'] = $exams;
+        $this->loadView('exam/historic.php', $dados);
+    }
     
     public function create($dados = [], $errorMsgs = ""){
         $this->loadView("exam/create_exam.php", $dados, $errorMsgs);
@@ -53,7 +60,7 @@ class ExamController extends Controller{
 
     protected function save(){
         // Pegando valores do formulário
-        $exam_type = $_POST['exam_type'] ?? 'defalut';
+        $exam_type = $_POST['exam_type'] ?? 'default';
         $filters_count = isset($_POST['filters_count']) ? intval($_POST['filters_count']) : 0;
         $user_id = $_POST['user_id'] ?? NULL;
 

@@ -19,8 +19,8 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
 
         <div class="row">
-            <div class="col-md-9">
-
+            <div class="col-md-6 video"></div>
+            <div class="col-md-3">
 
                 <!-- SERAO LISTADOS AS AULAS DE CADA MODULO -->
                 <?php foreach (Subjects::cases() as $subject) : ?>
@@ -36,7 +36,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
                 
 
-
+                
                 <div style="background-color: #cdd2c1; "> 
                     <button class="subject"> <?php echo $subject->name; ?> </button>
                     <!-- <div class="modules" id="<?php echo $subject->name; ?>"></div> -->

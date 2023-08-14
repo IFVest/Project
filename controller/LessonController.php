@@ -48,6 +48,7 @@ class LessonController extends Controller{
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);
         $lesson->setTitle($lesson_title);
+        $lesson->setDescription("");
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
         
@@ -65,7 +66,7 @@ class LessonController extends Controller{
                 exit;
             }
             catch (PDOException $e) {
-                $errors = "Erro ao salvar aula no banco de dados";
+                array_push($errors, "Erro ao salvar aula no banco de dados");
             }
         }
 

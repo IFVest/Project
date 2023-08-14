@@ -90,6 +90,31 @@ class ExamDAO{
 
         $stm->execute([$exam->getId()]);
     }
+
+    public function findByUser($idUser)
+    {
+        $conn = Connection::getConn();
+        $sql = "SELECT * FROM Exam e WHERE e.idUser = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$idUser]);
+        $result = $stm->fetchAll();
+
+        $exams = $this->mapExams($result);
+
+        return $exams;
+    }
+
+    public function findByUserAnswer($getId){
+        $conn = Connection::getConn();
+        $sql = "SELECT e.* FROM Exam e, ExamModule em, UserAnswer ua WHERE ua.idExamModule = em.id AND em.idExam = e.id AND ua.id = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$getId]);
+        $result = $stm->fetchAll();
+
+        $exams = $this->mapExams($result);
+
+        return $exams[0];
+    }
 }
 
 ?>

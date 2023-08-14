@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../util/config.php');
+require_once(__DIR__ . "/../dao/ExamDAO.php");
 require_once(__DIR__ . "/../dao/UserAnswerDAO.php");
 require_once(__DIR__ . "/Controller.php");
 
@@ -23,8 +24,12 @@ class UserAnswerController extends Controller{
         $userAnswerId = $_POST['userAnswerId'] ?? 0;
         $alternativeId = $_POST['alternativeId'] ?? 0;
         $userAnswer = $this->userAnswerDao->findById($userAnswerId);
-        $userAnswer->setChosenAnswer($alternativeId);
-        $this->userAnswerDao->update($userAnswer);
+        $examDao = new ExamDAO();
+        $exam = $examDao->findByUserAnswer($userAnswer->getId());
+        if(!$exam->getFinished()){
+            $userAnswer->setChosenAnswer($alternativeId);
+            $this->userAnswerDao->update($userAnswer);
+        }
     }
 
 }

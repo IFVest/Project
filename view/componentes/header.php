@@ -1,5 +1,13 @@
 <?php
 include_once(__DIR__ . "/../../util/config.php");
+
+if(session_status() != PHP_SESSION_ACTIVE)
+    session_start();
+    echo "<script>console.log('".$_SESSION["userId"]."')</script>";
+
+if (! isset($_SESSION["userId"])) {
+    header("location: ". SIGNIN_PAGE);
+}
 ?>
 
 <!doctype html>
@@ -88,22 +96,22 @@ include_once(__DIR__ . "/../../util/config.php");
                         <ul class="nav flex-column mb-auto">
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE_URL ?>/view/cronograma.php">
+                                <a class="nav-link" href="<?= BASE_URL ?>/controller/WeekController.php">
                                     <span></i>Cronograma</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE_URL ?>/view/simulados.php">
+                                <a class="nav-link" href="<?= BASE_URL ?>/controller/ExamController.php?action=create">
                                     <span></i>Simulados</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE_URL ?>/view/materias.php">
+                                <a class="nav-link" href="<?= BASE_URL ?>/controller/LessonController.php">
                                     <span></i>Materias</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE_URL ?>/view/historico.php">
+                                <a class="nav-link" href="<?= BASE_URL ?>/controller/ExamController.php?action=listAll">
                                     <span></i>Historico</span>
                                 </a>
                             </li>

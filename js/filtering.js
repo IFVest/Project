@@ -1,17 +1,18 @@
 var subjects = document.querySelectorAll(".subject");
 var modulesDiv = document.querySelector(".modules");
 var lessonsDiv = document.querySelector(".lessons");
+var selectedLessonsDiv = document.querySelector(".selected-lessons");
 
-export var moduleFiltering = function() {
-  filterBySubject(false, true);
+export var applyFiltering = function() {
+  filterBySubject("no-filter");
 }
 
 subjects.forEach((subject) =>{
-    subject.addEventListener("click", moduleFiltering)
+    subject.addEventListener("click", applyFiltering)
   }
 );
 
-export function filterBySubject(filterModule, isQuestion) {
+export function filterBySubject(filteringType) {
   // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria
   let selectedSubject = "";
   subjects.forEach((subject) => {
@@ -31,26 +32,28 @@ export function filterBySubject(filterModule, isQuestion) {
       console.log(this.response)
 
       // Com os módulos, chama o método setModules para colocá-los em outro select
-      createSelect(modules, filterModule, isQuestion);
+      createSelect(modules, filteringType);
     }
   };
   xhttp.send();
 }
 
-export function createSelect(object, filterModule, isQuestion) {
+export function createSelect(object, filteringType) {
   var selectAttribute = "";
   var optionAttribute = "";
   modulesDiv.innerHTML = "";
 
-  if (filterModule == false) {
-    selectAttribute = "lesson_modules";
-    optionAttribute = "lesson_module";
-  }else if(isQuestion){
-    selectAttribute = "exam_modules";
-    optionAttribute = "exam_module";
-  }else if (filterModule == true) {
-    selectAttribute = "week_modules";
-    optionAttribute = "week_module";
+  switch (filteringType) {
+    case "lesson":
+      selectAttribute = "lesson_modules";
+      optionAttribute = "lesson_module";
+      break;
+    case "week":
+      selectAttribute = "week_modules";
+      optionAttribute = "week_module";
+      break;
+    default:
+      return;
   }
 
   var select = document.createElement("select");
@@ -64,11 +67,13 @@ export function createSelect(object, filterModule, isQuestion) {
   select.appendChild(default_option);
 
   for (let i = 0; i < object.length; i++) {
+    console.log(i)
     var option = document.createElement("option");
 
-    if (filterModule && !isQuestion) {
-      option.addEventListener("click", filterByModule);
+    if (filteringType == "week") {
+      option.addEventListener("click", filterByWeekModule);
     }
+    
     option.setAttribute("value", object[i].id);
     option.setAttribute("class", optionAttribute);
     option.innerHTML = object[i].name;
@@ -79,7 +84,7 @@ export function createSelect(object, filterModule, isQuestion) {
   modulesDiv.appendChild(select);
 }
 
-function filterByModule(){
+function filterByWeekModule(){
   var week_moduleId = document.querySelector(".week_modules").value;
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "LessonController.php?action=findLessonsByModuleId&moduleId=" + week_moduleId, true);
@@ -163,5 +168,3 @@ function showSelectedLesson(lesson) {
   
   selectedLessonsDiv.appendChild(selectedLessonCard);
 }
-
-

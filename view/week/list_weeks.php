@@ -1,5 +1,5 @@
 <?php
-    include(__DIR__ . "/../componentes/sideBar.php");
+    require(__DIR__ . "/../componentes/header.php");
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <h1>hahahah</h1>
+    <h1>Listar semanas</h1>
     <?php foreach ($dados["lista"] as $week) : ?>
         <div class="week">
             <?php echo $week->getMarker(); ?>

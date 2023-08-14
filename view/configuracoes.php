@@ -1,4 +1,7 @@
-<?php require __DIR__ . "/componentes/header.php" ?>
+<?php 
+require __DIR__ . "/componentes/header.php";
+require __DIR__ . "/../util/config.php";
+?>
 
 <!-- MAIN CONTENT-->
 <main id="configuracoes" class="main-content col-md-10 px-md-5">
@@ -22,7 +25,7 @@
 
         <div class="col-md-3 mb-4">
             <div class="card">
-                <a href="./lesson/create_lesson.php">
+                <a href="../controller/LessonController.php?action=create">
                     <div class="card-body">
                         <h5 class="card-title">
                             <i class="bi bi-collection-play-fill"></i>
@@ -48,7 +51,7 @@
 
         <div class="col-md-3 mb-4">
             <div class="card">
-                <a href="./module/create_module.php">
+                <a href="../controller/ModuleController.php?action=create">
                     <div class="card-body">
                         <h5 class="card-title">
                         <i class="bi bi-folder-fill"></i>
@@ -61,7 +64,7 @@
 
         <div class="col-md-3 mb-4">
             <div class="card">
-                <a href="./module/list_modules.php">
+                <a href="../controller/ModuleController.php">
                     <div class="card-body">
                         <h5 class="card-title">
                         <i class="bi bi-folder-fill"></i>
@@ -74,7 +77,7 @@
 
         <div class="col-md-3 mb-4">
             <div class="card">
-                <a href="./question/create_question.php">
+                <a href="../controller/QuestionController.php?action=create">
                     <div class="card-body">
                         <h5 class="card-title">
                         <i class="bi bi-pen-fill"></i>
@@ -87,11 +90,37 @@
 
         <div class="col-md-3 mb-4">
             <div class="card">
-                <a href="./question/list_questions.php">
+                <a href="../controller/QuestionController.php">
                     <div class="card-body">
                         <h5 class="card-title">
                         <i class="bi bi-pen-fill"></i>
                             Listar Questões
+                        </h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <a href="../controller/WeekController.php?action=create">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        <i class="bi bi-pen-fill"></i>
+                            Criar Semana
+                        </h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <a href="../controller/WeekController.php">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                        <i class="bi bi-pen-fill"></i>
+                            Listar Semanas
                         </h5>
                     </div>
                 </a>

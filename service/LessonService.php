@@ -24,7 +24,7 @@ class LessonService {
             array_push($errors, "O campo URL é obrigatório");
         }
         if ($lesson->getModule() == null) {
-            array_push($errors, "Módulo inválido");
+            array_push($errors, "Módulo qwoeqwope");
         }
         else 
         {

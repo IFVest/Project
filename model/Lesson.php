@@ -4,6 +4,7 @@ class Lesson implements JsonSerializable
     private $id;
     private $title;
     private $url;
+    private $description;
     private $module;
     private $moduleName;
     private $studyWeek;
@@ -124,6 +125,26 @@ class Lesson implements JsonSerializable
     public function setModuleName($moduleName): self
     {
         $this->moduleName = $moduleName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of description
+     */ 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set the value of description
+     *
+     * @return  self
+     */ 
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
         return $this;
     }
