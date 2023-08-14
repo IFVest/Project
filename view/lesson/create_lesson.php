@@ -12,7 +12,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="<?= BASE_URL ?>/js/filtering.js" type="module"></script>
+    <script src="<?= BASE_URL ?>/js/lessonFilterByModule.js" type="module"></script>
     <link rel="stylesheet" href="<?= BASE_URL ?>/view/lesson/create_lesson.css">
 
 </head>

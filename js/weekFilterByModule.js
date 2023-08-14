@@ -2,11 +2,13 @@ import * as flt from "./filtering.js"
 
 var subjects = document.querySelectorAll(".subject");
 
-export function startPage(filterModule, isQuestion){
+export function startPage(filteringType){
     subjects.forEach((subject) => {
       subject.removeEventListener("click", flt.moduleFiltering);
       subject.addEventListener("click", () => {
-        flt.filterBySubject(filterModule, isQuestion);
+        flt.filterBySubject(filteringType);
       })
     })
 }
+
+startPage("week");

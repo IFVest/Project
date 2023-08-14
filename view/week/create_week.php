@@ -10,7 +10,7 @@ include(__DIR__ . "/../componentes/sideBar.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="<?= BASE_URL ?>/js/filterByModule.js" type="module"></script>
+    <script src="<?= BASE_URL ?>/js/weekFilterByModule.js" type="module"></script>
     <script src="<?= BASE_URL ?>/js/weekLessons.js"></script>
     <title>Document</title>
 </head>
