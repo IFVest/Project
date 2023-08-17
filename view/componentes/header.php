@@ -1,13 +1,10 @@
 <?php
 include_once(__DIR__ . "/../../util/config.php");
+require_once(__DIR__ . "/../../model/UserRoles.php");
+require_once(__DIR__ . "/../../service/AcessService.php");
 
-if(session_status() != PHP_SESSION_ACTIVE)
-    session_start();
-    echo "<script>console.log('".$_SESSION["userId"]."')</script>";
-
-if (! isset($_SESSION["userId"])) {
-    header("location: ". SIGNIN_PAGE);
-}
+$acessService = new AcessService();
+#$isAdmin = $acessService->hasRole(UserRoles::Administrador);
 ?>
 
 <!doctype html>

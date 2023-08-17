@@ -311,7 +311,7 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`) VALUES (NULL, 'andrei@gmail.com', '1234', 'Andrei Pinto', 'Administrador');
+INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`) VALUES (NULL, 'a@a.com', '$2y$10$iE7AsL8kH/nlfk1w2f1gmepSykPqDyfO2Yq.CuYvq.uFPwFDYbsx6', 'a', 'Administrador');
 
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Matemática Básica', 'Dando a base para o resto dos módulos', 'Matemática');
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Logarítmo', 'Resolução de exponenciais', 'Matemática');
