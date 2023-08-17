@@ -12,30 +12,33 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
     <title>Simulado</title>
 </head>
 <body>
-<div class="p-5 row">
-    <h1 class="m-4 mt-6">Relatório da Prova</h1>
-    <div class="container d-flex align-items-center flex-wrap justify-content-center col-12">
-        <?php
+    <main class="main-content col-md-10 px-md-5">
+        <div class="p-5 row">
+            
+            <h1 class="m-4 mt-6">Relatório da Prova</h1>
+            <div class="container d-flex align-items-center flex-wrap justify-content-center col-12">
+                <?php
 
-        $exam = $dados['prova'];
-        $examModules = $exam->getExamModules();
-        foreach($examModules as $exMod): ?>
-            <div class="card <?= $exMod->getId()?> col-3 m-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title"><?= $exMod->getModule()->getName() ?></h5>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Total de questões: <?= $exMod->getTotalQuestions() ?></li>
-                    <li class="list-group-item">Número de questões corretas: <?= $exMod->getCorrectQuestions() ?></li>
-                    <li class="list-group-item">Desempenho: <?= round(($exMod->getCorrectQuestions()/ $exMod->getTotalQuestions())*100, 2) ?> %</li>
-                </ul>
-                <div class="card-body">
-                    <button type="button" class="<?= ($exMod->getIsProblem())? 'btn btn-danger' :  'btn  btn-success'?>">Ver módulo</button>
-                    <button type="button" class="questnios-analizes-btn">Analisar questões</button>
-                </div>
+                $exam = $dados['prova'];
+                $examModules = $exam->getExamModules();
+                foreach($examModules as $exMod): ?>
+                    <div class="card <?= $exMod->getId()?> col-3 m-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $exMod->getModule()->getName() ?></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Total de questões: <?= $exMod->getTotalQuestions() ?></li>
+                            <li class="list-group-item">Número de questões corretas: <?= $exMod->getCorrectQuestions() ?></li>
+                            <li class="list-group-item">Desempenho: <?= round(($exMod->getCorrectQuestions()/ $exMod->getTotalQuestions())*100, 2) ?> %</li>
+                        </ul>
+                        <div class="card-body">
+                            <button type="button" class="<?= ($exMod->getIsProblem())? 'btn btn-danger' :  'btn  btn-success'?>">Ver módulo</button>
+                            <button type="button" class="questnios-analizes-btn">Analisar questões</button>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-        <?php endforeach; ?>
-    </div>
-</div>
+        </div>
+    </main>
 </body>
 </html>
