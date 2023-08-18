@@ -4,7 +4,8 @@ require_once(__DIR__ . "/../../model/UserRoles.php");
 require_once(__DIR__ . "/../../service/AcessService.php");
 
 $acessService = new AcessService();
-#$isAdmin = $acessService->hasRole(UserRoles::Administrador);
+$isAdmin = $acessService->hasRole(UserRoles::Administrador);
+$isTeacher = $acessService->hasRole(UserRoles::Professor);
 ?>
 
 <!doctype html>
@@ -107,12 +108,25 @@ $acessService = new AcessService();
                                     <span></i>Historico</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= BASE_URL ?>/view/configuracoes.php">
-                                    <span></i>Configurações</span>
-                                </a>
-                            </li>
-                            
+                            <?php if ($isAdmin or $isTeacher): ?>
+                                <h6 class="label">
+                                    <span>Administração</span>
+                                </h6>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= BASE_URL ?>/view/configuracoes.php">
+                                        <span>Configurações</span>
+                                    </a>
+                                </li>
+
+                                <?php if ($isAdmin): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="<?= BASE_URL ?>/controller/UserController.php?action=list">
+                                            <span>Usuários</span>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </ul>
 
                         <!-- LINHA SEPARADORA -->

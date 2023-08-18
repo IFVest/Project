@@ -18,6 +18,11 @@ class UserController extends Controller{
         $this->handleAction();
     }
 
+    protected function list() {
+        $dados["lista"] = $this->userDao->list();
+        $this->loadView("user/list_users.php", $dados);
+    }
+
     protected function signup($dados = [], $errorMsgs = "") {
         $this->loadView("user/signup.php", $dados, $errorMsgs);
     }

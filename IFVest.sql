@@ -312,6 +312,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`) VALUES (NULL, 'a@a.com', '$2y$10$iE7AsL8kH/nlfk1w2f1gmepSykPqDyfO2Yq.CuYvq.uFPwFDYbsx6', 'a', 'Administrador');
+INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`) VALUES (NULL, 'b@b.com', '$2y$10$8vtXfcYzVf1wGt7tBhBfx.nZoKbRjTa87FRJJSSEGmUe.AU3P8t/C', 'b', 'Professor');
+
 
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Matemática Básica', 'Dando a base para o resto dos módulos', 'Matemática');
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Logarítmo', 'Resolução de exponenciais', 'Matemática');

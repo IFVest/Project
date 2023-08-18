@@ -15,8 +15,12 @@ class AcessService {
         }
     }
 
-    protected function hasRole($role) {
+    public function hasRole($role) {
+        if ($_SESSION["userRole"] == $role->name) {
+            return true;
+        }
 
+        return false;
     }
 }
 ?>
