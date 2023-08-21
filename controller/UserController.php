@@ -93,6 +93,13 @@ class UserController extends Controller{
         $_SESSION["userName"] = $user->getCompleteName();
         $_SESSION["userRole"] = $user->getRole();
     }
+
+    public function logout() {
+        session_start();
+
+        session_destroy();
+        $this->loadView("user/signin.php", [], "");
+    }
 }
 
 $usr = new UserController();
