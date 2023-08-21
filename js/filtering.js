@@ -24,11 +24,11 @@ export function filterBySubject(filteringType) {
   );
 
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true
-  );
+  xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true);
   xhttp.onload = function () {
     if (xhttp.status >= 200 && xhttp.status < 400) {
       let modules = JSON.parse(this.responseText);
+      console.log(filteringType)
       console.log(this.response)
 
       // Com os módulos, chama o método setModules para colocá-los em outro select
@@ -39,10 +39,11 @@ export function filterBySubject(filteringType) {
 }
 
 export function createSelect(object, filteringType) {
+  console.log('thiago chan')
   var selectAttribute = "";
   var optionAttribute = "";
   modulesDiv.innerHTML = "";
-
+  console.log(filteringType)
   switch (filteringType) {
     case "lesson":
       selectAttribute = "lesson_modules";
@@ -52,6 +53,10 @@ export function createSelect(object, filteringType) {
       selectAttribute = "week_modules";
       optionAttribute = "week_module";
       break;
+    case "exam_personalized":
+      console.log('exam_personalized')
+      selectAttribute = "exam_modules";
+      optionAttribute = "exam_module";
     default:
       return;
   }
@@ -80,7 +85,7 @@ export function createSelect(object, filteringType) {
 
     select.appendChild(option);
   }
-
+  console.log(select)
   modulesDiv.appendChild(select);
 }
 
