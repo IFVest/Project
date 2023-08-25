@@ -20,9 +20,9 @@
     <main class="main-content col-md-10 px-md-5">
         <div class="component p-5 d-flex flex-column align-items-center justify-content-center">
             <h1 class='my-2'>Criar Simulado Personalizado</h1>
-            <div class="form card col-8 m-3 p-3">
-                <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=save" class='d-flex flex-column'>
-                    <div class="type-exam d-flex justify-content-evenly">
+            <div class="form card col-10 m-3 p-3">
+                <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=save" class='d-flex flex-column col-8'>
+                    <div class="type-exam d-flex justify-content-between">
                         <div class="personalized m-2">
                             <label for="personalized">Personalizado</label>
                             <input type="radio" name="exam_type" class="exam_type" id="personalized" value="personalized">
@@ -33,17 +33,24 @@
                         </div>
                     </div>
                     
-                    <div class="filters" style="display: none; border: 1px solid black; flex-direction: column">
-                        <label for='subjects'>Matéria:</label>
-                        <select name="subjects" id='subjects'>
-                            <?php foreach (Subjects::cases() as $subject) : ?>
-                                <option class="subject" value="<?php echo $subject->name; ?>"><?php echo $subject->name ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <label for='modules'>Módulos:</label>
-                        <div class="modules" id="modules" name='modules'></div>
+                    <div class="filters col-6" style="display: none; border: 1px solid black; flex-direction: column">
+                        <div class="params col-11">
+                            <label for='subjects'>Matéria:</label>
+                            <select class='subjects' name="subject1" id='subjects'>
+                                <?php foreach (Subjects::cases() as $subject) : ?>
+                                    <option class="subject" value="<?php echo $subject->name; ?>"><?php echo $subject->name ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <br>
+                            <label for='modules'>Módulos:</label>
+                            <div class="modules" id="modules" name='modules'>
+
+                            </div>
+                        </div>
+
+
+                        <button type="button" class='new-filter-button'>Adicionar componente</button>
                     </div>
-                    <button class='new-filter-button'>Adicionar componente</button>
                     
         
                     <button type="submit" class='btn btn-primary'>Criar</button>
@@ -59,14 +66,29 @@
     <script>
         let filterDiv = document.querySelector('.filters')
         let inputType = document.querySelector('.exam_type')
+        let newFilter = document.querySelector('.new-filter-button')
+        let selectCounter = 1
 
         inputType.addEventListener('change', (event)=>{
-            if(event.target.value == 'personalized'){
-                filterDiv.style.display = 'flex'
-            }
+            filterDiv.style.display = (event.target.value == 'personalized')? 'flex' : 'none'
         })
+
+        newFilter.addEventListener('click', ()=>{
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "SubjectsController.php?action=findAll", true);
+            xhttp.onload = function (){
+                if (xhttp.status >= 200 && xhttp.status < 400) {
+                    let subjects = JSON.parse(this.responseText);
+
+                    let select = createElement('select')
+                    select.setAttribute('class', 'subjects')
+                    select.setAttribute('name', 'subject')
+                }
+            };
+            xhttp.send();
+        })
+
     </script>
-    <script src="<?= BASE_URL ?>/js/filtering.js" type="module"></script>
     <script src="<?= BASE_URL ?>/js/examFilterByModule.js" type="module"></script>
 </body>
 
