@@ -1,6 +1,7 @@
 <?php
     require_once(__DIR__ . "/../componentes/header.php");
     require_once(__DIR__ . "/../../model/User.php");
+    require_once(__DIR__ . "/../../model/UserRoles.php");
 
 ?>
 <main class="main-content col-md-10 px-md-5">
@@ -19,7 +20,13 @@
                                     <?php echo $user->getCompleteName();?>
                                 </div>
                                 <div class="role" style="display:inline; padding-left:15px">
-                                    <?php echo $user->getRole();?>
+                                    <select>
+                                        <?php foreach(UserRoles::cases() as $role): ?>
+                                            <option <?php echo ($role->name == $user->getRole()) ? "selected" : "" ?>>
+                                                <?= $role->name; ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
 
                                 <a href="#" class="btn btn-danger w-100" style="display:inline; right:0">Inativar</a>
