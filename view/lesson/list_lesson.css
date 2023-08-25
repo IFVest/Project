@@ -1,29 +1,22 @@
-body{
-    /* align-items: center; */
-/*     
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;  */
-    background-color: #e5e5e5;
-}
- 
-.title{
-    text-align: center;
+.module {
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
 }
 
-.lessonListing{
-    text-align: right;
-    margin-right: 12px; */
- }
-
-
-.subject{
-    border: none;
-    /* border-radius: 10px; */
-    /* background-color: #cdd2c1; */
-/* } */
-
-/* button{
-    border: solid 1px;
+.materias{
+    background-color: #E4E3E3;
     border-radius: 10px;
-}  */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    font-family: "Poppins", sans-serif;
+    
+
+}
+
+.materia button{
+    border: none;
+    background-color: transparent;
+    padding-left: 0;
+    margin-bottom: 10px;
+}

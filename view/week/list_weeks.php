@@ -1,30 +1,38 @@
-<?php
-    require(__DIR__ . "/../componentes/header.php");
-?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php require __DIR__. "/../componentes/header.php"?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <!-- MAIN CONTENT-->
+    <main class="main-content col-md-10 px-md-5">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            
+            <h1 class="content-title">Listar semanas</h1>
+            
+            <!-- MENUZINHO DE OPÇÕES-->
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
+                </div>
+            </div>
+        </div>
 
-<body>
-    <h1>Listar semanas</h1>
-    <?php foreach ($dados["lista"] as $week) : ?>
+        <!-- <h5 class="content-subtitle">subtítulo</h5>
+        <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
+
+        <div class="col-md-6">
+        <?php foreach ($dados["lista"] as $week) : ?>
         <div class="week">
-            <?php echo $week->getMarker(); ?>
-            <a href="WeekController.php?action=edit&id=<?php echo $week->getId();?>">
-                <button>Alterar</button>
+            <!--  -->
+            <div class="mb-md-3">
+            <a class="btn btn-rounded btn-primary " href="WeekController.php?action=edit&id=<?php echo $week->getId();?>">
+                Alterar
             </a>
             <a href="WeekController.php?action=delete&id=<?php echo $week->getId();?>">
                 <button>Deletar</button>
             </a>
+            </div>
         </div>
-        <div class="week-lessons">
+        <div style="background-color: red" class="">
             <?php if (!empty($week->getLessons())) {
                 foreach ($week->getLessons() as $lesson) : ?>
                     <div class="lesson">
@@ -34,6 +42,7 @@
             <?php endforeach; }?>
         </div>
     <?php endforeach; ?>
-</body>
+    </div>
+    </main>
 
-</html>
+    <?php require __DIR__. "/../componentes/footer.php"?>       

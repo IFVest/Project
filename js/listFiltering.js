@@ -10,7 +10,9 @@ subjects.forEach(subject => {
 });
 
 export function filterBySubject(subjectButton, filterLesson) {
+
     var isExpanded = subjectButton.getAttribute("aria-expanded");
+
     if (isExpanded === "true") {
         isExpanded = true;
     }
@@ -65,6 +67,8 @@ function createModulesButtons(modules, subject) {
     // Criar módulos em botões com uma div referente às suas aulas logo abaixo do botão
     modules.forEach(module => {
         let moduleDiv = document.createElement("div");
+        moduleDiv.classList.add("col-md-6");
+
         let moduloCard = document.createElement("div");
         let moduleLessonsDiv = document.createElement("div");
 
@@ -72,10 +76,12 @@ function createModulesButtons(modules, subject) {
         moduloCard.setAttribute("id", module.name);
 
         moduloCard.classList.add("card");
-        moduloCard.classList.add("col-md-3");
-        moduloCard.classList.add("px-5");
+        moduloCard.classList.add("module");
+        moduloCard.classList.add("ps-3");
+        moduloCard.classList.add("pt-3");
+        moduloCard.classList.add("pb-3");
         moduloCard.classList.add("mb-4");
-        moduloCard.classList.add("me-4");
+        // moduloCard.classList.add("me-4");
 
         moduloCard.setAttribute("aria-expanded", false);
         moduloCard.innerHTML = module.name;

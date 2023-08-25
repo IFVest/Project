@@ -8,14 +8,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 <!-- MAIN CONTENT-->
 <main class="main-content col-md-10 px-md-5">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <script src="<?= BASE_URL ?>/js/lessonFilterByModule.js" type="module"></script>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/view/lesson/create_lesson.css">
 
         <!-- MENUZINHO DE OPÇÕES-->
         <div class="btn-toolbar mb-2 mb-md-0">

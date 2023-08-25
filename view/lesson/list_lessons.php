@@ -3,6 +3,8 @@
 require_once(__DIR__ . "/../../model/Subjects.php");
 ?>
 
+<link rel="stylesheet" href="<?= BASE_URL ?>/view/lesson/list_lesson.css">
+
     <!-- MAIN CONTENT-->
     <main class="main-content col-md-10 px-md-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -19,8 +21,9 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
 
         <div class="row">
-            <div class="col-md-6 video"></div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-6 video"></div> -->
+            <div class="col-md-9">
+
 
                 <!-- SERAO LISTADOS AS AULAS DE CADA MODULO -->
                 <?php foreach (Subjects::cases() as $subject) : ?>
@@ -31,18 +34,19 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
             </div>
 
-            <div class="col-md-3">
-            <?php foreach (Subjects::cases() as $subject) : ?>
+            <div class="col-md-3 materias">
 
-                
+                <h5 class="materias_title">Matérias</h5>
 
-                
-                <div style="background-color: #cdd2c1; "> 
+                <?php foreach (Subjects::cases() as $subject) : ?>
+
+                <div class="materia"> 
                     <button class="subject"> <?php echo $subject->name; ?> </button>
                     <!-- <div class="modules" id="<?php echo $subject->name; ?>"></div> -->
                     <br>
                 </div>
-            <?php endforeach; ?>
+
+                <?php endforeach; ?>
             </div>
         </div>
 

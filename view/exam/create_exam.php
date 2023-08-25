@@ -1,26 +1,28 @@
-<?php
-    error_reporting(E_ERROR);
-    include(__DIR__ . "/../componentes/header.php");
-    require_once(__DIR__ . "/../../util/config.php");
-    require_once(__DIR__ . "/../../model/Subjects.php");
-?> 
+
+<?php 
+require (__DIR__. "/../componentes/header.php");
+require_once(__DIR__ . "/../../util/config.php");
+require_once(__DIR__ . "/../../model/Subjects.php");
+
+?>
+
+    <!-- MAIN CONTENT-->
+    <main class="main-content col-md-10 px-md-5">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            
+            <h1 class="content-title">Criar Simulado</h1>
+            
+            <!-- MENUZINHO DE OPÇÕES-->
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
+                </div>
+            </div>
+        </div>
 
 
-<!DOCTYPE html>
-<html lang="PT-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Simulado</title>
-</head>
-
-<body>
-    <div class="component p-5 d-flex flex-column align-items-center justify-content-center">
-        <h1 class='my-2'>Criar Simulado Personalizado</h1>
-        <div class="form card col-8 m-3 p-3">
-            <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=save" class='d-flex flex-column'>
+        <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=save" class='d-flex flex-column'>
                 <div class="type-exam d-flex justify-content-evenly">
                     <div class="personalized m-2">
                         <label for="personalized">Personalizado</label>
@@ -52,6 +54,6 @@
     <script type="module" src="../view/exam/script.js">
     </script>
 
-</body>
+    </main>
 
-</html>
+    <?php require __DIR__. "/../componentes/footer.php"?>       
