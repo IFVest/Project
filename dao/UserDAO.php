@@ -63,7 +63,7 @@ class UserDAO{
     public function update(User $user){
         $conn = Connection::getConn();
 
-        $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, role=:role, active:active WHERE id = :id";
+        $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, role=:role, active=:active WHERE id = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('email', $user->getEmail());
@@ -71,6 +71,26 @@ class UserDAO{
         $stm->bindValue('completeName', $user->getCompleteName());
         $stm->bindValue('role', $user->getRole());
         $stm->bindValue('active', $user->getActive());
+        $stm->bindValue('id', $user->getId());
+        $stm->execute();
+    }
+
+    public function editingUpdate(User $user) {
+        $conn = Connection::getConn();
+
+        $sql = "UPDATE User SET role = :role, active = :active WHERE id = :id";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue('role', $user->getRole());
+
+        $isActive = $user->getActive();
+        if ($isActive == "0") {
+            $stm->bindValue('active', chr(_FALSE_));
+        }
+        else {
+            $stm->bindValue('active', chr(_TRUE_));
+           
+        }
         $stm->bindValue('id', $user->getId());
         $stm->execute();
     }
