@@ -20,9 +20,6 @@ export function filterBySubject(filteringType) {
   xhttp.onload = function () {
     if (xhttp.status >= 200 && xhttp.status < 400) {
       let modules = JSON.parse(this.responseText);
-      console.log(filteringType)
-      console.log(this.response)
-
       // Com os módulos, chama o método setModules para colocá-los em outro select
       createSelect(modules, filteringType);
     }
@@ -31,23 +28,22 @@ export function filterBySubject(filteringType) {
 }
 
 export function createSelect(modules, filteringType) {
-  let selectAttribute = "";
+  let selectAttribute = 'form-select ';
   let optionAttribute = "";
   modulesDiv.innerHTML = "";
 
   switch (filteringType) {
     case "lesson":
-      selectAttribute = "lesson_modules";
-      optionAttribute = "lesson_module";
+      selectAttribute += "lesson_modules";
+      optionAttribute += "lesson_module";
       break;
     case "week":
-      selectAttribute = "week_modules";
-      optionAttribute = "week_module";
+      selectAttribute += "week_modules";
+      optionAttribute += "week_module";
       break;
     case "exam_personalized":
-      console.log('exam_personalized')
-      selectAttribute = "exam_modules";
-      optionAttribute = "exam_module";
+      selectAttribute += "exam_modules";
+      optionAttribute += "exam_module";
       break;
     default:
       return;

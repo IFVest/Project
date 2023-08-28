@@ -81,7 +81,6 @@ class ExamModuleDAO{
 
         $sql = "INSERT INTO ExamModule (totalQuestions, correctQuestions, isProblem, idExam, idModule) VALUES 
             (:totalQuestions, :correctQuestions, :isProblem, :exam, :module)";
-
         $stm = $conn->prepare($sql);
         $stm->bindValue('totalQuestions', $examModule->getTotalQuestions());
         $stm->bindValue('correctQuestions', $examModule->getCorrectQuestions());

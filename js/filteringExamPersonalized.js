@@ -4,7 +4,7 @@ var lessonsDiv = document.querySelector(".lessons");
 var selectedLessonsDiv = document.querySelector(".selected-lessons");
 
 
-export function filterBySubject(filteringType, aditionalStringName='') {
+export function filterBySubject(aditionalStringName='') {
   // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria
   let selectedSubject = "";
   subjects.forEach((subject) => {
@@ -12,7 +12,6 @@ export function filterBySubject(filteringType, aditionalStringName='') {
         selectedSubject = subject.value;
       }
     }
-
   );
 
   var xhttp = new XMLHttpRequest();
@@ -42,7 +41,6 @@ export function createSelect(modules, filteringType, aditionalStringName='') {
       optionAttribute = "week_module";
       break;
     case "exam_personalized":
-      console.log('exam_personalized')
       selectAttribute = "exam_modules";
       optionAttribute = "exam_module";
       break;
