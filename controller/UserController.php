@@ -46,6 +46,7 @@ class UserController extends Controller{
         $userToSave->setEmail($userEmail);
         $userToSave->setPassword($hashedPass);
         $userToSave->setRole(UserRoles::Aluno->name);
+        $userToSave->setActive(_TRUE_);
 
         // TODO: Verificar se email já existe
 
@@ -121,6 +122,7 @@ class UserController extends Controller{
         $_SESSION["userId"] = $user->getId();
         $_SESSION["userName"] = $user->getCompleteName();
         $_SESSION["userRole"] = $user->getRole();
+        $_SESSION["userActive"] = $user->getActive();
     }
 
     public function logout() {

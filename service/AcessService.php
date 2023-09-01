@@ -9,8 +9,9 @@ class AcessService {
     private function verifySession() {
         if(session_status() != PHP_SESSION_ACTIVE)
         session_start();
-    
-        if (! isset($_SESSION["userId"])) {
+        
+        // Se não estiver cadastrado ou estar inativo, é lançado para a página de login
+        if (! isset($_SESSION["userId"]) || ! $_SESSION["userActive"]) {
             header("location: ". SIGNIN_PAGE);
         }
     }
