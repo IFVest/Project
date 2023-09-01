@@ -16,12 +16,20 @@
     <?php if (isset($dados)):?>
         <div class="container container-fluid d-flex flex-wrap col-3">
         <?php foreach ($dados["lista"] as $user): ?>
+            <?php $isActive = $user->getActive();?>
             <form method="POST" action="<?= BASE_URL ?>/controller/UserController.php?action=edit&id=<?=$user->getId();?>">
                 <div class="row">
                     <div class="col-2 mb-4">
                         <div class="card" style="width: 28rem;"> 
                             <div class="card-body">
-                                <i class="bi bi-person-fill"></i>
+                                <?php 
+                                    if (!$isActive){
+                                        echo "<i class=\"bi bi-person-fill-lock\"></i>";
+                                    }
+                                    else{
+                                        echo "<i class=\"bi bi-person-fill\"></i>";
+                                    }
+                                ?>
                                 <div class="name" style="display:inline; padding-left:15px">
                                     <?php echo $user->getCompleteName();?>
                                 </div>
@@ -36,8 +44,8 @@
                                 </div>
                                 <div class="role" style="display:inline; padding-left:15px">
                                     <select name="user_active">
-                                        <option value="1" <?= $user->getActive() == "1" ? "selected" : "" ?> >Ativo</option>
-                                        <option value="0" <?= $user->getActive() == "0" ? "selected" : "" ?> >Inativo</option>
+                                        <option value="1" <?= $isActive == _TRUE_ ? "selected" : "" ?> >Ativo</option>
+                                        <option value="0" <?= $isActive == _FALSE_ ? "selected" : "" ?> >Inativo</option>
                                     </select>
                                 </div>
 

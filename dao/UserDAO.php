@@ -15,6 +15,7 @@ class UserDAO{
             $user->setPassword($us['password']);
             $user->setCompleteName($us['completeName']);
             $user->setRole($us['role']);
+            $user->setActive($us['active']);
 
             array_push($users, $user);
         }
@@ -56,7 +57,7 @@ class UserDAO{
         $stm->bindValue('password', $user->getPassword());
         $stm->bindValue('completeName', $user->getCompleteName());
         $stm->bindValue('role', $user->getRole());
-        $stm->bindValue('active', chr(_TRUE_)); // é usado char pois tabela active é do tipo BIT
+        $stm->bindValue('active', _TRUE_);
         $stm->execute();
     }
 
@@ -85,10 +86,10 @@ class UserDAO{
 
         $isActive = $user->getActive();
         if ($isActive == "0") {
-            $stm->bindValue('active', chr(_FALSE_));
+            $stm->bindValue('active', _FALSE_);
         }
         else {
-            $stm->bindValue('active', chr(_TRUE_));
+            $stm->bindValue('active', _TRUE_);
            
         }
         $stm->bindValue('id', $user->getId());

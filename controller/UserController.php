@@ -62,6 +62,7 @@ class UserController extends Controller{
         $userToFind = new User();
         $userToFind->setId($id);
         $userToFind->setRole($role);
+        $userToFind->setActive($active);
 
         $errors = $this->userService->validateEditingData($userToFind);
 
