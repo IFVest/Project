@@ -7,7 +7,7 @@
 ?>
 <main class="main-content col-md-10 px-md-5">
     <h1>Usuários</h1>
-    <input type="text" name="user_name">
+    <input type="text" id="user_name">
 
     <div class="col-2">
         <?php require_once(__DIR__ . "/../include/msg.php");?>
@@ -61,4 +61,6 @@
         </div>
         
     <?php endif; ?>
+
+    <script src="<?= BASE_URL ?>/view/user/userFiltering.js"></script>
 </main>
