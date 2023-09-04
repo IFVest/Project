@@ -34,8 +34,8 @@
                     </div>
                     <div class="component allFilters" style="display: none; flex-direction: column">
                         <div class="filters col-12" style="flex-direction: column">
-                            <div class="card params text-center col-11">
-                                <select class='subject-select form-select card-header' name="subject1" id='subjects1'>
+                            <div class="card params text-center col-12">
+                                <select class='subject-select form-select card-header' name="subject1" id='subject1'>
                                     <?php foreach (Subjects::cases() as $subject) : ?>
                                         <option class="subject-option" value="<?php echo $subject->name; ?>"><?php echo $subject->name ?></option>
                                     <?php endforeach; ?>
@@ -43,6 +43,8 @@
                                 <div class="card-body">
                                     <label for='modules-filter-div1'>Módulos:</label>
                                     <div class="modules-filter-div1" id="modules-filter-div1"></div>
+                                    <hr>
+                                    <input type="number" class="num-questions1 col-10" name="num-questions1" value="9" >
                                 </div>
                             </div>
                         </div>
