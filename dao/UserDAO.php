@@ -114,6 +114,18 @@ class UserDAO{
 
         return $this->mapUsers($result);
     }
+
+    public function findByName($name) {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM User WHERE completeName LIKE '".$name."%'";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapUsers($result);
+    }
 }
 
 ?>

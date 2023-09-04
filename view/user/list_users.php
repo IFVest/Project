@@ -14,7 +14,7 @@
     </div>
 
     <?php if (isset($dados)):?>
-        <div class="container container-fluid d-flex flex-wrap col-3">
+        <div class="container container-fluid d-flex flex-wrap col-3 users">
         <?php foreach ($dados["lista"] as $user): ?>
             <?php $isActive = $user->getActive();?>
             <form method="POST" action="<?= BASE_URL ?>/controller/UserController.php?action=edit&id=<?=$user->getId();?>">
@@ -42,7 +42,7 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                                <div class="role" style="display:inline; padding-left:15px">
+                                <div class="active" style="display:inline; padding-left:15px">
                                     <select name="user_active">
                                         <option value="1" <?= $isActive == _TRUE_ ? "selected" : "" ?> >Ativo</option>
                                         <option value="0" <?= $isActive == _FALSE_ ? "selected" : "" ?> >Inativo</option>

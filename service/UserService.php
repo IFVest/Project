@@ -60,4 +60,11 @@ class UserService {
     public function findUserByEmail($email) {
         return $this->userDao->findByEmail($email);
     }
+
+    public function findUsersByName($name) {
+        $users = $this->userDao->findByName($name);
+        $usersJSON = json_encode($users);
+        return $usersJSON;
+
+    }
 }

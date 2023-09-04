@@ -131,6 +131,11 @@ class UserController extends Controller{
         session_destroy();
         $this->loadView("user/signin.php", [], "");
     }
+
+    protected function findByName() {
+        $userName = $_GET["userName"];
+        echo $this->userService->findUsersByName($userName);
+    }
 }
 
 $usr = new UserController();

@@ -1,5 +1,5 @@
 <?php
-class User
+class User implements JsonSerializable
 {
     private $id;
     private $email;
@@ -8,6 +8,15 @@ class User
     private $role;
     private $active;
 
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'completeName' => $this->completeName,
+            'role' => $this->role,
+            'active' => $this->active
+        ];
+    }
 
     /**
      * Get the value of id
