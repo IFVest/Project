@@ -6,6 +6,8 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
 ?>
 
+<link rel="stylesheet" href="<?= BASE_URL ?>/view/module/create_module.css">
+
     <!-- MAIN CONTENT-->
     <main class="main-content col-md-10 px-md-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -21,15 +23,17 @@ require_once(__DIR__ . "/../../model/Subjects.php");
             </div>
         </div>
 
-        <h5 class="content-subtitle">Espaço para criação de novos modulos!</h5>
 
 
         <form method="POST" action="<?= BASE_URL ?>/controller/ModuleController.php?action=save">
-        Nome:<input type="text" name="module_name" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getName() : '');?>">
+        <label>Nome:</label>
+        <input type="text" name="module_name" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getName() : '');?>">
         <br>
-        Descricao: <input type="text" name="module_desc" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getDescription() : ''); ?>">
+       <label> Descricao: </label>
+        <input type="text" name="module_desc" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getDescription() : ''); ?>">
         <br>
-        Matéria: <select name="module_subject">
+        <label>Matéria: </label>
+        <select name="module_subject">
             <?php $i = 1; foreach(Subjects::cases() as $subject):?>
                 <option value="<?php echo $i;?>" 
                 <?php echo (isset($dados["module"]) && $subject->name == $dados["module"]->getSubject() ? "selected" : '');?>>
@@ -40,11 +44,13 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         </select>
         <input type="hidden" name="module_id" value="<?php echo isset($dados["id"]) ? $dados["id"] : NULL;?>">
 
-        <button type="submit">Gravar</button>
+        <button class="buttonSave" type="submit">Gravar</button>
     </form>
 
-    <a href="../../controller/ModuleController.php">
-        <button>Ver módulos</button>
+    <hr>
+    <!-- <a href="../../controller/ModuleController.php"> -->
+    <a href="<?= BASE_URL ?>/controller/ModuleController.php">
+        <button class="moduleButton">Ver módulos</button>
     </a>
 
     <div class="col-2">

@@ -3,7 +3,6 @@
 require (__DIR__. "/../componentes/header.php");
 require_once(__DIR__ . "/../../util/config.php");
 require_once(__DIR__ . "/../../model/Subjects.php");
-
 ?>
 
     <!-- MAIN CONTENT-->

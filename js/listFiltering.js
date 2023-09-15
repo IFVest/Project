@@ -29,7 +29,6 @@ export function filterBySubject(subjectButton, filterLesson) {
         xhttp.onload = function () {
             if (xhttp.status >= 200 && xhttp.status < 400) {
                 var modules = JSON.parse(this.responseText);
-
                 if (modules.length != 0){
                     // filterLesson serve para, ao invés de mostrar uma tabela contendo todos
                     // os módulos, mostra-os em botões que ao serem clicados mostram uma tabela
@@ -100,8 +99,10 @@ function createModulesButtons(modules, subject) {
 function filterByModule(moduleClick) {
     var moduleButton = moduleClick.currentTarget;
     var moduleId = moduleButton.getAttribute("value");
-    var moduleName = moduleButton.id;
+    var moduleName = moduleButton.getAttribute("id");
     var isExpanded = moduleButton.getAttribute("aria-expanded");
+    console.log(moduleId)
+    console.log(moduleName)
 
     if (isExpanded === "true") {
         isExpanded = true;
@@ -116,7 +117,6 @@ function filterByModule(moduleClick) {
         xhttp.onload = function () {
             if (xhttp.status >= 200 && xhttp.status < 400) {
                 var lessons = JSON.parse(this.responseText);
-
                 if (lessons.length != 0) {
                     createLessonTable(lessons, moduleName);
                     moduleButton.setAttribute("aria-expanded", true);
@@ -197,13 +197,22 @@ function createLessonTable(lessons, moduleName) {
 }
 
 function showVideo(videoUrl) {
+    console.log("showVideo");
     var lessonVideoDiv = document.querySelector(".video");
+    lessonVideoDiv.classList.add("youtube-video-container");
     lessonVideoDiv.innerHTML = "";
     var video = document.createElement("iframe");
     video.setAttribute("src", videoUrl);
-    video.setAttribute("width", "1280px");
-    video.setAttribute("height", "720px");
+    video.setAttribute("width", "500px");
+    video.setAttribute("height", "500px");
     lessonVideoDiv.appendChild(video);
+
+    var lessonModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+        keyboard: false
+    });
+      
+      
+      lessonModal.show();
 }
 
 export function createModuleTable(modules, subject){

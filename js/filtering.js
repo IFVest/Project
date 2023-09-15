@@ -13,6 +13,7 @@ subjects.forEach((subject) =>{
 );
 
 export function filterBySubject(filteringType) {
+  console.log('aaaaaaaaaaaaaaaaa')
   // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria
   let selectedSubject = "";
   subjects.forEach((subject) => {

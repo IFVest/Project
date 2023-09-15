@@ -36,7 +36,7 @@
 
                         $report = round($calc*100, 2);
                     ?>
-                    <div class="component col-md-4 mb-5">
+                    <div class="component col-md-4 mb-4">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Prova <?= $exam->getId(); ?></h5>

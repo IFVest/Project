@@ -47,5 +47,6 @@
         </div>
     </main>
     <script src="<?= BASE_URL ?>/view/exam/answerExamScript.js"></script>
+
         
     <?php require __DIR__. "/../componentes/footer.php"?>       
