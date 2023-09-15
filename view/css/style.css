@@ -141,9 +141,6 @@ button.btn-close.align-self-end {
         top: 48px;
     }
 }
-
-
-
 /*
  * Tabela
  */
@@ -200,7 +197,7 @@ button.btn-close.align-self-end {
  */
 
  form {
-    max-width: 40em;
+    max-width: 80em;
     padding: 1em 3em 2em 3em;
     margin: 0em auto;
     border-radius: 4.2px;
@@ -208,7 +205,6 @@ button.btn-close.align-self-end {
     align-items: center;
     justify-content: center;
     text-align: center;
-    
 }
 
 .buttonSave{
@@ -229,19 +225,4 @@ button.btn-close.align-self-end {
 .buttonSave:hover{
     background-color: rgb(87, 87, 87);
     color: white;
-}
-
-input{
-    font-size: 20px;
-    width: 100%;
-    padding: 20px 5px 5px;
-    background-color: #cdd2c1;
-    border: none;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-label{
-    pointer-events: none;
-    font-size: 20px;
 }

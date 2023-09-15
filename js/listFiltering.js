@@ -99,7 +99,7 @@ function createModulesButtons(modules, subject) {
 
 function filterByModule(moduleClick) {
     var moduleButton = moduleClick.currentTarget;
-    var moduleId = moduleButton.value;
+    var moduleId = moduleButton.getAttribute("value");
     var moduleName = moduleButton.id;
     var isExpanded = moduleButton.getAttribute("aria-expanded");
 
@@ -116,7 +116,7 @@ function filterByModule(moduleClick) {
         xhttp.onload = function () {
             if (xhttp.status >= 200 && xhttp.status < 400) {
                 var lessons = JSON.parse(this.responseText);
-                
+
                 if (lessons.length != 0) {
                     createLessonTable(lessons, moduleName);
                     moduleButton.setAttribute("aria-expanded", true);

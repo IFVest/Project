@@ -6,6 +6,7 @@ require_once(__DIR__ . '/../dao/ExamDAO.php');
 require_once(__DIR__ . '/../service/ExamModuleService.php');
 require_once(__DIR__ . '/../service/ExamService.php');
 require_once(__DIR__ . "/Controller.php");
+require_once(__DIR__.'./../util/config.php');
 
 class ExamController extends Controller{
     private ExamModuleService $examModuleService;
@@ -27,8 +28,9 @@ class ExamController extends Controller{
         }
     }
     
-    public function list($exam){
-        $this->view($exam);
+    public function list($exam, $errorMsgs){
+        echo __DIR__.'/ExamController.php?action=view&id='.$exam->getId();
+        header('Location: '.BASE_URL.'/controller/ExamController.php?action=view&id='.$exam->getId());
     }
 
     protected function report($exam=null){
@@ -101,7 +103,7 @@ class ExamController extends Controller{
         $errors = [];
         try{
             $this->examDao->insert($exam);
-            $this->list($exam);
+            $this->list($exam, $errors);
             exit;
         } catch (PDOException $e) {
             $errors[] = "Erro ao salvar a questão no banco de dados";

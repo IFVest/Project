@@ -120,6 +120,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   `password` VARCHAR(100) NOT NULL,
   `completeName` VARCHAR(100) NOT NULL,
   `role` ENUM('Professor', 'Administrador', 'Aluno') NOT NULL,
+  `active` BIT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -311,7 +312,9 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
-INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`) VALUES (NULL, 'andrei@gmail.com', '1234', 'Andrei Pinto', 'Administrador');
+INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`, `active`) VALUES (NULL, 'a@a.com', '$2y$10$iE7AsL8kH/nlfk1w2f1gmepSykPqDyfO2Yq.CuYvq.uFPwFDYbsx6', 'a', 'Administrador', 1);
+INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`, `active`) VALUES (NULL, 'b@b.com', '$2y$10$8vtXfcYzVf1wGt7tBhBfx.nZoKbRjTa87FRJJSSEGmUe.AU3P8t/C', 'b', 'Professor', 1);
+
 
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Matemática Básica', 'Dando a base para o resto dos módulos', 'Matemática');
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Logarítmo', 'Resolução de exponenciais', 'Matemática');
