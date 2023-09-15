@@ -20,25 +20,8 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         </div>
 
         <div class="row">
-
-        <!-- Modal -->
-        <div class="modal fade" data-keyboard="false" data-backdrop="static" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="video"></div>
-                </div>
-
-            </div>
-        </div>
-        </div>
-
-
-
-
+            
+            <div class="col-md-6  video"></div>
             <div class="col-md-9">
 
 

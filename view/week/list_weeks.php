@@ -1,48 +1,76 @@
+<?php require __DIR__ . "/../componentes/header.php" ?>
 
-<?php require __DIR__. "/../componentes/header.php"?>
+<link rel="stylesheet" href="<?= BASE_URL ?>/view/week/list_week.css">
 
-    <!-- MAIN CONTENT-->
-    <main class="main-content col-md-10 px-md-5">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            
-            <h1 class="content-title">Listar semanas</h1>
-            
-            <!-- MENUZINHO DE OPÇÕES-->
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
-                </div>
+<!-- MAIN CONTENT-->
+<main class="main-content col-md-10 px-md-5">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+        <h1 class="content-title">Listar semanas</h1>
+
+        <!-- MENUZINHO DE OPÇÕES-->
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
             </div>
         </div>
+    </div>
 
-        <!-- <h5 class="content-subtitle">subtítulo</h5>
+    <!-- <h5 class="content-subtitle">subtítulo</h5>
         <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
 
-        <div class="col-md-6">
+    <div class="">
         <?php foreach ($dados["lista"] as $week) : ?>
-        <div class="week">
-            <!--  -->
-            <div class="mb-md-3">
-            <a class="btn btn-rounded btn-primary " href="WeekController.php?action=edit&id=<?php echo $week->getId();?>">
-                Alterar
-            </a>
-            <a href="WeekController.php?action=delete&id=<?php echo $week->getId();?>">
-                <button>Deletar</button>
-            </a>
-            </div>
-        </div>
-        <div style="background-color: red" class="">
-            <?php if (!empty($week->getLessons())) {
-                foreach ($week->getLessons() as $lesson) : ?>
-                    <div class="lesson">
-                        <label for="lesson-<?php echo $lesson->getId(); ?>"><?php echo $lesson->getTitle(); ?></label>
-                        <iframe id="<?php echo $lesson->getId(); ?>" src="<?php echo $lesson->getUrl(); ?>"></iframe>
-                    </div>
-            <?php endforeach; }?>
-        </div>
-    <?php endforeach; ?>
-    </div>
-    </main>
+            <div class="week">
 
-    <?php require __DIR__. "/../componentes/footer.php"?>       
+                <div class="row">
+                    <div class="col-md-9">
+                        <!-- Titulo da semana -->
+                        <h5><?= $week->getMarker() ?></h5>
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <a class="btn btn-secondary" href="WeekController.php?action=edit&id=<?php echo $week->getId(); ?>">
+                            Alterar
+                        </a>
+                        <a class="btn btn-secondary" href="WeekController.php?action=delete&id=<?php echo $week->getId(); ?>">
+                            Deletar
+                        </a>
+                    </div>
+                </div>
+
+                <hr>
+                
+
+                <?php //print_r($week->getMarker()); ?>
+
+
+
+            </div>
+
+            <?php if (!empty($week->getLessons())) :?>
+                <div class="row">
+                <?php foreach ($week->getLessons() as $lesson) : ?>
+                    <div class="lesson col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <iframe id="<?php echo $lesson->getId(); ?>" src="<?php echo $lesson->getUrl(); ?>"></iframe>
+                                
+                                <div class="lesson-title">
+                                    <label for="lesson-<?php echo $lesson->getId(); ?>"><?php echo $lesson->getTitle(); ?></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endforeach ?>
+                </div>
+            <?php endif ?>
+        <?php endforeach; ?>
+    </div>
+</main>
+
+<?php require __DIR__ . "/../componentes/footer.php" ?>

@@ -18,6 +18,11 @@ class UserController extends Controller{
         $this->handleAction();
     }
 
+    protected function list() {
+        $dados["lista"] = $this->userDao->list();
+        $this->loadView("user/list_users.php", $dados);
+    }
+
     protected function signup($dados = [], $errorMsgs = "") {
         $this->loadView("user/signup.php", $dados, $errorMsgs);
     }
@@ -87,6 +92,13 @@ class UserController extends Controller{
         $_SESSION["userId"] = $user->getId();
         $_SESSION["userName"] = $user->getCompleteName();
         $_SESSION["userRole"] = $user->getRole();
+    }
+
+    public function logout() {
+        session_start();
+
+        session_destroy();
+        $this->loadView("user/signin.php", [], "");
     }
 }
 

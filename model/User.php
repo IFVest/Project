@@ -6,6 +6,7 @@ class User
     private $password;
     private $completeName;
     private $role;
+    private $active;
 
 
     /**
@@ -97,6 +98,24 @@ class User
     public function setRole($role)
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of active
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the value of active
+     */
+    public function setActive($active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

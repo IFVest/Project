@@ -1,9 +1,5 @@
 
-<?php 
-require (__DIR__. "/../componentes/header.php");
-require_once(__DIR__ . "/../../util/config.php");
-require_once(__DIR__ . "/../../controller/ExamController.php");
-?>
+<?php require __DIR__. "/../componentes/header.php"?>
 
     <!-- MAIN CONTENT-->
     <main class="main-content col-md-10 px-md-5">
@@ -19,9 +15,6 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
                 </div>
             </div>
         </div>
-
-        <!-- <h5 class="content-subtitle">subtítulo</h5>
-        <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
 
         <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=makeReport">
             <?php
@@ -85,6 +78,7 @@ require_once(__DIR__ . "/../../controller/ExamController.php");
         </form>
     </div>
     <script src="<?= BASE_URL ?>/view/exam/answerExamScript.js"></script>
+
         
     </main>
 

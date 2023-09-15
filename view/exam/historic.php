@@ -1,7 +1,5 @@
 
-<?php 
-require __DIR__. "/../componentes/header.php";
-?>
+<?php require __DIR__. "/../componentes/header.php"?>
 
     <!-- MAIN CONTENT-->
     <main class="main-content col-md-10 px-md-5">
@@ -18,43 +16,52 @@ require __DIR__. "/../componentes/header.php";
             </div>
         </div>
 
-        <!-- <h5 class="content-subtitle">subtítulo</h5>
-        <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
+        <div class="component d-flex flex-column">
 
-        <?php
-            $exams = $dados['provas'];
-            foreach($exams as $exam):?>
+            <div class="exams component d-flex flex-wrap row">
                 <?php
-                $totalQuestions = 0;
-                $totalCorrectQuestions = 0;
-                foreach($exam->getExamModules() as $examMod){
-                    $totalQuestions += $examMod->getTotalQuestions();
-                    $totalCorrectQuestions += $examMod->getCorrectQuestions();
-                }
-                $report = round(($totalCorrectQuestions/$totalQuestions)*100, 2);
-                ?>
-                <div class="component mx-5 col-2">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Prova <?= $exam->getId(); ?></h5>
-                            <p class="card-text"><?=($exam->getFinished())? ($report > 70)? 'Mandou Bem!' : 'Não desanime, continue estudando!' : 'Prova em andamento'; ?> </p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Total de questões: <?= $totalQuestions; ?></li>
-                            <li class="list-group-item">Total de acertos: <?= ($exam->getFinished())?$totalCorrectQuestions : 'Termine a prova'; ?></li>
-                            <li class="list-group-item">Desempenho: <?= ($exam->getFinished())? $report.'%' : 'Termine a prova' ?></li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="<?= BASE_URL ?>/controller/ExamController.php?action=view&id=<?= $exam->getId() ?>" class="btn btn-primary w-100">Vizualizar prova</a>
-                            <a <?= ($exam->getFinished()? '' : 'disabled')?> href="<?= ($exam->getFinished()? BASE_URL.'/controller/ExamController.php?action=report&id='.$exam->getId() : '#')?>" class="btn btn-<?= ($exam->getFinished()? 'success' : 'secondary')?> mt-1 w-100">
-                                <?= ($exam->getFinished()? 'Vizualizar Relatório' : 'Relatório após fim da prova')?>
-                            </a>
+                $exams = $dados['provas'];
+                foreach($exams as $exam):?>
+                    <?php
+                    $totalQuestions = 0;
+                    $totalCorrectQuestions = 0;
+                    
+                    foreach($exam->getExamModules() as $examMod){
+                        $totalQuestions += $examMod->getTotalQuestions();
+                        $totalCorrectQuestions += $examMod->getCorrectQuestions();
+                    }
+                    if ($totalQuestions != 0):
 
+                        $calc = $totalCorrectQuestions/$totalQuestions;
+
+                        $report = round($calc*100, 2);
+                    ?>
+                    <div class="component col-md-4 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Prova <?= $exam->getId(); ?></h5>
+                                <p class="card-text"><?=($exam->getFinished())? ($report > 70)? 'Mandou Bem!' : 'Não desanime, continue estudando!' : 'Prova em andamento'; ?> </p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Total de questões: <?= $totalQuestions; ?></li>
+                                <li class="list-group-item">Total de acertos: <?= ($exam->getFinished())?$totalCorrectQuestions : 'Termine a prova'; ?></li>
+                                <li class="list-group-item">Desempenho: <?= ($exam->getFinished())? $report.'%' : 'Termine a prova' ?></li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="<?= BASE_URL ?>/controller/ExamController.php?action=view&id=<?= $exam->getId() ?>" class="btn btn-primary w-100">Vizualizar prova</a>
+                                <a <?= ($exam->getFinished()? '' : 'disabled')?> href="<?= ($exam->getFinished()? BASE_URL.'/controller/ExamController.php?action=report&id='.$exam->getId() : '#')?>" class="btn btn-<?= ($exam->getFinished()? 'success' : 'secondary')?> mt-1 w-100">
+                                    <?= ($exam->getFinished()? 'Vizualizar Relatório' : 'Relatório após fim da prova')?>
+                                </a>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-       
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        
     </main>
 
     <?php require __DIR__. "/../componentes/footer.php"?>       

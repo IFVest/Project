@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../model/User.php");
+require_once(__DIR__ . "/../util/config.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 
 class UserDAO{
@@ -48,26 +49,28 @@ class UserDAO{
     public function insert(User $user){
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO User (email, password, completeName, role) VALUES (:email, :password, :completeName, :role)";
+        $sql = "INSERT INTO User (email, password, completeName, role, active) VALUES (:email, :password, :completeName, :role, :active)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('email', $user->getEmail());
         $stm->bindValue('password', $user->getPassword());
         $stm->bindValue('completeName', $user->getCompleteName());
         $stm->bindValue('role', $user->getRole());
+        $stm->bindValue('active', chr(_TRUE_)); // é usado char pois tabela active é do tipo BIT
         $stm->execute();
     }
 
     public function update(User $user){
         $conn = Connection::getConn();
 
-        $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, role=:role WHERE id = :id";
+        $sql = "UPDATE User SET email = :email, password=:password, completeName=:completeName, role=:role, active:active WHERE id = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('email', $user->getEmail());
         $stm->bindValue('password', $user->getPassword());
         $stm->bindValue('completeName', $user->getCompleteName());
         $stm->bindValue('role', $user->getRole());
+        $stm->bindValue('active', $user->getActive());
         $stm->bindValue('id', $user->getId());
         $stm->execute();
     }
