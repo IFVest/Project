@@ -8,6 +8,7 @@
 <main class="main-content col-md-10 px-md-5">
     <h1>Usuários</h1>
     <input type="text" id="user_name">
+    <input type="text" id="baseurl" value="<?php echo BASE_URL ?>" hidden>
 
     <div class="col-2">
         <?php require_once(__DIR__ . "/../include/msg.php");?>
@@ -17,7 +18,6 @@
         <div class="container container-fluid d-flex flex-wrap col-3 users">
         <?php foreach ($dados["lista"] as $user): ?>
             <?php $isActive = $user->getActive();?>
-            <form method="POST" action="<?= BASE_URL ?>/controller/UserController.php?action=edit&id=<?=$user->getId();?>">
                 <div class="row">
                     <div class="col-2 mb-4">
                         <div class="card" style="width: 28rem;"> 
@@ -34,29 +34,27 @@
                                     <?php echo $user->getCompleteName();?>
                                 </div>
                                 <div class="role" style="display:inline; padding-left:15px">
-                                    <select name="user_role">
-                                        <?php foreach(UserRoles::cases() as $role): ?>
-                                            <option <?php echo ($role->name == $user->getRole()) ? "selected" : "" ?> value="<?= $role->name ?>">
-                                                <?= $role->name; ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <?php echo $user->getRole(); ?>
                                 </div>
                                 <div class="active" style="display:inline; padding-left:15px">
-                                    <select name="user_active">
-                                        <option value="1" <?= $isActive == _TRUE_ ? "selected" : "" ?> >Ativo</option>
-                                        <option value="0" <?= $isActive == _FALSE_ ? "selected" : "" ?> >Inativo</option>
-                                    </select>
+                                    <?php
+                                        if ($isActive) {
+                                            echo "Ativo";
+                                        }
+                                        else {
+                                            echo "Inativo";
+                                        }
+                                    ?>
                                 </div>
 
-                                <input name="user_id" value="<?= $user->getId(); ?>" hidden>
+                                <button class="btn btn-primary w-25" type="submit" style="display:inline; padding-left: 15px ">Alterar</button>
 
-                                <button class="btn btn-primary w-100" type="submit" style="display:inline; right:0">Alterar</button>
+                               <input name="user_id" value="<?= $user->getId(); ?>" hidden>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
         <?php endforeach; ?>
         </div>
         

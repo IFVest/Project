@@ -19,15 +19,14 @@ function showFilteredUsers(users) {
     usersDiv.innerHTML = '';
 
     users.forEach(user => {
-        var form = createUserForm(user);
+        var form = createUserTable(user);
+        usersDiv.appendChild(form);
     });
 }
 
-function createUserForm(user) {
-    var form = document.createElement('form');
-    form.setAttribute('method', 'POST');
-    form.setAttribute('action', '<?= BASE_URL ?>/controller/UserController.php?action=edit&id=' + user.id)
+function createUserTable(user) {
 
+    // Divs para bootstrap
     var rowDiv = document.createElement('div');
     rowDiv.setAttribute('class', 'row');
 
@@ -41,17 +40,28 @@ function createUserForm(user) {
     var cardBody = document.createElement('div');
     cardBody.setAttribute('class', 'card-body');
 
+    // Nome do usuário
     var userName = document.createElement('div');
+    userName.innerHTML = user.completeName
     userName.setAttribute('class', 'name');
     userName.setAttribute('style', 'display:inline; padding-left:15px');
 
+    // Papel 
     var userRole = document.createElement('div');
     userRole.setAttribute('class', 'role');
     userRole.setAttribute('style', 'display: inline; padding-left: 15px')
 
-    var userRoleSelect = document.createElement('select');
-    userRoleSelect.setAttribute('name', 'user_role');
+    if (user.role == "Administrador") {
+        userRole.innerHTML = "Administrador"
+    }
+    else if (user.role == "Professor") {
+        userRole.innerHTML = "Professor"
+    }
+    else {
+        userRole.innerHTML = "Aluno"
+    }
 
+    // Ativo
     var userActive = document.createElement('div');
     userActive.setAttribute('class', 'active');
     userActive.setAttribute('style', 'display: inline; padding-left: 15px');
@@ -61,7 +71,45 @@ function createUserForm(user) {
 
     var userActiveOption1 = document.createElement('option');
     userActiveOption1.setAttribute('value', '1');
+    userActiveOption1.innerHTML = "Ativo";
     var userActiveOption2 = document.createElement('option');
     userActiveOption2.setAttribute('value', '0');
+    userActiveOption2.innerHTML = "Inativo";
 
+    if (user.active == 1) {
+        userActiveOption1.selected = true;
+    }
+    else if (user.active == 0) {
+        userActiveOption2.selected = true;
+    }
+
+    // Id do usuário (escondido)
+    var userId = document.createElement("input");
+    userId.setAttribute("name", "user_id");
+    userId.setAttribute("value", user.id);
+    userId.hidden = true;
+
+    // Botão de submit
+    var submitButton = document.createElement("button");
+    submitButton.setAttribute("class", "btn btn-primary w-25");
+    submitButton.setAttribute("type", "submit")
+    submitButton.setAttribute("style", "display:inline; padding-left: 15px");
+    submitButton.innerHTML = "Alterar";
+
+    rowDiv.appendChild(colDiv);
+    colDiv.appendChild(card);
+    card.appendChild(cardBody);
+    // Colocar imagem
+    cardBody.appendChild(userName);
+    cardBody.appendChild(userRoleSelect);
+    userRoleSelect.appendChild(userRoleOption1);
+    userRoleSelect.appendChild(userRoleOption2);
+    userRoleSelect.appendChild(userRoleOption3);
+    cardBody.appendChild(userActiveSelect);
+    userActiveSelect.appendChild(userActiveOption1);
+    userActiveSelect.appendChild(userActiveOption2);
+    cardBody.appendChild(userId);
+    cardBody.appendChild(submitButton);
+
+    return rowDiv;
 }
