@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="component allFilters" style="display: none; flex-direction: column">
-                        <div class="filters col-12" style="flex-direction: column">
+                        <div class="filters col-12">
                             <div class="card params text-center col-12">
                                 <select class='subject-select form-select card-header' name="subject1" id='subject1'>
                                     <?php foreach (Subjects::cases() as $subject) : ?>
@@ -54,7 +54,8 @@
                     
         
                     <button type="submit" class='btn btn-primary'>Criar</button>
-                    <input type='hidden' value='<?= $_SESSION['userId'];?>' name='user_id'>
+                    <input type='hidden' value='<?= $_SESSION['userId'];?>' name='user_id' id='filter_count'>
+                    <input type='hidden' value='0' name='filters_count'>
                 </form>
                 <div class="error-div">
                     <?php require_once(__DIR__ . "/../include/msg.php");?>

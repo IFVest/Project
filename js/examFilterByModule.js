@@ -73,6 +73,7 @@ newFilter.addEventListener('click', ()=>{
   divParam.appendChild(select)
   divParam.appendChild(divCardBody)
   filterDiv.appendChild(divParam)
+  document.querySelector('.filter_count').setAttribute('value', numFilters)
 })
 
 
@@ -88,12 +89,12 @@ export function startPage(){
 
 export function filterBySubject(selectedSubject, aditionalStringName) {
   // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria
-  handleDisponibleModules()
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true);
   xhttp.onload = function () {
     if (xhttp.status >= 200 && xhttp.status < 400) {
       let modules = JSON.parse(this.responseText);
+      handleDisponibleModules()
       createModulesSelect(modules, aditionalStringName);
     }
   };
@@ -108,12 +109,12 @@ export function createModulesSelect(modules, aditionalStringName) {
   let optionAttribute = "exam_module"
 
   let select = document.createElement("select");
-  select.setAttribute("name", 'subject-select'+aditionalStringName);
-  select.setAttribute("id", 'subject-select'+aditionalStringName);
+  select.setAttribute("name", optionAttribute + aditionalStringName);
+  select.setAttribute("id", optionAttribute + aditionalStringName);
   select.setAttribute("class", selectAttribute);
 
   let default_option = document.createElement("option");
-  default_option.setAttribute("value", 'all');
+  default_option.setAttribute("value", 'ALL');
   default_option.setAttribute("class", optionAttribute);
   default_option.innerHTML = "TODOS"
 
@@ -131,58 +132,46 @@ export function createModulesSelect(modules, aditionalStringName) {
 }
 
 function handleDisponibleModules(){
+  // Pega todas as Metérias
   let freeSubjects = getSubjects()
 
+  // Pega todas matérias ja em filtros
   let allSelectsSubject = document.querySelectorAll('.subject-select')
-  let selectedSubjects = [] 
+  let selectedSubjects = []
   allSelectsSubject.forEach(element =>{
     selectedSubjects.push(element.value)
   })
 
-  freeSubjects = freeSubjects.filter(element => selectedSubjects.indexOf(element) == -1)
+  //Retira de todas as matérias as metérias que já estão em uso 
+  disponibleSubjects = freeSubjects.filter(element => selectedSubjects.indexOf(element) == -1)
 
+  // Para cada select dos filtros, reinterá as matérias disponíveis
   allSelectsSubject.forEach(element =>{
-    let options = element.childNodes.map(child => {return child.value})
-    freeSubjects.map(sub =>{
-      if(options.indexOf(sub) == -1){
-        // se a matéria não está nas opções
+    // Pega as Optiosn já criadas, visando não ter de fazer novamente
+    let optionsCreatedYet = []
+
+    // Se a opção não estiver dentre as matérias disponíveis e não for a selecionada, delete
+    element.childNodes.forEach(option => {
+      if(option.nodeName == 'OPTION'){
+        if(disponibleSubjects.indexOf(option.value) == -1 && element.value != option.value){
+          element.removeChild(option)
+        }else{
+          optionsCreatedYet.push(option.value)
+        }
+      }
+    })
+    
+    // Cria as opções de matérias que faltam
+    disponibleSubjects.map(sub =>{
+      if(optionsCreatedYet.indexOf(sub) == -1){
         let option = document.createElement('option')
         option.setAttribute("value", sub);
         option.setAttribute("class", 'subject-option');
         option.innerHTML = sub;
         element.appendChild(option);
-      }else{
-        
       }
     })
-
-    
-    // element.childNodes.forEach(option =>{
-    //   if(freeSubjects.indexOf(option.value) == -1){
-    //     element.removeChild(option)
-    //   }else{
-
-    //   }
-    //   if(freeSubjects.indexOf(option.value) == -1 && element.value != option.value){
-    //     element.removeChild(option)
-    //   }
-    // })
-
-    // element.innerHTML = ''
-    // freeSubjects.forEach(sub =>{
-    //   let option = document.createElement('option')
-    //   option.setAttribute("value", sub);
-    //   option.setAttribute("class", 'subject-option');
-    //   option.innerHTML = sub;
-    //   element.appendChild(option);
-    // })
-    // let currentValue = document.createElement('option')
-    // console.log(element.value)
-    // currentValue.setAttribute("value", element.value);
-    // currentValue.setAttribute("class", 'subject-option');
-    // currentValue.setAttribute("selected", 'selected');
-    // currentValue.innerHTML = element.value;
-    // element.appendChild(currentValue);
+  
   })
 
 }
