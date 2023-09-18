@@ -19,6 +19,15 @@ class UserController extends Controller{
         $this->handleAction();
     }
 
+    private function findById() {
+        if (isset($_GET["id"])) {
+            $userId = $_GET["id"];
+            $user = $this->userDao->findById($userId);
+            
+            return $user;
+        }
+    }
+
     protected function list($dados = [], $errorMsgs = "") {
         $dados["lista"] = $this->userDao->list();
         $this->loadView("user/list_users.php", $dados, $errorMsgs);
@@ -81,6 +90,14 @@ class UserController extends Controller{
 
         $errorMsgs = implode("<br>", $errors);
         $this->list([], $errorMsgs);
+    }
+
+    protected function alter() {
+        $user = $this->findById();
+        
+        $dados["id"] = $user->getId();
+        $dados["user"] = $user;
+        $this->loadView("user/alter_user.php", $dados, "");
     }
 
     protected function login() {

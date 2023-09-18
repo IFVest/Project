@@ -46,8 +46,9 @@
                                         }
                                     ?>
                                 </div>
-
-                                <button class="btn btn-primary w-25" type="submit" style="display:inline; padding-left: 15px ">Alterar</button>
+                                <a href="<?php echo BASE_URL ?>/controller/UserController.php?action=alter&id=<?= $user->getId();?>">
+                                    <button class="btn btn-primary w-25" style="display:inline; padding-left: 15px ">Alterar</button>
+                                </a>
 
                                <input name="user_id" value="<?= $user->getId(); ?>" hidden>
 
