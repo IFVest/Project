@@ -61,8 +61,8 @@ newFilter.addEventListener('click', ()=>{
   divModulesSelect.setAttribute('id', `modules-filter-div${numFilters}`)
 
   let inputNumQuestions = document.createElement('input')
-  inputNumQuestions.setAttribute('class', `col-10 num-questions${numFilters}`)
-  inputNumQuestions.setAttribute('name', `num-questions${numFilters}`)
+  inputNumQuestions.setAttribute('class', `col-10 num_questions${numFilters}`)
+  inputNumQuestions.setAttribute('name', `num_questions${numFilters}`)
   inputNumQuestions.setAttribute('value', '9')
 
   divCardBody.appendChild(label)
@@ -73,7 +73,8 @@ newFilter.addEventListener('click', ()=>{
   divParam.appendChild(select)
   divParam.appendChild(divCardBody)
   filterDiv.appendChild(divParam)
-  document.querySelector('.filter_count').setAttribute('value', numFilters)
+
+  document.querySelector('#filters_count').value = numFilters
 })
 
 

@@ -44,7 +44,7 @@
                                     <label for='modules-filter-div1'>Módulos:</label>
                                     <div class="modules-filter-div1" id="modules-filter-div1"></div>
                                     <hr>
-                                    <input type="number" class="num-questions1 col-10" name="num-questions1" value="9" >
+                                    <input type="number" class="num-questions1 col-10" name="num_questions1" value="9" >
                                 </div>
                             </div>
                         </div>
@@ -54,8 +54,8 @@
                     
         
                     <button type="submit" class='btn btn-primary'>Criar</button>
-                    <input type='hidden' value='<?= $_SESSION['userId'];?>' name='user_id' id='filter_count'>
-                    <input type='hidden' value='0' name='filters_count'>
+                    <input type='hidden' value='<?= $_SESSION['userId'];?>' name='user_id' id='user_id'>
+                    <input type='hidden' value='1' name='filters_count' class='filters_count' id='filters_count'>
                 </form>
                 <div class="error-div">
                     <?php require_once(__DIR__ . "/../include/msg.php");?>
