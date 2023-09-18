@@ -5,16 +5,25 @@
     require_once(__DIR__.'/examTestCreator.php')
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulado</title>
-</head>
+    <!-- MAIN CONTENT-->
+    <!-- <main class="main-content col-md-10 px-md-5">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            
+            <h1 class="content-title">Simulado</h1> -->
+            
+            <!-- MENUZINHO DE OPÇÕES-->
+            <!-- <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
+                </div>
+            </div>
+        </div> -->
 
-<body>
+        <!-- <h5 class="content-subtitle">subtítulo</h5>
+        <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
+
+
     <main class="main-content col-md-10 px-md-5">
         <div class="error-div">
             <?php require_once(__DIR__ . "/../include/msg.php");?>
@@ -41,5 +50,6 @@
         </div>
     </main>
     <script src="<?= BASE_URL ?>/view/exam/answerExamScript.js"></script>
-</body>
-</html>
+
+        
+    <?php require __DIR__. "/../componentes/footer.php"?>       

@@ -5,6 +5,7 @@ require_once(__DIR__ . "/../model/User.php");
 require_once(__DIR__ . "/../model/UserRoles.php");
 require_once(__DIR__ . "/../dao/UserDAO.php");
 require_once(__DIR__ . "/../service/UserService.php");
+require_once(__DIR__ . "/../util/config.php");
 
 class UserController extends Controller{
 
@@ -18,9 +19,18 @@ class UserController extends Controller{
         $this->handleAction();
     }
 
-    protected function list() {
+    private function findById() {
+        if (isset($_GET["id"])) {
+            $userId = $_GET["id"];
+            $user = $this->userDao->findById($userId);
+            
+            return $user;
+        }
+    }
+
+    protected function list($dados = [], $errorMsgs = "") {
         $dados["lista"] = $this->userDao->list();
-        $this->loadView("user/list_users.php", $dados);
+        $this->loadView("user/list_users.php", $dados, $errorMsgs);
     }
 
     protected function signup($dados = [], $errorMsgs = "") {
@@ -45,12 +55,49 @@ class UserController extends Controller{
         $userToSave->setEmail($userEmail);
         $userToSave->setPassword($hashedPass);
         $userToSave->setRole(UserRoles::Aluno->name);
+        $userToSave->setActive(_TRUE_);
 
         // TODO: Verificar se email já existe
 
         $this->userDao->insert($userToSave);
 
         $this->loadView("user/signin.php", [], "");
+    }
+
+    protected function edit() {
+        $id = isset($_POST["user_id"]) ? $_POST["user_id"] : NULL;
+        $role = isset($_POST["user_role"]) ? $_POST["user_role"] : UserRoles::Aluno;
+        $active = isset($_POST["user_active"]) ? $_POST["user_active"] : "1";
+
+        $userToFind = new User();
+        $userToFind->setId($id);
+        $userToFind->setRole($role);
+        $userToFind->setActive($active);
+
+        $errors = $this->userService->validateEditingData($userToFind);
+
+        if (empty($errors)) {
+            try {
+                $this->userDao->editingUpdate($userToFind);
+
+                $this->list();
+                exit;
+            }
+            catch (PDOException $e) {
+                array_push($errors, "Erro ao atualizar usuário no banco de dados"); 
+            }
+        }
+
+        $errorMsgs = implode("<br>", $errors);
+        $this->list([], $errorMsgs);
+    }
+
+    protected function alter() {
+        $user = $this->findById();
+        
+        $dados["id"] = $user->getId();
+        $dados["user"] = $user;
+        $this->loadView("user/alter_user.php", $dados, "");
     }
 
     protected function login() {
@@ -92,6 +139,19 @@ class UserController extends Controller{
         $_SESSION["userId"] = $user->getId();
         $_SESSION["userName"] = $user->getCompleteName();
         $_SESSION["userRole"] = $user->getRole();
+        $_SESSION["userActive"] = $user->getActive();
+    }
+
+    public function logout() {
+        session_start();
+
+        session_destroy();
+        $this->loadView("user/signin.php", [], "");
+    }
+
+    protected function findByName() {
+        $userName = $_GET["userName"];
+        echo $this->userService->findUsersByName($userName);
     }
 }
 

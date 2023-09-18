@@ -1,4 +1,7 @@
 <?php
+error_reporting(0);
+
+
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'ifvest');
 define('DB_USER', 'root');

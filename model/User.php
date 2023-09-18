@@ -1,12 +1,22 @@
 <?php
-class User
+class User implements JsonSerializable
 {
     private $id;
     private $email;
     private $password;
     private $completeName;
     private $role;
+    private $active;
 
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'completeName' => $this->completeName,
+            'role' => $this->role,
+            'active' => $this->active
+        ];
+    }
 
     /**
      * Get the value of id
@@ -97,6 +107,24 @@ class User
     public function setRole($role)
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of active
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set the value of active
+     */
+    public function setActive($active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

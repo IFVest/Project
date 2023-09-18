@@ -1,33 +1,32 @@
-<?php
-require_once(__DIR__ . "/../../controller/QuestionController.php");
-require __DIR__ . "/../componentes/header.php";
-?>
 
-<!-- MAIN CONTENT-->
-<main class="main-content col-md-10 px-md-5">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<?php require __DIR__. "/../componentes/header.php"?>
 
-        <h1 class="content-title">Listagem das questões</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/view/question/list_question.css">
-    <title>Listar Questões</title>
-</head>
+    <!-- MAIN CONTENT-->
+    <main class="main-content col-md-10 px-md-5">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            
+            <h1 class="content-title">Listagem das questões</h1>
+            
+            <!-- MENUZINHO DE OPÇÕES-->
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
+                </div>
+            </div>
+        </div>
 
-<body>
-    <div class="container-fluid d-flex flex-wrap row">
+        <div class="container-fluid d-flex flex-wrap row">
         <?php
         $questions = $dados['lista'];
         //print_r($questions);
         
         foreach ($questions as $question) :?>
-        <div class="container container-fluid d-flex flex-wrap col-3">
+        <div class="container container-fluid d-flex flex-wrap col-12">
             <div class="row">
                 <div class="col-2 mb-4">
-                    <div class="card" style="width: 18rem;"> 
+                    <div class="card" style="width: 65rem;"> 
                         <div class="card-body">
                             <h5 class="card-title"><?= $question->getText() ?></h5>
                             <?php foreach ($question->getAlternatives() as $alt) : ?>
@@ -50,6 +49,7 @@ require __DIR__ . "/../componentes/header.php";
         
     </div>
 
-    <?php require __DIR__ . "/../componentes/footer.php" ?>
-</main>
+        
+    </main>
 
+    <?php require __DIR__. "/../componentes/footer.php"?>       

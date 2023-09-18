@@ -1,20 +1,23 @@
-<?php
-include(__DIR__ . "/../componentes/header.php");
+
+<?php 
+require (__DIR__. "/../componentes/header.php");
 require_once(__DIR__ . "/../../controller/ExamController.php");
 require_once(__DIR__. '/../../model/Subjects.php');
 require_once(__DIR__. '/examTestCreator.php');
+
 ?>
 
-<!DOCTYPE html>
-<html lang="PT-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulado</title>
-</head>
-<body>
+    <!-- MAIN CONTENT-->
+
     <main class="main-content col-md-10 px-md-5">
+        <!-- MENUZINHO DE OPÇÕES-->
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
+            </div>
+        </div>
+        
         <div class="row p-4">  
             <h1 class="m-4 mt-6">Relatório da Prova</h1>
             <div class="container d-flex flex-wrap col-12">
@@ -84,8 +87,7 @@ require_once(__DIR__. '/examTestCreator.php');
             })
         })
     </script>
-</body>
-</html>
+    <?php require __DIR__. "/../componentes/footer.php"?>       
 
 <!-- 
     <div class="card <?= $exMod->getId()?> col-11 my-3 d-flex">
