@@ -71,21 +71,21 @@ require_once(__DIR__. '/examTestCreator.php');
         </div>
     </main>
     <script >
-    let questionsAnalizesBtns = document.querySelectorAll('.questions-analizes-btn')
-    let questionsView = document.querySelectorAll('.questions-view')
+        let questionsAnalizesBtns = document.querySelectorAll('.questions-analizes-btn')
+        let questionsView = document.querySelectorAll('.questions-view')
 
-    questionsAnalizesBtns.forEach(element=>{
-        element.addEventListener('click', (event)=>{
-            questionsView.forEach(elementDiv =>{
-                elementDiv.style.display = 'none'
-                console.log(('questions-view-' + event.target.name) == elementDiv.className.split(' ')[1])
-                if(('questions-view-' + event.target.name) == elementDiv.className.split(' ')[1]){
-                    elementDiv.style.display = 'flex'
-                    
-                }
-            })  
+        questionsAnalizesBtns.forEach(element=>{
+            element.addEventListener('click', (event)=>{
+                questionsView.forEach(elementDiv =>{
+                    elementDiv.style.display = 'none'
+                    console.log(('questions-view-' + event.target.name) == elementDiv.className.split(' ')[1])
+                    if(('questions-view-' + event.target.name) == elementDiv.className.split(' ')[1]){
+                        elementDiv.style.display = 'flex'
+                        
+                    }
+                })  
+            })
         })
-    })
     </script>
     <?php require __DIR__. "/../componentes/footer.php"?>       
 

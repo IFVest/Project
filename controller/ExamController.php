@@ -7,6 +7,8 @@ require_once(__DIR__ . '/../service/ExamModuleService.php');
 require_once(__DIR__ . '/../service/ExamService.php');
 require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__.'./../util/config.php');
+error_reporting(1);
+
 
 class ExamController extends Controller{
     private ExamModuleService $examModuleService;
@@ -62,10 +64,11 @@ class ExamController extends Controller{
 
     protected function save(){
         // Pegando valores do formulário
+        $errors = [];
         $exam_type = $_POST['exam_type'] ?? 'default';
-        $filters_count = isset($_POST['filters_count']) ? intval($_POST['filters_count']) : 0;
         $user_id = $_POST['user_id'] ?? NULL;
 
+        echo $exam_type;
         // Cria os parâmetros para consulta de questões
         $exam_subjects_module_num = [];
         if($exam_type == 'default'){
@@ -80,16 +83,31 @@ class ExamController extends Controller{
             // Senão, pega os subjects filtrados, o módulo que selecionou para este e o número de questões escolhidas, 
             // ficando no padrão $var["Matemática"]["Modules"] = "0"->id ["Matemática"]["NumberQuestions"] = 8
             // Para pegas os valores depois, as Subjects que não foram colocadas não estarão na prova
-            for($i = 0; $i<$filters_count; $i++){
-                if(isset($_POST['subjects'.$i])){
-                    $sub = $_POST['subjects'.$i];
-                    $exam_subjects_module_num[$sub]['Module'] = $_POST['exam_modules' . $i] ?? 'ALL';
-                    $exam_subjects_module_num[$sub]['NumberQuestions'] = $_POST['module_quest_num' . $i] ?? 9;
+            $filters_count = isset($_POST['filters_count']) ? intval($_POST['filters_count']) : 0;
+            for($i = 1; $i<($filters_count+1); $i++){
+                if(isset($_POST['subject'.$i])){
+                    $sub = $_POST['subject'.$i];
+                    $exam_subjects_module_num[$sub]['Module'] = $_POST['exam_module' . $i] ?? 'ALL';
+                    $exam_subjects_module_num[$sub]['NumberQuestions'] = $_POST['num_questions' . $i] ?? 9;
                 }
             }
         }
+
+        echo $exam_subjects_module_num['Português'];
+        echo $exam_subjects_module_num['Português']['Module'];
+        echo $exam_subjects_module_num['Português']['NumberQuestions'];
+        echo $exam_subjects_module_num['Ciências'];
+        echo $exam_subjects_module_num['Ciências']['Module'];
+        echo $exam_subjects_module_num['Ciências']['NumberQuestions'];
+
+
         // Pega as questões, separadas por matérias -> ExamModule
         $exam_modules = $this->examModuleService->handleRandomExamModules($exam_subjects_module_num);
+
+        echo '<br>'.count($exam_modules);
+        foreach($exam_modules as $ex){
+            echo $ex->getModule()->getName();
+        }
 
         // Find User
         $user = $this->userDao->findById($user_id);
@@ -100,13 +118,12 @@ class ExamController extends Controller{
         $exam->setExamModules($exam_modules);
         $exam->setFinished(_FALSE_);
 
-        $errors = [];
         try{
             $this->examDao->insert($exam);
             $this->list($exam, $errors);
             exit;
         } catch (PDOException $e) {
-            $errors[] = "Erro ao salvar a questão no banco de dados";
+            array_push($errors, "Erro ao salvar a questão no banco de dados");
         }
         $errorMsgs = implode("<br>", $errors);
         $this->list($exam, $errorMsgs);

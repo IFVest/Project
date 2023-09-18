@@ -4,8 +4,7 @@ var lessonsDiv = document.querySelector(".lessons");
 var selectedLessonsDiv = document.querySelector(".selected-lessons");
 
 
-export function filterBySubject(filteringType) {
-  console.log('aaaaaaaaaaaaaaaaa')
+export function filterBySubject(aditionalStringName='') {
   // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria
   let selectedSubject = "";
   subjects.forEach((subject) => {
@@ -13,7 +12,6 @@ export function filterBySubject(filteringType) {
         selectedSubject = subject.value;
       }
     }
-
   );
 
   var xhttp = new XMLHttpRequest();
@@ -22,41 +20,41 @@ export function filterBySubject(filteringType) {
     if (xhttp.status >= 200 && xhttp.status < 400) {
       let modules = JSON.parse(this.responseText);
       // Com os módulos, chama o método setModules para colocá-los em outro select
-      createSelect(modules, filteringType);
+      createSelect(modules, filteringType, aditionalStringName);
     }
   };
   xhttp.send();
 }
 
-export function createSelect(modules, filteringType) {
-  let selectAttribute = 'form-select ';
+export function createSelect(modules, filteringType, aditionalStringName='') {
+  let selectAttribute = "";
   let optionAttribute = "";
   modulesDiv.innerHTML = "";
 
   switch (filteringType) {
     case "lesson":
-      selectAttribute += "lesson_modules";
-      optionAttribute += "lesson_module";
+      selectAttribute = "lesson_modules";
+      optionAttribute = "lesson_module";
       break;
     case "week":
-      selectAttribute += "week_modules";
-      optionAttribute += "week_module";
+      selectAttribute = "week_modules";
+      optionAttribute = "week_module";
       break;
     case "exam_personalized":
-      selectAttribute += "exam_modules";
-      optionAttribute += "exam_module";
+      selectAttribute = "exam_modules";
+      optionAttribute = "exam_module";
       break;
     default:
       return;
   }
 
-  let select = document.createElement("select");
-  select.setAttribute("name", selectAttribute);
-  select.setAttribute("class", selectAttribute);
+  let select = document.createElement("select"+aditionalStringName);
+  select.setAttribute("name", selectAttribute+aditionalStringName);
+  select.setAttribute("class", selectAttribute+aditionalStringName);
 
   let default_option = document.createElement("option");
   default_option.setAttribute("value", 'all');
-  default_option.setAttribute("class", optionAttribute);
+  default_option.setAttribute("class", optionAttribute+aditionalStringName);
   default_option.innerHTML = "TODOS"
   select.appendChild(default_option);
   for(let i = 0; i < modules.length; i++) {
@@ -67,7 +65,7 @@ export function createSelect(modules, filteringType) {
     }
     
     option.setAttribute("value", modules[i].id);
-    option.setAttribute("class", optionAttribute);
+    option.setAttribute("class", optionAttribute+aditionalStringName);
     option.innerHTML = modules[i].name;
     select.appendChild(option);
   }

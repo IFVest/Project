@@ -33,7 +33,7 @@ class ExamService{
         }
     }
 
-    private function ifCorrect($chosenAnswer, $question): bool {
+    private function ifCorrect($chosenAnswer, $question){
         foreach ($question->getAlternatives() as $alt){
             if($alt->getIsCorrect()){
                 return $chosenAnswer == $alt->getId();
@@ -42,7 +42,7 @@ class ExamService{
         return false;
     }
 
-    private function handleIsProblem($examModule) : bool{
+    private function handleIsProblem($examModule){
         $performance = $examModule->getCorrectQuestions() / $examModule->getTotalQuestions();
         if($performance < $this->MINNIMUM_PORCENTAGE){
             return _TRUE_;
