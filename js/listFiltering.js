@@ -116,6 +116,7 @@ function filterByModule(moduleClick) {
         xhttp.open("GET", "LessonController.php?action=findLessonsByModuleId&moduleId=" + moduleId, true);
         xhttp.onload = function () {
             if (xhttp.status >= 200 && xhttp.status < 400) {
+                console.log(this.responseText)
                 var lessons = JSON.parse(this.responseText);
                 if (lessons.length != 0) {
                     createLessonTable(lessons, moduleName);
@@ -149,14 +150,17 @@ function createLessonTable(lessons, moduleName) {
     
     // T-head
     var thTitle = document.createElement("th");
+    var thDescription = document.createElement("th");
     var thVisualize = document.createElement("th");
     var thAlter = document.createElement("th");
     var thDelete = document.createElement("th");
     thTitle.innerHTML = "Título";
+    thDescription.innerHTML = "Descrição";
     thVisualize.innerHTML = "Video";
     thAlter.innerHTML = "Alterar";
     thDelete.innerHTML = "Deletar";
     thead.appendChild(thTitle);
+    thead.appendChild(thDescription);
     thead.appendChild(thVisualize);
     thead.appendChild(thAlter);
     thead.appendChild(thDelete);
@@ -166,6 +170,7 @@ function createLessonTable(lessons, moduleName) {
     for (let i = 0; i < lessons.length; i++) {
         let tr = document.createElement("tr");
         let tdTitle = document.createElement("td");
+        let tdDescription = document.createElement("td");
         let tdVisualize = document.createElement("td");
         let tdAlter = document.createElement("td");
         let tdDelete = document.createElement("td");
@@ -178,10 +183,12 @@ function createLessonTable(lessons, moduleName) {
         linkAlter.innerHTML = "Alterar";
         linkDelete.innerHTML = "Deletar";
         tdTitle.innerHTML = lessons[i].title;
+        tdDescription.innerHTML = lessons[i].description;
         tdVisualize.appendChild(visualizeButton);
         tdAlter.appendChild(linkAlter);
         tdDelete.appendChild(linkDelete);
         tr.appendChild(tdTitle);
+        tr.appendChild(tdDescription);
         tr.appendChild(tdVisualize);
         tr.appendChild(tdAlter);
         tr.appendChild(tdDelete);

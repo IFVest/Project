@@ -15,6 +15,7 @@ class LessonDAO{
             $lesson->setId($les["id"]);
             $lesson->setTitle($les["title"]);
             $lesson->setUrl($les["videoURL"]);
+            $lesson->setDescription($les["description"]);
             $lesson->setModule($les["idModule"]);
 
             array_push($lessons, $lesson);
@@ -69,11 +70,10 @@ class LessonDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE Lesson SET title = ?, videoURL = ?, idModule = ? WHERE id = ?";
+        $sql = "UPDATE Lesson SET title = ?, videoURL = ?, idModule = ?, description = ?  WHERE id = ?";
 
         $stm = $conn->prepare($sql);
-        $stm->execute([$lesson->getTitle(), $lesson->getUrl(), 
-                        $lesson->getModule(), $lesson->getId()]);
+        $stm->execute([$lesson->getTitle(), $lesson->getUrl(),$lesson->getModule(), $lesson->getDescription(), $lesson->getId()]);
     }
 
     public function delete(Lesson $lesson)

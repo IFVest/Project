@@ -24,7 +24,10 @@ class LessonService {
             array_push($errors, "O campo URL é obrigatório");
         }
         if ($lesson->getModule() == null) {
-            array_push($errors, "Módulo qwoeqwope");
+            array_push($errors, "Módulo não encontrado");
+        }
+        if ($lesson->getDescription() == null) {
+            array_push($errors, "O camp DESCRIÇÃO é obrigatório");
         }
         else 
         {

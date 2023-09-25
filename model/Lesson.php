@@ -14,6 +14,7 @@ class Lesson implements JsonSerializable
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'description' => $this->description,
             'url' => $this->url,
             'moduleId' => $this->module,
             'moduleName' => $this->moduleName

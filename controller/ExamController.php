@@ -31,7 +31,6 @@ class ExamController extends Controller{
     }
     
     public function list($exam, $errorMsgs){
-        echo __DIR__.'/ExamController.php?action=view&id='.$exam->getId();
         header('Location: '.BASE_URL.'/controller/ExamController.php?action=view&id='.$exam->getId());
     }
 
@@ -68,7 +67,6 @@ class ExamController extends Controller{
         $exam_type = $_POST['exam_type'] ?? 'default';
         $user_id = $_POST['user_id'] ?? NULL;
 
-        echo $exam_type;
         // Cria os parâmetros para consulta de questões
         $exam_subjects_module_num = [];
         if($exam_type == 'default'){
@@ -93,21 +91,9 @@ class ExamController extends Controller{
             }
         }
 
-        echo $exam_subjects_module_num['Português'];
-        echo $exam_subjects_module_num['Português']['Module'];
-        echo $exam_subjects_module_num['Português']['NumberQuestions'];
-        echo $exam_subjects_module_num['Ciências'];
-        echo $exam_subjects_module_num['Ciências']['Module'];
-        echo $exam_subjects_module_num['Ciências']['NumberQuestions'];
-
 
         // Pega as questões, separadas por matérias -> ExamModule
         $exam_modules = $this->examModuleService->handleRandomExamModules($exam_subjects_module_num);
-
-        echo '<br>'.count($exam_modules);
-        foreach($exam_modules as $ex){
-            echo $ex->getModule()->getName();
-        }
 
         // Find User
         $user = $this->userDao->findById($user_id);
