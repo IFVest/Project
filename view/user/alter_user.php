@@ -3,6 +3,7 @@ require_once(__DIR__ . "/../componentes/header.php");
 require_once(__DIR__ . "/../../model/UserRoles.php");
 ?>
 
+<link rel="stylesheet" href="<?= BASE_URL ?>/view/user/alter_user.css">
 <main class="main-content col-md-10 px-md-5">
 
     <h1>Alterar Usuário</h1>

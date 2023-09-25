@@ -74,15 +74,4 @@ select{
     font-size: 16px;
     transition: all 150ms ease;
     
-    option {
-      color: #58b352;
-      
-      &:focus{
-        outline: none;
-        border-color: #0077FF;
-        box-shadow: 0 0 0 2px rgba(#0077FF,.2);
-        
-    }
-    
-}
 }

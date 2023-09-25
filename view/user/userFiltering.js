@@ -7,7 +7,6 @@ nameInput.addEventListener("input", (event) => {
     xhttp.onload = function () {
         if (xhttp.status >= 200 && xhttp.status < 400) {
             let users = JSON.parse(this.responseText);
-
             showFilteredUsers(users);
         }
     };
@@ -40,11 +39,21 @@ function createUserTable(user) {
     var cardBody = document.createElement('div');
     cardBody.setAttribute('class', 'card-body');
 
+    // Imagem
+    var img = document.createElement('i')
+    img.setAttribute('style', 'display:inline; padding-left:15px')
+    if (user.active == 0) {
+        img.setAttribute('class', 'bi bi-person-fill-lock')
+    }
+    else {
+        img.setAttribute('class', 'bi bi-person-fill')
+    }
+
     // Nome do usuário
     var userName = document.createElement('div');
-    userName.innerHTML = user.completeName
     userName.setAttribute('class', 'name');
     userName.setAttribute('style', 'display:inline; padding-left:15px');
+    userName.appendChild(document.createTextNode(user.completeName))
 
     // Papel 
     var userRole = document.createElement('div');
@@ -52,13 +61,13 @@ function createUserTable(user) {
     userRole.setAttribute('style', 'display: inline; padding-left: 15px')
 
     if (user.role == "Administrador") {
-        userRole.innerHTML = "Administrador"
+        userRole.appendChild(document.createTextNode("Administrador"))
     }
     else if (user.role == "Professor") {
-        userRole.innerHTML = "Professor"
+        userRole.appendChild(document.createTextNode("Professor"))
     }
     else {
-        userRole.innerHTML = "Aluno"
+        userRole.appendChild(document.createTextNode("Aluno"))
     }
 
     // Ativo
@@ -66,21 +75,11 @@ function createUserTable(user) {
     userActive.setAttribute('class', 'active');
     userActive.setAttribute('style', 'display: inline; padding-left: 15px');
 
-    var userActiveSelect = document.createElement('select');
-    userActiveSelect.setAttribute('name', 'user_active');
-
-    var userActiveOption1 = document.createElement('option');
-    userActiveOption1.setAttribute('value', '1');
-    userActiveOption1.innerHTML = "Ativo";
-    var userActiveOption2 = document.createElement('option');
-    userActiveOption2.setAttribute('value', '0');
-    userActiveOption2.innerHTML = "Inativo";
-
     if (user.active == 1) {
-        userActiveOption1.selected = true;
+        userActive.innerHTML = "Ativo";
     }
     else if (user.active == 0) {
-        userActiveOption2.selected = true;
+        userActive.innerHTML = "Inativo";
     }
 
     // Id do usuário (escondido)
@@ -88,6 +87,11 @@ function createUserTable(user) {
     userId.setAttribute("name", "user_id");
     userId.setAttribute("value", user.id);
     userId.hidden = true;
+
+    // Link pro botão
+    var baseurl = document.getElementById("baseurl").getAttribute("value")
+    var buttonLink = document.createElement('a');
+    buttonLink.setAttribute('href', baseurl + "/controller/UserController.php?action=alter&id=" + user.id)
 
     // Botão de submit
     var submitButton = document.createElement("button");
@@ -99,17 +103,13 @@ function createUserTable(user) {
     rowDiv.appendChild(colDiv);
     colDiv.appendChild(card);
     card.appendChild(cardBody);
-    // Colocar imagem
+    cardBody.appendChild(img)
     cardBody.appendChild(userName);
-    cardBody.appendChild(userRoleSelect);
-    userRoleSelect.appendChild(userRoleOption1);
-    userRoleSelect.appendChild(userRoleOption2);
-    userRoleSelect.appendChild(userRoleOption3);
-    cardBody.appendChild(userActiveSelect);
-    userActiveSelect.appendChild(userActiveOption1);
-    userActiveSelect.appendChild(userActiveOption2);
     cardBody.appendChild(userId);
-    cardBody.appendChild(submitButton);
+    cardBody.appendChild(userRole)
+    cardBody.appendChild(userActive)
+    cardBody.appendChild(buttonLink)
+    buttonLink.appendChild(submitButton)
 
     return rowDiv;
 }

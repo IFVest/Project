@@ -7,6 +7,7 @@
 ?>
 <main class="main-content col-md-10 px-md-5">
     <h1>Usuários</h1>
+    <label for="user_name">Filtre por nome: </label>
     <input type="text" id="user_name">
     <input type="text" id="baseurl" value="<?php echo BASE_URL ?>" hidden>
 
