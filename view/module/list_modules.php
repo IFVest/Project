@@ -31,7 +31,7 @@ require_once(__DIR__ . "/../../util/config.php");
         </div>
         <div class="subjects-body">
         <?php foreach (Subjects::cases() as $subject) : ?>
-            <button class="subject" aria-expanded="false" style="width: 64em; height: 4em"> <?php echo $subject->name; ?> </button>
+            <button class="subject" aria-expanded="false"> <?php echo $subject->name; ?> </button>
             <div class="modules" id="<?php echo $subject->name; ?>"></div>
             <br>
         <?php endforeach; ?>
