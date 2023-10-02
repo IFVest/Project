@@ -8,15 +8,10 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 <!-- MAIN CONTENT-->
 <main class="main-content col-md-10 px-md-5">
 
-    <div class="error">
-    <script src="<?= BASE_URL ?>/js/lessonFilterByModule.js" type="module"></script>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/view/lesson/create_lesson.css">
-
-        <!-- MENUZINHO DE OPÇÕES-->
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-            </div>
+    <!-- MENUZINHO DE OPÇÕES-->
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
         </div>
     </div>
 
@@ -29,6 +24,8 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <label>Url:</label>
         <input type="text" class="lesson_url" name="lesson_url" value="<?php echo isset($dados["lesson"]) ? $dados["lesson"]->getUrl() : ''; ?>">
         <br>
+        <label>Descrição</label>
+        <input type="text" name="lesson_description" value="<?php echo $dados["lesson"]->getDescription() ?? ""; ?>">
         <label>Material da aula em PDF:</label>
         <input type="file" name="pdf" accept="application/pdf">
         <br>

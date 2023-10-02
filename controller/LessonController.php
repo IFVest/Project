@@ -44,11 +44,11 @@ class LessonController extends Controller{
         $lesson_title = isset($_POST["lesson_title"]) ? $_POST["lesson_title"] : NULL;
         $lesson_url = isset($_POST["lesson_url"]) ? $_POST["lesson_url"] : NULL;
         $moduleId = isset($_POST["lesson_modules"]) ? $_POST["lesson_modules"] : NULL;
-        $lesson_description = $_POST['lesson_description'] ?? NULL;
+        $lesson_description = $_POST['lesson_description'] ?? "oi";
 
-        $pdf = $_FILES['pdf'];
-        $pdf_path = $this->savePDF($pdf);
-        echo "<script>console.log('".$pdf_path."')</script>";
+        // $pdf = $_FILES['pdf'];
+        // $pdf_path = $this->savePDF($pdf);
+        // echo "<script>console.log('".$pdf_path."')</script>";
         
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);
