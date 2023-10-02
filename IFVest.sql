@@ -15,11 +15,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Table `Module`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Module` ;
-
 CREATE TABLE IF NOT EXISTS `Module` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL,
   `description` VARCHAR(1000) NOT NULL,
+  `difficulty` INT NOT NULL DEFAULT 1,
   `subject` ENUM('Matemática', 'Português', 'Redação', 'Geografia', 'História', 'Ciências') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB

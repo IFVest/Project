@@ -31,6 +31,8 @@ class ExamService{
             $examModule->setIsProblem($isProblem);
             $this->examModuleDao->update($examModule);
         }
+
+        $this->makeStudyPlan($exam);
     }
 
     private function ifCorrect($chosenAnswer, $question){
@@ -48,5 +50,9 @@ class ExamService{
             return _TRUE_;
         }
         return _FALSE_;
+    }
+
+    private function makeStudyPlan($exam){
+        
     }
 }

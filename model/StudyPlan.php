@@ -1,6 +1,6 @@
 <?php
 
-class Module{
+class StudyPlan{
     private $id;
     private $user;
     private $exam;

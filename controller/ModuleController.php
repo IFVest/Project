@@ -43,15 +43,17 @@ class ModuleController extends Controller
 
     protected function save()
     {
-        $dados["id"] = isset($_POST['module_id']) ? $_POST["module_id"] : NULL;
-        $module_name = isset($_POST['module_name']) ? $_POST['module_name'] : NULL;
-        $module_desc = isset($_POST['module_desc']) ? $_POST['module_desc'] : NULL;
+        $dados["id"] = $_POST['module_id'] ?? NULL;
+        $module_name = $_POST['module_name'] ?? NULL;
+        $module_desc = $_POST['module_desc'] ?? NULL;
+        $module_diff = $_POST['module_diff'] ?? NULL;
         $module_subject = isset($_POST['module_subject']) ? $_POST['module_subject'] : NULL;
 
         $module = new Module();
         $module->setId($dados['id']);
         $module->setName($module_name);
         $module->setDescription($module_desc);
+        $module->setDifficulty($module_diff);
         $module->setSubject($module_subject);
 
         $errors = $this->moduleService->validateData($module);

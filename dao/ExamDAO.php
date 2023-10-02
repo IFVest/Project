@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ERROR);
+
 require_once(__DIR__ . "/../model/Exam.php");
 require_once(__DIR__ . "/../dao/ExamModuleDAO.php");
 require_once(__DIR__ . "/../dao/UserDAO.php");

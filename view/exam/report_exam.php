@@ -10,13 +10,6 @@ require_once(__DIR__. '/examTestCreator.php');
     <!-- MAIN CONTENT-->
 
     <main class="main-content col-md-10 px-md-5">
-        <!-- MENUZINHO DE OPÇÕES-->
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
-            </div>
-        </div>
         
         <div class="row p-4">  
             <h1 class="m-4 mt-6">Relatório da Prova</h1>
@@ -54,7 +47,6 @@ require_once(__DIR__. '/examTestCreator.php');
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="questions-view questions-view-<?= $exMod->getId(); ?> col-4" style="display: none; position: absolute; right: 1vw; top: 10px;">
                                             <?php
                                                 ExamTestCreator::mapTest($exam, [$exMod]);
@@ -69,6 +61,11 @@ require_once(__DIR__. '/examTestCreator.php');
                 </div>
             </div>
         </div>
+
+        <button class="questions-analizes-btn btn btn-secondary col-10">
+            <a href="<?= BASE_URL ?>/controller/StudyPlanController.php?action=list&id=<?= $exam->getId()?>">Visualizar Plano de Estudo gerado</a>
+        </button>
+
     </main>
     <script >
         let questionsAnalizesBtns = document.querySelectorAll('.questions-analizes-btn')
