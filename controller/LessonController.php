@@ -45,6 +45,10 @@ class LessonController extends Controller{
         $lesson_url = isset($_POST["lesson_url"]) ? $_POST["lesson_url"] : NULL;
         $moduleId = isset($_POST["lesson_modules"]) ? $_POST["lesson_modules"] : NULL;
         $lesson_description = $_POST['lesson_description'] ?? NULL;
+
+        $pdf = $_FILES['pdf'];
+        $pdf_path = $this->savePDF($pdf);
+        echo "<script>console.log('".$pdf_path."')</script>";
         
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);
@@ -76,6 +80,18 @@ class LessonController extends Controller{
         $errorMsgs = implode("<br>", $errors);
         $this->create($dados, $errorMsgs);
     }
+
+    protected function savePDF(Array $pdf) {
+        
+        
+        $extensao = pathinfo($pdf['name'], PATHINFO_EXTENSION);
+        $nome_imagem = md5(uniqid($pdf['name'])).".".$extensao;
+        $caminho_imagem = "../view/pdfs/" . $nome_imagem;
+        move_uploaded_file($pdf["tmp_name"], $caminho_imagem);
+
+        return $caminho_imagem;
+    }
+
 
     public function list()
     {

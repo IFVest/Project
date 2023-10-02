@@ -43,12 +43,11 @@ class LessonDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Lesson (title, videoURL, description, idModule) VALUES (:t, :u, :d, :m)";
+        $sql = "INSERT INTO Lesson (title, videoURL, idModule) VALUES (:t, :u, :m)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('t', $lesson->getTitle());
         $stm->bindValue('u', $lesson->getUrl());
-        $stm->bindValue('d', $lesson->getDescription());
         $stm->bindValue('m', $lesson->getModule());
         $stm->execute();
     }

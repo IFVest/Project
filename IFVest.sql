@@ -88,7 +88,6 @@ DROP TABLE IF EXISTS `Lesson` ;
 CREATE TABLE IF NOT EXISTS `Lesson` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(300) NOT NULL,
   `videoURL` VARCHAR(9999) NOT NULL,
   `idModule` INT NOT NULL,
   `idStudyWeek` INT,

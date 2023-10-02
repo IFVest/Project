@@ -72,7 +72,7 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_URL ?>/view/sobre.php">
-                                    <span></i>Sobre</span>
+                                    <span></i>Sobre o Instituto</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -100,12 +100,12 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_URL ?>/controller/LessonController.php">
-                                    <span></i>Materias</span>
+                                    <span></i>Matérias</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_URL ?>/controller/ExamController.php?action=listAll">
-                                    <span></i>Historico</span>
+                                    <span></i>Historico dos Simulados</span>
                                 </a>
                             </li>
                             <?php if ($isAdmin or $isTeacher): ?>
