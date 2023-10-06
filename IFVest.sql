@@ -210,18 +210,12 @@ DROP TABLE IF EXISTS `StudyPlan` ;
 CREATE TABLE IF NOT EXISTS `StudyPlan` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idExam` INT NOT NULL,
-  `idUser` INT NOT NULL,
+  `marker` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_StudyPlan_Exam1_idx` (`idExam` ASC),
-  INDEX `fk_StudyPlan_User1_idx` (`idUser` ASC),
   CONSTRAINT `fk_StudyPlan_Exam1`
     FOREIGN KEY (`idExam`)
     REFERENCES `Exam` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_StudyPlan_User1`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `User` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

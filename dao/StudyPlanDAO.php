@@ -3,17 +3,22 @@
 require_once(__DIR__ . "/../connection/Connection.php");
 require_once(__DIR__ . "/../model/StudyPlan.php");
 require_once(__DIR__ . "/../dao/ExamDAO.php");
+require_once(__DIR__ . "/../dao/SuggestedModuleDAO.php");
 
 class StudyPlanDAO{
 
     private function mapStudyPlan($sql){
         $studyPlans = array();
+        $suggestedModuleDao = new SuggestedModuleDAO();
 
         foreach($sql as $sp){
           $studyPlan = new StudyPlan();
           $studyPlan->setId($sp["id"]);
-          $studyPlan->setUser($sp["user"]);
+          $studyPlan->setMarker($sp["marker"]);
           $studyPlan->setExam($sp["exam"]);
+
+          $suggestedModules = $suggestedModuleDao->findByStudyPlan($studyPlan);
+          $studyPlan->setSuggestedModules($suggestedModules);
 
           array_push($studyPlans, $studyPlan);
         }
@@ -39,13 +44,15 @@ class StudyPlanDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO StudyPlan (idUser, idExam) VALUES (:u, :e)";
+        $sql = "INSERT INTO StudyPlan (idExam, marker) VALUES (:e, :m)";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue('u', $studyPlan->getUser());
+        $stm->bindValue('m', $studyPlan->getMarker());
         $stm->bindValue('e', $studyPlan->getExam());
 
         $stm->execute();
+        $studyPlan->setId($conn->lastInsertId());
+        return $studyPlan;
     }
 
     public function list()
@@ -61,13 +68,13 @@ class StudyPlanDAO{
         return $this->mapStudyPlan($result);
     }
 
-    public function delete(Lesson $lesson){
+    public function delete(StudyPlan $studyPlan){
         $conn = Connection::getConn();
 
-        $sql = "DELETE FROM Lesson WHERE id = ?";
+        $sql = "DELETE FROM StudyPlan WHERE id = ?";
 
         $stm = $conn->prepare($sql);
-        $stm->execute([$lesson->getId()]);
+        $stm->execute([$studyPlan->getId()]);
     }
 }
 ?>

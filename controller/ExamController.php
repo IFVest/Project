@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../dao/UserDAO.php');
 require_once(__DIR__ . '/../dao/ExamDAO.php');
 require_once(__DIR__ . '/../service/ExamModuleService.php');
 require_once(__DIR__ . '/../service/ExamService.php');
+require_once(__DIR__ . '/../service/StudyPlanService.php');
 require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__.'./../util/config.php');
 error_reporting(1);
@@ -91,7 +92,6 @@ class ExamController extends Controller{
             }
         }
 
-
         // Pega as questões, separadas por matérias -> ExamModule
         $exam_modules = $this->examModuleService->handleRandomExamModules($exam_subjects_module_num);
 
@@ -116,11 +116,15 @@ class ExamController extends Controller{
     }
 
     protected function makeReport(){
+        $studyPlanService = new StudyPlanService();
         $exam_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
         $exam = $this->examDao->findById($exam_id);
         $this->examService->makeReport($exam);
         $exam->setFinished(_TRUE_);
         $this->examDao->update($exam);
+        
+        $studyPlanService->createStudyPlan($exam);
+
         $this->report($exam);
     }
 

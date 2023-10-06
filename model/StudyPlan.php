@@ -2,8 +2,9 @@
 
 class StudyPlan{
     private $id;
-    private $user;
+    private $marker;
     private $exam;
+    private $suggestedModules;
 
     /**
      * Get the value of id
@@ -23,23 +24,6 @@ class StudyPlan{
         return $this;
     }
 
-    /**
-     * Get the value of user
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Set the value of user
-     */
-    public function setUser($user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     /**
      * Get the value of exam
@@ -55,6 +39,42 @@ class StudyPlan{
     public function setExam($exam): self
     {
         $this->exam = $exam;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of marker
+     */
+    public function getMarker()
+    {
+        return $this->marker;
+    }
+
+    /**
+     * Set the value of marker
+     */
+    public function setMarker($marker): self
+    {
+        $this->marker = $marker;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of suggestedModules
+     */
+    public function getSuggestedModules()
+    {
+        return $this->suggestedModules;
+    }
+
+    /**
+     * Set the value of suggestedModules
+     */
+    public function setSuggestedModules($suggestedModules): self
+    {
+        $this->suggestedModules = $suggestedModules;
 
         return $this;
     }
