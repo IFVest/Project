@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5 {
     font-size: 28px;
     font-family: "Poppins", sans-serif;
 
-    color: var(--cor-primaria);
+    color: #98CE00;
     letter-spacing: -1px;
     display: flex;
     align-items: center;
@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .navbar-brand {
-    color: var(--cor-primaria);
+    color: #98CE00;
 }
 
 .responsive-button {

@@ -6,7 +6,9 @@ require_once(__DIR__ . "/../../util/config.php");
     <!-- MAIN CONTENT-->
     <main class="main-content col-md-10 px-md-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            
+        <link rel="stylesheet" href="<?= BASE_URL ?>/view/question/create_question.css">
+
+
         <h1> <?php if (! isset($dados['id']) || $dados['id'] == NULL) echo "Inserir";
             else echo "Alterar"; ?> questão</h1>
             
@@ -17,9 +19,6 @@ require_once(__DIR__ . "/../../util/config.php");
                 </div>
             </div>
         </div>
-
-        <h5 class="content-subtitle">Espaço para a criação de questões!</h5>
-        
        
         <form method="POST" action="<?= BASE_URL ?>/controller/QuestionController.php?action=save">
         <select name="question_module" required>
@@ -32,8 +31,10 @@ require_once(__DIR__ . "/../../util/config.php");
             <?php endforeach;?>
         </select><br>
 
+        <br/><br/>
+
         <label for="question_text">Enunciado: </label>
-        <input type="text" name="question_text" value="<?php echo (isset($dados["question"]) ? $dados["question"]->getText() : '');?>"required>
+        <textarea rows="5" cols="25" maxlength="500" name="question_text" value="<?php echo (isset($dados["question"]) ? $dados["question"]->getText() : '');?>"required></textarea>
         <br>
         
         
@@ -43,7 +44,7 @@ require_once(__DIR__ . "/../../util/config.php");
             echo '<input type="text" name="alternative'.$i.'" value="'.
                 (isset($dados['question']) && $dados['question']->getAlternatives() ? $dados['question']->getAlternatives()[$i-1]->getText() : '')
             .'" required> ';
-            echo '<input required type="radio" name="correctAlternative" value='.$i.' '.
+            echo '<input required type="radio" class="correct" name="correctAlternative" value='.$i.' '.
                 (isset($dados['question']) && $dados['question']->getAlternatives()[$i-1]->getIsCorrect() ? 'checked' : '')
             .'>';
             echo '<br>';
@@ -52,7 +53,7 @@ require_once(__DIR__ . "/../../util/config.php");
         
         <input type="hidden" name="question_id" value="<?php echo $dados['id']; ?>">
         
-        <button type="submit">Gravar</button>
+        <button class="buttonSave" type="submit">Gravar</button>
     </form>
 
     <div class="error-div">

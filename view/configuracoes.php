@@ -12,14 +12,10 @@ require __DIR__ . "/../util/config.php";
         <!-- MENUZINHO DE OPÇÕES-->
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
+                <!-- <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button> -->
             </div>
         </div>
     </div>
-
-    <h5 class="content-subtitle">subtítulo</h5>
-    <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-
 
     <div class="row">
 
@@ -27,7 +23,7 @@ require __DIR__ . "/../util/config.php";
             <div class="card">
                 <a href="../controller/LessonController.php?action=create">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="color: #58b352">
                             <i class="bi bi-collection-play-fill"></i>
                             Criar Aula
                         </h5>
@@ -40,7 +36,7 @@ require __DIR__ . "/../util/config.php";
             <div class="card">
                 <a href="../controller/LessonController.php">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="color: #58b352">
                             <i class="bi bi-collection-play-fill"></i>
                             Listar Aula
                         </h5>
@@ -53,7 +49,7 @@ require __DIR__ . "/../util/config.php";
             <div class="card">
                 <a href="../controller/ModuleController.php?action=create">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="color: #58b352">
                         <i class="bi bi-folder-fill"></i>
                             Criar Modulo
                         </h5>
@@ -66,7 +62,7 @@ require __DIR__ . "/../util/config.php";
             <div class="card">
                 <a href="../controller/ModuleController.php">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="color: #58b352">
                         <i class="bi bi-folder-fill"></i>
                             Listar Modulo
                         </h5>
@@ -79,7 +75,7 @@ require __DIR__ . "/../util/config.php";
             <div class="card">
                 <a href="../controller/QuestionController.php?action=create">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="color: #58b352">
                         <i class="bi bi-pen-fill"></i>
                             Criar Questão
                         </h5>
@@ -92,7 +88,7 @@ require __DIR__ . "/../util/config.php";
             <div class="card">
                 <a href="../controller/QuestionController.php">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="color: #58b352">
                         <i class="bi bi-pen-fill"></i>
                             Listar Questões
                         </h5>
@@ -105,7 +101,7 @@ require __DIR__ . "/../util/config.php";
             <div class="card">
                 <a href="../controller/WeekController.php?action=create">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="color: #58b352">
                         <i class="bi bi-pen-fill"></i>
                             Criar Semana
                         </h5>
@@ -118,7 +114,7 @@ require __DIR__ . "/../util/config.php";
             <div class="card">
                 <a href="../controller/WeekController.php">
                     <div class="card-body">
-                        <h5 class="card-title">
+                        <h5 class="card-title" style="color: #58b352">
                         <i class="bi bi-pen-fill"></i>
                             Listar Semanas
                         </h5>

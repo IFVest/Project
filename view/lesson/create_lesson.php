@@ -25,7 +25,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <input type="text" class="lesson_url" name="lesson_url" value="<?php echo isset($dados["lesson"]) ? $dados["lesson"]->getUrl() : ''; ?>">
         <br>
         <label>Descrição</label>
-        <input type="text" name="lesson_description" value="<?php echo $dados["lesson"]->getDescription() ?? ""; ?>">
+        <input type="text" name="lesson_description" value="<?php echo isset($dados["lesson"]) ? $dados["lesson"]->getDescription() : ""; ?>">
         <label>Material da aula em PDF:</label>
         <input type="file" name="pdf" accept="application/pdf">
         <br>
