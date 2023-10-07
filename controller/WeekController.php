@@ -59,6 +59,23 @@ class WeekController extends Controller
                 if ($dados["id"] == NULL) {
                     $this->weekDao->insert($week);
                 } else {
+                    // Comparar semana antiga com nova para saber se uma aula foi retirada dela
+                    $oldWeekLessons = $this->lessonService->findLessonsByWeekId($dados["id"]);
+                    echo "<script>console.log('aaaa')</script>";
+                    $isInList = false;
+                    foreach ($oldWeekLessons as $oldLesson) {
+                        foreach($week->getLessons() as $newLesson) {
+                            if ($oldLesson->getId() == $newLesson->getId()) {
+                                $isInList = true;
+                            }
+                        }
+                        
+                        if (!$isInList) {
+                            $oldLesson->setStudyWeek(null);
+                            $this->lessonService->updateLessonStudyWeek($oldLesson);
+                        }
+                    }
+
                     $this->weekDao->update($week);
                 }
 

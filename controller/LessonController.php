@@ -44,7 +44,7 @@ class LessonController extends Controller{
         $lesson_title = isset($_POST["lesson_title"]) ? $_POST["lesson_title"] : NULL;
         $lesson_url = isset($_POST["lesson_url"]) ? $_POST["lesson_url"] : NULL;
         $moduleId = isset($_POST["lesson_modules"]) ? $_POST["lesson_modules"] : NULL;
-        $lesson_description = $_POST['lesson_description'] ?? "oi";
+        $lesson_description = isset($_POST["lesson_description"]) ? $_POST["lesson_description"] : NULL;
 
         // $pdf = $_FILES['pdf'];
         // $pdf_path = $this->savePDF($pdf);
