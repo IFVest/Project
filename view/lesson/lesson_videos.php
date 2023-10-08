@@ -27,7 +27,7 @@
         </div>
             <div class="col-md-9">
                 
-                <div class="video"></div>
+                <iframe src="<?php echo isset($dados) ? $dados["lista"][0]->getUrl() : "" ?>" frameborder="0"></iframe>
 
             </div>
 

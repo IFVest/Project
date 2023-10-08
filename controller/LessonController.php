@@ -92,7 +92,6 @@ class LessonController extends Controller{
         return $caminho_imagem;
     }
 
-
     public function list()
     {
         $dados["lista"] = $this->lessonDao->list();
@@ -105,6 +104,12 @@ class LessonController extends Controller{
         endforeach;
 
         $this->loadView("lesson/list_lessons.php", $dados);
+    }
+
+    public function showModuleLessons() {
+        $dados["lista"] = $this->findLessonsByModuleId();
+
+        $this->loadView("lesson/lesson_videos.php", $dados);
     }
 
     protected function edit()

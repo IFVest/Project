@@ -1,5 +1,6 @@
 var subjects = document.querySelectorAll(".subject");
 var modulesDiv = document.querySelectorAll(".modules");
+var baseUrl = document.getElementById("base_url").getAttribute("value")
 
 export var subjectFiltering = function (subjectButton) {
     filterBySubject(subjectButton.currentTarget, false);
@@ -116,8 +117,8 @@ function filterByModule(moduleClick) {
             if (xhttp.status >= 200 && xhttp.status < 400) {
                 var lessons = JSON.parse(this.responseText);
                 if (lessons.length != 0) {
-                    createLessonTable(lessons, moduleName);
                     moduleButton.setAttribute("aria-expanded", true);
+                    window.location.href = baseUrl + "/controller/LessonController.php?action=showModuleLessons&moduleId=" + moduleId
                 } else {
                     alert("Módulo não possui aulas.");
                 }
@@ -133,18 +134,7 @@ function filterByModule(moduleClick) {
 
 }
 
-async function test() {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            window.location.assign("./../view/lesson/lesson_videos.php#test")
-        }, 2000);
-      });
-}
-
-
-async function createLessonTable(lessons, videoUrl) {
-    test()
-    
+async function createLessonTable(lessons, videoUrl) {    
     console.log(window.location)
     var lessonsDiv = document.querySelector('.lessonsDiv')
     var lessonsCardsDiv = document.createElement('div')
@@ -176,62 +166,7 @@ async function createLessonTable(lessons, videoUrl) {
         //     lesson.innerHTML = "";
         // })
 
-    }
-        // var moduleLessonId = moduleName + "-lessons"
-        // var moduleLessonsDiv = document.querySelector("#" + moduleLessonId.replace(/\s/g, '_'));
-        // var table = document.createElement("table");
-        // var thead = document.createElement("thead");
-        // var tbody = document.createElement("tbody");
-
-        // // T-head
-        // var thTitle = document.createElement("th");
-        // var thVisualize = document.createElement("th");
-        // var thAlter = document.createElement("th");
-        // var thDelete = document.createElement("th");
-        // thTitle.innerHTML = "Título";
-        // thVisualize.innerHTML = "Video";
-        // thAlter.innerHTML = "Alterar";
-        // thDelete.innerHTML = "Deletar";
-        // thead.appendChild(thTitle);
-        // thead.appendChild(thVisualize);
-        // thead.appendChild(thAlter);
-        // thead.appendChild(thDelete);
-        // table.appendChild(thead);
-
-        // // T-body
-        // for (let i = 0; i < lessons.length; i++) {
-        //     let tr = document.createElement("tr");
-        //     let tdTitle = document.createElement("td");
-        //     let tdVisualize = document.createElement("td");
-        //     let tdAlter = document.createElement("td");
-        //     let tdDelete = document.createElement("td");
-        //     let linkAlter = document.createElement("a");
-        //     let linkDelete = document.createElement("a");
-        //     let visualizeButton = document.createElement("button");
-        //     visualizeButton.innerHTML = "Visualizar";
-        //     visualizeButton.setAttribute("class", "btn btn-secondary")
-        //     linkAlter.setAttribute("href", "LessonController.php?action=edit&id=" + lessons[i].id);
-        //     linkDelete.setAttribute("href", "LessonController.php?action=delete&id=" + lessons[i].id);
-        //     linkAlter.innerHTML = "Alterar";
-        //     linkDelete.innerHTML = "Deletar";
-        //     tdTitle.innerHTML = lessons[i].title;
-        //     tdVisualize.appendChild(visualizeButton);
-        //     tdAlter.appendChild(linkAlter);
-        //     tdDelete.appendChild(linkDelete);
-        //     tr.appendChild(tdTitle);
-        //     tr.appendChild(tdVisualize);
-        //     tr.appendChild(tdAlter);
-        //     tr.appendChild(tdDelete);
-        //     tbody.appendChild(tr);
-
-        //     visualizeButton.addEventListener("click", () => {
-        //         showVideo(lessons[i].url)
-        //     });
-        // }
-        // table.appendChild(tbody);
-        // moduleLessonsDiv.appendChild(table);
-
-    )
+    })
 }
 
 function showVideo(videoUrl) {
