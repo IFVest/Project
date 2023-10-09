@@ -5,6 +5,7 @@ require_once(__DIR__ . "/../dao/LessonDAO.php");
 require_once(__DIR__ . "/../dao/ModuleDAO.php");
 require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../service/LessonService.php");
+require_once(__DIR__ . "/../service/ModuleService.php");
 
 
 class LessonController extends Controller{
@@ -12,12 +13,14 @@ class LessonController extends Controller{
     private LessonDAO $lessonDao;
     private ModuleDAO $moduleDao;
     private LessonService $lessonService;
+    private ModuleService $moduleService;
 
     public function __construct()
     {
         $this->lessonDao = new LessonDAO();
         $this->moduleDao = new ModuleDAO();
         $this->lessonService = new LessonService();
+        $this->moduleService = new ModuleService();
         $this->setActionDefault("list");
         $this->handleAction();
     }
@@ -107,8 +110,11 @@ class LessonController extends Controller{
     }
 
     public function showModuleLessons() {
-        $dados["lista"] = $this->findLessonsByModuleId();
+        $moduleId = $_GET["moduleId"];
+        $moduleName = $_GET["moduleName"];
 
+        $dados["moduleName"] = $moduleName;
+        $dados["lista"] = $this->lessonService->findLessonsByModuleId($moduleId);
         $this->loadView("lesson/lesson_videos.php", $dados);
     }
 
@@ -147,7 +153,11 @@ class LessonController extends Controller{
 
     protected function findLessonsByModuleId() {
         $moduleId = $_GET["moduleId"];
-        echo $this->lessonService->findLessonsByModuleId($moduleId);
+
+        $lessons = $this->lessonService->findLessonsByModuleId($moduleId);
+
+        $lessonsJSON = json_encode($lessons);
+        echo $lessonsJSON;
     }
 }
 

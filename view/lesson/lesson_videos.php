@@ -12,7 +12,7 @@
     <main class="main-content col-md-10 px-md-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             
-            <h1 class="content-title">Listar Aulas</h1>
+            <h1 class="content-title">Aulas <?php echo isset($dados["moduleName"]) ? "de " . $dados["moduleName"] : "" ?></h1>
             
             <!-- MENUZINHO DE OPÇÕES-->
             <div class="btn-toolbar mb-2 mb-md-0">
@@ -25,24 +25,23 @@
         <div class="row">
 
         </div>
+
             <div class="col-md-9">
-                
-                <iframe src="<?php echo isset($dados) ? $dados["lista"][0]->getUrl() : "" ?>" frameborder="0"></iframe>
-
+                <iframe width="500px" src="<?php echo isset($dados) ? $dados["lista"][0]->getUrl() : "" ?>" frameborder="0"></iframe>
             </div>
 
-            <div class="col-md-3 lessonsDiv">
+            <?php if (isset($dados["lista"]) and count($dados["lista"]) > 1): ?>
+                <div class="col-md-3 lessonsDiv">
 
-                <h5 class="lessons_title">Matérias</h5>
-                
-            </div>
+                    <h5 class="lessons_title">Aulas</h5>
+                    
+                </div>
+            <?php endif;?>
 
         </div>
 
       
     </main>
-
-    <script src="<?= BASE_URL ?>/js/lessonListFiltering.js" type="module"></script>
 
 
     <?php require __DIR__. "/../componentes/footer.php"?>       

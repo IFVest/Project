@@ -1,6 +1,5 @@
 var subjects = document.querySelectorAll(".subject");
 var modulesDiv = document.querySelectorAll(".modules");
-var baseUrl = document.getElementById("base_url").getAttribute("value")
 
 export var subjectFiltering = function (subjectButton) {
     filterBySubject(subjectButton.currentTarget, false);
@@ -98,6 +97,7 @@ function createModulesButtons(modules, subject) {
 }
 
 function filterByModule(moduleClick) {
+    var baseUrl = document.getElementById("base_url").getAttribute("value")
     var moduleButton = moduleClick.currentTarget;
     var moduleId = moduleButton.getAttribute("value");
     var moduleName = moduleButton.getAttribute("id");
@@ -115,10 +115,10 @@ function filterByModule(moduleClick) {
         xhttp.open("GET", "LessonController.php?action=findLessonsByModuleId&moduleId=" + moduleId, true);
         xhttp.onload = function () {
             if (xhttp.status >= 200 && xhttp.status < 400) {
-                var lessons = JSON.parse(this.responseText);
+                var lessons = JSON.parse(this.responseText)
                 if (lessons.length != 0) {
                     moduleButton.setAttribute("aria-expanded", true);
-                    window.location.href = baseUrl + "/controller/LessonController.php?action=showModuleLessons&moduleId=" + moduleId
+                    window.location.href = baseUrl + "/controller/LessonController.php?action=showModuleLessons&moduleId=" + moduleId + "&moduleName=" + moduleName
                 } else {
                     alert("Módulo não possui aulas.");
                 }
