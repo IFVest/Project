@@ -18,7 +18,7 @@ class StudyPlanService{
         $this->suggestedModuleDao = new SuggestedModuleDAO();
     }
 
-    public function createStudyPlan(Exam $exam){
+    public function createStudyPlans(Exam $exam){
         $suggestedModules = [];
         foreach($exam->getExamModules() as $exMod){
             if($exMod->getIsProblem()){
@@ -32,29 +32,38 @@ class StudyPlanService{
             return strcmp($a->getModule()->getDifficulty(), $b->getModule()->getDifficulty());
         });
 
-        $weeks = array_chunk($suggestedModule, 5);
-
+        $weeks = array_chunk($suggestedModules, 5);
+        $studyPlans = [];
         foreach($weeks as $week){
             $studyPlan = new StudyPlan();
-            $studyPlan->setExam($exam->getId());
+            $studyPlan->setExam($exam);
             
-            $lastDiff = $this->getDifficultyFromSug($week[0]);
-            $firstDiff = $this->getDifficultyFromSug($week[count($week)-1]);
-            $text = ($lastDiff > $firstDiff)? $firstDiff.'->'.$lastDiff : $firstDiff;
+            $text = $this->createMark($week);
             
             $studyPlan->setMarker('Semana Dificuldade '.$text);
-            $this->studyPlanDao->insert($studyPlan);
-
+            $studyPlan = $this->studyPlanDao->insert($studyPlan);
+            
+            $suggestedModules = [];
             foreach($week as $suggestedModule){
-                $suggestedModule->setStudyPlan($studyPlan->getId());
+                echo $suggestedModule->getModule()->getId();
+                $suggestedModule->setStudyPlan($studyPlan);
                 $this->suggestedModuleDao->insert($suggestedModule);
+                array_push($suggestedModules, $suggestedModule);
             }
+            $studyPlan->setSuggestedModules($suggestedModules);
+            array_push($studyPlans, $studyPlan);
         }
 
-        return $suggestedModules;
+        return $studyPlans;
+    }
+
+    private function createMark($week){
+        $firstDiff = $this->getDifficultyFromSug($week[0]);
+        $lastDiff = $this->getDifficultyFromSug($week[count($week)-1]);
+        return ($lastDiff > $firstDiff)? $firstDiff.'->'.$lastDiff : $firstDiff;
     }
 
     private function getDifficultyFromSug($suggestedModule){
-        return $suggestedModule->getModule()->getDifficulty();
+        return intval($suggestedModule->getModule()->getDifficulty());
     }
 } 

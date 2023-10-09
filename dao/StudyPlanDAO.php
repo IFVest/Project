@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/../connection/Connection.php");
 require_once(__DIR__ . "/../model/StudyPlan.php");
+require_once(__DIR__ . "/../model/Exam.php");
 require_once(__DIR__ . "/../dao/ExamDAO.php");
 require_once(__DIR__ . "/../dao/SuggestedModuleDAO.php");
 
@@ -15,7 +16,7 @@ class StudyPlanDAO{
           $studyPlan = new StudyPlan();
           $studyPlan->setId($sp["id"]);
           $studyPlan->setMarker($sp["marker"]);
-          $studyPlan->setExam($sp["exam"]);
+          $studyPlan->setExam($sp["idExam"]);
 
           $suggestedModules = $suggestedModuleDao->findByStudyPlan($studyPlan);
           $studyPlan->setSuggestedModules($suggestedModules);
@@ -40,6 +41,20 @@ class StudyPlanDAO{
         return $studyPlans[0];
     }
 
+    public function findByExam(Exam $exam){
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM StudyPlan WHERE idExam = ?";
+
+        $stm = $conn->prepare($sql);
+        $stm->execute([$exam->getId()]);
+        $result = $stm->fetchAll();
+
+        $studyPlans = $this->mapStudyPlan($result);
+
+        return $studyPlans;
+    }
+
     public function insert(StudyPlan $studyPlan)
     {
         $conn = Connection::getConn();
@@ -48,7 +63,7 @@ class StudyPlanDAO{
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('m', $studyPlan->getMarker());
-        $stm->bindValue('e', $studyPlan->getExam());
+        $stm->bindValue('e', $studyPlan->getExam()->getId());
 
         $stm->execute();
         $studyPlan->setId($conn->lastInsertId());

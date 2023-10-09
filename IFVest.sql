@@ -228,7 +228,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `SuggestedModule` ;
 
 CREATE TABLE IF NOT EXISTS `SuggestedModule` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idStudyPlan` INT NOT NULL,
   `idModule` INT NOT NULL,
   INDEX `fk_StudyPlan_has_Module_Module1_idx` (`idModule` ASC),

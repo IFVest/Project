@@ -41,7 +41,7 @@ class SuggestedModuleDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM SuggestedModule s WHERE s.idStudyplan = ?";
+        $sql = "SELECT * FROM SuggestedModule s WHERE s.idStudyPlan = ?";
 
         $stm = $conn->prepare($sql);
         $stm->execute([$studyPlan->getId()]);
@@ -71,7 +71,7 @@ class SuggestedModuleDAO{
         $sql = "INSERT INTO SuggestedModule (idStudyPlan, idModule) VALUES (:idStudyPlan, :idModule)";
 
         $stm = $conn->prepare($sql);
-        $stm->bindValue('idStudyPlan', $suggestedModule->getStudyPlan());
+        $stm->bindValue('idStudyPlan', $suggestedModule->getStudyPlan()->getId());
         $stm->bindValue('idModule', $suggestedModule->getModule()->getId());
 
         $stm->execute();

@@ -3,6 +3,7 @@
 require_once(__DIR__ . "/../model/Exam.php");
 require_once(__DIR__ . "/../dao/ExamModuleDAO.php");
 require_once(__DIR__ . "/../dao/UserDAO.php");
+require_once(__DIR__ . "/../dao/StudyPlanDAO.php");
 require_once(__DIR__ . "/../service/ExamModuleService.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 
@@ -12,6 +13,7 @@ class ExamDAO{
 
     private function mapExams($sql){
         $examModuleDao = new ExamModuleDAO();
+        $studyPlanDao = new StudyPlanDAO();
         $userDao = new UserDAO();
         $exams = array();
 
@@ -26,6 +28,9 @@ class ExamDAO{
             $exam->setExamModules($examModules);
 
             $exam->setFinished($exam_sql['finished']);
+
+            $studyPlan = $studyPlanDao->findByExam($exam);
+            $exam->setStudyPlans($studyPlan);
 
             array_push($exams, $exam);
         }

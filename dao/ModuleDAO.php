@@ -3,12 +3,15 @@
 require_once(__DIR__ . "/../model/Module.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 require_once(__DIR__ . "/../dao/QuestionDAO.php");
+require_once(__DIR__ . "/../dao/LessonDAO.php");
 
 class ModuleDAO{
 
     private function mapModules($sql)
     {
         $modules = array();
+        $questDao = new QuestionDAO();
+        $lessonDao = new LessonDAO();
 
         foreach($sql as $mod){
             $module = new Module();
@@ -18,9 +21,11 @@ class ModuleDAO{
             $module->setDifficulty($mod['difficulty']);
             $module->setSubject($mod['subject']);
 
-            $questDao = new QuestionDAO();
             $questions = $questDao->findByModule($module);
             $module->setQuestions($questions);
+
+            $lessons = $lessonDao->findByModuleId($mod['id']);
+            $module->setLessons($lessons);
 
             array_push($modules, $module);
         }
