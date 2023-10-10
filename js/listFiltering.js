@@ -138,7 +138,8 @@ function filterByModule(moduleClick) {
 function createLessonTable(lessons, videoUrl) {
     window.location.replace("./../view/lesson/lesson_videos.php");
 
-    console.log(lessons)
+    console.log(lessons);
+
     for (let i = 0; i < lessons.length; i++) {
         let p = document.createElement('p')
         p.innerHTML = lessons[i].title
@@ -261,6 +262,8 @@ export function createModuleTable(modules, subject) {
 
     var subjectModulesDiv = document.querySelector("#" + subject);
     var table = document.createElement("table");
+    table.classList.add('table');
+    table.classList.add('table-list-modules');
     table.setAttribute("name", "modulesTable");
     var thead = document.createElement("thead");
     var tbody = document.createElement("tbody");

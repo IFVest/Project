@@ -16,7 +16,6 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
     <meta name="description" content="">
     <meta name="author" content="Maria Eduarda">
     <title></title>
-    <scale=1.0">
 
     <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>/view/css/style.css" rel="stylesheet">
@@ -60,9 +59,11 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
             <!-- SIDE BAR-->
             <div class="sidebar border-right col-md-2 p-0">
                 <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebarMenu">
+
                     <div class="offcanvas-header d-md-none d-flex align-items-end">
                         <button type="button" class="btn-close align-self-end" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
                     </div>
+                    
                     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         
                         <h6 class="label">
