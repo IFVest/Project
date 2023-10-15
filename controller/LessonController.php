@@ -147,6 +147,15 @@ class LessonController extends Controller{
         $this->list();
     }
 
+    protected function getByLessonId() {
+        $lessonId = $_GET["lessonId"];
+
+        $lesson = $this->lessonService->findByLessonId($lessonId);
+
+        $lessonJSON = json_encode($lesson);
+        echo $lessonJSON;
+    }
+
     protected function findByLessonId($id) {
         return $this->lessonService->findByLessonId($id);
     }
