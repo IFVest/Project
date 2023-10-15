@@ -49,9 +49,9 @@ class LessonController extends Controller{
         $moduleId = isset($_POST["lesson_modules"]) ? $_POST["lesson_modules"] : NULL;
         $lesson_description = isset($_POST["lesson_description"]) ? $_POST["lesson_description"] : NULL;
 
-        // $pdf = $_FILES['pdf'];
-        // $pdf_path = $this->savePDF($pdf);
-        // echo "<script>console.log('".$pdf_path."')</script>";
+        $pdf = $_FILES['pdf'];
+        $pdf_path = $this->savePDF($pdf);
+        echo "<script>console.log('".$pdf_path."')</script>";
         
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);
