@@ -56,5 +56,9 @@ class LessonService {
     public function findLessonsByWeekId($weekId) {
         return $this->lessonDao->findByWeekId($weekId);
     }
+
+    public function findAllLessons() {
+        return $this->lessonDao->list();
+    }
 }
 ?>

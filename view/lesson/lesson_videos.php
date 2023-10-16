@@ -26,7 +26,10 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-9 selected_video">
+        <input id="selected_video_id" type="text" hidden value="<?php echo isset($dados) ? $dados["lista"][0]->getId() : "" ?>"> 
+        <input id="lesson_module_id" type="text" hidden value="<?php echo isset($dados) ? $dados["lista"][0]->getModule() : "" ?>">
+
         <h2 class="selected_video_title" <?= ($isAdmin || $isTeacher) ? " style=\"display: inline-block \" " : "" ?>>
             <?php echo isset($dados) ? $dados["lista"][0]->getTitle() : "" ?>
         </h2>

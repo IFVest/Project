@@ -150,7 +150,7 @@ class LessonController extends Controller{
     protected function getByLessonId() {
         $lessonId = $_GET["lessonId"];
 
-        $lesson = $this->lessonService->findByLessonId($lessonId);
+        $lesson = $this->lessonService->findByLessonId(intval($lessonId));
 
         $lessonJSON = json_encode($lesson);
         echo $lessonJSON;
