@@ -28,7 +28,7 @@ require_once(__DIR__. '/examTestCreator.php');
                             <?= $subject; ?>
                         </button>
                     </h2>
-                    <div id="<?= $subjectId; ?>" class="accordion-collapse collapse show" data-bs-parent="#accordionParent">
+                    <div id="<?= $subjectId; ?>" class="accordion-collapse collapse" data-bs-parent="#accordionParent">
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <?php
                             foreach($examModules as $exMod): 
@@ -58,9 +58,7 @@ require_once(__DIR__. '/examTestCreator.php');
                     </div>
                 </div>
                 <?php endforeach;?>
-                <button class="text-bg-light questions-analizes-btn btn btn-secondary col-11">
-                    <a style="text-decoration: none; color:black;" href="<?= BASE_URL ?>/controller/StudyPlanController.php?action=listByExam&idExam=<?= $exam->getId()?>">Visualizar Plano de Estudo gerado</a>
-                </button>
+                    <a class="btn btn-success questions-analizes-btn my-2" href="<?= BASE_URL ?>/controller/StudyPlanController.php?action=listByExam&idExam=<?= $exam->getId()?>">Visualizar Plano de Estudo gerado</a>
             </div>
         </div>
     </div>
