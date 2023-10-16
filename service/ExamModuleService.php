@@ -20,19 +20,15 @@ class ExamModuleService{
 
     // Padrão de recebimento => $var['Matemática']['Module']='0'->id e $var['Matemática']['QuestionNumber']=9
     function handleRandomExamModules($exam_subjects_module_num){
-        echo 'aqui';
         $exam_modules = [];
 
         foreach(Subjects::cases() as $subject):
             $subjectName = $subject->name;
             if(isset($exam_subjects_module_num[$subjectName])){
-                echo '<br>'.$subjectName;
                 
                 $module = $exam_subjects_module_num[$subjectName]['Module'];
                 $questions_num = $exam_subjects_module_num[$subjectName]['NumberQuestions'];
                 
-                echo '<br>'.$module;
-                echo '<br>'.$questions_num;
     
                 $modules = [];
                 if($module == 'ALL'){
@@ -41,10 +37,7 @@ class ExamModuleService{
                     $module = $this->moduleService->findById($module);
                     $modules = [$module];
                 }
-    
-                foreach($modules as $mod){
-                    echo $mod->getName();
-                }
+
     
                 $num_questions_by_module = $this->defineQuestionsNum(count($modules), $questions_num);
                 for($i = 0; $i<count($modules); $i++){

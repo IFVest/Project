@@ -45,7 +45,6 @@ class StudyPlanService{
             
             $suggestedModules = [];
             foreach($week as $suggestedModule){
-                echo $suggestedModule->getModule()->getId();
                 $suggestedModule->setStudyPlan($studyPlan);
                 $this->suggestedModuleDao->insert($suggestedModule);
                 array_push($suggestedModules, $suggestedModule);

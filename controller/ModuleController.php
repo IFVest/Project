@@ -47,6 +47,7 @@ class ModuleController extends Controller
         $module_name = $_POST['module_name'] ?? NULL;
         $module_desc = $_POST['module_desc'] ?? NULL;
         $module_diff = $_POST['module_diff'] ?? NULL;
+        $module_min = intval($_POST['module_min']) ?? NULL;
         $module_subject = isset($_POST['module_subject']) ? $_POST['module_subject'] : NULL;
 
         $module = new Module();
@@ -55,6 +56,7 @@ class ModuleController extends Controller
         $module->setDescription($module_desc);
         $module->setDifficulty($module_diff);
         $module->setSubject($module_subject);
+        $module->setMinimumPercentageCorrect($module_min);
 
         $errors = $this->moduleService->validateData($module);
 

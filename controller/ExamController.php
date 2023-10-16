@@ -126,7 +126,7 @@ class ExamController extends Controller{
         $studyPlans = $studyPlanService->createStudyPlans($exam);
 
         $exam->setStudyPlans($studyPlans);
-        $this->report($exam);
+        header('Location: '.BASE_URL.'/controller/ExamController.php?action=report&id='.$exam->getId());
     }
 
 }

@@ -33,7 +33,12 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <input type="text" name="module_desc" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getDescription() : ''); ?>">
         <br>
         <label> Dificuldade: <span id="value_diff"></span> </label>
-        <input type="range" name="module_diff" class="form-range" min="1" max="10" step="1" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getDifficulty() : ''); ?>" oninput="this.nextElementSibling.value = this.value">
+        <input type="range" name="module_diff" class="form-range" min="1" max="10" step="1" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getDifficulty() : '1'); ?>" oninput="this.nextElementSibling.value = this.value">
+        <br>
+        <label> Porcentagem Mínima de acertos: </label>
+        <input type="text" style="width: 50px;" class="text-center" name="module_min" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getMinimumPercentageCorrect() : ''); ?>">%
+        <br>
+        
         <label>Matéria: </label>
         <select name="module_subject">
             <?php $i = 1; foreach(Subjects::cases() as $subject):?>

@@ -11,13 +11,7 @@ require_once(__DIR__ . "/../../util/config.php");
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             
             <h1 class="content-title">Listagem de modulos</h1>
-            
-            <!-- MENUZINHO DE OPÇÕES-->
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-                </div>
-            </div>
+
         </div>
 
         <h5 class="content-subtitle"></h5>
@@ -25,9 +19,6 @@ require_once(__DIR__ . "/../../util/config.php");
 
         <div class="subjects">
         <div class="subjects-header">
-            <!-- <a class="create-module" href="/controller/ModuleController.php?action=create">
-                <button>Criar módulo</button>
-            </a> -->
         </div>
         <div class="subjects-body">
         <?php foreach (Subjects::cases() as $subject) : ?>

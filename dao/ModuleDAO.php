@@ -19,6 +19,7 @@ class ModuleDAO{
             $module->setName($mod['name']);
             $module->setDescription($mod['description']);
             $module->setDifficulty($mod['difficulty']);
+            $module->setMinimumPercentageCorrect($mod['minimumPercentageCorrect']);
             $module->setSubject($mod['subject']);
 
             $questions = $questDao->findByModule($module);
@@ -72,13 +73,14 @@ class ModuleDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Module (name, description, difficulty, subject) VALUES (:name,:desc,:diff,:sub)";
+        $sql = "INSERT INTO Module (name, description, difficulty, subject, minimumPercentageCorrect) VALUES (:name,:desc,:diff,:sub, :min)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('name', $module->getName());
         $stm->bindValue('desc', $module->getDescription());
         $stm->bindValue('diff', $module->getDifficulty());
         $stm->bindValue('sub', $module->getSubject());
+        $stm->bindValue('min', $module->getMinimumPercentageCorrect());
 
         $stm->execute();
     }
@@ -87,14 +89,16 @@ class ModuleDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE Module SET name = :name, description = :desc, difficulty = :diff, subject = :sub WHERE id = :id";
+        $sql = "UPDATE Module SET name = :name, description = :desc, difficulty = :diff, subject = :sub, minimumPercentageCorrect = :min WHERE id = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("name", $module->getName());
         $stm->bindValue("desc", $module->getDescription());
         $stm->bindValue("diff", $module->getDifficulty());
         $stm->bindValue("sub", $module->getSubject());
+        $stm->bindValue('min', $module->getMinimumPercentageCorrect());
         $stm->bindValue("id", $module->getId());
+        
         $stm->execute();
     }
 

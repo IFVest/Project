@@ -13,17 +13,9 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 </head>
   
 <!-- MAIN CONTENT-->
-<main class="main-content col-md-10 px-md-5">x
+<main class="main-content col-md-10 px-md-5">
     <div class="component p-5 d-flex flex-column align-items-center justify-content-center">
         <h1 class="content-title">Criar Simulado</h1>
-
-        <!-- MENUZINHO DE OPÇÕES-->
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
-            </div>
-        </div>
 
         <div class="form card col-8 m-3 p-3">
             <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=save" class='d-flex flex-column'>

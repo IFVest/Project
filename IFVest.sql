@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `Module` (
   `name` VARCHAR(200) NOT NULL,
   `description` VARCHAR(1000) NOT NULL,
   `difficulty` INT NOT NULL DEFAULT 1,
+  `minimumPercentageCorrect` INT NOT NULL DEFAULT 60,
   `subject` ENUM('Matemática', 'Português', 'Redação', 'Geografia', 'História', 'Ciências') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
