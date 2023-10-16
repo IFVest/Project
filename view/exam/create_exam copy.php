@@ -7,20 +7,16 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
     <!-- MAIN CONTENT-->
     <main class="main-content col-md-10 px-md-5">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            
-            <h1 class="content-title">Criar simulado</h1>
+        <div class="component p-5 d-flex flex-column align-items-center justify-content-center">
+            <h1 class="content-title">Criar Simulado</h1>
             
             <!-- MENUZINHO DE OPÇÕES-->
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2">
                 </div>
-
             </div>
-        </div>
 
-
-        <div class="form col-8 m-3 p-3 ">
+            <div class="form card col-8 m-3 p-3">
                 <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=save" class='d-flex flex-column'>
                     <div class="type-exam d-flex justify-content-evenly">
                         <div class="personalized m-2">
@@ -50,9 +46,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
                 </div>
             </div>
         </div>
-
     </main>
-
     <script type="module" src="../view/exam/script.js">
     </script>
 
