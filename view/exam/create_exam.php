@@ -38,21 +38,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
                     </div>
                 </div>
                 <div class="component allFilters" style="display: none; flex-direction: column">
-                    <div class="filters col-12">
-                        <div class="card params text-center col-12">
-                            <select class='subject-select form-select card-header' name="subject1" id='subject1'>
-                                <?php foreach (Subjects::cases() as $subject) : ?>
-                                    <option class="subject-option" value="<?php echo $subject->name; ?>"><?php echo $subject->name ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="card-body">
-                                <label for='modules-filter-div1'>Módulos:</label>
-                                <div class="modules-filter-div1" id="modules-filter-div1"></div>
-                                <hr>
-                                <input type="number" class="num-questions1 col-10" name="num_questions1" value="9" >
-                            </div>
-                        </div>
-                    </div>
+                    <div class="filters col-12"></div>
                     <button type="button" class='new-filter-button btn btn-secondary'>Adicionar componente</button>
                 </div>
 
@@ -60,7 +46,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
                 <button type="submit" class='btn btn-primary'>Criar</button>
                 <input type='hidden' value='<?= $_SESSION['userId'];?>' name='user_id' id='user_id'>
-                <input type='hidden' value='1' name='filters_count' class='filters_count' id='filters_count'>
+                <input type='hidden' value='0' name='filters_count' class='filters_count' id='filters_count'>
             </form>
             <div class="error-div">
                 <?php require_once(__DIR__ . "/../include/msg.php");?>

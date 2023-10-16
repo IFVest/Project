@@ -2,7 +2,7 @@ let allFilters = document.querySelector('.allFilters')
 let filterDiv = document.querySelector('.filters')
 let inputType = document.querySelectorAll('.exam_type')
 let newFilter = document.querySelector('.new-filter-button')
-let numFilters = 1
+let numFilters = 0
 
 let disponibleSubjects = getSubjects()
 
@@ -74,19 +74,10 @@ newFilter.addEventListener('click', ()=>{
   divParam.appendChild(divCardBody)
   filterDiv.appendChild(divParam)
 
+  filterBySubject(select.value, numFilters)
+
   document.querySelector('#filters_count').value = numFilters
 })
-
-
-let subjectsSelect = document.querySelectorAll(".subject-select");
-startPage();
-export function startPage(){
-  subjectsSelect.forEach((subjectSelect) => {
-    subjectSelect.addEventListener("change", (event) => {
-      filterBySubject(event.target.value, subjectSelect.name.split('subject')[1])
-    })
-  })
-}
 
 export function filterBySubject(selectedSubject, aditionalStringName) {
   // Pegar matéria selecionado e procurar todos os módulos relacionados a essa matéria

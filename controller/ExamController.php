@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../dao/UserDAO.php');
 require_once(__DIR__ . '/../dao/ExamDAO.php');
 require_once(__DIR__ . '/../service/ExamModuleService.php');
 require_once(__DIR__ . '/../service/ExamService.php');
+require_once(__DIR__ . '/../service/StudyPlanService.php');
 require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__.'./../util/config.php');
 error_reporting(1);
@@ -78,9 +79,9 @@ class ExamController extends Controller{
                 ];
             endforeach;
         }else{
-            // Senão, pega os subjects filtrados, o módulo que selecionou para este e o número de questões escolhidas, 
-            // ficando no padrão $var["Matemática"]["Modules"] = "0"->id ["Matemática"]["NumberQuestions"] = 8
-            // Para pegas os valores depois, as Subjects que não foram colocadas não estarão na prova
+            /* Senão, pega os subjects filtrados, o módulo que selecionou para este e o número de questões escolhidas, 
+            ficando no padrão $var["Matemática"]["Modules"] = "0"->id ["Matemática"]["NumberQuestions"] = 8
+            Para pegas os valores depois, as Subjects que não foram colocadas não estarão na prova*/
             $filters_count = isset($_POST['filters_count']) ? intval($_POST['filters_count']) : 0;
             for($i = 1; $i<($filters_count+1); $i++){
                 if(isset($_POST['subject'.$i])){
@@ -90,7 +91,6 @@ class ExamController extends Controller{
                 }
             }
         }
-
 
         // Pega as questões, separadas por matérias -> ExamModule
         $exam_modules = $this->examModuleService->handleRandomExamModules($exam_subjects_module_num);
@@ -116,11 +116,16 @@ class ExamController extends Controller{
     }
 
     protected function makeReport(){
+        $studyPlanService = new StudyPlanService();
         $exam_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
         $exam = $this->examDao->findById($exam_id);
         $this->examService->makeReport($exam);
         $exam->setFinished(_TRUE_);
         $this->examDao->update($exam);
+        
+        $studyPlans = $studyPlanService->createStudyPlans($exam);
+
+        $exam->setStudyPlans($studyPlans);
         $this->report($exam);
     }
 

@@ -29,9 +29,11 @@ require_once(__DIR__ . "/../../model/Subjects.php");
         <label>Nome:</label>
         <input type="text" name="module_name" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getName() : '');?>">
         <br>
-       <label> Descricao: </label>
+        <label> Descricao: </label>
         <input type="text" name="module_desc" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getDescription() : ''); ?>">
         <br>
+        <label> Dificuldade: <span id="value_diff"></span> </label>
+        <input type="range" name="module_diff" class="form-range" min="1" max="10" step="1" value="<?php echo (isset($dados["module"]) ? $dados["module"]->getDifficulty() : ''); ?>" oninput="this.nextElementSibling.value = this.value">
         <label>Matéria: </label>
         <select name="module_subject">
             <?php $i = 1; foreach(Subjects::cases() as $subject):?>
@@ -60,3 +62,9 @@ require_once(__DIR__ . "/../../model/Subjects.php");
     </main>
 
     <?php require __DIR__. "/../componentes/footer.php"?>       
+
+    <script>
+        document.querySelector('.form-range').addEventListener('change', (event)=>{
+            document.querySelector('#value_diff').innerHTML = event.target.value
+        })
+    </script>

@@ -3,23 +3,29 @@
 require_once(__DIR__ . "/../model/Module.php");
 require_once(__DIR__ . "/../connection/Connection.php");
 require_once(__DIR__ . "/../dao/QuestionDAO.php");
+require_once(__DIR__ . "/../dao/LessonDAO.php");
 
 class ModuleDAO{
 
     private function mapModules($sql)
     {
         $modules = array();
+        $questDao = new QuestionDAO();
+        $lessonDao = new LessonDAO();
 
         foreach($sql as $mod){
             $module = new Module();
             $module->setId($mod['id']);
             $module->setName($mod['name']);
             $module->setDescription($mod['description']);
+            $module->setDifficulty($mod['difficulty']);
             $module->setSubject($mod['subject']);
 
-            $questDao = new QuestionDAO();
             $questions = $questDao->findByModule($module);
             $module->setQuestions($questions);
+
+            $lessons = $lessonDao->findByModuleId($mod['id']);
+            $module->setLessons($lessons);
 
             array_push($modules, $module);
         }
@@ -43,10 +49,10 @@ class ModuleDAO{
             return $modules[0];
         }
         else if(count($modules) > 1) {
-            return "More than 1 module found";
+            return "Mais de um módulo achado";
         }
 
-        die("Invalid module");
+        die("Modulo inválido");
     }
 
     public function list()
@@ -66,11 +72,12 @@ class ModuleDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Module (name, description, subject) VALUES (:name,:desc,:sub)";
+        $sql = "INSERT INTO Module (name, description, difficulty, subject) VALUES (:name,:desc,:diff,:sub)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('name', $module->getName());
         $stm->bindValue('desc', $module->getDescription());
+        $stm->bindValue('diff', $module->getDifficulty());
         $stm->bindValue('sub', $module->getSubject());
 
         $stm->execute();
@@ -80,11 +87,12 @@ class ModuleDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE Module SET name = :name, description = :desc, subject = :sub WHERE id = :id";
+        $sql = "UPDATE Module SET name = :name, description = :desc, difficulty = :diff, subject = :sub WHERE id = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("name", $module->getName());
         $stm->bindValue("desc", $module->getDescription());
+        $stm->bindValue("diff", $module->getDifficulty());
         $stm->bindValue("sub", $module->getSubject());
         $stm->bindValue("id", $module->getId());
         $stm->execute();

@@ -15,11 +15,11 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Table `Module`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Module` ;
-
 CREATE TABLE IF NOT EXISTS `Module` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL,
   `description` VARCHAR(1000) NOT NULL,
+  `difficulty` INT NOT NULL DEFAULT 1,
   `subject` ENUM('Matemática', 'Português', 'Redação', 'Geografia', 'História', 'Ciências') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -210,18 +210,12 @@ DROP TABLE IF EXISTS `StudyPlan` ;
 CREATE TABLE IF NOT EXISTS `StudyPlan` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idExam` INT NOT NULL,
-  `idUser` INT NOT NULL,
+  `marker` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_StudyPlan_Exam1_idx` (`idExam` ASC),
-  INDEX `fk_StudyPlan_User1_idx` (`idUser` ASC),
   CONSTRAINT `fk_StudyPlan_Exam1`
     FOREIGN KEY (`idExam`)
     REFERENCES `Exam` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_StudyPlan_User1`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `User` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -234,7 +228,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `SuggestedModule` ;
 
 CREATE TABLE IF NOT EXISTS `SuggestedModule` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idStudyPlan` INT NOT NULL,
   `idModule` INT NOT NULL,
   INDEX `fk_StudyPlan_has_Module_Module1_idx` (`idModule` ASC),

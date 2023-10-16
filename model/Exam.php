@@ -3,6 +3,7 @@ class Exam{
     private $id;
     private $user;
     private $examModules;
+    private $studyPlans;
     private $finished;
 
     /**
@@ -72,6 +73,23 @@ class Exam{
     {
         $this->examModules = $examModules;
 
+        return $this;
+    }
+
+    /**
+     * Get the value of studyPlan
+     */
+    public function getStudyPlans()
+    {
+        return $this->studyPlans;
+    }
+
+    /**
+     * Set the value of studyPlan
+     */
+    public function setStudyPlans($studyPlans): self
+    {
+        $this->studyPlans = $studyPlans;
         return $this;
     }
 }
