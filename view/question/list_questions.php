@@ -5,6 +5,7 @@
     <!-- MAIN CONTENT-->
     <main class="main-content col-md-10 px-md-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <link rel="stylesheet" href="<?= BASE_URL ?>/view/question/list_question.css">
             
             <h1 class="content-title">Listagem das questões</h1>
             
@@ -34,12 +35,15 @@
                                     <?= $alt->getText() ?>
                                     <?php
                                     if ($alt->getIsCorrect())
-                                    echo " *";
+                                    echo " <i class=\"bi bi-check-circle-fill\"></i>";
                                     ?>
                                 </p>
                             <?php endforeach; ?>
-                            <a href="../controller/QuestionController.php?action=edit&id=<?= $question->getId(); ?>">Alterar</a>
-                            <a href="../controller/QuestionController.php?action=delete&id=<?= $question->getId(); ?>">Deletar</a>
+                            <br/>
+                            <button type="button" class="btn btn-light"><a href="../controller/QuestionController.php?action=edit&id=<?= $question->getId(); ?>">Alterar</a></button>
+                            <button type="button" class="btn btn-light"><a href="../controller/QuestionController.php?action=delete&id=<?= $question->getId(); ?>">Deletar</a></button>
+
+                            
                         </div>
                     </div>
                 </div>

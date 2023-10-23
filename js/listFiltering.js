@@ -194,6 +194,8 @@ export function createModuleTable(modules, subject) {
 
     var subjectModulesDiv = document.querySelector("#" + subject);
     var table = document.createElement("table");
+    table.classList.add('table');
+    table.classList.add('table-list-modules');
     table.setAttribute("name", "modulesTable");
     var thead = document.createElement("thead");
     var tbody = document.createElement("tbody");
