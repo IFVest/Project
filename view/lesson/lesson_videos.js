@@ -21,6 +21,7 @@ function test(e) {
         xhttp.open("GET", "LessonController.php?action=getByLessonId&lessonId=" + lessonId)
         xhttp.onload = function () {
             if (xhttp.status >= 200 && xhttp.status < 400) {
+                console.log(this.responseText)
                 var lesson = JSON.parse(this.responseText)
 
                 showButtons(lessonCard, lesson)

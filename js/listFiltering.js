@@ -10,7 +10,6 @@ subjects.forEach(subject => {
 });
 
 export function filterBySubject(subjectButton, filterLesson) {
-
     var isExpanded = subjectButton.getAttribute("aria-expanded");
 
     if (isExpanded === "true") {
@@ -57,6 +56,7 @@ export function filterBySubject(subjectButton, filterLesson) {
 }
 
 function createModulesButtons(modules, subject) {
+    console.log(modules)
     modulesDiv.forEach(module => {
         module.innerHTML = "";
     });
