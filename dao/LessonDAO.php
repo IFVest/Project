@@ -17,6 +17,7 @@ class LessonDAO{
             $lesson->setUrl($les["videoURL"]);
             $lesson->setDescription($les["description"]);
             $lesson->setModule($les["idModule"]);
+            $lesson->setPdfPath($les["pdfPath"]);
 
             array_push($lessons, $lesson);
         }
@@ -43,13 +44,14 @@ class LessonDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Lesson (title, videoURL, description, idModule) VALUES (:t, :u, :d, :m)";
+        $sql = "INSERT INTO Lesson (title, videoURL, description, idModule, pdfPath) VALUES (:t, :u, :d, :m, :p)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('t', $lesson->getTitle());
         $stm->bindValue('u', $lesson->getUrl());
         $stm->bindValue('d', $lesson->getDescription());
         $stm->bindValue('m', $lesson->getModule());
+        $stm->bindValue('p', $lesson->getPdfPath());
         $stm->execute();
     }
 
@@ -70,10 +72,10 @@ class LessonDAO{
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE Lesson SET title = ?, videoURL = ?, idModule = ?, description = ?  WHERE id = ?";
+        $sql = "UPDATE Lesson SET title = ?, videoURL = ?, idModule = ?, description = ?, pdfPath = ? WHERE id = ?";
 
         $stm = $conn->prepare($sql);
-        $stm->execute([$lesson->getTitle(), $lesson->getUrl(),$lesson->getModule(), $lesson->getDescription(), $lesson->getId()]);
+        $stm->execute([$lesson->getTitle(), $lesson->getUrl(),$lesson->getModule(), $lesson->getDescription(), $lesson->getPdfPath(), $lesson->getId()]);
     }
 
     public function delete(Lesson $lesson)

@@ -8,6 +8,7 @@ class Lesson implements JsonSerializable
     private $module;
     private $moduleName;
     private $studyWeek;
+    private $pdfPath;
 
     public function jsonSerialize(): mixed
     {
@@ -17,7 +18,8 @@ class Lesson implements JsonSerializable
             'description' => $this->description,
             'url' => $this->url,
             'moduleId' => $this->module,
-            'moduleName' => $this->moduleName
+            'moduleName' => $this->moduleName,
+            'pdfPath' => $this->pdfPath
         ];
     }
 
@@ -146,6 +148,26 @@ class Lesson implements JsonSerializable
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pdfPath
+     */ 
+    public function getPdfPath()
+    {
+        return $this->pdfPath;
+    }
+
+    /**
+     * Set the value of pdfPath
+     *
+     * @return  self
+     */ 
+    public function setPdfPath($pdfPath)
+    {
+        $this->pdfPath = $pdfPath;
 
         return $this;
     }

@@ -51,7 +51,6 @@ class LessonController extends Controller{
 
         $pdf = $_FILES['pdf'];
         $pdf_path = $this->savePDF($pdf);
-        echo "<script>console.log('".$pdf_path."')</script>";
         
         $lesson = new Lesson();
         $lesson->setId($dados["id"]);
@@ -59,6 +58,7 @@ class LessonController extends Controller{
         $lesson->setDescription($lesson_description);
         $lesson->setUrl($lesson_url);
         $lesson->setModule($moduleId);
+        $lesson->setPdfPath($pdf_path);
         
         $errors = $this->lessonService->validateData($lesson);
 

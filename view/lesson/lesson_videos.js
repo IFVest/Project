@@ -92,6 +92,18 @@ function videoChange(lesson) {
 
         selectedVideo.appendChild(alterLink)
         selectedVideo.appendChild(deleteLink)
+
+        if (lesson.pdfPath != null) {
+            var linkDownload = document.createElement('a')
+            linkDownload.setAttribute('href', lesson.pdfPath)
+            linkDownload.setAttribute("target", "blank")
+
+            var downloadIcon = document.createElement('i')
+            downloadIcon.setAttribute('class', 'bi bi-download')
+
+            linkDownload.appendChild(downloadIcon)
+            selectedVideo.appendChild(linkDownload)
+        }
     }
     selectedVideo.innerHTML += "<br>"
 

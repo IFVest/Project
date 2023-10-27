@@ -32,17 +32,23 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
         <h2 class="selected_video_title" <?= ($isAdmin || $isTeacher) ? " style=\"display: inline-block \" " : "" ?>>
             <?php echo isset($dados) ? $dados["lista"][0]->getTitle() : "" ?>
-        </h2>
-        <?php if ($isAdmin || $isTeacher) : ?>
+            <?php if ($isAdmin || $isTeacher) : ?>
             <a href="<?= BASE_URL ?>/controller/LessonController.php?action=edit&id=<?= $dados["lista"][0]->getId() ?>">
                 <button>Alterar</button>
             </a>
             <a href="<?= BASE_URL ?>/controller/LessonController.php?action=delete&id=<?= $dados["lista"][0]->getId() ?>">
                 <button>Deletar</button>
             </a>
-        <?php endif; ?>
-
-        <iframe width="500px" height="300px" src="<?php echo isset($dados) ? $dados["lista"][0]->getUrl() : "" ?>" frameborder="0"></iframe>
+            <?php endif; ?>
+            <?php if (isset($dados) && $dados["lista"][0]->getPdfPath() != null): ?>
+                <a target="blank" href="<?php echo $dados["lista"][0]->getPdfPath() ?>">
+                    <i class="bi bi-download"></i>
+                </a>
+            <?php endif;?>
+            <br>
+            <iframe width="500px" height="300px" src="<?php echo isset($dados) ? $dados["lista"][0]->getUrl() : "" ?>" frameborder="0"></iframe>
+        </h2>
+        
 
     </div>
 
