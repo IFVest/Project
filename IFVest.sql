@@ -127,34 +127,6 @@ CREATE TABLE IF NOT EXISTS `User` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
-
--- -----------------------------------------------------
--- Table `Comment`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Comment` ;
-
-CREATE TABLE IF NOT EXISTS `Comment` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(200) NOT NULL,
-  `idLession` INT NOT NULL,
-  `idUser` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_Coment_Lession1_idx` (`idLession` ASC),
-  INDEX `fk_Coment_User1_idx` (`idUser` ASC),
-  CONSTRAINT `fk_Coment_Lession1`
-    FOREIGN KEY (`idLession`)
-    REFERENCES `Lesson` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Coment_User1`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `User` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
-
 -- -----------------------------------------------------
 -- Table `Exam`
 -- -----------------------------------------------------
@@ -282,26 +254,6 @@ CREATE TABLE IF NOT EXISTS `UserAnswer` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `Material`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Material` ;
-
-CREATE TABLE IF NOT EXISTS `Material` (
-  `id` INT NOT NULL,
-  `Path` VARCHAR(300) NOT NULL,
-  `idLession` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_Material_Lesson1_idx` (`idLession` ASC),
-  CONSTRAINT `fk_Material_Lesson1`
-    FOREIGN KEY (`idLession`)
-    REFERENCES `Lesson` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
