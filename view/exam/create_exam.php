@@ -13,17 +13,9 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 </head>
   
 <!-- MAIN CONTENT-->
-<main class="main-content col-md-10 px-md-5">x
+<main class="main-content col-md-10 px-md-5">
     <div class="component p-5 d-flex flex-column align-items-center justify-content-center">
         <h1 class="content-title">Criar Simulado</h1>
-
-        <!-- MENUZINHO DE OPÇÕES-->
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
-            </div>
-        </div>
 
         <div class="form card col-8 m-3 p-3">
             <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=save" class='d-flex flex-column'>
@@ -39,19 +31,6 @@ require_once(__DIR__ . "/../../model/Subjects.php");
                 </div>
                 <div class="component allFilters" style="display: none; flex-direction: column">
                     <div class="filters col-12">
-                        <div class="card params text-center col-12">
-                            <select class='subject-select form-select card-header' name="subject1" id='subject1'>
-                                <?php foreach (Subjects::cases() as $subject) : ?>
-                                    <option class="subject-option" value="<?php echo $subject->name; ?>"><?php echo $subject->name ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <div class="card-body">
-                                <label for='modules-filter-div1'>Módulos:</label>
-                                <div class="modules-filter-div1" id="modules-filter-div1"></div>
-                                <hr>
-                                <input type="number" class="num-questions1 col-10" name="num_questions1" value="9" >
-                            </div>
-                        </div>
                     </div>
                     <button type="button" class='new-filter-button btn btn-secondary'>Adicionar componente</button>
                 </div>
@@ -60,7 +39,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
                 <button type="submit" class='btn btn-primary'>Criar</button>
                 <input type='hidden' value='<?= $_SESSION['userId'];?>' name='user_id' id='user_id'>
-                <input type='hidden' value='1' name='filters_count' class='filters_count' id='filters_count'>
+                <input type='hidden' value='0' name='filters_count' class='filters_count' id='filters_count'>
             </form>
             <div class="error-div">
                 <?php require_once(__DIR__ . "/../include/msg.php");?>

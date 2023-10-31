@@ -86,7 +86,7 @@ class ExamModuleDAO{
         $stm->bindValue('correctQuestions', $examModule->getCorrectQuestions());
         $stm->bindValue('isProblem', $examModule->getIsProblem());
         $stm->bindValue('exam', $examModule->getExam()->getId());
-        $stm->bindValue('module', $examModule->getModule()->getId());
+        $stm->bindValue('module', $examModule->getModule());
         $stm->execute();
 
         //Pegando o último ID inserido, no caso a questão no situação. 
