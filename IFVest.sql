@@ -15,11 +15,12 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Table `Module`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `Module` ;
-
 CREATE TABLE IF NOT EXISTS `Module` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(200) NOT NULL,
   `description` VARCHAR(1000) NOT NULL,
+  `difficulty` INT NOT NULL DEFAULT 1,
+  `minimumPercentageCorrect` INT NOT NULL DEFAULT 60,
   `subject` ENUM('Matemática', 'Português', 'Redação', 'Geografia', 'História', 'Ciências') NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -87,9 +88,10 @@ DROP TABLE IF EXISTS `Lesson` ;
 
 CREATE TABLE IF NOT EXISTS `Lesson` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `description`VARCHAR(1000) NOT NULL,
   `title` VARCHAR(100) NOT NULL,
-  `description` VARCHAR(300) NOT NULL,
-  `videoURL` VARCHAR(9999) NOT NULL,
+  `videoURL` VARCHAR(1000) NOT NULL,
+  `pdfPath` VARCHAR(1000) NULL,
   `idModule` INT NOT NULL,
   `idStudyWeek` INT,
   PRIMARY KEY (`id`),
@@ -124,34 +126,6 @@ CREATE TABLE IF NOT EXISTS `User` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `Comment`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Comment` ;
-
-CREATE TABLE IF NOT EXISTS `Comment` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(200) NOT NULL,
-  `idLession` INT NOT NULL,
-  `idUser` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_Coment_Lession1_idx` (`idLession` ASC),
-  INDEX `fk_Coment_User1_idx` (`idUser` ASC),
-  CONSTRAINT `fk_Coment_Lession1`
-    FOREIGN KEY (`idLession`)
-    REFERENCES `Lesson` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Coment_User1`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `User` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
 
 -- -----------------------------------------------------
 -- Table `Exam`
@@ -210,18 +184,12 @@ DROP TABLE IF EXISTS `StudyPlan` ;
 CREATE TABLE IF NOT EXISTS `StudyPlan` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idExam` INT NOT NULL,
-  `idUser` INT NOT NULL,
+  `marker` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_StudyPlan_Exam1_idx` (`idExam` ASC),
-  INDEX `fk_StudyPlan_User1_idx` (`idUser` ASC),
   CONSTRAINT `fk_StudyPlan_Exam1`
     FOREIGN KEY (`idExam`)
     REFERENCES `Exam` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_StudyPlan_User1`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `User` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -234,7 +202,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `SuggestedModule` ;
 
 CREATE TABLE IF NOT EXISTS `SuggestedModule` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idStudyPlan` INT NOT NULL,
   `idModule` INT NOT NULL,
   INDEX `fk_StudyPlan_has_Module_Module1_idx` (`idModule` ASC),
@@ -286,26 +254,6 @@ CREATE TABLE IF NOT EXISTS `UserAnswer` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `Material`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `Material` ;
-
-CREATE TABLE IF NOT EXISTS `Material` (
-  `id` INT NOT NULL,
-  `Path` VARCHAR(300) NOT NULL,
-  `idLession` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_Material_Lesson1_idx` (`idLession` ASC),
-  CONSTRAINT `fk_Material_Lesson1`
-    FOREIGN KEY (`idLession`)
-    REFERENCES `Lesson` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

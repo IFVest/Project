@@ -11,14 +11,9 @@
         <!-- MENUZINHO DE OPÇÕES-->
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">exportar</button>
             </div>
         </div>
     </div>
-
-    <!-- <h5 class="content-subtitle">subtítulo</h5>
-        <p class="content-subtitle-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
 
     <div class="">
         <?php foreach ($dados["lista"] as $week) : ?>
@@ -40,14 +35,7 @@
                         </a>
                     </div>
                 </div>
-
                 <hr>
-                
-
-                <?php //print_r($week->getMarker()); ?>
-
-
-
             </div>
 
             <?php if (!empty($week->getLessons())) :?>

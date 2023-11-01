@@ -46,12 +46,19 @@ class LessonService {
     public function findLessonsByModuleId($moduleId) 
     {
         $lessons = $this->lessonDao->findByModuleId($moduleId);
-        $lessonsJSON = json_encode($lessons);
-        return $lessonsJSON;
+        return $lessons;
     }
 
     public function updateLessonStudyWeek($lesson) {
         $this->lessonDao->updateLessonStudyWeek($lesson);
+    }
+
+    public function findLessonsByWeekId($weekId) {
+        return $this->lessonDao->findByWeekId($weekId);
+    }
+
+    public function findAllLessons() {
+        return $this->lessonDao->list();
     }
 }
 ?>

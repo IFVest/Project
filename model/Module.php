@@ -4,6 +4,8 @@ class Module implements JsonSerializable{
     private $id;
     private $name;
     private $description;
+    private $difficulty;
+    private $minimumPercentageCorrect;
     private $subject;
     private $lessons;
     private $questions;
@@ -14,6 +16,7 @@ class Module implements JsonSerializable{
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'difficulty' => $this->difficulty,
             'subject' => $this->subject
         ];
     }
@@ -132,6 +135,43 @@ class Module implements JsonSerializable{
     public function setQuestions($questions): self
     {
         $this->questions = $questions;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of difficulty
+     */
+    public function getDifficulty()
+    {
+        return $this->difficulty;
+    }
+
+    /**
+     * Set the value of difficulty
+     */
+    public function setDifficulty($difficulty): self
+    {
+        $this->difficulty = $difficulty;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of minimumPercentageCorrect
+     */
+    public function getMinimumPercentageCorrect()
+    {
+        return $this->minimumPercentageCorrect;
+    }
+
+    /**
+     * Set the value of minimumPercentageCorrect
+     */
+    public function setMinimumPercentageCorrect($minimumPercentageCorrect): self
+    {
+        $this->minimumPercentageCorrect = $minimumPercentageCorrect;
 
         return $this;
     }

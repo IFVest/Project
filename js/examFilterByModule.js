@@ -85,6 +85,7 @@ export function filterBySubject(selectedSubject, aditionalStringName) {
   xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true);
   xhttp.onload = function () {
     if (xhttp.status >= 200 && xhttp.status < 400) {
+      console.log(this.responseText)
       let modules = JSON.parse(this.responseText);
       handleDisponibleModules()
       createModulesSelect(modules, aditionalStringName);

@@ -16,7 +16,6 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
     <meta name="description" content="">
     <meta name="author" content="Maria Eduarda">
     <title></title>
-    <scale=1.0">
 
     <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>/view/css/style.css" rel="stylesheet">
@@ -60,9 +59,11 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
             <!-- SIDE BAR-->
             <div class="sidebar border-right col-md-2 p-0">
                 <div class="offcanvas-md offcanvas-end" tabindex="-1" id="sidebarMenu">
+
                     <div class="offcanvas-header d-md-none d-flex align-items-end">
                         <button type="button" class="btn-close align-self-end" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
                     </div>
+                    
                     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         
                         <h6 class="label">
@@ -72,7 +73,7 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_URL ?>/view/sobre.php">
-                                    <span></i>Sobre</span>
+                                    <span></i>Sobre o Instituto</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -100,12 +101,12 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_URL ?>/controller/LessonController.php">
-                                    <span></i>Materias</span>
+                                    <span></i>Matérias</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= BASE_URL ?>/controller/ExamController.php?action=listAll">
-                                    <span></i>Historico</span>
+                                    <span></i>Historico dos Simulados</span>
                                 </a>
                             </li>
                             <?php if ($isAdmin or $isTeacher): ?>

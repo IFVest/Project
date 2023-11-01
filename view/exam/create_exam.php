@@ -30,8 +30,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
                     </div>
                 </div>
                 <div class="component allFilters" style="display: none; flex-direction: column">
-                    <div class="filters col-12">
-                    </div>
+                    <div class="filters col-12"></div>
                     <button type="button" class='new-filter-button btn btn-secondary'>Adicionar componente</button>
                 </div>
 

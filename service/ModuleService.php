@@ -22,6 +22,10 @@ class ModuleService {
         if (! $module->getName()) {
             array_push($errors, "O campo NOME é obrigatório");
         }
+
+        if (! $module->getMinimumPercentageCorrect()) {
+            array_push($errors, "O campo PORCENTAGEM MINIMA DE ACERTOS é obrigatório");
+        }
         
         $isValidSubject = false;
         foreach(Subjects::cases() as $subject) {

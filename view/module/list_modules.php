@@ -1,23 +1,16 @@
-
 <?php 
 require (__DIR__. "/../componentes/header.php");
 require_once(__DIR__ . "/../../model/Subjects.php");
 require_once(__DIR__ . "/../../util/config.php");
-
 ?>
 
     <!-- MAIN CONTENT-->
+    
     <main class="main-content col-md-10 px-md-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             
             <h1 class="content-title">Listagem de modulos</h1>
-            
-            <!-- MENUZINHO DE OPÇÕES-->
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
-                </div>
-            </div>
+
         </div>
 
         <h5 class="content-subtitle"></h5>
@@ -25,16 +18,24 @@ require_once(__DIR__ . "/../../util/config.php");
 
         <div class="subjects">
         <div class="subjects-header">
-            <!-- <a class="create-module" href="/controller/ModuleController.php?action=create">
-                <button>Criar módulo</button>
-            </a> -->
         </div>
         <div class="subjects-body">
-        <?php foreach (Subjects::cases() as $subject) : ?>
-            <button class="subject" aria-expanded="false" style="width: 64em; height: 4em"> <?php echo $subject->name; ?> </button>
-            <div class="modules" id="<?php echo $subject->name; ?>"></div>
-            <br>
-        <?php endforeach; ?>
+        <div class="row">
+
+            <?php foreach (Subjects::cases() as $subject) : ?>
+                <div class="col-md-12">
+                    <div class="subject card module ps-3 pt-3 pb-3 mb-4" aria-expanded="false" onclick="showListModules('<?php echo $subject->name; ?>')">
+                        <?php echo $subject->name; ?> 
+                    </div>
+
+                </div>
+                <div id='listagem-<?php echo $subject->name; ?>' class="list-modules col-md-12">
+                    <div class="modules" id="<?php echo $subject->name; ?>"></div>
+                </div>
+
+            <?php endforeach; ?>
+
+            </div>
         </div>
         
     </div>
@@ -43,4 +44,29 @@ require_once(__DIR__ . "/../../util/config.php");
 
     </main>
 
-    <?php require __DIR__. "/../componentes/footer.php"?>       
+    <?php require __DIR__. "/../componentes/footer.php"?>   
+    
+    
+    <script>
+        var listModules = document.querySelectorAll('.list-modules');
+        
+        listModules.forEach(list => {
+            list.style.display = 'none';
+        });
+
+        function showListModules(nameList){
+
+            var listModules = document.querySelectorAll('.list-modules');
+
+
+            listModules.forEach(list => {
+                list.style.display = 'none';
+            });
+
+            var id = 'listagem-'+nameList;
+            console.log(id);
+            var list = document.getElementById(id);
+            list.style.display = 'block';
+        }
+
+    </script>

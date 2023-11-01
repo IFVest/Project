@@ -6,7 +6,6 @@ require_once(__DIR__ . "/../dao/ExamModuleDAO.php");
 class ExamService{
     private UserAnswerDAO $userAnswerDao;
     private ExamModuleDAO $examModuleDao;
-    private $MINNIMUM_PORCENTAGE = 0.6;
 
     function __construct(){
         $this->userAnswerDao = new UserAnswerDAO();
@@ -43,8 +42,8 @@ class ExamService{
     }
 
     private function handleIsProblem($examModule){
-        $performance = $examModule->getCorrectQuestions() / $examModule->getTotalQuestions();
-        if($performance < $this->MINNIMUM_PORCENTAGE){
+        $performance = 100*($examModule->getCorrectQuestions() / $examModule->getTotalQuestions());
+        if($performance < $examModule->getModule()->getMinimumPercentageCorrect()){
             return _TRUE_;
         }
         return _FALSE_;

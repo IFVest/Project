@@ -67,7 +67,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
             </div>
         </div>
 
-      
+        <input type="text" id="base_url" hidden value="<?php echo BASE_URL ?>">
     </main>
 
     <script src="<?= BASE_URL ?>/js/lessonListFiltering.js" type="module"></script>

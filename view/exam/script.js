@@ -5,7 +5,7 @@ let inputType = document.querySelector('.exam_type')
 inputType.addEventListener('change', changeFiltersDiv)
 
 function changeFiltersDiv(event){
-  if(event.taret.value == 'personalized'){
+  if(event.target.value == 'personalized'){
     filterDiv.style.display = 'flex'
   }
 }

@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5 {
     font-size: 28px;
     font-family: "Poppins", sans-serif;
 
-    color: var(--cor-primaria);
+    color: #98CE00;
     letter-spacing: -1px;
     display: flex;
     align-items: center;
@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .navbar-brand {
-    color: var(--cor-primaria);
+    color: #98CE00;
 }
 
 .responsive-button {
@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5 {
 .sidebar {
     background: #fcfcfc;
     border-right: solid 1px #e3e7ed;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .sidebar .label {
@@ -225,4 +225,9 @@ button.btn-close.align-self-end {
 .buttonSave:hover{
     background-color: rgb(87, 87, 87);
     color: white;
+}
+
+
+.table-list-modules td {
+    padding: 13px 13px !important;
 }

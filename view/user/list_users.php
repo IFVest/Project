@@ -1,13 +1,22 @@
-<?php
-    require_once(__DIR__ . "/../componentes/header.php");
-    require_once(__DIR__ . "/../../util/config.php");
-    require_once(__DIR__ . "/../../model/User.php");
-    require_once(__DIR__ . "/../../model/UserRoles.php");
+<?php require __DIR__. "/../componentes/header.php"?>
 
-?>
-<main class="main-content col-md-10 px-md-5">
-    <h1>Usuários</h1>
-    <label for="user_name">Filtre por nome: </label>
+<link rel="stylesheet" href="<?= BASE_URL ?>/view/user/list_users.css">
+
+
+    <!-- MAIN CONTENT-->
+    <main class="main-content col-md-10 px-md-5">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            
+            <h1 class="content-title">Usuários Cadastrados</h1>
+            
+            <!-- MENUZINHO DE OPÇÕES-->
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                </div>
+            </div>
+        </div>
+
+        <label for="user_name">Filtre por nome: </label>
     <input type="text" id="user_name">
     <input type="text" id="baseurl" value="<?php echo BASE_URL ?>" hidden>
 
@@ -48,7 +57,8 @@
                                     ?>
                                 </div>
                                 <a href="<?php echo BASE_URL ?>/controller/UserController.php?action=alter&id=<?= $user->getId();?>">
-                                    <button class="btn btn-primary w-25" style="display:inline; padding-left: 15px ">Alterar</button>
+                                <br/>
+                                    <button class="btn btn-primary w-25 mt-3" style="display:inline; padding-left: 15px ">Alterar</button>
                                 </a>
 
                                <input name="user_id" value="<?= $user->getId(); ?>" hidden>
@@ -63,4 +73,7 @@
     <?php endif; ?>
 
     <script src="<?= BASE_URL ?>/view/user/userFiltering.js"></script>
-</main>
+        
+    </main>
+
+    <?php require __DIR__. "/../componentes/footer.php"?>       
