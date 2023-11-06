@@ -14,7 +14,6 @@ require_once(__DIR__ . "/../../model/Subjects.php");
             <!-- MENUZINHO DE OPÇÕES-->
             <div class="btn-toolbar mb-2 mb-md-0">
                 <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded">compartilhar</button>
                 </div>
             </div>
         </div>
@@ -35,9 +34,6 @@ require_once(__DIR__ . "/../../model/Subjects.php");
             </div>
         </div>
         </div>
-
-
-
 
             <div class="col-md-9">
 

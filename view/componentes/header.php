@@ -36,7 +36,7 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
     <header class="navbar sticky-top flex-md-nowrap p-0 d-flex justify-content-start">
 
         <!-- LOGO -->
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">ifvest</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 color:red" href="#">ifvest</a>
 
         <a id="sidebar-button" class="d-none d-md-block" ><span><i class="bi bi-water"></i></span></a>
 

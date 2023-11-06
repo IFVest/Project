@@ -42,6 +42,7 @@ function showButtons(lessonCard, lesson) {
     var viewButton = document.createElement("button")
     viewButton.lesson = lesson
     viewButton.innerHTML = "Visualizar"
+    viewButton.setAttribute("class", "btn btn-secondary")
     viewButton.addEventListener("click", function () {
         videoChange(lesson)
     })
@@ -51,14 +52,16 @@ function showButtons(lessonCard, lesson) {
         var alterLink = document.createElement('a')
         var alterButton = document.createElement("button")
         alterLink.setAttribute("href", "LessonController.php?action=edit&id=" + lesson.id)
-        alterButton.innerHTML = "Alterar"
-        alterLink.appendChild(alterButton)
+        alterLink.innerHTML = "Alterar"
+        alterLink.setAttribute("class", "btn btn-secondary")
+        //alterLink.appendChild(alterButton)
 
         var deleteLink = document.createElement('a')
-        var deleteButton = document.createElement("button")
-        deleteButton.innerHTML = "Deletar"
+        //var deleteButton = document.createElement("button")
+        deleteLink.innerHTML = "Deletar"
+        deleteLink.setAttribute("class", "btn btn-secondary")
         deleteLink.setAttribute("href", "LessonController.php?action=delete&id=" + lesson.id)
-        deleteLink.appendChild(deleteButton)
+        //deleteLink.appendChild(deleteButton)
 
         cardContent.appendChild(alterLink)
         cardContent.appendChild(deleteLink)
@@ -77,16 +80,15 @@ function videoChange(lesson) {
     selectedVideo.appendChild(h2)
     if (!isStudent) {
         var alterLink = document.createElement('a')
-        var alterButton = document.createElement("button")
+        
         alterLink.setAttribute("href", "LessonController.php?action=edit&id=" + lesson.id)
-        alterButton.innerHTML = "Alterar"
-        alterLink.appendChild(alterButton)
+        alterLink.innerHTML = "Alterar"
+        alterLink.setAttribute("class", "btn btn-secondary")
 
         var deleteLink = document.createElement('a')
-        var deleteButton = document.createElement("button")
-        deleteButton.innerHTML = "Deletar"
+        deleteLink.setAttribute("class", "btn btn-secondary")
+        deleteLink.innerHTML = "Deletar"
         deleteLink.setAttribute("href", "LessonController.php?action=delete&id=" + lesson.id)
-        deleteLink.appendChild(deleteButton)
 
         h2.setAttribute("style", "display: inline-block")
 
