@@ -39,8 +39,8 @@ newFilter.addEventListener('click', ()=>{
   select.setAttribute('id', `subject${numFilters}`)
 
   for(let sub of disponibleSubjects){
-    if (disponibleSubjects.indexOf(sub) != -1){
-      var option = document.createElement("option");
+    if(disponibleSubjects.indexOf(sub) != -1){
+      let option = document.createElement("option");
       option.setAttribute("value", sub);
       option.setAttribute("class", 'subject-option');
       option.innerHTML = sub;
@@ -85,6 +85,7 @@ export function filterBySubject(selectedSubject, aditionalStringName) {
   xhttp.open("GET", "ModuleController.php?action=findModulesBySubject&subject=" + selectedSubject, true);
   xhttp.onload = function () {
     if (xhttp.status >= 200 && xhttp.status < 400) {
+      console.log(this.responseText)
       let modules = JSON.parse(this.responseText);
       handleDisponibleModules()
       createModulesSelect(modules, aditionalStringName);

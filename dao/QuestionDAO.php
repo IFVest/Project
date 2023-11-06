@@ -98,16 +98,25 @@ class QuestionDAO{
         $stm->execute([$question->getId()]);
     }
 
-    public function findByModule(Module $module){
+    public function findByModule($module){
         $conn = Connection::getConn();
         $sql = "SELECT * FROM Question q WHERE q.idModule = ?";
         $stm = $conn->prepare($sql);
-        $stm->execute([$module->getId()]);
+        $stm->execute([(gettype($module) == 'integer')? $module : $module->getId()]);
         $result = $stm->fetchAll();
 
-        $questions = $this->mapQuestions($result);
+        return $this->mapQuestions($result);
+    }
 
-        return $questions;
+    public function findBySubject($subjectName){
+        $conn = Connection::getConn();
+        $sql = "SELECT q.* FROM Question q, Module m WHERE q.idModule = m.id AND m.subject = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$subjectName]);
+        $result = $stm->fetchAll();
+
+        return $this->mapQuestions($result);
+
     }
 }
 
