@@ -34,7 +34,7 @@ DROP TABLE IF EXISTS `Question` ;
 
 CREATE TABLE IF NOT EXISTS `Question` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(999) NOT NULL,
+  `text` VARCHAR(9999) NOT NULL,
   `idModule` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Question_Module1_idx` (`idModule` ASC),
@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS `Alternative` ;
 
 CREATE TABLE IF NOT EXISTS `Alternative` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(200) NOT NULL,
+  `text` VARCHAR(9999) NOT NULL,
   `isCorrect` TINYINT NOT NULL,
   `idQuestion` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -136,6 +136,9 @@ CREATE TABLE IF NOT EXISTS `Exam` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idUser` INT NOT NULL,
   `finished` TINYINT NOT NULL,
+  `totalQuestions` INT NULL DEFAULT 0,
+  `totalQuestionsCorrect` INT NULL DEFAULT 0,
+  `percentageCorrect` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `fk_Exam_User1_idx` (`idUser` ASC),
   CONSTRAINT `fk_Exam_User1`
@@ -1098,7 +1101,7 @@ GUITARRA, Paloma. Teoria malthusiana. Brasil Escola. Disponível em: https://bra
 O período histórico mencionado corresponde à(s):
 ', '21');
 INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Grandes Navegações europeias.', '0', '95');
-INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Colonização da América.', '', '95');
+INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Colonização da América.', '0', '95');
 INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Primeira Revolução Industrial.', '1', '95');
 INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Segunda Revolução Industrial.', '0', '95');
 INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Revolução Chinesa.', '0', '95');

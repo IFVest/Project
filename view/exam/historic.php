@@ -23,30 +23,16 @@ include(__DIR__ . "/../componentes/header.php");
             <?php
             $exams = $dados['provas'];
             foreach($exams as $exam):?>
-                <?php
-                $totalQuestions = 0;
-                $totalCorrectQuestions = 0;
-
-                foreach($exam->getExamModules() as $examMod){
-                    $totalQuestions += $examMod->getTotalQuestions();
-                    $totalCorrectQuestions += $examMod->getCorrectQuestions();
-                }
-                if ($totalQuestions != 0):
-
-                    $calc = $totalCorrectQuestions/$totalQuestions;
-
-                    $report = round($calc*100, 2);
-                ?>
                 <div class="component col-md-4 mb-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Prova <?= $exam->getId(); ?></h5>
-                            <p class="card-text"><?=($exam->getFinished())? ($report > 70)? 'Mandou Bem!' : 'Não desanime, continue estudando!' : 'Prova em andamento'; ?> </p>
+                            <p class="card-text"><?=($exam->getFinished())? ($exam->getPercentageCorrect() > 70)? 'Mandou Bem!' : 'Não desanime, continue estudando!' : 'Prova em andamento'; ?> </p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Total de questões: <?= $totalQuestions; ?></li>
-                            <li class="list-group-item">Total de acertos: <?= ($exam->getFinished())?$totalCorrectQuestions : 'Termine a prova'; ?></li>
-                            <li class="list-group-item">Desempenho: <?= ($exam->getFinished())? $report.'%' : 'Termine a prova' ?></li>
+                            <li class="list-group-item">Total de questões: <?= $exam->getTotalQuestions(); ?></li>
+                            <li class="list-group-item">Total de acertos: <?= ($exam->getFinished())? $exam->getTotalQuestionsCorrect() : 'Termine a prova'; ?></li>
+                            <li class="list-group-item">Desempenho: <?= ($exam->getFinished())? $exam->getPercentageCorrect().'%' : 'Termine a prova' ?></li>
                         </ul>
                         <div class="card-body">
                             <a href="<?= BASE_URL ?>/controller/ExamController.php?action=view&id=<?= $exam->getId() ?>" class="btn btn-primary w-100">Vizualizar prova</a>
@@ -57,7 +43,6 @@ include(__DIR__ . "/../componentes/header.php");
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>

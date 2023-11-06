@@ -98,11 +98,17 @@ class ExamController extends Controller{
         // Find User
         $user = $this->userDao->findById($user_id);
 
+        $totalQuestions = 0;
+        foreach($exam_modules as $exMod){
+            $totalQuestions += count($exMod->getUserAnswers());
+        }
+
         // Create Exam
         $exam = new Exam();
         $exam->setUser($user);
         $exam->setExamModules($exam_modules);
         $exam->setFinished(_FALSE_);
+        $exam->setTotalQuestions($totalQuestions);
 
         try{
             $this->examDao->insert($exam);
@@ -117,10 +123,24 @@ class ExamController extends Controller{
 
     protected function makeReport(){
         $studyPlanService = new StudyPlanService();
+        $examModuleDao = new ExamModuleDAO();
+
         $exam_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
         $exam = $this->examDao->findById($exam_id);
         $this->examService->makeReport($exam);
         $exam->setFinished(_TRUE_);
+        
+        $totalCorrects = 0;
+        foreach($examModuleDao->findByExam($exam) as $exMod){
+            $totalCorrects += $exMod->getCorrectQuestions();
+        }
+        
+        $exam->setTotalQuestionsCorrect($totalCorrects);
+        
+        $calc = $totalCorrects/$exam->getTotalQuestions();
+        $report = round($calc*100, 2);
+        $exam->setPercentageCorrect($report);
+        
         $this->examDao->update($exam);
         
         $studyPlans = $studyPlanService->createStudyPlans($exam);

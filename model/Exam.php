@@ -5,22 +5,9 @@ class Exam{
     private $examModules;
     private $studyPlans;
     private $finished;
-
-    /**
-     * @return mixed
-     */
-    public function getFinished()
-    {
-        return $this->finished;
-    }
-
-    /**
-     * @param mixed $finished
-     */
-    public function setFinished($finished): void
-    {
-        $this->finished = $finished;
-    }
+    private $totalQuestions;
+    private $totalQuestionsCorrect;
+    private $percentageCorrect;
 
     /**
      * Get the value of id
@@ -41,7 +28,7 @@ class Exam{
     }
 
     /**
-     * Get the value of idUser
+     * Get the value of user
      */
     public function getUser()
     {
@@ -49,7 +36,7 @@ class Exam{
     }
 
     /**
-     * Set the value of idUser
+     * Set the value of user
      */
     public function setUser($user): self
     {
@@ -77,7 +64,7 @@ class Exam{
     }
 
     /**
-     * Get the value of studyPlan
+     * Get the value of studyPlans
      */
     public function getStudyPlans()
     {
@@ -85,12 +72,84 @@ class Exam{
     }
 
     /**
-     * Set the value of studyPlan
+     * Set the value of studyPlans
      */
     public function setStudyPlans($studyPlans): self
     {
         $this->studyPlans = $studyPlans;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of finished
+     */
+    public function getFinished()
+    {
+        return $this->finished;
+    }
+
+    /**
+     * Set the value of finished
+     */
+    public function setFinished($finished): self
+    {
+        $this->finished = $finished;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of totalQuestions
+     */
+    public function getTotalQuestions()
+    {
+        return $this->totalQuestions;
+    }
+
+    /**
+     * Set the value of totalQuestions
+     */
+    public function setTotalQuestions($totalQuestions): self
+    {
+        $this->totalQuestions = $totalQuestions;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of totalQuestionsCorrect
+     */
+    public function getTotalQuestionsCorrect()
+    {
+        return $this->totalQuestionsCorrect;
+    }
+
+    /**
+     * Set the value of totalQuestionsCorrect
+     */
+    public function setTotalQuestionsCorrect($totalQuestionsCorrect): self
+    {
+        $this->totalQuestionsCorrect = $totalQuestionsCorrect;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of percentageCorrect
+     */
+    public function getPercentageCorrect()
+    {
+        return $this->percentageCorrect;
+    }
+
+    /**
+     * Set the value of percentageCorrect
+     */
+    public function setPercentageCorrect($percentageCorrect): self
+    {
+        $this->percentageCorrect = $percentageCorrect;
+
         return $this;
     }
 }
-?>

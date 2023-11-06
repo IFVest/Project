@@ -42,7 +42,11 @@ require_once(__DIR__. '/examTestCreator.php');
                                             <li class="list-group-item col-2">Número de questões corretas: <?= $exMod->getCorrectQuestions() ?></li>
                                             <li class="list-group-item col-2">Desempenho: <?= round(($exMod->getCorrectQuestions()/ $exMod->getTotalQuestions())*100, 2) ?> %</li>
                                             <div class="component d-flex col-3">
-                                                <button class="<?= ($exMod->getIsProblem())? 'btn btn-danger' :  'btn  btn-success'?> mx-1 col-6">Ver módulo</button>
+                                                <a style='text-decoration: none;'
+                                                href='<?= BASE_URL?>/controller/LessonController.php?action=showModuleLessons&moduleId=<?= $exMod->getId()?>&moduleName=<?= $subject?>' 
+                                                class="<?= ($exMod->getIsProblem())? 'btn btn-danger' :  'btn  btn-success'?> mx-1 col-6">
+                                                    Ver módulo
+                                                </a>
                                                 <button class="questions-analizes-btn btn btn-secondary col-6" name='<?= $exMod->getId(); ?>'>Analisar questões</button>
                                             </div>
                                         </div>

@@ -28,6 +28,10 @@ class ExamDAO{
             $exam->setExamModules($examModules);
 
             $exam->setFinished($exam_sql['finished']);
+            $exam->setTotalQuestions($exam_sql['totalQuestions']);
+            $exam->setTotalQuestionsCorrect($exam_sql['totalQuestionsCorrect']);
+            $exam->setPercentageCorrect($exam_sql['percentageCorrect']);
+            $exam->setFinished($exam_sql['finished']);
 
             $studyPlan = $studyPlanDao->findByExam($exam);
             $exam->setStudyPlans($studyPlan);
@@ -65,11 +69,12 @@ class ExamDAO{
     public function insert(Exam $exam){
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO Exam (idUser, finished) VALUES (:user, :finished)";
+        $sql = "INSERT INTO Exam (idUser, finished, totalQuestions) VALUES (:user, :finished, :totalQuest)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue('user', $exam->getUser()->getId());
         $stm->bindValue('finished', $exam->getFinished());
+        $stm->bindValue('totalQuest', $exam->getTotalQuestions());
         $stm->execute();
 
         //Pegando o último ID inserido, no caso a questão no situação. 
