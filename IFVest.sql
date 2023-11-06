@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `Question` (
   CONSTRAINT `fk_Question_Module1`
     FOREIGN KEY (`idModule`)
     REFERENCES `Module` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `Alternative` (
   CONSTRAINT `fk_Alternative_Question1`
     FOREIGN KEY (`idQuestion`)
     REFERENCES `Question` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `Lesson` (
   CONSTRAINT `fk_Lession_Module`
     FOREIGN KEY (`idModule`)
     REFERENCES `Module` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Lession_StudyWeek1`
     FOREIGN KEY (`idStudyWeek`)
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `Exam` (
   CONSTRAINT `fk_Exam_User1`
     FOREIGN KEY (`idUser`)
     REFERENCES `User` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -168,12 +168,12 @@ CREATE TABLE IF NOT EXISTS `ExamModule` (
   CONSTRAINT `fk_CorrectByModule_Exam1`
     FOREIGN KEY (`idExam`)
     REFERENCES `Exam` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ExamModules_Module1`
     FOREIGN KEY (`idModule`)
     REFERENCES `Module` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `StudyPlan` (
   CONSTRAINT `fk_StudyPlan_Exam1`
     FOREIGN KEY (`idExam`)
     REFERENCES `Exam` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -214,12 +214,12 @@ CREATE TABLE IF NOT EXISTS `SuggestedModule` (
   CONSTRAINT `fk_StudyPlan_has_Module_StudyPlan1`
     FOREIGN KEY (`idStudyPlan`)
     REFERENCES `StudyPlan` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_StudyPlan_has_Module_Module1`
     FOREIGN KEY (`idModule`)
     REFERENCES `Module` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -243,17 +243,17 @@ CREATE TABLE IF NOT EXISTS `UserAnswer` (
   CONSTRAINT `fk_QuestionByModule_has_Question_QuestionByModule1`
     FOREIGN KEY (`idExamModule`)
     REFERENCES `ExamModule` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_QuestionByModule_has_Question_Question1`
     FOREIGN KEY (`idQuestion`)
     REFERENCES `Question` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_UserAnswer_Alternative1`
     FOREIGN KEY (`chosenAnswer`)
     REFERENCES `Alternative` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -266,6 +266,21 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`, `active`) VALUES (NULL, 'a@a.com', '$2y$10$iE7AsL8kH/nlfk1w2f1gmepSykPqDyfO2Yq.CuYvq.uFPwFDYbsx6', 'a', 'Administrador', 1);
 INSERT INTO `User` (`id`, `email`, `password`, `completeName`, `role`, `active`) VALUES (NULL, 'b@b.com', '$2y$10$8vtXfcYzVf1wGt7tBhBfx.nZoKbRjTa87FRJJSSEGmUe.AU3P8t/C', 'b', 'Professor', 1);
 
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Matemática Básica', 'Dando a base para o resto dos módulos', 'Matemática');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Logarítmo', 'Resolução de exponenciais', 'Matemática');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Funções', 'A arte de colocar um número em um script e receber um gráfico', 'Matemática');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Ortografia', 'Para escrever melhor', 'Português');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Conectivos', 'Para escrever de forma clara e conectada', 'Português');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Concordância', 'Para que seu texto tenha sentido', 'Português');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Era Medieval', 'Os anos das trevas, sem economia ou Estado', 'História');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Idade Moderna', 'Formação dos Estados-Modernos e revoluções ideológicas', 'História');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Era Vargas', 'Anos de ditadura populista no Brasil', 'História');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Dinâmica', 'As Leis de Newton', 'Ciências');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Eletroquímica', 'Mudança de energia química para energia elétrica', 'Ciências');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Citologia', 'Estudando as células', 'Ciências');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Climas', 'Os Climas ao redor do mundo', 'Geografia');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Guerra Fria', 'Embate ideológico entre EUA e URSS', 'Geografia');
+INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Globalização', 'Conectando o mundo moderno', 'Geografia');
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Uso dos porquês', 'Entendendo o uso dos porquês', 'Português');
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Coesão e Coerência', 'Para escrever de forma clara e conectada', 'Português');
 INSERT INTO `Module` (`id`, `name`, `description`, `subject`) VALUES (NULL, 'Interpretação de Texto', 'Aprendendo a interpretar textos e seus objetivo', 'Português');

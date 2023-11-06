@@ -229,6 +229,7 @@ export function createModuleTable(modules, subject) {
         linkAlter.setAttribute("href", "ModuleController.php?action=edit&id=" + modules[i].id);
         linkAlter.innerHTML = "Alterar";
         linkDelete.setAttribute("href", "ModuleController.php?action=delete&id=" + modules[i].id);
+        linkDelete.setAttribute('onclick', "return confirm('Confirma a exclusão do módulo?');")
         linkDelete.innerHTML = "Deletar";
 
         tdAlter.appendChild(linkAlter);

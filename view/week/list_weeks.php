@@ -26,7 +26,8 @@
 
                     </div>
 
-                    <div class="col-md-3">
+                    <?php if ($isAdmin || $isTeacher):?>
+                        <div class="col-md-3">
                         <a class="btn btn-secondary" href="WeekController.php?action=edit&id=<?php echo $week->getId(); ?>">
                             Alterar
                         </a>
@@ -34,6 +35,8 @@
                             Deletar
                         </a>
                     </div>
+                    <?php endif;?>
+                    
                 </div>
                 <hr>
             </div>

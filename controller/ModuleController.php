@@ -112,8 +112,6 @@ class ModuleController extends Controller
         else{
             $this->loadView("module/list_modules.php", [], "Módulo não encontrado");
         }
-
-        $this->list();
     }
 
     protected function findModulesBySubject()
