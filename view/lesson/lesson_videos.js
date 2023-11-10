@@ -78,22 +78,38 @@ function videoChange(lesson) {
     h2.innerHTML = lesson.title 
     h2.setAttribute("class", "selected_video_title")
     selectedVideo.appendChild(h2)
+
+    h2.innerHTML += "<br>"
+    var video = document.createElement("iframe")
+    video.setAttribute("width", "500px")
+    video.setAttribute("height", "300px")
+    video.setAttribute("src", lesson.url)
+
+    h2.appendChild(video)
+    selectedLessonId = lesson.id
+
     if (!isStudent) {
+        var otherH2 = document.createElement("h2")
+
         var alterLink = document.createElement('a')
         
+        //botao de baixo
         alterLink.setAttribute("href", "LessonController.php?action=edit&id=" + lesson.id)
         alterLink.innerHTML = "Alterar"
         alterLink.setAttribute("class", "btn btn-secondary")
+        alterLink.style.marginRight = "8px"
+        
 
         var deleteLink = document.createElement('a')
         deleteLink.setAttribute("class", "btn btn-secondary")
         deleteLink.innerHTML = "Deletar"
         deleteLink.setAttribute("href", "LessonController.php?action=delete&id=" + lesson.id)
+        deleteLink.style.marginRight = "8px"
 
         h2.setAttribute("style", "display: inline-block")
 
-        selectedVideo.appendChild(alterLink)
-        selectedVideo.appendChild(deleteLink)
+        otherH2.appendChild(alterLink)
+        otherH2.appendChild(deleteLink)
 
         if (lesson.pdfPath != null) {
             var linkDownload = document.createElement('a')
@@ -104,18 +120,13 @@ function videoChange(lesson) {
             downloadIcon.setAttribute('class', 'bi bi-download')
 
             linkDownload.appendChild(downloadIcon)
-            selectedVideo.appendChild(linkDownload)
+            otherH2.appendChild(linkDownload)
         }
+
+        selectedVideo.innerHTML += "<br>"
+        selectedVideo.appendChild(otherH2)
     }
-    selectedVideo.innerHTML += "<br>"
 
-    var video = document.createElement("iframe")
-    video.setAttribute("width", "500px")
-    video.setAttribute("height", "300px")
-    video.setAttribute("src", lesson.url)
-
-    selectedVideo.appendChild(video)
-    selectedLessonId = lesson.id
     recreateLessonCards(moduleId)
 }
 
@@ -130,6 +141,8 @@ function recreateLessonCards(moduleId) {
         }
     };
     xhttp.send();
+
+    
 }
 
 function buildLessonCards(lessons) {
@@ -144,7 +157,7 @@ function buildLessonCards(lessons) {
     lessons.forEach(lesson => {
         if (selectedLessonId != lesson.id) {
             var cardLesson = document.createElement('div')
-            cardLesson.setAttribute('class', 'card lesson')
+            cardLesson.setAttribute('class', 'card_lesson card lesson mb-4')
             cardLesson.setAttribute('aria-expanded', "false")
             cardLesson.setAttribute('value', lesson.id)
 
