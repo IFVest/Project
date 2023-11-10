@@ -36,7 +36,10 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
 
 
-            <button type="submit" class='btn btn-primary'>Criar</button>
+            <button type="submit" class='btn btn-primary create-exam-btn'>
+                <span class='text-create'>Criar</span> 
+                <img class='loading' style="display: none; height: 45px; width: 45px;" src="<?= BASE_URL ?>/images/Spinner-1s-200px(1).gif">
+            </button>
             <input type='hidden' value='<?= $_SESSION['userId']; ?>' name='user_id' id='user_id'>
             <input type='hidden' value='0' name='filters_count' class='filters_count' id='filters_count'>
         </form>

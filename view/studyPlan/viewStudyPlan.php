@@ -34,10 +34,10 @@ require (__DIR__. "/../componentes/header.php");
                               foreach($module->getLessons() as $lesson):?>
                                 <div class="lesson mx-2" style="width: 330px;">
                                       <a class="card" style="text-decoration: none; cursor: pointer;" href='<?= BASE_URL?>/controller/LessonController.php?action=showModuleLessons&moduleId=<?= $module->getId()?>&moduleName=<?= $module->getName()?>'>
-                                        <div class="card-body">
-                                          <iframe id="<?= $lesson->getId() ?>" src="<?= $lesson->getUrl() ?>" height="200px" width="auto"></iframe>
+                                        <div class="card-body" style="cursor: pointer;">
+                                          <iframe class='<?= BASE_URL?> <?= $module->getId()?> <?= $module->getName()?>' id="<?= $lesson->getId() ?>" src="<?= $lesson->getUrl() ?>" height="200px" width="auto"></iframe>
                                           <div class="lesson-title">
-                                          <label for="lesson-<?= $lesson->getId() ?>"><?= $lesson->getTitle() ?></label>
+                                            <label for="lesson-<?= $lesson->getId() ?>"> <?= $lesson->getTitle() ?> </label>
                                           </div>
                                         </div>
                                       </a>
@@ -56,3 +56,6 @@ require (__DIR__. "/../componentes/header.php");
           <?php endforeach; ?>
     </div>
 </main>
+<input type="hidden" name='base_url' class='base_url' value='<?= BASE_URL?>'>
+
+<script src="<?= BASE_URL?>/view/studyPlan/script.js"></script>

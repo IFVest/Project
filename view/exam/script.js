@@ -9,3 +9,10 @@ function changeFiltersDiv(event){
     filterDiv.style.display = 'flex'
   }
 }
+
+let examCreateButton = document.querySelector('.create-exam-btn')
+examCreateButton.addEventListener('click', ()=>{
+  examCreateButton.setAttribute('disabled', true)
+  document.querySelector('.text-create').style.display = 'none'
+  document.querySelector('.loading').style.display = 'flex'
+})
