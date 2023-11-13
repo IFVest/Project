@@ -58,7 +58,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 
                 <?php $lessonsCount = count($dados["lista"]); ?>
                 <?php for ($i = 1; $i < $lessonsCount; $i++) : ?>
-                    <div class="card_lesson card lesson mb-4" aria-expanded="false" value="<?= $dados["lista"][$i]->getId() ?>">
+                    <div class="card_lesson card lesson mb-4" style="padding: 15px;" aria-expanded="false" value="<?= $dados["lista"][$i]->getId() ?>">
                         <?php echo $dados["lista"][$i]->getTitle() ?>
                         <div class="card-content"></div>
                     </div>

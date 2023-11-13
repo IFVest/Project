@@ -158,6 +158,7 @@ function buildLessonCards(lessons) {
         if (selectedLessonId != lesson.id) {
             var cardLesson = document.createElement('div')
             cardLesson.setAttribute('class', 'card_lesson card lesson mb-4')
+            cardLesson.style.padding = "15px"
             cardLesson.setAttribute('aria-expanded', "false")
             cardLesson.setAttribute('value', lesson.id)
 
