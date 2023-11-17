@@ -2,6 +2,7 @@
 
 class SuggestedModule{
     private $id;
+    private $marker;
     private $studyPlan;
     private $module;
 
@@ -55,6 +56,24 @@ class SuggestedModule{
     public function setModule($module): self
     {
         $this->module = $module;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of marker
+     */
+    public function getMarker()
+    {
+        return $this->marker;
+    }
+
+    /**
+     * Set the value of marker
+     */
+    public function setMarker($marker): self
+    {
+        $this->marker = $marker;
 
         return $this;
     }
