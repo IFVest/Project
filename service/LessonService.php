@@ -31,9 +31,11 @@ class LessonService {
         }
         else 
         {
-            $lesson_module = $this->moduleDao->findById($lesson->getModule());
-            if ($lesson_module == null) {
-                array_push($errors, "Módulo inválido");
+            if ($lesson->getModule() != null) {
+                $lesson_module = $this->moduleDao->findById($lesson->getModule());
+                if ($lesson_module == null) {
+                    array_push($errors, "Módulo inválido");
+                }
             }
         }
         return $errors;
