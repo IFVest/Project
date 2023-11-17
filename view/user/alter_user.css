@@ -1,0 +1,53 @@
+
+.buttonSave{
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 5px 20px;
+    color: white;
+    background-color: #58b352;
+    text-decoration: none;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); */
+}
+
+.buttonSave:hover{
+    background-color: rgb(87, 87, 87);
+    color: white;
+}
+
+label{
+    pointer-events: none;
+    font-size: 17px;
+    font-family: "Poppins", sans-serif;
+   
+}
+
+select{
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    min-width: 100px;
+    padding: 7px 40px 7px 12px;
+    /* width: 100%; */
+    border: 1px solid #E8EAED;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098A9;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 150ms ease;
+    
+    option {
+      color: #58b352;
+      
+      &:focus{
+        outline: none;
+        border-color: #0077FF;
+        box-shadow: 0 0 0 2px rgba(#0077FF,.2);
+        
+    }
+    
+}
+}

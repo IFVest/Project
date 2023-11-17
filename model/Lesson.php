@@ -1,12 +1,27 @@
 <?php
-
-class Lesson{
+class Lesson implements JsonSerializable
+{
     private $id;
     private $title;
+    private $url;
     private $description;
     private $module;
-    private $url;
-    private $user;
+    private $moduleName;
+    private $studyWeek;
+    private $pdfPath;
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'url' => $this->url,
+            'moduleId' => $this->module,
+            'moduleName' => $this->moduleName,
+            'pdfPath' => $this->pdfPath
+        ];
+    }
 
     /**
      * Get the value of id
@@ -44,20 +59,39 @@ class Lesson{
         return $this;
     }
 
+
     /**
-     * Get the value of description
+     * Get the value of module
      */
-    public function getDescription()
+    public function getModule()
     {
-        return $this->description;
+        return $this->module;
     }
 
     /**
-     * Set the value of description
+     * Set the value of module
      */
-    public function setDescription($description): self
+    public function setModule($module): self
     {
-        $this->description = $description;
+        $this->module = $module;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of studyWeek
+     */
+    public function getStudyWeek()
+    {
+        return $this->studyWeek;
+    }
+
+    /**
+     * Set the value of studyWeek
+     */
+    public function setStudyWeek($studyWeek): self
+    {
+        $this->studyWeek = $studyWeek;
 
         return $this;
     }
@@ -81,40 +115,61 @@ class Lesson{
     }
 
     /**
-     * Get the value of user
+     * Get the value of moduleName
      */
-    public function getUser()
+    public function getModuleName()
     {
-        return $this->user;
+        return $this->moduleName;
     }
 
     /**
-     * Set the value of user
+     * Set the value of moduleName
      */
-    public function setUser($user): self
+    public function setModuleName($moduleName): self
     {
-        $this->user = $user;
+        $this->moduleName = $moduleName;
 
         return $this;
     }
 
     /**
-     * Get the value of module
-     */
-    public function getModule()
+     * Get the value of description
+     */ 
+    public function getDescription()
     {
-        return $this->module;
+        return $this->description;
     }
 
     /**
-     * Set the value of module
-     */
-    public function setModule($module): self
+     * Set the value of description
+     *
+     * @return  self
+     */ 
+    public function setDescription($description)
     {
-        $this->module = $module;
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pdfPath
+     */ 
+    public function getPdfPath()
+    {
+        return $this->pdfPath;
+    }
+
+    /**
+     * Set the value of pdfPath
+     *
+     * @return  self
+     */ 
+    public function setPdfPath($pdfPath)
+    {
+        $this->pdfPath = $pdfPath;
 
         return $this;
     }
 }
-
 ?>

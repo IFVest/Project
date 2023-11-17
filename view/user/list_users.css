@@ -1,0 +1,22 @@
+input{
+    padding: 10px 5px 5px;
+    background-color: #eaf0dc;
+    font-size: 16px;
+    line-height: 15px;
+    min-height: 25px;
+    border: none;
+    border-radius: 4px;
+    outline-color: #58b352;
+    margin-bottom: 20px;
+    justify-content: center;
+    /* width: 100%; */
+    border-radius: 10px;
+   
+}
+
+label{
+    pointer-events: none;
+    font-size: 17px;
+    font-family: "Poppins", sans-serif;
+   
+}
