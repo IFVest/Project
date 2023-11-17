@@ -36,9 +36,9 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
     <header class="navbar sticky-top flex-md-nowrap p-0 d-flex justify-content-start">
 
         <!-- LOGO -->
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 color:red" href="#">ifvest</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" style="color: #98CE00" href="<?= BASE_URL ?>/view/sobre.php">ifvest</a>
 
-        <a id="sidebar-button" class="d-none d-md-block" ><span><i class="bi bi-water"></i></span></a>
+        <a id="sidebar-button" class="d-none d-md-block" style="color: #98CE00"><span><i class="bi bi-water"></i></span></a>
 
         <!-- RESPONSIVO - SOMENTE APARECE EM DISPOSITIVOS MENORES (d-md-none)    -->
         <ul class="navbar-nav flex-row d-md-none">
@@ -66,7 +66,7 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
                     
                     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         
-                        <h6 class="label">
+                        <h6 class="label" style="color: #58b352">
                             <span>Campus</span>
                         </h6>
 
@@ -83,7 +83,7 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
                             </li>
                         </ul>
 
-                        <h6 class="label">
+                        <h6 class="label" style="color: #58b352">
                             <span>Estudos</span>
                         </h6>
                         
@@ -110,7 +110,7 @@ $isTeacher = $acessService->hasRole(UserRoles::Professor);
                                 </a>
                             </li>
                             <?php if ($isAdmin or $isTeacher): ?>
-                                <h6 class="label">
+                                <h6 class="label" style="color: #58b352">
                                     <span>Administração</span>
                                 </h6>
 

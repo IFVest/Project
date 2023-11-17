@@ -12,7 +12,7 @@ require_once(__DIR__. '/examTestCreator.php');
 <main class="main-content col-md-10 px-md-5">
     
     <div class="row p-4">  
-        <h1 class="m-4 mt-6">Relatório da Prova</h1>
+        <h1 class="m-4 mt-6" style="color: #58b352">Relatório da Prova</h1>
         <div class="container d-flex flex-wrap col-12">
             <div class="accordion col-7" id="accordionParent">
                 <?php

@@ -9,7 +9,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
 <main class="main-content col-md-10 px-md-5">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
-        <h1 class="content-title">Aulas <?php echo isset($dados["moduleName"]) ? "de " . $dados["moduleName"] : "" ?></h1>
+        <h1 class="content-title" style="color: #58b352">Aulas <?php echo isset($dados["moduleName"]) ? "de " . $dados["moduleName"] : "" ?></h1>
 
         <!-- MENUZINHO DE OPÇÕES -->
         <div class="btn-toolbar mb-2 mb-md-0">

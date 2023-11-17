@@ -14,7 +14,7 @@ include(__DIR__ . "/../componentes/header.php");
 <main class="main-content col-md-10 px-md-5">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
-        <h1 class="content-title">Histórico de Simulados</h1>
+        <h1 class="content-title" style="color: #58b352">Histórico de Simulados</h1>
     </div>
 
     <div class="component d-flex flex-column">

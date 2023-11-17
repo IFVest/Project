@@ -12,7 +12,7 @@ require_once(__DIR__ . "/../../model/Subjects.php");
     <main class="main-content col-md-10 px-md-5">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             
-            <h1 class="content-title"> <?php if (! isset($dados['id']) || $dados['id'] == NULL) echo "Inserir";
+            <h1 class="content-title" style="color: #58b352"> <?php if (! isset($dados['id']) || $dados['id'] == NULL) echo "Inserir";
             else echo "Alterar"; ?> módulo</h1>
             
             <!-- MENUZINHO DE OPÇÕES-->

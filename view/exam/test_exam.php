@@ -29,7 +29,7 @@
             <?php require_once(__DIR__ . "/../include/msg.php");?>
         </div>
         <div class="container col-12 d-flex flex-column align-items-center justify-content-center">
-            <h1 class="mt-3">Simulado</h1>
+            <h1 class="mt-3" style="color: #58b352">Simulado</h1>
             <form method="POST" action="<?= BASE_URL ?>/controller/ExamController.php?action=makeReport">
                 <?php
                 $exam = $dados['prova'];

@@ -7,7 +7,7 @@ require (__DIR__. "/../componentes/header.php");
 <main class="main-content col-md-10 px-md-5">
     
     <div class="row p-4">  
-        <h1 class="m-1 my-4">Plano de Estudos Personalizado</h1>
+        <h1 class="m-1 my-4" style="color: #58b352">Plano de Estudos Personalizado</h1>
         <?php
           $studyPlans = $dados['studyPlans'];
           foreach($studyPlans as $studyPlan):
