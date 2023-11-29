@@ -314,7 +314,6 @@ INSERT INTO `Module` (`id`, `name`, `description`, `subject`, `difficulty`) VALU
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Feudalismo', 'História Geral do Feudalismo', 'https://www.youtube.com/embed/EDZVqcvffgQ?si=BOi4SaL6yWgyIMh8', '', 7, NULL);
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Renascimento', 'Historiografia Moderna: Renascimento', 'https://www.youtube.com/embed/9PCM2m1TVPk?si=XwDugfY41EcRodf2', '', 8, NULL);
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Perfil dos 15 anos de governo Vargas', 'A Era Vargas fácil!', 'https://www.youtube.com/embed/6JVTgiRbR9o?si=YqJQwxI4_7SAD9XD', '', 9, NULL);
-
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Climatologia', 'Climatologia - Elementos do Clima', 'https://www.youtube.com/embed/rm9HH7cGCwA?si=5Jje2Xp1dAauIYsj', '', 13, NULL);
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Climatologia', 'Climatologia - Fatores do Clima', 'https://www.youtube.com/embed/gEkiek-X1ac?si=mHizmZcI9ntIgzbR', '', 13, NULL);
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Climatologia', 'Clima do Brasil e as massas de ar', 'https://www.youtube.com/embed/HQC8w-HnNlk?si=LBInrIPtHi34lhGl', '', 13, NULL);
@@ -357,6 +356,95 @@ INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idMo
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Energia Cinética/Térmica', 'Energia Cinética', 'https://www.youtube.com/embed/CsJUrbwxrXk?si=w8-Bo_7qCI-nxCjQ', '', 43, NULL);
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Energia Cinética/Térmica', 'Energia Térmica', 'https://www.youtube.com/embed/VhbYxA4Q5n8?si=Ff2AdamralOiDboH', '', 43, NULL);
 INSERT INTO `Lesson` (`id`, `description`, `title`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Densidade', 'Densidade e Pressão', 'https://www.youtube.com/embed/EUEuBwxAFWE?si=B5KkPrCkuA89BB0p', '', 44, NULL);
+
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Adição e Subtração', 'Os princípios do cálculo matemático', 'https://www.youtube.com/embed/lRWPsnxSAZQ&list=PL8p1TxALqFEe75LyIEGYrip8xWmXxUpNo', '', 1, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Multiplicação', 'Um aglomerado de somas, as quais podem ser convertidas em multiplos', 'https://www.youtube.com/embed/BetgRvNQEC0&list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf&index=3', '', 1, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Divisão', 'Um agloremado de subtrações, para que possamos saber quantas vezes um número "cabe" em outro', 'https://www.youtube.com/embed/GpnfZHB3Rpw&list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf&index=4', '', 22, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Critérios de divisibilidade', 'Algumas regras que podemos ficar atentos ao fazer uma divisão', 'https://www.youtube.com/embed/nBYcEu3P6EQ&list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf&index=6', '', 22, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Frações', 'Um outro modo de encarar a divisão', 'https://www.youtube.com/embed/C9OctbTuqeo&list=PL8p1TxALqFEe75LyIEGYrip8xWmXxUpNo&index=5', '', 22, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Expressões Numéricas', 'Começo da relação entre todas operações', 'https://www.youtube.com/embed/qzl93K6_-LY&list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf&index=5', '', 1, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Potenciação', 'Uma série de multiplicações', 'https://www.youtube.com/embed/pzQEeRz-XJQ&list=PL8p1TxALqFEe75LyIEGYrip8xWmXxUpNo&index=6', '', 1, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Racionalização', 'Manipulando as raízes', 'https://www.youtube.com/embed/daHFLfUt6z4&list=PL8p1TxALqFEe75LyIEGYrip8xWmXxUpNo&index=7', '', 1, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Radiciação 1', 'Uma série de divisões parte 1', 'https://www.youtube.com/embed/HOc9gSqbJ-8&list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf&index=21', '', 1, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Radiciação 2', 'Uma série de divisões parte 2', 'https://www.youtube.com/embed/ULydE64exnA&list=PLTPg64KdGgYgFpOFt2TETLdEuBB4fvxxf&index=22', '', 1, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Produtos notáveis', 'São multiplicações de expressões que se comportam de maneira conhecida', 'https://www.youtube.com/embed/KVbOb5hje5A&list=PL8p1TxALqFEe75LyIEGYrip8xWmXxUpNo&index=9', '', 1, NULL);
+-- Funções
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Noções iniciais', 'Introdução às funções', 'https://www.youtube.com/embed/G3zjNRYbDv8&list=PLTPg64KdGgYiYqKmotPzPJVchCwKpTLzm&index=2', '', 3, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Tipos de funções', 'Injetoas, Bijetoras... o que é isso?', 'https://www.youtube.com/embed/h7ckVhhOGW8&list=PL-LPJn0YTIEFPnbtzeedJzacR3avOfjoh&index=7', '', 3, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Função Composta', 'São as funções mais diferentes que podem cair na sua prova!', 'https://www.youtube.com/embed/V9yhPL87lGs&list=PLTPg64KdGgYiYqKmotPzPJVchCwKpTLzm&index=14', '', 3, NULL);
+ -- Log
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Logaritmo Simplificado', 'uma outra forma de encarar as potenciações', 'https://www.youtube.com/embed/k2XkYEUH9nA', '', 2, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Exercícios de Fixação', 'Exercícios para uma melhor compreensão do conteúdo', 'https://www.youtube.com/embed/6zWS7z22FZo', '', 2, NULL);
+-- Area e perimetro
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Perímetro', 'São os lados da fomra geométrica', 'https://www.youtube.com/embed/BaJnnrMSzGk', '', 23, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Áreas', 'É o espaço que uma fomra geométrica, em 2D, ocupa', 'https://www.youtube.com/embed/th5k6bzSDTA', '', 23, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Exercícios', 'Aprendendo na prática', 'https://www.youtube.com/embed/z6r1o3JEjlI', '', 23, NULL);
+-- números irracionais
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Equações irracionais', 'Expressões com números irracionais', 'https://www.youtube.com/embed/sBO4XcOE4UU', '', 24, NULL);
+
+-- porcentagem
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Porcentagem', 'Uma parcela de algum valor', 'https://www.youtube.com/embed/CERiIwParX4', '', 25, NULL);
+-- segundo grau
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Equação Segundo Grau parte 1', 'Quando o x é elevado na 2', 'https://www.youtube.com/embed/toAaUBwitFE', '', 26, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Equação Segundo Grau parte 2', 'Quando o x é elevado na 2', 'https://www.youtube.com/embed/qYQllsg8ka8', '', 26, NULL);
+
+-- media
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Calcule médias de forma simples', 'O conteúdo que não cai, DESPENCA!', 'https://www.youtube.com/embed/nRxl0WUplf4', '', 27, NULL);
+
+-- probabilidade
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Probabilidade - teoria', 'As chances de alguam coisa acontecer', 'https://www.youtube.com/embed/AZH67sWDW5w', '', 28, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Probabilidade - exercícios', 'Aprendendo na prática', 'https://www.youtube.com/embed/dmU8BE3dqYg', '', 28, NULL);
+
+-- volume cubo
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Calcule o volume de um cubo', 'O espaço que um cubo ocupa no espaço', 'https://www.youtube.com/embed/mAbNOaLkSnY', '', 29, NULL);
+
+
+-- ortografia 4
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Ortografia - uso de Z e S', 'Uso de Z e S', 'https://www.youtube.com/embed/AZQ7w--hR00', '', 4, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Ortografia - uso de J e G', 'Uso de J e G', 'https://www.youtube.com/embed/H66eOQZXWy0', '', 4, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Ortografia - uso de X, CH e Mau', 'Uso de J e G', 'https://www.youtube.com/embed/8Uj8ISzzBJE', '', 4, NULL);
+
+-- conectivos 5
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Conectivos Textuais', 'Entender o que garante maior fluidez e entendimento do texto', 'https://www.youtube.com/embed/SMIXNel6qMw', '', 5, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Paródia dos conectivos', 'Nada melhor que uma música para te ajudar a decorar os assuntos', 'https://www.youtube.com/embed/KHnQPc99FNA', '', 5, NULL);
+
+
+-- concordancia 6
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Concordância Nominal', 'Concordância sem envolver verbos', 'https://www.youtube.com/embed/ATCfXJT4Tdg', '', 6, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Concordância Verbal', 'Concordância com a presença de verbos', 'https://www.youtube.com/embead/4ZJnTqTk4_Y', '', 6, NULL);
+
+
+-- porques 16
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Qual "porque" serve para quê', 'A distinção entre os 4 porquês', 'https://www.youtube.com/embed/v3vYPexq_QE', '', 16, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Uso dos porquês - Exercícios', 'Aprendendo na prática', 'https://www.youtube.com/embed/Prg9Kt6tjIY', '', 16, NULL);
+
+-- interpretação de texto 18
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Como a Interpretação de Texto é abordada nas provas', 'Decifrando o modo de abordagem da interpretação de texto', 'https://www.youtube.com/embed/XsN0e_xPyNI', '', 18, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Teoria da interpretaçãod e texto', 'Um estudo de como interpretar textos', 'https://www.youtube.com/embed/W3XrpIRTgzA', '', 18, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Dicas para um boa interpretação de texto', 'Decifrando a mãe da prova do IFPR, o ENEM!', 'https://www.youtube.com/embed/9cZ7MBGh1fU', '', 18, NULL);
+
+-- coesao e coerencia 17
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Coesão e Coerência - Teoria', 'Elementos fundamentais para uma boa escrita e compreensão de textos', 'https://www.youtube.com/embed/voO8FT-9q6Y', '', 17, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Coesão e Coerência de forma mais ampla', 'Analisando de forma mais superificial, uma introdução ao conteúdo', 'https://www.youtube.com/embed/P0UEJKHpZ_A', '', 17, NULL);
+
+-- conjucação 19
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Conjunção Coordenativa', 'Estudando a Conjunção Coordenativa', 'https://www.youtube.com/embed/PnRvHAm1w-U', '', 19, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Conjunção Subordinadas', 'Estudando a Conjunção Subordinada', 'https://www.youtube.com/embed/XOeX8x7o8Jo', '', 19, NULL);
+
+-- conjugação de verbos 20
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Conjunção Verbal', 'Conjugando verbos', 'https://www.youtube.com/embed/SSWbcOQS9hc', '', 20, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Conjunção Verbal em Provas', 'Como o assunto pode aparecer na sua prova', 'https://www.youtube.com/embed/9LCCGw-Gr8Q', '', 20, NULL);
+
+-- uso de virgulas 21
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'Uso correto das Virgulas', 'Utilize as vírgulas de forma correta', 'https://www.youtube.com/embed/-uUtlvKifiY', '', 21, NULL);
+INSERT INTO `Lesson` (`id`, `title`, `description`, `videoURL`, `pdfPath`, `idModule`, `idStudyWeek`) VALUES (NULL, 'uso obrigatório de Vírgulas', 'Existem momentos que você é obrigado a utilizar vírgulas, descubra-os', 'https://www.youtube.com/embed/3zD5wNc-nDc', '', 21, NULL);
+
+
+
+
+
+
+
 
 INSERT INTO `Question` (`id`, `text`, `idModule`) VALUES (NULL, '____________ você não gosta da irmã dela?', '1');
 INSERT INTO `Alternative` (`id`, `text`, `isCorrect`, `idQuestion`) VALUES (NULL, 'Porque', '0', '1');

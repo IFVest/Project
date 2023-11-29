@@ -49,20 +49,11 @@
           <div class="justify-center">
             <hr />
           </div>
-
-          <p>
-            Esqueceu sua senha?
-            <a href="#">
-              Recuperar senha
-            </a>
-            </p>
               <p>
                 <a href="https://ifpr.edu.br/foz-do-iguacu/">
                   Site oficial do IFPR
                 </a>
               </p>
-            </p>
-          </p>
         </div>
       </form>
     </div>
